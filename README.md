@@ -4,6 +4,12 @@
 
 # 🎸 [Arbovirus](https://github.com/GhostDog45/Arbovirus)
 
+<p align="center">
+  <a href="https://github.com/GhostDog45/Arbovirus">
+    <img src="https://raw.githubusercontent.com/GhostDog45/Arbovirus/master/assets/band_cover.png" alt="Arbovirus Band Cover" width="750" />
+  </a>
+</p>
+
 ---
 
 # 🎸 [Artcell](https://github.com/GhostDog45/Artcell)
