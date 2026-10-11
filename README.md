@@ -44,6 +44,12 @@
 
 # 🎸 [Indalo](https://github.com/GhostDog45/Indalo)
 
+<p align="center">
+  <a href="https://github.com/GhostDog45/Indalo">
+    <img src="https://raw.githubusercontent.com/GhostDog45/Indalo/master/assets/band_cover.png" alt="Indalo Band Cover" width="750" />
+  </a>
+</p>
+
 ---
 
 # 🎸 [Minerva](https://github.com/GhostDog45/Minerva)
