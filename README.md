@@ -44,6 +44,12 @@
 
 # 🎸 [Icons](https://github.com/GhostDog45/Icons)
 
+<p align="center">
+  <a href="https://github.com/GhostDog45/Icons">
+    <img src="https://raw.githubusercontent.com/GhostDog45/Icons/master/assets/band_cover.jpg" alt="Icons Band Cover" width="750" />
+  </a>
+</p>
+
 ---
 
 # 🎸 [Indalo](https://github.com/GhostDog45/Indalo)
