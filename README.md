@@ -42,6 +42,10 @@
 
 ---
 
+# 🎸 [Icons](https://github.com/GhostDog45/Icons)
+
+---
+
 # 🎸 [Indalo](https://github.com/GhostDog45/Indalo)
 
 <p align="center">
