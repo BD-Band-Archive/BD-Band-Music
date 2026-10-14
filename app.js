@@ -161,13 +161,12 @@
   async function loadCatalog() {
     try {
       trackCountLabel.textContent = 'Loading catalogue...';
-      const response = await fetch('catalog.json');
+      const response = await fetch('catalog.json?v=2.2');
       if (!response.ok) throw new Error('Failed to load catalog.json');
       catalog = await response.json();
-      trackCountLabel.textContent = `${catalog.length} FLAC Tracks`;
       
+      isFullTracksListExpanded = false;
       initArtistFilterBar();
-      applyFilters();
       initFromUrlParams();
       pushNavState({}, true);
     } catch (err) {
@@ -279,7 +278,7 @@
   function setArtistFilter(artist, shouldPushState = true) {
     activeArtistFilter = artist;
     activeAlbumFilter = 'all';
-    isFullTracksListExpanded = true;
+    isFullTracksListExpanded = (artist !== 'all');
     
     // Update active pill UI
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
@@ -305,7 +304,7 @@
   function setAlbumFilter(albumName, shouldPushState = true) {
     activeAlbumFilter = albumName;
     activeArtistFilter = 'all';
-    isFullTracksListExpanded = true;
+    isFullTracksListExpanded = (albumName !== 'all');
 
     // Reset artist pills UI to All
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
@@ -421,7 +420,8 @@
       );
 
       if (isCuratedHomepage) {
-        resultsCount.textContent = `Showing ${currentFilteredTracks.length} Featured Classics • Instant Load`;
+        trackCountLabel.textContent = `18 Featured (${catalog.length} in Archive)`;
+        resultsCount.textContent = `Showing ${currentFilteredTracks.length} Featured Classics • Instant Load (${catalog.length} Songs in Archive)`;
         if (seeMoreWrap) {
           seeMoreWrap.style.display = 'flex';
           if (seeMoreBtn) {
@@ -432,9 +432,20 @@
           }
         }
       } else {
-        resultsCount.textContent = `Showing ${currentFilteredTracks.length} tracks`;
+        trackCountLabel.textContent = `${catalog.length} FLAC Tracks`;
+        resultsCount.textContent = `Showing ${currentFilteredTracks.length} of ${catalog.length} tracks`;
         if (seeMoreWrap) {
-          seeMoreWrap.style.display = 'none';
+          if (!rawQuery && activeArtistFilter === 'all' && activeAlbumFilter === 'all' && isFullTracksListExpanded) {
+            seeMoreWrap.style.display = 'flex';
+            if (seeMoreBtn) {
+              seeMoreBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/></svg>
+                <span>Collapse to 18 Featured Classics</span>
+              `;
+            }
+          } else {
+            seeMoreWrap.style.display = 'none';
+          }
         }
       }
     } else if (activeView === 'albums') {
@@ -1137,6 +1148,8 @@
     clearSearchBtn.style.display = globalSearchInput.value ? 'block' : 'none';
     if (globalSearchInput.value.trim()) {
       isFullTracksListExpanded = true;
+    } else if (activeArtistFilter === 'all' && activeAlbumFilter === 'all') {
+      isFullTracksListExpanded = false;
     }
     clearTimeout(searchDebounceTimer);
     searchDebounceTimer = setTimeout(applyFilters, 150);
@@ -1176,17 +1189,25 @@
     applyFilters();
   });
 
-  // --- See More Tracks Handler ---
+  // --- See More Tracks Handler (Toggle Curated vs Full) ---
   if (seeMoreBtn) {
     seeMoreBtn.addEventListener('click', () => {
-      isFullTracksListExpanded = true;
+      isFullTracksListExpanded = !isFullTracksListExpanded;
       applyFilters();
-      showToast(`Loaded all ${catalog.length} tracks`);
+      if (isFullTracksListExpanded) {
+        showToast(`Loaded all ${catalog.length} tracks`);
+      } else {
+        showToast('Returned to 18 Featured Classics');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     });
   }
 
   sortSelect.addEventListener('change', () => {
     sortBy = sortSelect.value;
+    if (sortBy !== 'default') {
+      isFullTracksListExpanded = true;
+    }
     applyFilters();
   });
 
@@ -1196,7 +1217,7 @@
       activeView = tab.dataset.view;
       pushNavState({ view: activeView, artist: activeArtistFilter, album: activeAlbumFilter });
       updateViewTabs();
-      renderCurrentView();
+      applyFilters();
     });
   });
 
@@ -1578,6 +1599,7 @@
     if (hash.startsWith('#track=')) {
       const trackId = hash.replace('#track=', '');
       playTrackById(trackId);
+      applyFilters();
     } else if (hash.startsWith('#artist=')) {
       const artist = decodeURIComponent(hash.replace('#artist=', ''));
       setArtistFilter(artist, false);
@@ -1587,7 +1609,10 @@
     } else if (hash === '#albums' || hash === '#artists') {
       activeView = hash.replace('#', '');
       updateViewTabs();
-      renderCurrentView();
+      applyFilters();
+    } else {
+      isFullTracksListExpanded = false;
+      applyFilters();
     }
   }
 

@@ -16,8 +16,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Cache Control Meta to prevent stale browser caching -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.2">
 </head>
 <body>
   <div id="app" class="app-container">
@@ -41,7 +45,7 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="globalSearchInput" placeholder="Search 770+ songs, bands, albums, or lyrics..." autocomplete="off" spellcheck="false">
+          <input type="text" id="globalSearchInput" placeholder="Search 780+ songs, bands, albums, or lyrics..." autocomplete="off" spellcheck="false">
           <button id="clearSearchBtn" class="clear-btn" title="Clear Search" style="display: none;">✕</button>
           <span class="search-shortcut" title="Press '/' to focus">/</span>
         </div>
@@ -50,7 +54,7 @@
       <div class="header-right">
         <div class="stats-badge" id="statsBadge">
           <span class="live-dot"></span>
-          <span id="trackCountLabel">Loading 772 tracks...</span>
+          <span id="trackCountLabel">Loading catalogue...</span>
         </div>
         <button id="creditsBtn" class="icon-btn" title="Credits & Acknowledgements">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
@@ -143,9 +147,9 @@
         <div class="see-more-wrap" id="seeMoreWrap" style="display: none;">
           <button id="seeMoreBtn" class="primary-btn see-more-btn">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-            <span>See All Tracks (772 Songs)</span>
+            <span>See All Tracks (782 Songs)</span>
           </button>
-          <span class="see-more-hint">Or use the search bar above to instantly find any of the 770+ songs</span>
+          <span class="see-more-hint">Or use the search bar above to instantly find any of the 780+ songs</span>
         </div>
       </section>
 
@@ -385,6 +389,6 @@
 
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=2.2"></script>
 </body>
 </html>
