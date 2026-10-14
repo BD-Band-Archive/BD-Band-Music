@@ -1930,3 +1930,337 @@ body {
   justify-content: flex-end;
   border-top: 1px solid var(--border-color);
 }
+
+/* ==========================================================================
+   Full-Screen Immersive Landing Page & Manifesto Overlay
+   ========================================================================== */
+.landing-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: radial-gradient(circle at 50% 12%, rgba(139, 92, 246, 0.22) 0%, rgba(9, 13, 22, 0.98) 55%), #06090e;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1.5rem 5rem;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.4s;
+  cursor: pointer;
+}
+
+.landing-overlay.dismissed {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+.landing-container {
+  width: 100%;
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  margin: auto 0;
+  cursor: default;
+}
+
+.landing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.landing-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.landing-flag {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.landing-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-brand-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+}
+
+.landing-brand-sub {
+  font-size: 0.74rem;
+  color: var(--accent-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.landing-skip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.landing-skip-btn:hover {
+  background: rgba(139, 92, 246, 0.25);
+  border-color: var(--accent-light);
+  transform: translateY(-1px);
+}
+
+.landing-skip-key {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.4rem;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.landing-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.landing-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #c084fc;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
+}
+
+.sparkle-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+}
+
+.landing-headline {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.landing-manifesto-card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(26, 32, 48, 0.85) 0%, rgba(15, 21, 35, 0.95) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2.5rem;
+  text-align: left;
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  width: 100%;
+}
+
+.landing-manifesto-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #10b981 0%, #8b5cf6 50%, #ec4899 100%);
+}
+
+.manifesto-quote-icon {
+  position: absolute;
+  top: 0.75rem;
+  right: 1.5rem;
+  font-size: 5rem;
+  line-height: 1;
+  font-family: Georgia, serif;
+  color: rgba(139, 92, 246, 0.12);
+  pointer-events: none;
+}
+
+.landing-quote {
+  font-size: 1.18rem;
+  font-weight: 500;
+  color: #f1f5f9;
+  line-height: 1.65;
+  margin: 0;
+  position: relative;
+}
+
+.landing-quote strong {
+  color: #c084fc;
+  font-weight: 700;
+}
+
+.landing-gratitude {
+  margin-top: 1.15rem;
+  font-size: 0.98rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.landing-gratitude strong {
+  color: #38bdf8;
+}
+
+.landing-curator {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.curator-avatar {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.curator-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.curator-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.curator-title {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.landing-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.landing-spec-card {
+  background: rgba(17, 24, 39, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.landing-spec-card:hover {
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+.landing-spec-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.landing-spec-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.landing-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  padding-top: 1rem;
+}
+
+.landing-enter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
+  transition: all 0.25s ease;
+}
+
+.landing-enter-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(236, 72, 153, 0.6);
+}
+
+.landing-tap-hint {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .landing-specs-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .landing-manifesto-card {
+    padding: 1.5rem;
+  }
+
+  .landing-quote {
+    font-size: 1.05rem;
+  }
+  
+  .landing-overlay {
+    padding: 1.5rem 1rem 4rem;
+  }
+}

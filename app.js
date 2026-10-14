@@ -127,6 +127,12 @@
   const closeCreditsModalBtn = document.getElementById('closeCreditsModalBtn');
   const okCreditsBtn = document.getElementById('okCreditsBtn');
 
+  // Landing Page & Manifesto Overlay Elements
+  const landingOverlay = document.getElementById('landingOverlay');
+  const enterArchiveBtn = document.getElementById('enterArchiveBtn');
+  const closeLandingBtn = document.getElementById('closeLandingBtn');
+  const storyBtn = document.getElementById('storyBtn');
+
   // --- Phonetic Normalizer for Bengali & English ---
   function normalizeQuery(str) {
     if (!str) return '';
@@ -161,7 +167,7 @@
   async function loadCatalog() {
     try {
       trackCountLabel.textContent = 'Loading catalogue...';
-      const response = await fetch('catalog.json?v=2.4');
+      const response = await fetch('catalog.json?v=2.5');
       if (!response.ok) throw new Error('Failed to load catalog.json');
       catalog = await response.json();
       
@@ -170,6 +176,11 @@
       initFromUrlParams();
       pushNavState({}, true);
       setupDefaultVisualizer();
+
+      // Check if user previously dismissed landing in this session
+      if (sessionStorage.getItem('bd_landing_seen') === 'true' && landingOverlay) {
+        landingOverlay.classList.add('dismissed');
+      }
     } catch (err) {
       console.error('Catalog load error:', err);
       trackCountLabel.textContent = 'Failed to load catalogue';
@@ -1290,6 +1301,51 @@
     });
   }
 
+  // --- Landing Page & Manifesto Overlay Handlers ---
+  function dismissLanding() {
+    if (landingOverlay && !landingOverlay.classList.contains('dismissed')) {
+      landingOverlay.classList.add('dismissed');
+      sessionStorage.setItem('bd_landing_seen', 'true');
+    }
+  }
+
+  function showLanding() {
+    if (landingOverlay) {
+      landingOverlay.classList.remove('dismissed');
+      landingOverlay.scrollTop = 0;
+    }
+  }
+
+  if (landingOverlay) {
+    // Tap or click anywhere on the landing screen to dismiss into the player
+    landingOverlay.addEventListener('click', (e) => {
+      // If clicking an external anchor link, do not dismiss
+      if (e.target.closest('a')) return;
+      dismissLanding();
+    });
+  }
+
+  if (enterArchiveBtn) {
+    enterArchiveBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dismissLanding();
+    });
+  }
+
+  if (closeLandingBtn) {
+    closeLandingBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dismissLanding();
+    });
+  }
+
+  if (storyBtn) {
+    storyBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showLanding();
+    });
+  }
+
   // --- Brand Home Button ---
   brandHomeBtn.addEventListener('click', () => {
     globalSearchInput.value = '';
@@ -1553,6 +1609,15 @@
 
   // --- Keyboard Shortcuts ---
   window.addEventListener('keydown', (e) => {
+    // If landing overlay is active, any dismiss key (Escape, Space, Enter) dismisses it
+    if (landingOverlay && !landingOverlay.classList.contains('dismissed')) {
+      if (e.key === 'Escape' || e.code === 'Space' || e.key === 'Enter') {
+        e.preventDefault();
+        dismissLanding();
+        return;
+      }
+    }
+
     if (e.key === 'Escape') {
       if (document.activeElement === globalSearchInput) {
         globalSearchInput.blur();
