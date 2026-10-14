@@ -24,6 +24,7 @@ REPOS = [
     ("Arbovirus", "Arbovirus"),
     ("Artcell", "Artcell"),
     ("Aurthohin", "Aurthohin"),
+    ("Bassbaba Sumon", "Bassbaba-Sumon"),
     ("Black", "Black"),
     ("Icons", "Icons"),
     ("Indalo", "Indalo"),
@@ -33,6 +34,14 @@ REPOS = [
     ("Vibe", "Vibe"),
     ("Mixed Albums", "Mixed-Albums")
 ]
+
+FOLDER_MAP = {
+    'Mixed-Albums': 'Mixed Albums',
+    'BD-Band-Music': 'BD Band Music',
+    'Stoic-Bliss': 'Stoic Bliss',
+    'The-Watson-Brothers': 'The Watson Brothers',
+    'Bassbaba-Sumon': 'Bassbaba Sumon'
+}
 
 def clean_track(raw_title, default_artist, is_mixed=False):
     raw = raw_title.strip()
@@ -74,12 +83,46 @@ def clean_track(raw_title, default_artist, is_mixed=False):
         
     return artist, title
 
+def get_exact_album_cover(stream_url):
+    """Directly inspect filesystem for the album's cover based on the stream URL."""
+    m = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/([^/]+)/master/([^/]+)/', stream_url)
+    if not m:
+        return ''
+    repo = m.group(1)
+    album_folder = urllib.parse.unquote(m.group(2))
+    local_repo_folder = FOLDER_MAP.get(repo, repo)
+    target_dir = MUSIC_DIR / local_repo_folder / album_folder
+    
+    if not target_dir.exists():
+        return ''
+        
+    for cov_name in ['Album Cover', 'Album Covers']:
+        cov_dir = target_dir / cov_name
+        if cov_dir.exists():
+            files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png']]
+            if files:
+                front = next((f for f in files if 'front' in f.name.lower()), files[0])
+                enc_alb = urllib.parse.quote(album_folder)
+                enc_cov = urllib.parse.quote(cov_name)
+                enc_file = urllib.parse.quote(front.name)
+                return f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
+                
+    # Fallback to repo banner if no album cover directory exists (e.g. remastered collections / singles)
+    assets_dir = MUSIC_DIR / local_repo_folder / 'assets'
+    if assets_dir.exists():
+        for banner in ['band_cover.png', 'band_cover.jpg']:
+            if (assets_dir / banner).exists():
+                return f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/assets/{banner}'
+                
+    return ''
+
 def build_catalog():
     catalog = []
     seen_urls = set()
     
     for folder_name, repo_name in REPOS:
         readme_path = MUSIC_DIR / folder_name / "README.md"
+        repo_dir = MUSIC_DIR / folder_name
         if not readme_path.exists():
             print(f"Skipping {folder_name}: README.md not found")
             continue
@@ -95,7 +138,6 @@ def build_catalog():
         current_artist = folder_name if folder_name != "Mixed Albums" else "Various Artists"
         lossy_note = False
         album_track_counter = 0
-        in_sumon_section = False
         
         for line in lines:
             line_str = line.strip()
@@ -128,7 +170,7 @@ def build_catalog():
                 lossy_note = "16 cut - Lossy version" in header_text or "Lossy" in header_text
                 
                 if folder_name != "Mixed Albums":
-                    if "Bassbaba Sumon" in current_album or "Sumon" in current_album:
+                    if "Bassbaba Sumon" in current_album or "Sumon" in current_album or folder_name == "Bassbaba Sumon":
                         current_artist = "Bassbaba Sumon"
                     else:
                         current_artist = folder_name
@@ -150,27 +192,26 @@ def build_catalog():
             if "16 kHz shelf cutoff lossy" in line_str or "16 cut - Lossy version" in line_str:
                 lossy_note = True
                 
-            # Cover image
-            m_img = re.search(r'<img\s+src="([^"]+)"', line_str)
-            if not m_img:
-                m_img = re.search(r'!\[.*?\]\(([^)]+)\)', line_str)
+            # Cover image in markdown
+            m_img = re.search(r'<img\s+[^>]*src="([^"]+)"', line_str)
             if m_img:
                 img_src = m_img.group(1).strip()
-                if not img_src.startswith("http"):
-                    unquoted = urllib.parse.unquote(img_src.replace("\\", "/"))
-                    encoded_path = "/".join(urllib.parse.quote(seg) for seg in unquoted.split("/"))
-                    img_src = f"https://raw.githubusercontent.com/GhostDog45/{repo_name}/master/{encoded_path}"
-                else:
-                    unquoted = urllib.parse.unquote(img_src)
-                    parts = unquoted.split("://", 1)
-                    if len(parts) == 2:
-                        proto = parts[0]
-                        path_parts = parts[1].split("/")
-                        host = path_parts[0]
-                        rest = "/".join(urllib.parse.quote(seg) for seg in path_parts[1:])
-                        img_src = f"{proto}://{host}/{rest}"
-                if not current_cover:
-                    current_cover = img_src
+                if "img.shields.io" not in img_src and "band_cover" not in img_src and "assets/band_cover" not in img_src:
+                    if not img_src.startswith("http"):
+                        unquoted = urllib.parse.unquote(img_src.replace("\\", "/"))
+                        encoded_path = "/".join(urllib.parse.quote(seg) for seg in unquoted.split("/"))
+                        img_src = f"https://raw.githubusercontent.com/GhostDog45/{repo_name}/master/{encoded_path}"
+                    else:
+                        unquoted = urllib.parse.unquote(img_src)
+                        parts = unquoted.split("://", 1)
+                        if len(parts) == 2:
+                            proto = parts[0]
+                            path_parts = parts[1].split("/")
+                            host = path_parts[0]
+                            rest = "/".join(urllib.parse.quote(seg) for seg in path_parts[1:])
+                            img_src = f"{proto}://{host}/{rest}"
+                    if not current_cover:
+                        current_cover = img_src
                     
             # Track link
             m_trk = re.search(r'-\s+\[\*\*([^*]+)\*\*\]\((https://media\.githubusercontent\.com/media/[^)]+)\)', line_str)
@@ -198,6 +239,12 @@ def build_catalog():
                 if m_feat:
                     feat = m_feat.group(1).strip()
                     
+                # High-precision cover resolution:
+                # 1. Exact album cover deduced from streamUrl
+                # 2. Markdown cover if valid
+                # 3. Fallback
+                track_cover = get_exact_album_cover(url) or current_cover
+                
                 track_id = f"track-{len(catalog)+1}"
                 
                 catalog.append({
@@ -209,7 +256,7 @@ def build_catalog():
                     "year": current_year,
                     "trackNo": album_track_counter,
                     "streamUrl": url,
-                    "coverUrl": current_cover,
+                    "coverUrl": track_cover,
                     "repo": repo_name,
                     "isLossyTranscode": lossy_note
                 })
