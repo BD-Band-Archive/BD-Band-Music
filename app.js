@@ -56,7 +56,7 @@
   let analyser = null;
   let sourceNode = null;
   let visualizerAnimId = null;
-  let visualizerEnabled = false;
+  let visualizerEnabled = true;
 
   // DOM Elements
   const audio = document.getElementById('audioElement');
@@ -161,7 +161,7 @@
   async function loadCatalog() {
     try {
       trackCountLabel.textContent = 'Loading catalogue...';
-      const response = await fetch('catalog.json?v=2.3');
+      const response = await fetch('catalog.json?v=2.4');
       if (!response.ok) throw new Error('Failed to load catalog.json');
       catalog = await response.json();
       
@@ -169,10 +169,22 @@
       initArtistFilterBar();
       initFromUrlParams();
       pushNavState({}, true);
+      setupDefaultVisualizer();
     } catch (err) {
       console.error('Catalog load error:', err);
       trackCountLabel.textContent = 'Failed to load catalogue';
       showToast('Error loading songs catalogue. Please refresh.');
+    }
+  }
+
+  // --- Initialize Audio Spectrum Visualizer by Default ---
+  function setupDefaultVisualizer() {
+    if (visualizerEnabled) {
+      visualizerCanvas.classList.add('active');
+      themeToggleBtn.classList.add('active');
+      visualizerCanvas.width = window.innerWidth;
+      visualizerCanvas.height = 90;
+      startVisualizerLoop();
     }
   }
 
