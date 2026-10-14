@@ -22,6 +22,34 @@
   let searchQuery = '';
   let sortBy = 'default';
   let isSeeking = false;
+  let isFullTracksListExpanded = false;
+
+  // Curated 18 Essential / Iconic Tracks for Instant Homepage Load
+  const CURATED_HOMEPAGE_TRACK_IDS = [
+    // Arbovirus
+    'track-12', // Shorger Shishura
+    'track-5',  // Adhar O Ishshor
+    'track-7',  // Omanush
+    // Black
+    'track-265', // Kobor
+    'track-272', // Miththa
+    'track-275', // Sloak
+    'track-295', // Na-Thaka Jibon
+    'track-308', // Ajo
+    'track-458', // Opolap
+    // Artcell
+    'track-61', // Gontobbohin
+    'track-75', // Ei Bidaye
+    // The Watson Brothers
+    'track-417', // Ohom
+    'track-422', // Shore Daray, Shesh Barer Moto
+    'track-413', // Akash
+    // Aurthohin
+    'track-142', // Golper Shuru
+    'track-99',  // Rater Train
+    'track-116', // Rongdhonu
+    'track-138'  // Uru Uru Mon
+  ];
 
   // Audio Context & Visualizer State
   let audioCtx = null;
@@ -52,6 +80,8 @@
   const activeFilterValue = document.getElementById('activeFilterValue');
   const resetFilterBtn = document.getElementById('resetFilterBtn');
   const clearAllFiltersBtn = document.getElementById('clearAllFiltersBtn');
+  const seeMoreWrap = document.getElementById('seeMoreWrap');
+  const seeMoreBtn = document.getElementById('seeMoreBtn');
 
   // Player Elements
   const playPauseBtn = document.getElementById('playPauseBtn');
@@ -220,6 +250,7 @@
       activeAlbumFilter = e.state.album || 'all';
       globalSearchInput.value = e.state.search || '';
       clearSearchBtn.style.display = globalSearchInput.value ? 'block' : 'none';
+      isFullTracksListExpanded = !!(globalSearchInput.value || activeArtistFilter !== 'all' || activeAlbumFilter !== 'all');
 
       // Update pills UI
       artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
@@ -248,6 +279,7 @@
   function setArtistFilter(artist, shouldPushState = true) {
     activeArtistFilter = artist;
     activeAlbumFilter = 'all';
+    isFullTracksListExpanded = true;
     
     // Update active pill UI
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
@@ -273,6 +305,7 @@
   function setAlbumFilter(albumName, shouldPushState = true) {
     activeAlbumFilter = albumName;
     activeArtistFilter = 'all';
+    isFullTracksListExpanded = true;
 
     // Reset artist pills UI to All
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
@@ -299,39 +332,53 @@
     const rawQuery = globalSearchInput.value.trim();
     const query = normalizeQuery(rawQuery);
 
-    let filtered = catalog.filter(track => {
-      // Artist filter
-      if (activeArtistFilter !== 'all' && track.artist !== activeArtistFilter) {
-        return false;
+    const isCuratedHomepage = (
+      activeView === 'tracks' &&
+      !query &&
+      activeArtistFilter === 'all' &&
+      activeAlbumFilter === 'all' &&
+      !isFullTracksListExpanded
+    );
+
+    let filtered = [];
+
+    if (isCuratedHomepage) {
+      filtered = CURATED_HOMEPAGE_TRACK_IDS.map(id => catalog.find(t => t.id === id)).filter(Boolean);
+    } else {
+      filtered = catalog.filter(track => {
+        // Artist filter
+        if (activeArtistFilter !== 'all' && track.artist !== activeArtistFilter) {
+          return false;
+        }
+
+        // Album filter
+        if (activeAlbumFilter !== 'all' && track.album !== activeAlbumFilter) {
+          return false;
+        }
+
+        // Keyword Search
+        if (query) {
+          const matchTitle = normalizeQuery(track.title).includes(query);
+          const matchArtist = normalizeQuery(track.artist).includes(query);
+          const matchAlbum = normalizeQuery(track.album).includes(query);
+          const matchYear = track.year && track.year.toString().includes(query);
+          const matchFeat = track.featured && normalizeQuery(track.featured).includes(query);
+          return matchTitle || matchArtist || matchAlbum || matchYear || matchFeat;
+        }
+
+        return true;
+      });
+
+      // Sorting
+      if (sortBy === 'title-asc') {
+        filtered.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sortBy === 'artist-asc') {
+        filtered.sort((a, b) => a.artist.localeCompare(b.artist));
+      } else if (sortBy === 'year-desc') {
+        filtered.sort((a, b) => (b.year || 0) - (a.year || 0));
+      } else if (sortBy === 'year-asc') {
+        filtered.sort((a, b) => (a.year || 9999) - (b.year || 9999));
       }
-
-      // Album filter
-      if (activeAlbumFilter !== 'all' && track.album !== activeAlbumFilter) {
-        return false;
-      }
-
-      // Keyword Search
-      if (query) {
-        const matchTitle = normalizeQuery(track.title).includes(query);
-        const matchArtist = normalizeQuery(track.artist).includes(query);
-        const matchAlbum = normalizeQuery(track.album).includes(query);
-        const matchYear = track.year && track.year.toString().includes(query);
-        const matchFeat = track.featured && normalizeQuery(track.featured).includes(query);
-        return matchTitle || matchArtist || matchAlbum || matchYear || matchFeat;
-      }
-
-      return true;
-    });
-
-    // Sorting
-    if (sortBy === 'title-asc') {
-      filtered.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortBy === 'artist-asc') {
-      filtered.sort((a, b) => a.artist.localeCompare(b.artist));
-    } else if (sortBy === 'year-desc') {
-      filtered.sort((a, b) => (b.year || 0) - (a.year || 0));
-    } else if (sortBy === 'year-asc') {
-      filtered.sort((a, b) => (a.year || 9999) - (b.year || 9999));
     }
 
     currentFilteredTracks = filtered;
@@ -349,6 +396,7 @@
       artistsView.classList.remove('active');
       noResultsState.style.display = 'block';
       resultsCount.textContent = 'Showing 0 tracks';
+      if (seeMoreWrap) seeMoreWrap.style.display = 'none';
       return;
     }
 
@@ -363,7 +411,32 @@
       albumsView.classList.remove('active');
       artistsView.classList.remove('active');
       tracksTable.style.display = 'table';
-      resultsCount.textContent = `Showing ${currentFilteredTracks.length} tracks`;
+
+      const rawQuery = globalSearchInput.value.trim();
+      const isCuratedHomepage = (
+        !rawQuery &&
+        activeArtistFilter === 'all' &&
+        activeAlbumFilter === 'all' &&
+        !isFullTracksListExpanded
+      );
+
+      if (isCuratedHomepage) {
+        resultsCount.textContent = `Showing ${currentFilteredTracks.length} Featured Classics • Instant Load`;
+        if (seeMoreWrap) {
+          seeMoreWrap.style.display = 'flex';
+          if (seeMoreBtn) {
+            seeMoreBtn.innerHTML = `
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+              <span>See All Tracks (${catalog.length} Songs)</span>
+            `;
+          }
+        }
+      } else {
+        resultsCount.textContent = `Showing ${currentFilteredTracks.length} tracks`;
+        if (seeMoreWrap) {
+          seeMoreWrap.style.display = 'none';
+        }
+      }
     } else if (activeView === 'albums') {
       renderAlbumsGrid();
       tracksView.style.display = 'none';
@@ -1062,6 +1135,9 @@
   let searchDebounceTimer = null;
   globalSearchInput.addEventListener('input', () => {
     clearSearchBtn.style.display = globalSearchInput.value ? 'block' : 'none';
+    if (globalSearchInput.value.trim()) {
+      isFullTracksListExpanded = true;
+    }
     clearTimeout(searchDebounceTimer);
     searchDebounceTimer = setTimeout(applyFilters, 150);
   });
@@ -1069,6 +1145,7 @@
   clearSearchBtn.addEventListener('click', () => {
     globalSearchInput.value = '';
     clearSearchBtn.style.display = 'none';
+    isFullTracksListExpanded = false;
     applyFilters();
     globalSearchInput.focus();
   });
@@ -1076,6 +1153,7 @@
   resetFilterBtn.addEventListener('click', () => {
     activeArtistFilter = 'all';
     activeAlbumFilter = 'all';
+    isFullTracksListExpanded = false;
     pushNavState({ view: activeView, artist: 'all', album: 'all' });
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.artist === 'all');
@@ -1089,6 +1167,7 @@
     clearSearchBtn.style.display = 'none';
     activeArtistFilter = 'all';
     activeAlbumFilter = 'all';
+    isFullTracksListExpanded = false;
     pushNavState({ view: activeView, artist: 'all', album: 'all', search: '' });
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.artist === 'all');
@@ -1096,6 +1175,15 @@
     activeFilterBanner.style.display = 'none';
     applyFilters();
   });
+
+  // --- See More Tracks Handler ---
+  if (seeMoreBtn) {
+    seeMoreBtn.addEventListener('click', () => {
+      isFullTracksListExpanded = true;
+      applyFilters();
+      showToast(`Loaded all ${catalog.length} tracks`);
+    });
+  }
 
   sortSelect.addEventListener('change', () => {
     sortBy = sortSelect.value;
@@ -1176,6 +1264,7 @@
     activeView = 'tracks';
     activeArtistFilter = 'all';
     activeAlbumFilter = 'all';
+    isFullTracksListExpanded = false;
     pushNavState({ view: 'tracks', artist: 'all', album: 'all', search: '' });
     updateViewTabs();
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {

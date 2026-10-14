@@ -138,6 +138,15 @@
             </tbody>
           </table>
         </div>
+
+        <!-- See More Tracks Container -->
+        <div class="see-more-wrap" id="seeMoreWrap" style="display: none;">
+          <button id="seeMoreBtn" class="primary-btn see-more-btn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+            <span>See All Tracks (772 Songs)</span>
+          </button>
+          <span class="see-more-hint">Or use the search bar above to instantly find any of the 770+ songs</span>
+        </div>
       </section>
 
       <!-- VIEW 2: Albums Grid View -->
@@ -316,7 +325,7 @@
     </footer>
 
     <!-- Native Audio Element (Hidden) -->
-    <audio id="audioElement" preload="auto" crossorigin="anonymous"></audio>
+    <audio id="audioElement" preload="metadata" crossorigin="anonymous"></audio>
 
     <!-- Floating Toast Notification -->
     <div id="toast" class="toast" style="display: none;">
