@@ -91,6 +91,12 @@
   const toast = document.getElementById('toast');
   const toastMsg = document.getElementById('toastMsg');
 
+  // Credits Modal Elements
+  const creditsBtn = document.getElementById('creditsBtn');
+  const creditsModal = document.getElementById('creditsModal');
+  const closeCreditsModalBtn = document.getElementById('closeCreditsModalBtn');
+  const okCreditsBtn = document.getElementById('okCreditsBtn');
+
   // --- Phonetic Normalizer for Bengali & English ---
   function normalizeQuery(str) {
     if (!str) return '';
@@ -552,10 +558,12 @@
   // --- Official Artist Logos & Images (OSINT & Verified Band Archives) ---
   const ARTIST_OFFICIAL_IMAGES = {
     'Artcell': 'assets/artists/artcell.jpg',
+    'Artcell, Black & Cryptic Fate': 'assets/artists/artcell.jpg',
     'Black': 'assets/artists/black.jpg',
     'Aurthohin': 'assets/artists/aurthohin.png',
     'Bassbaba Sumon': 'assets/artists/bassbaba_sumon.png',
     'Bassbaba Sumon & Anila Naz Chowdhury': 'assets/artists/bassbaba_sumon.png',
+    'Stentorian feat. Bassbaba Sumon': 'assets/artists/bassbaba_sumon.png',
     'Arbovirus': 'assets/artists/arbovirus.png',
     'Indalo': 'assets/artists/indalo.png',
     'Icons': 'assets/artists/icons.jpg',
@@ -569,8 +577,62 @@
     'Cryptic Fate': 'assets/artists/cryptic_fate.jpg',
     'Nemesis': 'assets/artists/nemesis.jpg',
     'Avoid Rafa': 'assets/artists/avoid_rafa.jpg',
-    'Karnival': 'assets/artists/karnival.jpg'
+    'Karnival': 'assets/artists/karnival.jpg',
+    'Powersurge': 'assets/artists/powersurge.jpg',
+    'Power Surge': 'assets/artists/powersurge.jpg',
+    'Mechanix': 'assets/artists/mechanix.jpg',
+    'Habib Wahid': 'assets/artists/habib_wahid.jpg',
+    'Mila': 'assets/artists/mila.jpg',
+    'Fuad': 'assets/artists/fuad.jpg',
+    'Bishop Fuad': 'assets/artists/fuad.jpg',
+    'Elita': 'assets/artists/elita.jpg',
+    'Jon Kabir': 'assets/artists/jon_kabir.jpg'
   };
+
+  // --- Dynamic Color Avatars (Simple Colors: Green or Violet) for Artists ---
+  function getArtistInitials(name) {
+    if (!name) return 'BD';
+    const clean = name.replace(/[^\w\s]/gi, '').trim();
+    const words = clean.split(/\s+/).filter(Boolean);
+    if (words.length >= 2) {
+      return (words[0][0] + words[1][0]).toUpperCase();
+    } else if (words.length === 1 && words[0].length >= 2) {
+      return words[0].slice(0, 2).toUpperCase();
+    } else if (words.length === 1) {
+      return words[0][0].toUpperCase();
+    }
+    return 'BD';
+  }
+
+  function getArtistFallbackSvg(name) {
+    let hash = 0;
+    const str = name || '';
+    for (let i = 0; i < str.length; i++) {
+      hash = (hash << 5) - hash + str.charCodeAt(i);
+      hash |= 0;
+    }
+    const isViolet = Math.abs(hash) % 2 === 1;
+    const initials = getArtistInitials(name);
+    
+    // Simple vibrant colors: Emerald Green or Royal Violet
+    const color1 = isViolet ? '#6d28d9' : '#047857';
+    const color2 = isViolet ? '#8b5cf6' : '#10b981';
+    
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">` +
+      `<defs>` +
+        `<linearGradient id="g_${Math.abs(hash)}" x1="0%" y1="0%" x2="100%" y2="100%">` +
+          `<stop offset="0%" stop-color="${color1}"/>` +
+          `<stop offset="100%" stop-color="${color2}"/>` +
+        `</linearGradient>` +
+      `</defs>` +
+      `<circle cx="80" cy="80" r="80" fill="url(#g_${Math.abs(hash)})"/>` +
+      `<circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>` +
+      `<text x="80" y="88" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" letter-spacing="1">${initials}</text>` +
+    `</svg>`;
+    
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  }
+  window.getArtistFallbackSvg = getArtistFallbackSvg;
 
   // --- Render Artists Grid ---
   function renderArtistsGrid() {
@@ -579,8 +641,8 @@
 
     sourceTracks.forEach(t => {
       if (!artistsMap.has(t.artist)) {
-        // Strictly use official band logos/photos, fallback to neutral band cover, NOT album covers!
-        const cover = ARTIST_OFFICIAL_IMAGES[t.artist] || 'assets/band_cover.jpg';
+        // Strictly use official band logos/photos when found, or simple vibrant colors (green or violet)
+        const cover = ARTIST_OFFICIAL_IMAGES[t.artist] || getArtistFallbackSvg(t.artist);
         artistsMap.set(t.artist, {
           artist: t.artist,
           coverUrl: cover,
@@ -606,7 +668,7 @@
     artistList.forEach(artistObj => {
       gridHtml += `
         <div class="artist-card" data-artist="${escapeHtml(artistObj.artist)}">
-          <img class="artist-avatar" src="${escapeHtml(artistObj.coverUrl)}" alt="${escapeHtml(artistObj.artist)}" loading="lazy" onerror="this.src='assets/band_cover.jpg'">
+          <img class="artist-avatar" src="${escapeHtml(artistObj.coverUrl)}" alt="${escapeHtml(artistObj.artist)}" loading="lazy" onerror="this.onerror=null; this.src=getArtistFallbackSvg('${escapeHtml(artistObj.artist)}')">
           <div class="artist-card-name">${escapeHtml(artistObj.artist)}</div>
           <div class="artist-card-count">${artistObj.tracksCount} tracks • ${artistObj.albumsSet.size} albums</div>
         </div>
@@ -1072,6 +1134,41 @@
     showToast('Queue cleared');
   });
 
+  // --- Credits Modal Handlers ---
+  function openCreditsModal() {
+    if (creditsModal) {
+      creditsModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeCreditsModal() {
+    if (creditsModal) {
+      creditsModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (creditsBtn) {
+    creditsBtn.addEventListener('click', openCreditsModal);
+  }
+
+  if (closeCreditsModalBtn) {
+    closeCreditsModalBtn.addEventListener('click', closeCreditsModal);
+  }
+
+  if (okCreditsBtn) {
+    okCreditsBtn.addEventListener('click', closeCreditsModal);
+  }
+
+  if (creditsModal) {
+    creditsModal.addEventListener('click', (e) => {
+      if (e.target === creditsModal) {
+        closeCreditsModal();
+      }
+    });
+  }
+
   // --- Brand Home Button ---
   brandHomeBtn.addEventListener('click', () => {
     globalSearchInput.value = '';
@@ -1162,6 +1259,46 @@
     }
   }
 
+  // --- Audio Visualizer Palettes (5 Vibrant Gradients) ---
+  const VISUALIZER_PALETTES = [
+    // 1: Neon Violet / Fuchsia / Pink (Signature Default)
+    [
+      { offset: 0, r: 139, g: 92, b: 246, a: 0.25 },
+      { offset: 0.7, r: 192, g: 132, b: 252, a: 0.75 },
+      { offset: 1, r: 236, g: 72, b: 153, a: 0.95 }
+    ],
+    // 2: Cyber Cyan / Electric Blue / Royal Indigo
+    [
+      { offset: 0, r: 6, g: 182, b: 212, a: 0.25 },
+      { offset: 0.7, r: 59, g: 130, b: 246, a: 0.75 },
+      { offset: 1, r: 99, g: 102, b: 241, a: 0.95 }
+    ],
+    // 3: Emerald Aurora / Teal / Neon Mint
+    [
+      { offset: 0, r: 5, g: 150, b: 105, a: 0.25 },
+      { offset: 0.7, r: 16, g: 185, b: 129, a: 0.75 },
+      { offset: 1, r: 74, g: 222, b: 128, a: 0.95 }
+    ],
+    // 4: Sunset Amber / Flame Orange / Crimson Coral
+    [
+      { offset: 0, r: 245, g: 158, b: 11, a: 0.25 },
+      { offset: 0.7, r: 249, g: 115, b: 22, a: 0.75 },
+      { offset: 1, r: 239, g: 68, b: 68, a: 0.95 }
+    ],
+    // 5: Cosmic Purple / Radiant Magenta / Hot Rose
+    [
+      { offset: 0, r: 147, g: 51, b: 234, a: 0.25 },
+      { offset: 0.7, r: 217, g: 70, b: 239, a: 0.75 },
+      { offset: 1, r: 251, g: 113, b: 133, a: 0.95 }
+    ]
+  ];
+
+  let currentPaletteIdx = 0;
+  let targetPaletteIdx = 0;
+  let lastColorSwitchTime = performance.now();
+  const COLOR_SWITCH_INTERVAL = 4000; // Change color gradient every 4 seconds
+  const COLOR_TRANSITION_DURATION = 1200; // 1.2s smooth blend transition
+
   function startVisualizerLoop() {
     if (visualizerAnimId) return;
 
@@ -1179,6 +1316,38 @@
         visualizerCanvas.height = 90;
       }
 
+      const nowMs = performance.now();
+
+      // Check for gradient color transition every 4 seconds
+      if (nowMs - lastColorSwitchTime >= COLOR_SWITCH_INTERVAL) {
+        lastColorSwitchTime = nowMs;
+        currentPaletteIdx = targetPaletteIdx;
+        let nextIdx;
+        do {
+          nextIdx = Math.floor(Math.random() * VISUALIZER_PALETTES.length);
+        } while (nextIdx === targetPaletteIdx && VISUALIZER_PALETTES.length > 1);
+        targetPaletteIdx = nextIdx;
+      }
+
+      // Smooth interpolation of RGB color stops between palettes
+      const elapsed = nowMs - lastColorSwitchTime;
+      const progressRaw = Math.min(1, elapsed / COLOR_TRANSITION_DURATION);
+      const progress = progressRaw < 0.5 
+        ? 2 * progressRaw * progressRaw 
+        : 1 - Math.pow(-2 * progressRaw + 2, 2) / 2;
+
+      const fromPal = VISUALIZER_PALETTES[currentPaletteIdx];
+      const toPal = VISUALIZER_PALETTES[targetPaletteIdx];
+      const activeStops = [0, 0.7, 1].map((offset, idx) => {
+        const c1 = fromPal[idx];
+        const c2 = toPal[idx];
+        const r = Math.round(c1.r + (c2.r - c1.r) * progress);
+        const g = Math.round(c1.g + (c2.g - c1.g) * progress);
+        const b = Math.round(c1.b + (c2.b - c1.b) * progress);
+        const a = (c1.a + (c2.a - c1.a) * progress).toFixed(2);
+        return { offset, color: `rgba(${r}, ${g}, ${b}, ${a})` };
+      });
+
       let hasSignal = false;
       if (analyser && isPlaying && !audio.paused) {
         analyser.getByteFrequencyData(dataArray);
@@ -1193,7 +1362,7 @@
       ctx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
       const bufferLen = analyser ? analyser.frequencyBinCount : numBars;
       const barWidth = (visualizerCanvas.width / bufferLen) * 2.2;
-      const now = performance.now() * 0.003;
+      const now = nowMs * 0.003;
 
       let x = 0;
       for (let i = 0; i < bufferLen; i++) {
@@ -1212,9 +1381,7 @@
         }
 
         const grad = ctx.createLinearGradient(0, visualizerCanvas.height, 0, visualizerCanvas.height - barHeight);
-        grad.addColorStop(0, 'rgba(139, 92, 246, 0.25)');
-        grad.addColorStop(0.7, 'rgba(192, 132, 252, 0.75)');
-        grad.addColorStop(1, 'rgba(236, 72, 153, 0.95)');
+        activeStops.forEach(s => grad.addColorStop(s.offset, s.color));
 
         ctx.fillStyle = grad;
         ctx.fillRect(x, visualizerCanvas.height - barHeight, Math.max(1, barWidth - 3), barHeight);
@@ -1264,11 +1431,17 @@
 
   // --- Keyboard Shortcuts ---
   window.addEventListener('keydown', (e) => {
-    // If typing in search box, ignore playback shortcuts
-    if (document.activeElement === globalSearchInput) {
-      if (e.key === 'Escape') {
+    if (e.key === 'Escape') {
+      if (document.activeElement === globalSearchInput) {
         globalSearchInput.blur();
       }
+      closeCreditsModal();
+      queueDrawer.classList.remove('open');
+      return;
+    }
+
+    // If typing in search box, ignore playback shortcuts
+    if (document.activeElement === globalSearchInput) {
       return;
     }
 

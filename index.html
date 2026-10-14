@@ -52,6 +52,9 @@
           <span class="live-dot"></span>
           <span id="trackCountLabel">Loading 772 tracks...</span>
         </div>
+        <button id="creditsBtn" class="icon-btn" title="Credits & Acknowledgements">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        </button>
         <button id="themeToggleBtn" class="icon-btn" title="Toggle Visualizer Mode">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5v14M7 8v8M22 10v4M2 10v4"/></svg>
         </button>
@@ -158,6 +161,70 @@
         <p>Try searching for a different keyword, artist name, or clear the search filters.</p>
         <button id="clearAllFiltersBtn" class="primary-btn">Clear All Filters</button>
       </div>
+
+      <!-- Credits & Preservation Acknowledgements Section -->
+      <section class="credits-section" id="creditsSection">
+        <div class="credits-card">
+          <div class="credits-header">
+            <div class="credits-badge">
+              <span class="heart-icon">❤️</span>
+              <span>Credits &amp; Acknowledgements</span>
+            </div>
+            <p class="credits-intro">
+              Dedicated to the passionate collectors, archivists, and music lovers keeping the heritage of Bangladeshi rock and band music alive in lossless fidelity.
+            </p>
+          </div>
+
+          <div class="credits-grid">
+            <!-- 1: Lossless Preservation Community -->
+            <div class="credit-item">
+              <div class="credit-icon-wrap cd-glow">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+              </div>
+              <div class="credit-content">
+                <div class="credit-role">Preservation Community</div>
+                <h4 class="credit-title">Lossless CD Rippers &amp; Uploaders</h4>
+                <p class="credit-text">
+                  All the good folks still keeping CDs and uploading them lossless for free on <strong>Soulseek</strong>, <strong>Telegram Channels</strong> &amp; <strong>TBD</strong>.
+                </p>
+              </div>
+            </div>
+
+            <!-- 2: Shohail Ibne Mahbub (XTR) -->
+            <div class="credit-item">
+              <div class="credit-icon-wrap art-glow">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              </div>
+              <div class="credit-content">
+                <div class="credit-role">CD Cover Art Archivist</div>
+                <h4 class="credit-title">
+                  <a href="https://banglacdcovers.blogspot.com/" target="_blank" rel="noopener noreferrer" class="credit-link">
+                    Shohail Ibne Mahbub (XTR)
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  </a>
+                </h4>
+                <p class="credit-text">
+                  For collecting all the CD arts, inlay scans, and album artwork at <a href="https://banglacdcovers.blogspot.com/" target="_blank" rel="noopener noreferrer" class="credit-link">banglacdcovers.blogspot.com</a>.
+                </p>
+              </div>
+            </div>
+
+            <!-- 3: Md. Maniruzzaman Mridul -->
+            <div class="credit-item">
+              <div class="credit-icon-wrap dev-glow">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <div class="credit-content">
+                <div class="credit-role">Curator &amp; Developer</div>
+                <h4 class="credit-title">Md. Maniruzzaman Mridul</h4>
+                <p class="credit-text">
+                  For curating the git FLAC collection, structuring metadata catalogs, and engineering the lossless web search engine and player.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- Side Drawer: Up Next Queue -->
@@ -254,6 +321,57 @@
     <!-- Floating Toast Notification -->
     <div id="toast" class="toast" style="display: none;">
       <span id="toastMsg">Track added to queue</span>
+    </div>
+
+    <!-- Credits & Acknowledgements Modal Dialog -->
+    <div id="creditsModal" class="modal-backdrop" style="display: none;">
+      <div class="modal-box credits-modal-box">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-badge">Acknowledgements</span>
+            <h3>Archive Credits &amp; Community</h3>
+          </div>
+          <button id="closeCreditsModalBtn" class="icon-btn" title="Close">✕</button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-lead">
+            This lossless archival music player exists thanks to the dedicated efforts of the community preserving Bangladesh's rock and band heritage:
+          </p>
+          <div class="credits-modal-list">
+            <div class="credit-modal-card cd-border">
+              <div class="credit-modal-header">
+                <span class="credit-badge cd-glow">CD Archivists</span>
+                <h4>The Preservation Community</h4>
+              </div>
+              <p>All the good folks still keeping CDs and uploading them lossless for free on <strong>Soulseek</strong>, <strong>Telegram Channels</strong> &amp; <strong>TBD</strong>.</p>
+            </div>
+
+            <div class="credit-modal-card art-border">
+              <div class="credit-modal-header">
+                <span class="credit-badge art-glow">Artwork Preservation</span>
+                <h4>
+                  <a href="https://banglacdcovers.blogspot.com/" target="_blank" rel="noopener noreferrer" class="credit-link">
+                    Shohail Ibne Mahbub (XTR)
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  </a>
+                </h4>
+              </div>
+              <p>For painstakingly collecting, digitizing, and cataloging all the original CD arts, booklets, and inlay covers at <a href="https://banglacdcovers.blogspot.com/" target="_blank" rel="noopener noreferrer" class="credit-link">banglacdcovers.blogspot.com</a>.</p>
+            </div>
+
+            <div class="credit-modal-card dev-border">
+              <div class="credit-modal-header">
+                <span class="credit-badge dev-glow">Curator &amp; Developer</span>
+                <h4>Md. Maniruzzaman Mridul</h4>
+              </div>
+              <p>For compiling the lossless git repository, organizing metadata catalogues, and developing the searchable lossless web music player.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="okCreditsBtn" class="primary-btn">Close</button>
+        </div>
+      </div>
     </div>
 
   </div>
