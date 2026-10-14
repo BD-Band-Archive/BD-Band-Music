@@ -18,6 +18,7 @@
   let repeatMode = 'all'; // 'off' | 'all' | 'one'
   let activeView = 'tracks'; // 'tracks' | 'albums' | 'artists'
   let activeArtistFilter = 'all';
+  let activeAlbumFilter = 'all';
   let searchQuery = '';
   let sortBy = 'default';
 
@@ -37,6 +38,7 @@
   const artistFilterBar = document.getElementById('artistFilterBar');
   const viewTabs = document.querySelectorAll('.tab-btn');
   const tracksView = document.getElementById('tracksView');
+  const tracksTable = document.getElementById('tracksTable');
   const albumsView = document.getElementById('albumsView');
   const artistsView = document.getElementById('artistsView');
   const tracksTbody = document.getElementById('tracksTbody');
@@ -181,6 +183,7 @@
   // --- Set Active Artist Filter ---
   function setArtistFilter(artist) {
     activeArtistFilter = artist;
+    activeAlbumFilter = 'all';
     
     // Update active pill UI
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
@@ -198,6 +201,27 @@
     applyFilters();
   }
 
+  // --- Set Active Album Filter ---
+  function setAlbumFilter(albumName) {
+    activeAlbumFilter = albumName;
+    activeArtistFilter = 'all';
+
+    // Reset artist pills UI to All
+    artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.artist === 'all');
+    });
+
+    // Update banner
+    if (albumName !== 'all') {
+      activeFilterBanner.style.display = 'flex';
+      activeFilterValue.textContent = `Album: ${albumName}`;
+    } else {
+      activeFilterBanner.style.display = 'none';
+    }
+
+    applyFilters();
+  }
+
   // --- Filter & Search Logic ---
   function applyFilters() {
     const rawQuery = globalSearchInput.value.trim();
@@ -206,6 +230,11 @@
     let filtered = catalog.filter(track => {
       // Artist filter
       if (activeArtistFilter !== 'all' && track.artist !== activeArtistFilter) {
+        return false;
+      }
+
+      // Album filter
+      if (activeAlbumFilter !== 'all' && track.album !== activeAlbumFilter) {
         return false;
       }
 
@@ -328,7 +357,7 @@
               <button class="row-action-btn add-queue-btn" title="Add to Queue" data-id="${track.id}">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/></svg>
               </button>
-              <a href="${escapeHtml(track.streamUrl)}" class="row-action-btn download-track-btn" title="Download FLAC Track" download>
+              <a href="${escapeHtml(track.downloadUrl || (track.streamUrl + '?download=true'))}" class="row-action-btn download-track-btn" title="Download FLAC Track" download>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
               </a>
             </div>
@@ -360,9 +389,7 @@
     tracksTbody.querySelectorAll('.album-link').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        globalSearchInput.value = link.dataset.album;
-        clearSearchBtn.style.display = 'block';
-        applyFilters();
+        setAlbumFilter(link.dataset.album);
       });
     });
 
@@ -429,16 +456,28 @@
     albumsGrid.innerHTML = gridHtml;
 
     albumsGrid.querySelectorAll('.album-card').forEach(card => {
-      card.addEventListener('click', () => {
+      const playBtn = card.querySelector('.play-album-btn');
+      if (playBtn) {
+        playBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const albumName = card.dataset.album;
+          const albumObj = albumsMap.get(albumName);
+          if (albumObj && albumObj.tracks.length > 0) {
+            playTrackById(albumObj.tracks[0].id);
+            queue = albumObj.tracks.slice(1).map(t => t.id);
+            updateQueueBadge();
+            renderQueueList();
+            showToast(`Playing album: ${albumName}`);
+          }
+        });
+      }
+
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.play-album-btn')) return;
         const albumName = card.dataset.album;
-        const albumObj = albumsMap.get(albumName);
-        if (albumObj && albumObj.tracks.length > 0) {
-          playTrackById(albumObj.tracks[0].id);
-          queue = albumObj.tracks.slice(1).map(t => t.id);
-          updateQueueBadge();
-          renderQueueList();
-          showToast(`Playing album: ${albumName}`);
-        }
+        activeView = 'tracks';
+        updateViewTabs();
+        setAlbumFilter(albumName);
       });
     });
   }
@@ -521,12 +560,15 @@
     currentTrack = track;
     currentTrackIndex = currentFilteredTracks.findIndex(t => t.id === id);
 
-    // Update Player UI
+    // Update Player UI with Full Tooltips to prevent text cutoff
     playerTitle.textContent = track.title;
+    playerTitle.title = track.title;
     playerArtist.textContent = track.artist;
+    playerArtist.title = track.artist;
     playerAlbum.textContent = track.album;
+    playerAlbum.title = track.album;
     playerCoverImg.src = track.coverUrl;
-    playerDownloadBtn.href = track.streamUrl;
+    playerDownloadBtn.href = track.downloadUrl || `${track.streamUrl}?download=true`;
     playerDownloadBtn.setAttribute('download', `${track.artist} - ${track.title}.flac`);
 
     if (track.isLossyTranscode) {
@@ -539,19 +581,31 @@
       playerQualityBadge.title = 'Lossless FLAC Audio';
     }
 
-    // Set Audio Source and Play
-    audio.src = track.streamUrl;
+    // Set Clean Audio Source (strip any trailing query parameters)
+    const cleanUrl = (track.streamUrl || '').split('?')[0];
+    if (audio.src !== cleanUrl) {
+      audio.src = cleanUrl;
+    }
     audio.load();
 
     audioSpinner.style.display = 'block';
     playIcon.style.display = 'none';
     pauseIcon.style.display = 'none';
 
+    if (visualizerEnabled) {
+      initAudioVisualizer();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(() => {});
+    }
+
     audio.play().then(() => {
       isPlaying = true;
       updatePlayPauseState();
       updateMediaSession();
-      initAudioVisualizer();
+      if (visualizerEnabled) {
+        initAudioVisualizer();
+      }
       renderTracksTable(); // Update active row state
     }).catch(err => {
       console.warn('Playback error (possibly user interaction needed):', err);
@@ -571,10 +625,19 @@
       return;
     }
 
+    if (visualizerEnabled) {
+      initAudioVisualizer();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(() => {});
+    }
+
     if (audio.paused) {
       audio.play().then(() => {
         isPlaying = true;
         updatePlayPauseState();
+      }).catch(err => {
+        console.warn('Playback resume error:', err);
       });
     } else {
       audio.pause();
@@ -856,13 +919,25 @@
   });
 
   resetFilterBtn.addEventListener('click', () => {
-    setArtistFilter('all');
+    activeArtistFilter = 'all';
+    activeAlbumFilter = 'all';
+    artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.artist === 'all');
+    });
+    activeFilterBanner.style.display = 'none';
+    applyFilters();
   });
 
   clearAllFiltersBtn.addEventListener('click', () => {
     globalSearchInput.value = '';
     clearSearchBtn.style.display = 'none';
-    setArtistFilter('all');
+    activeArtistFilter = 'all';
+    activeAlbumFilter = 'all';
+    artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.artist === 'all');
+    });
+    activeFilterBanner.style.display = 'none';
+    applyFilters();
   });
 
   sortSelect.addEventListener('change', () => {
@@ -907,7 +982,13 @@
     clearSearchBtn.style.display = 'none';
     activeView = 'tracks';
     updateViewTabs();
-    setArtistFilter('all');
+    activeArtistFilter = 'all';
+    activeAlbumFilter = 'all';
+    artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.artist === 'all');
+    });
+    activeFilterBanner.style.display = 'none';
+    applyFilters();
   });
 
   // --- MediaSession API Integration ---
@@ -953,45 +1034,91 @@
 
   // --- Web Audio Visualizer ---
   function initAudioVisualizer() {
-    if (audioCtx) return;
+    if (audioCtx) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+      return;
+    }
     try {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (!AudioContextClass) return;
       audioCtx = new AudioContextClass();
       analyser = audioCtx.createAnalyser();
       analyser.fftSize = 64;
+      analyser.smoothingTimeConstant = 0.8;
 
       sourceNode = audioCtx.createMediaElementSource(audio);
       sourceNode.connect(analyser);
       analyser.connect(audioCtx.destination);
 
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+
       startVisualizerLoop();
     } catch (err) {
-      console.warn('Web Audio API visualizer initialization notice (CORS/AudioContext policy):', err);
+      console.warn('Web Audio API visualizer initialization notice:', err);
+      // Start loop for dynamic harmonic visualizer even if Web Audio element source failed
+      startVisualizerLoop();
     }
   }
 
   function startVisualizerLoop() {
+    if (visualizerAnimId) return;
+
     const ctx = visualizerCanvas.getContext('2d');
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+    const numBars = 32;
+    const dataArray = analyser ? new Uint8Array(analyser.frequencyBinCount) : new Uint8Array(numBars);
 
     function draw() {
       visualizerAnimId = requestAnimationFrame(draw);
-      analyser.getByteFrequencyData(dataArray);
+      if (!visualizerEnabled) return;
+
+      if (visualizerCanvas.width !== window.innerWidth) {
+        visualizerCanvas.width = window.innerWidth;
+        visualizerCanvas.height = 90;
+      }
+
+      let hasSignal = false;
+      if (analyser && isPlaying && !audio.paused) {
+        analyser.getByteFrequencyData(dataArray);
+        for (let i = 0; i < dataArray.length; i++) {
+          if (dataArray[i] > 0) {
+            hasSignal = true;
+            break;
+          }
+        }
+      }
 
       ctx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
-      const barWidth = (visualizerCanvas.width / bufferLength) * 2.2;
-      let x = 0;
+      const bufferLen = analyser ? analyser.frequencyBinCount : numBars;
+      const barWidth = (visualizerCanvas.width / bufferLen) * 2.2;
+      const now = performance.now() * 0.003;
 
-      for (let i = 0; i < bufferLength; i++) {
-        const barHeight = (dataArray[i] / 255) * visualizerCanvas.height;
-        const grad = ctx.createLinearGradient(0, visualizerCanvas.height, 0, 0);
-        grad.addColorStop(0, 'rgba(139, 92, 246, 0.2)');
-        grad.addColorStop(1, 'rgba(192, 132, 252, 0.7)');
+      let x = 0;
+      for (let i = 0; i < bufferLen; i++) {
+        let barHeight = 0;
+        if (isPlaying && !audio.paused) {
+          if (hasSignal) {
+            barHeight = (dataArray[i] / 255) * (visualizerCanvas.height * 0.85);
+          } else {
+            // Dynamic harmonic waveform when frequency data is zero or during CORS restriction
+            const wave = (Math.sin(now * 3 + i * 0.35) * 0.5 + 0.5) * 
+                         (Math.cos(now * 1.5 + i * 0.15) * 0.3 + 0.7);
+            barHeight = Math.max(4, wave * (visualizerCanvas.height * 0.75));
+          }
+        } else {
+          barHeight = 2; // Flat subtle baseline when paused
+        }
+
+        const grad = ctx.createLinearGradient(0, visualizerCanvas.height, 0, visualizerCanvas.height - barHeight);
+        grad.addColorStop(0, 'rgba(139, 92, 246, 0.25)');
+        grad.addColorStop(0.7, 'rgba(192, 132, 252, 0.75)');
+        grad.addColorStop(1, 'rgba(236, 72, 153, 0.95)');
 
         ctx.fillStyle = grad;
-        ctx.fillRect(x, visualizerCanvas.height - barHeight, barWidth - 2, barHeight);
+        ctx.fillRect(x, visualizerCanvas.height - barHeight, Math.max(1, barWidth - 3), barHeight);
         x += barWidth;
       }
     }
@@ -1001,8 +1128,17 @@
   themeToggleBtn.addEventListener('click', () => {
     visualizerEnabled = !visualizerEnabled;
     visualizerCanvas.classList.toggle('active', visualizerEnabled);
-    visualizerCanvas.width = window.innerWidth;
-    visualizerCanvas.height = 90;
+    themeToggleBtn.classList.toggle('active', visualizerEnabled);
+
+    if (visualizerEnabled) {
+      initAudioVisualizer();
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+      visualizerCanvas.width = window.innerWidth;
+      visualizerCanvas.height = 90;
+      startVisualizerLoop();
+    }
     showToast(visualizerEnabled ? 'Audio Spectrum: ON' : 'Audio Spectrum: OFF');
   });
 
@@ -1070,6 +1206,9 @@
     } else if (hash.startsWith('#artist=')) {
       const artist = decodeURIComponent(hash.replace('#artist=', ''));
       setArtistFilter(artist);
+    } else if (hash.startsWith('#album=')) {
+      const album = decodeURIComponent(hash.replace('#album=', ''));
+      setAlbumFilter(album);
     }
   }
 

@@ -957,11 +957,18 @@ body {
   height: 90px;
   pointer-events: none;
   z-index: 10;
-  opacity: 0.35;
+  opacity: 0.85;
   display: none;
 }
 .visualizer-canvas.active {
   display: block;
+}
+
+#themeToggleBtn.active {
+  color: var(--accent-light);
+  background: rgba(139, 92, 246, 0.25);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
 }
 
 /* Sticky Bottom Player Bar */
@@ -989,8 +996,9 @@ body {
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  width: 280px;
-  flex-shrink: 0;
+  flex: 1 1 340px;
+  min-width: 0;
+  max-width: 440px;
 }
 
 .now-playing-cover {
@@ -1038,6 +1046,8 @@ body {
 .now-playing-info {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -1045,6 +1055,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  min-width: 0;
 }
 
 .player-track-title {
@@ -1054,6 +1065,8 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
 }
 
 .quality-badge {
@@ -1077,6 +1090,21 @@ body {
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  min-width: 0;
+}
+.player-artist {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  max-width: 55%;
+}
+.player-album {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
 }
 .bullet { font-size: 0.6rem; opacity: 0.5; }
 
@@ -1337,7 +1365,9 @@ body {
   }
   
   .player-left {
-    width: 200px;
+    flex: 1 1 220px;
+    min-width: 140px;
+    max-width: 300px;
   }
   .player-right {
     width: auto;
@@ -1378,7 +1408,9 @@ body {
   }
   
   .player-left {
-    width: 140px;
+    flex: 1 1 160px;
+    min-width: 110px;
+    max-width: 220px;
   }
   .now-playing-cover {
     width: 44px;

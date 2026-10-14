@@ -255,7 +255,8 @@ def build_catalog():
                     "album": current_album,
                     "year": current_year,
                     "trackNo": album_track_counter,
-                    "streamUrl": url,
+                    "streamUrl": clean_url,
+                    "downloadUrl": f"{clean_url}?download=true",
                     "coverUrl": track_cover,
                     "repo": repo_name,
                     "isLossyTranscode": lossy_note
