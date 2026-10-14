@@ -157,8 +157,18 @@ def build_catalog():
             if m_img:
                 img_src = m_img.group(1).strip()
                 if not img_src.startswith("http"):
-                    encoded_path = "/".join(urllib.parse.quote(seg) for seg in img_src.replace("\\", "/").split("/"))
+                    unquoted = urllib.parse.unquote(img_src.replace("\\", "/"))
+                    encoded_path = "/".join(urllib.parse.quote(seg) for seg in unquoted.split("/"))
                     img_src = f"https://raw.githubusercontent.com/GhostDog45/{repo_name}/master/{encoded_path}"
+                else:
+                    unquoted = urllib.parse.unquote(img_src)
+                    parts = unquoted.split("://", 1)
+                    if len(parts) == 2:
+                        proto = parts[0]
+                        path_parts = parts[1].split("/")
+                        host = path_parts[0]
+                        rest = "/".join(urllib.parse.quote(seg) for seg in path_parts[1:])
+                        img_src = f"{proto}://{host}/{rest}"
                 if not current_cover:
                     current_cover = img_src
                     

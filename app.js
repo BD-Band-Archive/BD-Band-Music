@@ -240,31 +240,46 @@
   // --- Render Views ---
   function renderCurrentView() {
     if (currentFilteredTracks.length === 0) {
-      tracksTable.style.display = 'none';
-      albumsGrid.style.display = 'none';
-      artistsGrid.style.display = 'none';
+      tracksView.style.display = 'none';
+      albumsView.style.display = 'none';
+      artistsView.style.display = 'none';
+      tracksView.classList.remove('active');
+      albumsView.classList.remove('active');
+      artistsView.classList.remove('active');
       noResultsState.style.display = 'block';
       resultsCount.textContent = 'Showing 0 tracks';
       return;
     }
 
     noResultsState.style.display = 'none';
-    resultsCount.textContent = `Showing ${currentFilteredTracks.length} tracks`;
 
     if (activeView === 'tracks') {
       renderTracksTable();
+      tracksView.style.display = 'block';
+      albumsView.style.display = 'none';
+      artistsView.style.display = 'none';
+      tracksView.classList.add('active');
+      albumsView.classList.remove('active');
+      artistsView.classList.remove('active');
       tracksTable.style.display = 'table';
-      albumsGrid.style.display = 'none';
-      artistsGrid.style.display = 'none';
+      resultsCount.textContent = `Showing ${currentFilteredTracks.length} tracks`;
     } else if (activeView === 'albums') {
       renderAlbumsGrid();
-      tracksTable.style.display = 'none';
+      tracksView.style.display = 'none';
+      albumsView.style.display = 'block';
+      artistsView.style.display = 'none';
+      tracksView.classList.remove('active');
+      albumsView.classList.add('active');
+      artistsView.classList.remove('active');
       albumsGrid.style.display = 'grid';
-      artistsGrid.style.display = 'none';
     } else if (activeView === 'artists') {
       renderArtistsGrid();
-      tracksTable.style.display = 'none';
-      albumsGrid.style.display = 'none';
+      tracksView.style.display = 'none';
+      albumsView.style.display = 'none';
+      artistsView.style.display = 'block';
+      tracksView.classList.remove('active');
+      albumsView.classList.remove('active');
+      artistsView.classList.add('active');
       artistsGrid.style.display = 'grid';
     }
   }
@@ -294,7 +309,7 @@
           </td>
           <td class="td-title">
             <div class="track-main-cell">
-              <img class="track-thumb" src="${escapeHtml(track.coverUrl)}" alt="Cover" loading="lazy" onerror="this.src='https://raw.githubusercontent.com/GhostDog45/BD-Band-Music/master/assets/band_cover.jpg'">
+              <img class="track-thumb" src="${escapeHtml(track.coverUrl)}" alt="Cover" loading="lazy" onerror="this.src='assets/band_cover.jpg'">
               <div class="track-details">
                 <span class="track-title-cell">${escapeHtml(track.title)} ${featTag}</span>
               </div>
@@ -327,7 +342,6 @@
     // Attach row events
     tracksTbody.querySelectorAll('tr').forEach(row => {
       row.addEventListener('click', (e) => {
-        // Prevent row click if clicking link or button
         if (e.target.closest('.clickable-link') || e.target.closest('.row-action-btn')) return;
         const trackId = row.dataset.id;
         playTrackById(trackId);
@@ -378,12 +392,25 @@
       albumsMap.get(t.album).tracks.push(t);
     });
 
+    const albumList = Array.from(albumsMap.values());
+    if (sortBy === 'title-asc') {
+      albumList.sort((a, b) => a.album.localeCompare(b.album));
+    } else if (sortBy === 'artist-asc') {
+      albumList.sort((a, b) => a.artist.localeCompare(b.artist));
+    } else if (sortBy === 'year-desc') {
+      albumList.sort((a, b) => (b.year || 0) - (a.year || 0));
+    } else if (sortBy === 'year-asc') {
+      albumList.sort((a, b) => (a.year || 9999) - (b.year || 9999));
+    }
+
+    resultsCount.textContent = `Showing ${albumList.length} albums`;
+
     let gridHtml = '';
-    albumsMap.forEach(albumObj => {
+    albumList.forEach(albumObj => {
       gridHtml += `
         <div class="album-card" data-album="${escapeHtml(albumObj.album)}">
           <div class="album-cover-wrap">
-            <img class="album-cover-img" src="${escapeHtml(albumObj.coverUrl)}" alt="${escapeHtml(albumObj.album)}" loading="lazy" onerror="this.src='https://raw.githubusercontent.com/GhostDog45/BD-Band-Music/master/assets/band_cover.jpg'">
+            <img class="album-cover-img" src="${escapeHtml(albumObj.coverUrl)}" alt="${escapeHtml(albumObj.album)}" loading="lazy" onerror="this.src='assets/band_cover.jpg'">
             <button class="album-play-overlay play-album-btn" title="Play Album">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             </button>
@@ -406,7 +433,6 @@
         const albumName = card.dataset.album;
         const albumObj = albumsMap.get(albumName);
         if (albumObj && albumObj.tracks.length > 0) {
-          // Play first track and load rest into queue
           playTrackById(albumObj.tracks[0].id);
           queue = albumObj.tracks.slice(1).map(t => t.id);
           updateQueueBadge();
@@ -420,7 +446,9 @@
   // --- Render Artists Grid ---
   function renderArtistsGrid() {
     const artistsMap = new Map();
-    catalog.forEach(t => {
+    const sourceTracks = searchQuery ? currentFilteredTracks : catalog;
+
+    sourceTracks.forEach(t => {
       if (!artistsMap.has(t.artist)) {
         artistsMap.set(t.artist, {
           artist: t.artist,
@@ -434,11 +462,20 @@
       a.albumsSet.add(t.album);
     });
 
+    const artistList = Array.from(artistsMap.values());
+    if (sortBy === 'title-asc' || sortBy === 'artist-asc') {
+      artistList.sort((a, b) => a.artist.localeCompare(b.artist));
+    } else {
+      artistList.sort((a, b) => b.tracksCount - a.tracksCount);
+    }
+
+    resultsCount.textContent = `Showing ${artistList.length} artists`;
+
     let gridHtml = '';
-    artistsMap.forEach(artistObj => {
+    artistList.forEach(artistObj => {
       gridHtml += `
         <div class="artist-card" data-artist="${escapeHtml(artistObj.artist)}">
-          <img class="artist-avatar" src="${escapeHtml(artistObj.coverUrl)}" alt="${escapeHtml(artistObj.artist)}" loading="lazy" onerror="this.src='https://raw.githubusercontent.com/GhostDog45/BD-Band-Music/master/assets/band_cover.jpg'">
+          <img class="artist-avatar" src="${escapeHtml(artistObj.coverUrl)}" alt="${escapeHtml(artistObj.artist)}" loading="lazy" onerror="this.src='assets/band_cover.jpg'">
           <div class="artist-card-name">${escapeHtml(artistObj.artist)}</div>
           <div class="artist-card-count">${artistObj.tracksCount} tracks • ${artistObj.albumsSet.size} albums</div>
         </div>

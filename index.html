@@ -98,24 +98,25 @@
         <button class="reset-filter-btn" id="resetFilterBtn">Show All Tracks ✕</button>
       </div>
 
+      <!-- Universal Section Toolbar -->
+      <div class="section-toolbar">
+        <div class="results-meta">
+          <span id="resultsCount">Showing 772 tracks</span>
+        </div>
+        <div class="sort-controls">
+          <label for="sortSelect">Sort:</label>
+          <select id="sortSelect">
+            <option value="default">Default Order</option>
+            <option value="title-asc">Title / Name (A-Z)</option>
+            <option value="artist-asc">Artist (A-Z)</option>
+            <option value="year-desc">Year (Newest First)</option>
+            <option value="year-asc">Year (Oldest First)</option>
+          </select>
+        </div>
+      </div>
+
       <!-- VIEW 1: Tracks List View -->
       <section id="tracksView" class="view-section active">
-        <div class="section-toolbar">
-          <div class="results-meta">
-            <span id="resultsCount">Showing 772 songs</span>
-          </div>
-          <div class="sort-controls">
-            <label for="sortSelect">Sort:</label>
-            <select id="sortSelect">
-              <option value="default">Default Order</option>
-              <option value="title-asc">Song Title (A-Z)</option>
-              <option value="artist-asc">Artist (A-Z)</option>
-              <option value="year-desc">Year (Newest First)</option>
-              <option value="year-asc">Year (Oldest First)</option>
-            </select>
-          </div>
-        </div>
-
         <div class="tracks-table-container">
           <table class="tracks-table" id="tracksTable">
             <thead>
@@ -180,7 +181,7 @@
     <footer class="player-bar" id="playerBar">
       <div class="player-left">
         <div class="now-playing-cover" id="nowPlayingCoverWrap">
-          <img id="playerCoverImg" src="https://raw.githubusercontent.com/GhostDog45/BD-Band-Music/master/assets/band_cover.jpg" alt="Album Cover">
+          <img id="playerCoverImg" src="assets/band_cover.jpg" alt="Album Cover">
           <div class="cover-visualizer-bars" id="coverBars">
             <span></span><span></span><span></span>
           </div>

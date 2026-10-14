@@ -428,6 +428,14 @@ body {
   width: 100%;
 }
 
+.view-section {
+  display: none;
+}
+
+.view-section.active {
+  display: block;
+}
+
 .section-toolbar {
   display: flex;
   align-items: center;
