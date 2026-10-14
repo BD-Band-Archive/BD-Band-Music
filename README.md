@@ -32,6 +32,16 @@
 
 ---
 
+# 👑 [Bassbaba Sumon (বেসবাবা সুমন)](https://github.com/GhostDog45/Bassbaba-Sumon)
+
+<p align="center">
+  <a href="https://github.com/GhostDog45/Bassbaba-Sumon">
+    <img src="https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/assets/band_cover.png" alt="Bassbaba Sumon Artist Cover" width="750" />
+  </a>
+</p>
+
+---
+
 # 🎸 [Black](https://github.com/GhostDog45/Black)
 
 <p align="center">
