@@ -443,6 +443,21 @@
     });
   }
 
+  // --- Iconic Band Front Covers Map ---
+  const BAND_FRONT_COVERS = {
+    'Artcell': 'https://raw.githubusercontent.com/GhostDog45/Artcell/master/Onno%20Shomoy/cover.jpg',
+    'Black': 'https://raw.githubusercontent.com/GhostDog45/Black/master/Amar%20Prithibi/Album%20Cover/Amar%20Prithibi%20%5BFront%5D.jpg',
+    'Aurthohin': 'https://raw.githubusercontent.com/GhostDog45/Aurthohin/master/Trimatrik/Album%20Cover/Trimatrik%20%5BFront%5D.jpg',
+    'Bassbaba Sumon': 'https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg',
+    'Arbovirus': 'https://raw.githubusercontent.com/GhostDog45/Arbovirus/master/64min53sec%20%282007%29/Album%20Cover/64min53sec%20%5BFront%5D.jpg',
+    'Indalo': 'https://raw.githubusercontent.com/GhostDog45/Indalo/master/Kokhon%20Kibhabe%20Ekhane%20Ke%20Jane/Album%20Cover/Kokhon%20Kibhabe%20Ekhane%20Ke%20Jane%20%5BFront%5D.jpg',
+    'Minerva': 'https://raw.githubusercontent.com/GhostDog45/Minerva/master/Biday%20Songbidhan/Album%20Cover/folder.jpg',
+    'Icons': 'https://raw.githubusercontent.com/GhostDog45/Icons/master/Ishshoronio%20%282005%29/Album%20Cover/folder.jpg',
+    'Stoic Bliss': 'https://raw.githubusercontent.com/GhostDog45/Stoic-Bliss/master/Light%20Years%20Ahead/Album%20Cover/Light%20Years%20Ahead%20%5BFront-Back%5D.jpg',
+    'The Watson Brothers': 'https://raw.githubusercontent.com/GhostDog45/The-Watson-Brothers/master/Ohom/Album%20Cover/Ohom%20%5BFront%5D.jpg',
+    'Vibe': 'https://raw.githubusercontent.com/GhostDog45/Vibe/master/CHENA%20JOGOT/Album%20Cover/Chena%20Jogot%20%5BFront%5D.jpg'
+  };
+
   // --- Render Artists Grid ---
   function renderArtistsGrid() {
     const artistsMap = new Map();
@@ -450,14 +465,18 @@
 
     sourceTracks.forEach(t => {
       if (!artistsMap.has(t.artist)) {
+        const cover = BAND_FRONT_COVERS[t.artist] || t.coverUrl || '';
         artistsMap.set(t.artist, {
           artist: t.artist,
-          coverUrl: t.coverUrl,
+          coverUrl: cover,
           tracksCount: 0,
           albumsSet: new Set()
         });
       }
       const a = artistsMap.get(t.artist);
+      if (!a.coverUrl && t.coverUrl) {
+        a.coverUrl = t.coverUrl;
+      }
       a.tracksCount++;
       a.albumsSet.add(t.album);
     });
