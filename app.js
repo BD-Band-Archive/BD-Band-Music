@@ -161,7 +161,7 @@
   async function loadCatalog() {
     try {
       trackCountLabel.textContent = 'Loading catalogue...';
-      const response = await fetch('catalog.json?v=2.2');
+      const response = await fetch('catalog.json?v=2.3');
       if (!response.ok) throw new Error('Failed to load catalog.json');
       catalog = await response.json();
       

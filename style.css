@@ -1708,15 +1708,17 @@ body {
 }
 
 .credits-intro {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: var(--text-secondary);
-  line-height: 1.5;
-  max-width: 720px;
+  line-height: 1.6;
+  width: 100%;
+  max-width: 100%;
+  text-wrap: pretty;
 }
 
 .credits-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.25rem;
 }
 
