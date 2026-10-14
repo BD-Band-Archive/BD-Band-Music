@@ -142,6 +142,7 @@ body {
 .search-container {
   flex: 1;
   max-width: 580px;
+  min-width: 0;
 }
 
 .search-box {
@@ -153,6 +154,7 @@ body {
   border-radius: var(--radius-full);
   padding: 0.4rem 0.85rem;
   transition: all 0.2s ease;
+  min-width: 0;
 }
 
 .search-box:focus-within {
@@ -170,6 +172,7 @@ body {
 
 .search-box input {
   flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   outline: none;
@@ -1365,9 +1368,9 @@ body {
   }
   
   .player-left {
-    flex: 1 1 220px;
+    flex: 1 1 240px;
     min-width: 140px;
-    max-width: 300px;
+    max-width: 320px;
   }
   .player-right {
     width: auto;
@@ -1376,52 +1379,173 @@ body {
 
 @media (max-width: 680px) {
   :root {
-    --player-height: 80px;
-    --header-height: 58px;
+    --player-height: 74px;
+    --header-height: 56px;
   }
   
   .app-header {
-    padding: 0 1rem;
-    gap: 0.75rem;
+    padding: 0 0.85rem;
+    gap: 0.6rem;
   }
   
+  .header-left {
+    flex-shrink: 0;
+  }
+
   .brand-text, .search-shortcut, .stats-badge {
     display: none;
   }
+
+  .search-container {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .search-box {
+    padding: 0.35rem 0.65rem;
+  }
+
+  .search-box input {
+    font-size: 0.82rem;
+    padding: 0.2rem 0.35rem;
+  }
+
+  .header-right {
+    flex-shrink: 0;
+    gap: 0.45rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .icon-btn {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    padding: 0;
+    flex-shrink: 0;
+  }
   
   .sub-nav {
-    padding: 0 1rem;
-    gap: 0.75rem;
+    padding: 0 0.85rem;
+    gap: 0.5rem;
   }
   
   .main-content {
-    padding: 1rem;
+    padding: 0.85rem;
+    padding-bottom: calc(var(--player-height) + 1.5rem);
   }
   
   .th-album, .td-album {
     display: none;
   }
   
+  /* Mobile Player Bar: Edge-to-edge top scrub bar, generous track info */
   .player-bar {
     padding: 0 0.85rem;
-    gap: 0.5rem;
-  }
-  
-  .player-left {
-    flex: 1 1 160px;
-    min-width: 110px;
-    max-width: 220px;
-  }
-  .now-playing-cover {
-    width: 44px;
-    height: 44px;
-  }
-  
-  .player-controls {
     gap: 0.6rem;
+    height: var(--player-height);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Full-width scrub bar at top of mobile player */
+  .player-center {
+    position: static;
+    flex: 0 0 auto;
+    max-width: none;
+    gap: 0;
+  }
+
+  .progress-bar-container {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    padding: 0;
+    margin: 0;
+    z-index: 10;
+  }
+
+  .progress-bar-container .time-label {
+    display: none;
+  }
+
+  .seek-slider-wrap {
+    height: 6px;
+    border-radius: 0;
+  }
+
+  .seek-slider {
+    height: 6px;
+    border-radius: 0;
+  }
+
+  .seek-slider::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+    opacity: 1;
+  }
+
+  .player-left {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 105px);
+    gap: 0.65rem;
+  }
+
+  .now-playing-cover {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+  }
+
+  .now-playing-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .player-track-title {
+    font-size: 0.88rem;
+  }
+
+  .player-meta-row {
+    font-size: 0.74rem;
+    gap: 0.25rem;
+  }
+
+  .player-artist {
+    max-width: 60%;
+  }
+
+  .player-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
   }
   
-  #shuffleBtn, #repeatBtn {
+  #prevBtn, #shuffleBtn, #repeatBtn {
+    display: none;
+  }
+
+  .play-btn {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+  }
+
+  .control-btn {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
+
+  .player-right {
     display: none;
   }
   
@@ -1432,6 +1556,56 @@ body {
   
   .albums-grid, .artists-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 0.85rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand-flag {
+    font-size: 1.4rem;
+  }
+  
+  .app-header {
+    padding: 0 0.5rem;
+    gap: 0.4rem;
+  }
+
+  .search-box input {
+    font-size: 0.78rem;
+    padding: 0.15rem 0.25rem;
+  }
+
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  .player-bar {
+    padding: 0 0.6rem;
+    gap: 0.4rem;
+  }
+
+  .now-playing-cover {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+  }
+
+  .player-left {
+    max-width: calc(100% - 95px);
+    gap: 0.5rem;
+  }
+
+  .play-btn {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .control-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
   }
 }

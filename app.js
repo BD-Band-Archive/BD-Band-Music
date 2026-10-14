@@ -21,6 +21,7 @@
   let activeAlbumFilter = 'all';
   let searchQuery = '';
   let sortBy = 'default';
+  let isSeeking = false;
 
   // Audio Context & Visualizer State
   let audioCtx = null;
@@ -132,6 +133,7 @@
       initArtistFilterBar();
       applyFilters();
       initFromUrlParams();
+      pushNavState({}, true);
     } catch (err) {
       console.error('Catalog load error:', err);
       trackCountLabel.textContent = 'Failed to load catalogue';
@@ -180,8 +182,64 @@
     });
   }
 
+  // --- Navigation & Browser History State ---
+  function pushNavState(opts = {}, replace = false) {
+    const state = {
+      view: opts.view !== undefined ? opts.view : activeView,
+      artist: opts.artist !== undefined ? opts.artist : activeArtistFilter,
+      album: opts.album !== undefined ? opts.album : activeAlbumFilter,
+      search: opts.search !== undefined ? opts.search : globalSearchInput.value
+    };
+
+    let hash = '';
+    if (state.album !== 'all') {
+      hash = `#album=${encodeURIComponent(state.album)}`;
+    } else if (state.artist !== 'all') {
+      hash = `#artist=${encodeURIComponent(state.artist)}`;
+    } else if (state.view !== 'tracks') {
+      hash = `#${state.view}`;
+    }
+
+    if (replace) {
+      window.history.replaceState(state, '', hash || window.location.pathname);
+    } else {
+      window.history.pushState(state, '', hash || window.location.pathname);
+    }
+  }
+
+  window.addEventListener('popstate', (e) => {
+    if (e.state) {
+      activeView = e.state.view || 'tracks';
+      activeArtistFilter = e.state.artist || 'all';
+      activeAlbumFilter = e.state.album || 'all';
+      globalSearchInput.value = e.state.search || '';
+      clearSearchBtn.style.display = globalSearchInput.value ? 'block' : 'none';
+
+      // Update pills UI
+      artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.artist === activeArtistFilter);
+      });
+
+      // Update banner UI
+      if (activeAlbumFilter !== 'all') {
+        activeFilterBanner.style.display = 'flex';
+        activeFilterValue.textContent = `Album: ${activeAlbumFilter}`;
+      } else if (activeArtistFilter !== 'all') {
+        activeFilterBanner.style.display = 'flex';
+        activeFilterValue.textContent = activeArtistFilter;
+      } else {
+        activeFilterBanner.style.display = 'none';
+      }
+
+      updateViewTabs();
+      applyFilters();
+    } else {
+      initFromUrlParams();
+    }
+  });
+
   // --- Set Active Artist Filter ---
-  function setArtistFilter(artist) {
+  function setArtistFilter(artist, shouldPushState = true) {
     activeArtistFilter = artist;
     activeAlbumFilter = 'all';
     
@@ -198,11 +256,15 @@
       activeFilterBanner.style.display = 'none';
     }
 
+    if (shouldPushState) {
+      pushNavState({ view: 'tracks', artist: artist, album: 'all' });
+    }
+
     applyFilters();
   }
 
   // --- Set Active Album Filter ---
-  function setAlbumFilter(albumName) {
+  function setAlbumFilter(albumName, shouldPushState = true) {
     activeAlbumFilter = albumName;
     activeArtistFilter = 'all';
 
@@ -217,6 +279,10 @@
       activeFilterValue.textContent = `Album: ${albumName}`;
     } else {
       activeFilterBanner.style.display = 'none';
+    }
+
+    if (shouldPushState) {
+      pushNavState({ view: 'tracks', album: albumName, artist: 'all' });
     }
 
     applyFilters();
@@ -475,26 +541,35 @@
       card.addEventListener('click', (e) => {
         if (e.target.closest('.play-album-btn')) return;
         const albumName = card.dataset.album;
+        pushNavState({ view: 'tracks', album: albumName, artist: 'all', search: '' });
         activeView = 'tracks';
         updateViewTabs();
-        setAlbumFilter(albumName);
+        setAlbumFilter(albumName, false);
       });
     });
   }
 
-  // --- Iconic Band Front Covers Map ---
-  const BAND_FRONT_COVERS = {
-    'Artcell': 'https://raw.githubusercontent.com/GhostDog45/Artcell/master/Onno%20Shomoy/cover.jpg',
-    'Black': 'https://raw.githubusercontent.com/GhostDog45/Black/master/Amar%20Prithibi/Album%20Cover/Amar%20Prithibi%20%5BFront%5D.jpg',
-    'Aurthohin': 'https://raw.githubusercontent.com/GhostDog45/Aurthohin/master/Trimatrik/Album%20Cover/Trimatrik%20%5BFront%5D.jpg',
-    'Bassbaba Sumon': 'https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg',
-    'Arbovirus': 'https://raw.githubusercontent.com/GhostDog45/Arbovirus/master/64min53sec%20%282007%29/Album%20Cover/64min53sec%20%5BFront%5D.jpg',
-    'Indalo': 'https://raw.githubusercontent.com/GhostDog45/Indalo/master/Kokhon%20Kibhabe%20Ekhane%20Ke%20Jane/Album%20Cover/Kokhon%20Kibhabe%20Ekhane%20Ke%20Jane%20%5BFront%5D.jpg',
-    'Minerva': 'https://raw.githubusercontent.com/GhostDog45/Minerva/master/Biday%20Songbidhan/Album%20Cover/folder.jpg',
-    'Icons': 'https://raw.githubusercontent.com/GhostDog45/Icons/master/Ishshoronio%20%282005%29/Album%20Cover/folder.jpg',
-    'Stoic Bliss': 'https://raw.githubusercontent.com/GhostDog45/Stoic-Bliss/master/Light%20Years%20Ahead/Album%20Cover/Light%20Years%20Ahead%20%5BFront-Back%5D.jpg',
-    'The Watson Brothers': 'https://raw.githubusercontent.com/GhostDog45/The-Watson-Brothers/master/Ohom/Album%20Cover/Ohom%20%5BFront%5D.jpg',
-    'Vibe': 'https://raw.githubusercontent.com/GhostDog45/Vibe/master/CHENA%20JOGOT/Album%20Cover/Chena%20Jogot%20%5BFront%5D.jpg'
+  // --- Official Artist Logos & Images (OSINT & Verified Band Archives) ---
+  const ARTIST_OFFICIAL_IMAGES = {
+    'Artcell': 'assets/artists/artcell.jpg',
+    'Black': 'assets/artists/black.jpg',
+    'Aurthohin': 'assets/artists/aurthohin.png',
+    'Bassbaba Sumon': 'assets/artists/bassbaba_sumon.png',
+    'Bassbaba Sumon & Anila Naz Chowdhury': 'assets/artists/bassbaba_sumon.png',
+    'Arbovirus': 'assets/artists/arbovirus.png',
+    'Indalo': 'assets/artists/indalo.png',
+    'Icons': 'assets/artists/icons.jpg',
+    'The Icons': 'assets/artists/icons.jpg',
+    'Minerva': 'assets/artists/minerva.png',
+    'Stoic Bliss': 'assets/artists/stoic_bliss.jpg',
+    'The Watson Brothers': 'assets/artists/the_watson_brothers.jpg',
+    'Vibe': 'assets/artists/vibe.jpg',
+    'Warfaze': 'assets/artists/warfaze.jpg',
+    'Shironamhin': 'assets/artists/shironamhin.jpg',
+    'Cryptic Fate': 'assets/artists/cryptic_fate.jpg',
+    'Nemesis': 'assets/artists/nemesis.jpg',
+    'Avoid Rafa': 'assets/artists/avoid_rafa.jpg',
+    'Karnival': 'assets/artists/karnival.jpg'
   };
 
   // --- Render Artists Grid ---
@@ -504,7 +579,8 @@
 
     sourceTracks.forEach(t => {
       if (!artistsMap.has(t.artist)) {
-        const cover = BAND_FRONT_COVERS[t.artist] || t.coverUrl || '';
+        // Strictly use official band logos/photos, fallback to neutral band cover, NOT album covers!
+        const cover = ARTIST_OFFICIAL_IMAGES[t.artist] || 'assets/band_cover.jpg';
         artistsMap.set(t.artist, {
           artist: t.artist,
           coverUrl: cover,
@@ -513,9 +589,6 @@
         });
       }
       const a = artistsMap.get(t.artist);
-      if (!a.coverUrl && t.coverUrl) {
-        a.coverUrl = t.coverUrl;
-      }
       a.tracksCount++;
       a.albumsSet.add(t.album);
     });
@@ -545,9 +618,10 @@
     artistsGrid.querySelectorAll('.artist-card').forEach(card => {
       card.addEventListener('click', () => {
         const artist = card.dataset.artist;
+        pushNavState({ view: 'tracks', artist: artist, album: 'all', search: '' });
         activeView = 'tracks';
         updateViewTabs();
-        setArtistFilter(artist);
+        setArtistFilter(artist, false);
       });
     });
   }
@@ -772,6 +846,7 @@
 
   // --- Audio Element Event Listeners ---
   audio.addEventListener('timeupdate', () => {
+    if (isSeeking) return; // Prevent overwriting slider position during active user drag
     if (!audio.duration || isNaN(audio.duration)) return;
     const progress = (audio.currentTime / audio.duration) * 100;
     seekSlider.value = progress;
@@ -833,18 +908,36 @@
     playIcon.style.display = 'block';
   });
 
-  // --- Seek Slider Interaction ---
+  // --- Seek Slider Interaction (Smooth Drag & Release) ---
+  const onSeekStart = () => {
+    isSeeking = true;
+  };
+
+  const onSeekCommit = () => {
+    if (isSeeking) {
+      if (audio.duration && !isNaN(audio.duration)) {
+        const targetTime = (parseFloat(seekSlider.value) / 100) * audio.duration;
+        audio.currentTime = targetTime;
+      }
+      isSeeking = false;
+    }
+  };
+
+  seekSlider.addEventListener('mousedown', onSeekStart);
+  seekSlider.addEventListener('touchstart', onSeekStart, { passive: true });
+
   seekSlider.addEventListener('input', () => {
-    if (!audio.duration) return;
-    const seekTime = (seekSlider.value / 100) * audio.duration;
-    currentTimeLabel.textContent = formatTime(seekTime);
+    isSeeking = true;
+    if (audio.duration && !isNaN(audio.duration)) {
+      const seekTime = (parseFloat(seekSlider.value) / 100) * audio.duration;
+      currentTimeLabel.textContent = formatTime(seekTime);
+    }
     seekSlider.style.backgroundSize = `${seekSlider.value}% 100%`;
   });
 
-  seekSlider.addEventListener('change', () => {
-    if (!audio.duration) return;
-    audio.currentTime = (seekSlider.value / 100) * audio.duration;
-  });
+  seekSlider.addEventListener('change', onSeekCommit);
+  window.addEventListener('mouseup', onSeekCommit);
+  window.addEventListener('touchend', onSeekCommit);
 
   // --- Volume Slider ---
   volumeSlider.addEventListener('input', () => {
@@ -921,6 +1014,7 @@
   resetFilterBtn.addEventListener('click', () => {
     activeArtistFilter = 'all';
     activeAlbumFilter = 'all';
+    pushNavState({ view: activeView, artist: 'all', album: 'all' });
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.artist === 'all');
     });
@@ -933,6 +1027,7 @@
     clearSearchBtn.style.display = 'none';
     activeArtistFilter = 'all';
     activeAlbumFilter = 'all';
+    pushNavState({ view: activeView, artist: 'all', album: 'all', search: '' });
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.artist === 'all');
     });
@@ -949,6 +1044,7 @@
   viewTabs.forEach(tab => {
     tab.addEventListener('click', () => {
       activeView = tab.dataset.view;
+      pushNavState({ view: activeView, artist: activeArtistFilter, album: activeAlbumFilter });
       updateViewTabs();
       renderCurrentView();
     });
@@ -981,9 +1077,10 @@
     globalSearchInput.value = '';
     clearSearchBtn.style.display = 'none';
     activeView = 'tracks';
-    updateViewTabs();
     activeArtistFilter = 'all';
     activeAlbumFilter = 'all';
+    pushNavState({ view: 'tracks', artist: 'all', album: 'all', search: '' });
+    updateViewTabs();
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.artist === 'all');
     });
@@ -1043,7 +1140,8 @@
     try {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (!AudioContextClass) return;
-      audioCtx = new AudioContextClass();
+      // Configure latencyHint: 'playback' for smooth, glitch-free background audio
+      audioCtx = new AudioContextClass({ latencyHint: 'playback' });
       analyser = audioCtx.createAnalyser();
       analyser.fftSize = 64;
       analyser.smoothingTimeConstant = 0.8;
@@ -1073,7 +1171,8 @@
 
     function draw() {
       visualizerAnimId = requestAnimationFrame(draw);
-      if (!visualizerEnabled) return;
+      // Skip canvas drawing if visualizer is disabled or tab is in background
+      if (!visualizerEnabled || document.hidden) return;
 
       if (visualizerCanvas.width !== window.innerWidth) {
         visualizerCanvas.width = window.innerWidth;
@@ -1124,6 +1223,20 @@
     }
     draw();
   }
+
+  // --- Optimize Background Play & Tab Switching ---
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (visualizerAnimId) {
+        cancelAnimationFrame(visualizerAnimId);
+        visualizerAnimId = null;
+      }
+    } else {
+      if (visualizerEnabled && isPlaying) {
+        startVisualizerLoop();
+      }
+    }
+  });
 
   themeToggleBtn.addEventListener('click', () => {
     visualizerEnabled = !visualizerEnabled;
@@ -1205,10 +1318,14 @@
       playTrackById(trackId);
     } else if (hash.startsWith('#artist=')) {
       const artist = decodeURIComponent(hash.replace('#artist=', ''));
-      setArtistFilter(artist);
+      setArtistFilter(artist, false);
     } else if (hash.startsWith('#album=')) {
       const album = decodeURIComponent(hash.replace('#album=', ''));
-      setAlbumFilter(album);
+      setAlbumFilter(album, false);
+    } else if (hash === '#albums' || hash === '#artists') {
+      activeView = hash.replace('#', '');
+      updateViewTabs();
+      renderCurrentView();
     }
   }
 
