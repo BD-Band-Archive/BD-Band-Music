@@ -338,19 +338,19 @@ def get_all_album_covers(stream_url):
 def validate_repo_structure(folder_name, readme_path):
     """
     Validates mandatory discography structural hierarchy:
-      1. Original Albums (Studio albums, Live albums, core EPs)
+      1. Original Albums (Studio albums, Live albums, core EPs) - ascending by release year
       2. Solos / Singles (Solo releases, standalone singles, unreleased demo tracks)
-      3. Linked Mixed Albums (Mixed album / compilation appearances linking to Mixed-Albums or external repos)
+      3. Linked Mixed Albums (Mixed album / compilation appearances) - strictly ascending by release year
       
     Also enforces:
       - Sequential numbering without gaps (1, 2, 3, ...)
       - If a 'Singles' folder exists on disk with audio tracks, a Singles section must exist in README
       - No Tier 3 (Mixed) albums appearing before Tier 1 or Tier 2
+      - Mandatory ascending chronological order for all albums in 'Mixed Albums' repository
     """
-    if folder_name in ["Mixed Albums", "BD Band Music"]:
+    if folder_name == "BD Band Music":
         return True
 
-    repo_dir = MUSIC_DIR / folder_name
     if not readme_path.exists():
         return False
 
@@ -361,6 +361,34 @@ def validate_repo_structure(folder_name, readme_path):
     if not body_matches:
         return True
 
+    # Special validation for the central Mixed Albums repository
+    if folder_name == "Mixed Albums":
+        prev_yr = 0
+        prev_num = 0
+        errors = []
+        for num_str, title in body_matches:
+            num = int(num_str)
+            if num != prev_num + 1:
+                errors.append(f"Header numbering jump: expected {prev_num+1}, got {num} ('{title}')")
+            prev_num = num
+            y_m = re.search(r"\((\d{4})\)", title)
+            if y_m:
+                yr = int(y_m.group(1))
+                if yr < prev_yr:
+                    errors.append(
+                        f"Ascending chronological order violation in Mixed Albums: section {num} ('{title}', year {yr}) "
+                        f"is earlier than previous album year {prev_yr}!"
+                    )
+                prev_yr = yr
+        if errors:
+            print(f"\n❌ [CHRONOLOGICAL VIOLATION] in Mixed Albums:")
+            for err in errors:
+                print(f"   • {err}")
+            raise ValueError("Mixed Albums violates mandatory ascending chronological order.")
+        print(f"  [✓] Mixed Albums Chronological Order Verified ({len(body_matches)} albums ascending)")
+        return True
+
+    repo_dir = MUSIC_DIR / folder_name
     sections = []
     for num_str, title in body_matches:
         num = int(num_str)
@@ -387,6 +415,8 @@ def validate_repo_structure(folder_name, readme_path):
 
     current_tier = 1
     prev_num = 0
+    prev_years = {"original": 0, "single": 0, "mixed": 0}
+
     for num, sec_type, title in sections:
         tier = tier_map[sec_type]
         if num != prev_num + 1:
@@ -401,6 +431,19 @@ def validate_repo_structure(folder_name, readme_path):
             )
         else:
             current_tier = tier
+
+        # Validate ascending chronological release year order within original and mixed sections
+        y_m = re.search(r"\((\d{4})\)", title)
+        if y_m and sec_type in ["original", "mixed"]:
+            yr = int(y_m.group(1))
+            if yr < prev_years[sec_type]:
+                errors.append(
+                    f"Ascending chronological order violation in {sec_type} albums: "
+                    f"section {num} ('{title}', year {yr}) appears after year {prev_years[sec_type]}! "
+                    f"All albums within {sec_type} albums must be in ascending chronological order."
+                )
+            else:
+                prev_years[sec_type] = yr
 
     if errors:
         print(f"\n❌ [STRUCTURAL VIOLATION] in repository '{folder_name}':")
