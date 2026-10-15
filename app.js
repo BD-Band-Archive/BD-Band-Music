@@ -61,6 +61,27 @@
   let visualizerAnimId = null;
   let visualizerEnabled = true;
 
+  // Precision 10-Band Graphic Equalizer State
+  const EQ_FREQUENCIES = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
+  const EQ_LABELS = ['32', '64', '125', '250', '500', '1k', '2k', '4k', '8k', '16k'];
+  
+  const EQ_PRESETS = {
+    flat: { name: 'Flat (Bit-Perfect)', preamp: 0, gains: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    rock: { name: 'Rock / Metal Bite', preamp: -1.5, gains: [4.5, 3.0, 1.0, -1.0, -2.5, 0.5, 2.5, 3.5, 3.0, 2.0] },
+    bassbaba: { name: 'Bassbaba (Deep Bass)', preamp: -2.5, gains: [6.5, 5.5, 4.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] },
+    vocal: { name: 'Vocal Clarity', preamp: -1.0, gains: [-2.0, -1.5, 0.0, 1.0, 2.5, 3.5, 3.0, 2.0, 1.0, 0.0] },
+    acoustic: { name: 'Acoustic & Unplugged', preamp: -1.0, gains: [2.0, 2.5, 1.5, 0.0, 1.0, 1.5, 2.0, 3.0, 3.5, 2.5] },
+    electronic: { name: 'Electronic / Beats', preamp: -1.5, gains: [5.0, 4.0, 1.0, 0.0, -1.0, 1.0, 2.0, 3.0, 4.0, 4.5] },
+    treble: { name: 'Treble Boost', preamp: -1.5, gains: [-2.0, -1.0, 0.0, 0.0, 1.0, 2.0, 3.5, 5.0, 5.5, 6.0] }
+  };
+
+  let eqEnabled = true;
+  let eqFilters = [];
+  let eqPreampNode = null;
+  let currentEqGains = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  let currentPreamp = 0;
+  let currentPresetKey = 'flat';
+
   // DOM Elements
   const audio = document.getElementById('audioElement');
   const globalSearchInput = document.getElementById('globalSearchInput');
@@ -114,6 +135,8 @@
   const playerShareBtn = document.getElementById('playerShareBtn');
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const visualizerCanvas = document.getElementById('visualizerCanvas');
+  const eqBtn = document.getElementById('eqBtn');
+  const eqActiveDot = document.getElementById('eqActiveDot');
 
   // Queue Elements
   const queueDrawer = document.getElementById('queueDrawer');
@@ -130,6 +153,17 @@
   const creditsModal = document.getElementById('creditsModal');
   const closeCreditsModalBtn = document.getElementById('closeCreditsModalBtn');
   const okCreditsBtn = document.getElementById('okCreditsBtn');
+
+  // Precision Equalizer Elements
+  const eqModal = document.getElementById('eqModal');
+  const closeEqBtn = document.getElementById('closeEqBtn');
+  const eqToggle = document.getElementById('eqToggle');
+  const eqStatusLabel = document.getElementById('eqStatusLabel');
+  const eqPresetSelect = document.getElementById('eqPresetSelect');
+  const eqResetBtn = document.getElementById('eqResetBtn');
+  const eqPreamp = document.getElementById('eqPreamp');
+  const preampVal = document.getElementById('preampVal');
+  const eqBandsRack = document.getElementById('eqBandsRack');
 
   // Landing Page & Manifesto Overlay Elements
   const landingOverlay = document.getElementById('landingOverlay');
@@ -230,11 +264,31 @@
         console.warn('Notice: dynamic album_covers.json skipped.', err);
       }
 
+      // Populate landing page live telemetry stats
+      const landingTrackCount = document.getElementById('landingTrackCount');
+      const landingAlbumCount = document.getElementById('landingAlbumCount');
+      const landingBandCount = document.getElementById('landingBandCount');
+      if (landingTrackCount) landingTrackCount.textContent = catalog.length;
+      if (landingAlbumCount) {
+        const uniqueAlbums = new Set(catalog.map(t => t.album).filter(Boolean));
+        landingAlbumCount.textContent = uniqueAlbums.size;
+      }
+      if (landingBandCount) {
+        const uniqueArtists = new Set();
+        catalog.forEach(t => {
+          if (t.artists && t.artists.length > 0) t.artists.forEach(a => uniqueArtists.add(a));
+          else if (t.artist) uniqueArtists.add(t.artist);
+        });
+        landingBandCount.textContent = uniqueArtists.size + '+';
+      }
+
       isFullTracksListExpanded = false;
       initArtistFilterBar();
       initFromUrlParams();
       pushNavState({}, true);
       setupDefaultVisualizer();
+      loadSavedEqSettings();
+      renderEqBands();
     } catch (err) {
       console.error('Catalog load error:', err);
       trackCountLabel.textContent = 'Failed to load catalogue';
@@ -1709,6 +1763,20 @@
     });
   }
 
+  // Interactive Band Discovery Matrix on Landing Overlay
+  const landingBandMatrix = document.getElementById('landingBandMatrix');
+  if (landingBandMatrix) {
+    landingBandMatrix.addEventListener('click', (e) => {
+      const chip = e.target.closest('.landing-band-chip');
+      if (!chip) return;
+      const artist = chip.dataset.artist;
+      if (artist) {
+        dismissLanding();
+        setArtistFilter(artist);
+      }
+    });
+  }
+
   // --- Brand Home Button ---
   brandHomeBtn.addEventListener('click', () => {
     globalSearchInput.value = '';
@@ -1767,7 +1835,262 @@
     });
   }
 
-  // --- Web Audio Visualizer ---
+  // --- Precision Equalizer Utilities & State Management ---
+  function dbToGain(db) {
+    return Math.pow(10, db / 20);
+  }
+
+  function formatDb(val) {
+    const num = parseFloat(val);
+    if (isNaN(num)) return '0.0';
+    return (num > 0 ? '+' : '') + num.toFixed(1);
+  }
+
+  function loadSavedEqSettings() {
+    try {
+      const saved = localStorage.getItem('bd_band_music_eq');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed.gains) && parsed.gains.length === 10) {
+          currentEqGains = parsed.gains.map(v => Math.max(-12, Math.min(12, parseFloat(v) || 0)));
+        }
+        if (typeof parsed.preamp === 'number') {
+          currentPreamp = Math.max(-6, Math.min(6, parsed.preamp));
+        }
+        if (typeof parsed.enabled === 'boolean') {
+          eqEnabled = parsed.enabled;
+        }
+        if (parsed.preset && (EQ_PRESETS[parsed.preset] || parsed.preset === 'custom')) {
+          currentPresetKey = parsed.preset;
+        }
+      }
+    } catch (_) {}
+  }
+
+  function saveEqSettings() {
+    try {
+      localStorage.setItem('bd_band_music_eq', JSON.stringify({
+        enabled: eqEnabled,
+        preset: currentPresetKey,
+        preamp: currentPreamp,
+        gains: currentEqGains
+      }));
+    } catch (_) {}
+  }
+
+  function renderEqBands() {
+    if (!eqBandsRack) return;
+
+    let bandsHtml = '';
+    EQ_FREQUENCIES.forEach((freq, idx) => {
+      const label = EQ_LABELS[idx];
+      const gain = currentEqGains[idx] || 0;
+      const formatted = formatDb(gain);
+      const activeClass = Math.abs(gain) > 0.05 ? 'active-gain' : '';
+
+      bandsHtml += `
+        <div class="eq-col" data-index="${idx}">
+          <div class="eq-col-meta">
+            <span class="eq-gain-val ${activeClass}" id="eqGainVal_${idx}">${formatted}</span>
+          </div>
+          <div class="eq-slider-slot">
+            <input type="range" class="eq-slider-input eq-band-slider" data-index="${idx}" min="-12" max="12" step="0.5" value="${gain}" orient="vertical" aria-label="Frequency band ${label}">
+          </div>
+          <span class="eq-freq-badge">${label}</span>
+        </div>
+      `;
+    });
+
+    eqBandsRack.innerHTML = bandsHtml;
+
+    // Attach band slider listeners
+    eqBandsRack.querySelectorAll('.eq-band-slider').forEach(slider => {
+      slider.addEventListener('input', (e) => {
+        const idx = parseInt(e.target.dataset.index, 10);
+        const val = parseFloat(e.target.value);
+        setBandGain(idx, val);
+      });
+    });
+
+    // Update Pre-amp
+    if (eqPreamp && preampVal) {
+      eqPreamp.value = currentPreamp;
+      preampVal.textContent = formatDb(currentPreamp);
+      preampVal.className = 'eq-gain-val' + (Math.abs(currentPreamp) > 0.05 ? ' active-gain' : '');
+    }
+
+    // Update toggle switch
+    if (eqToggle) {
+      eqToggle.checked = eqEnabled;
+      if (eqStatusLabel) {
+        eqStatusLabel.textContent = eqEnabled ? 'Active' : 'Bypassed';
+      }
+    }
+
+    // Update preset selector
+    if (eqPresetSelect) {
+      eqPresetSelect.value = currentPresetKey;
+    }
+
+    updateEqActiveState();
+  }
+
+  function setBandGain(index, val) {
+    currentEqGains[index] = val;
+    const valEl = document.getElementById(`eqGainVal_${index}`);
+    if (valEl) {
+      valEl.textContent = formatDb(val);
+      valEl.className = 'eq-gain-val' + (Math.abs(val) > 0.05 ? ' active-gain' : '');
+    }
+
+    if (eqFilters[index] && eqEnabled) {
+      eqFilters[index].gain.value = val;
+    }
+
+    checkCustomPreset();
+    updateEqActiveState();
+    saveEqSettings();
+  }
+
+  function setPreampGain(val) {
+    currentPreamp = val;
+    if (preampVal) {
+      preampVal.textContent = formatDb(val);
+      preampVal.className = 'eq-gain-val' + (Math.abs(val) > 0.05 ? ' active-gain' : '');
+    }
+    if (eqPreampNode && eqEnabled) {
+      eqPreampNode.gain.value = dbToGain(val);
+    }
+    checkCustomPreset();
+    updateEqActiveState();
+    saveEqSettings();
+  }
+
+  function checkCustomPreset() {
+    let matchesPreset = null;
+    for (const [key, preset] of Object.entries(EQ_PRESETS)) {
+      if (Math.abs(preset.preamp - currentPreamp) < 0.1) {
+        const allMatch = preset.gains.every((g, idx) => Math.abs(g - currentEqGains[idx]) < 0.1);
+        if (allMatch) {
+          matchesPreset = key;
+          break;
+        }
+      }
+    }
+    currentPresetKey = matchesPreset || 'custom';
+    if (eqPresetSelect) {
+      eqPresetSelect.value = currentPresetKey;
+    }
+  }
+
+  function applyEqPreset(presetKey) {
+    const preset = EQ_PRESETS[presetKey];
+    if (!preset) return;
+
+    currentPresetKey = presetKey;
+    currentPreamp = preset.preamp;
+    currentEqGains = [...preset.gains];
+
+    if (eqFilters.length === 10) {
+      eqFilters.forEach((f, idx) => {
+        f.gain.value = eqEnabled ? currentEqGains[idx] : 0;
+      });
+    }
+    if (eqPreampNode) {
+      eqPreampNode.gain.value = eqEnabled ? dbToGain(currentPreamp) : 1.0;
+    }
+
+    renderEqBands();
+    saveEqSettings();
+    showToast(`EQ Profile: ${preset.name}`);
+  }
+
+  function setEqEnabled(enabled) {
+    eqEnabled = enabled;
+    if (eqFilters.length === 10) {
+      eqFilters.forEach((f, idx) => {
+        f.gain.value = enabled ? currentEqGains[idx] : 0;
+      });
+    }
+    if (eqPreampNode) {
+      eqPreampNode.gain.value = enabled ? dbToGain(currentPreamp) : 1.0;
+    }
+
+    if (eqStatusLabel) {
+      eqStatusLabel.textContent = enabled ? 'Active' : 'Bypassed';
+    }
+
+    updateEqActiveState();
+    saveEqSettings();
+    showToast(enabled ? 'Equalizer: Active' : 'Equalizer: Bypassed');
+  }
+
+  function resetEqToFlat() {
+    applyEqPreset('flat');
+  }
+
+  function updateEqActiveState() {
+    const isNonFlat = currentEqGains.some(g => Math.abs(g) > 0.05) || Math.abs(currentPreamp) > 0.05;
+    const isWorking = eqEnabled && isNonFlat;
+
+    if (eqActiveDot) {
+      eqActiveDot.style.display = isWorking ? 'block' : 'none';
+    }
+    if (eqBtn) {
+      eqBtn.classList.toggle('active', isWorking);
+    }
+  }
+
+  function openEqModal() {
+    if (!audioCtx) {
+      initAudioVisualizer();
+    }
+    if (eqModal) {
+      eqModal.style.display = 'flex';
+      renderEqBands();
+    }
+  }
+
+  function closeEqModal() {
+    if (eqModal) {
+      eqModal.style.display = 'none';
+    }
+  }
+
+  function toggleEqModal() {
+    if (eqModal && eqModal.style.display === 'flex') {
+      closeEqModal();
+    } else {
+      openEqModal();
+    }
+  }
+
+  // Hook Equalizer Panel Events
+  if (eqBtn) {
+    eqBtn.addEventListener('click', toggleEqModal);
+  }
+  if (closeEqBtn) {
+    closeEqBtn.addEventListener('click', closeEqModal);
+  }
+  if (eqModal) {
+    eqModal.addEventListener('click', (e) => {
+      if (e.target === eqModal) closeEqModal();
+    });
+  }
+  if (eqToggle) {
+    eqToggle.addEventListener('change', (e) => setEqEnabled(e.target.checked));
+  }
+  if (eqPresetSelect) {
+    eqPresetSelect.addEventListener('change', (e) => applyEqPreset(e.target.value));
+  }
+  if (eqResetBtn) {
+    eqResetBtn.addEventListener('click', resetEqToFlat);
+  }
+  if (eqPreamp) {
+    eqPreamp.addEventListener('input', (e) => setPreampGain(parseFloat(e.target.value)));
+  }
+
+  // --- Web Audio Visualizer & DSP Equalizer Pipeline ---
   function initAudioVisualizer() {
     if (audioCtx) {
       if (audioCtx.state === 'suspended') {
@@ -1785,7 +2108,38 @@
       analyser.smoothingTimeConstant = 0.8;
 
       sourceNode = audioCtx.createMediaElementSource(audio);
-      sourceNode.connect(analyser);
+
+      // Pre-Amp Gain Node (headroom management)
+      eqPreampNode = audioCtx.createGain();
+      eqPreampNode.gain.value = eqEnabled ? dbToGain(currentPreamp) : 1.0;
+
+      // 10-Band BiquadFilter Chain
+      eqFilters = EQ_FREQUENCIES.map((freq, idx) => {
+        const filter = audioCtx.createBiquadFilter();
+        if (idx === 0) {
+          filter.type = 'lowshelf';
+        } else if (idx === EQ_FREQUENCIES.length - 1) {
+          filter.type = 'highshelf';
+        } else {
+          filter.type = 'peaking';
+          filter.Q.value = 1.4;
+        }
+        filter.frequency.value = freq;
+        filter.gain.value = eqEnabled ? currentEqGains[idx] : 0;
+        return filter;
+      });
+
+      // Connect: source -> preamp -> filter[0..9] -> analyser -> destination
+      let lastNode = sourceNode;
+      lastNode.connect(eqPreampNode);
+      lastNode = eqPreampNode;
+
+      eqFilters.forEach(filter => {
+        lastNode.connect(filter);
+        lastNode = filter;
+      });
+
+      lastNode.connect(analyser);
       analyser.connect(audioCtx.destination);
 
       if (audioCtx.state === 'suspended') {
@@ -1794,7 +2148,7 @@
 
       startVisualizerLoop();
     } catch (err) {
-      console.warn('Web Audio API visualizer initialization notice:', err);
+      console.warn('Web Audio API visualizer/EQ initialization notice:', err);
       // Start loop for dynamic harmonic visualizer even if Web Audio element source failed
       startVisualizerLoop();
     }
@@ -1972,8 +2326,11 @@
 
   // --- Keyboard Shortcuts ---
   window.addEventListener('keydown', (e) => {
-    // If landing overlay is active, ignore audio shortcuts and do NOT dismiss via keyboard
+    // If landing overlay is active, allow Enter or Escape to enter the archive
     if (landingOverlay && !landingOverlay.classList.contains('dismissed')) {
+      if (e.key === 'Escape' || e.key === 'Enter') {
+        dismissLanding();
+      }
       return;
     }
 
@@ -1982,6 +2339,7 @@
         globalSearchInput.blur();
       }
       closeCreditsModal();
+      closeEqModal();
       queueDrawer.classList.remove('open');
       return;
     }
@@ -1994,6 +2352,12 @@
     if (e.key === '/' || e.key === 'f') {
       e.preventDefault();
       globalSearchInput.focus();
+      return;
+    }
+
+    if (e.key === 'e' || e.key === 'E') {
+      e.preventDefault();
+      toggleEqModal();
       return;
     }
 
