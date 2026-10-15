@@ -105,6 +105,13 @@ CANONICAL_ARTIST_MAP = {
     "bassbaba sumon & anila naz chowdhury": "Bassbaba Sumon",
 }
 
+MULTI_ARTIST_MAP = {
+    "artcell, black & cryptic fate": ["Artcell", "Black", "Cryptic Fate"],
+    "lamia, shaheen, johan shihab": ["Lamia", "Shaheen", "Johan", "Shihab"],
+    "johan, fuad shanto": ["Johan", "Fuad", "Shanto"],
+    "bassbaba sumon feat. arbovirus": ["Bassbaba Sumon", "Arbovirus"],
+}
+
 def clean_track(raw_title, default_artist, is_mixed=False):
     raw = raw_title.strip()
     
@@ -157,8 +164,23 @@ def clean_track(raw_title, default_artist, is_mixed=False):
         feat_from_artist = "Anila Naz Chowdhury"
     elif art_lower in CANONICAL_ARTIST_MAP:
         artist = CANONICAL_ARTIST_MAP[art_lower]
+
+    # Special track title cleaning and multi-artist resolution
+    if title.lower().startswith("bassbaba sumon feat. arbovirus - "):
+        artist = "Bassbaba Sumon"
+        feat_from_artist = "Arbovirus"
+        title = "Shohor"
+        artists_list = ["Bassbaba Sumon", "Arbovirus"]
+    elif "neel paharer gaaye (feat. zahed &" in title.lower():
+        title = "Neel Paharer Gaaye (feat. Zahed & Rafa)"
+        feat_from_artist = "Zahed & Rafa"
+        artists_list = [artist]
+    elif art_lower in MULTI_ARTIST_MAP:
+        artists_list = list(MULTI_ARTIST_MAP[art_lower])
+    else:
+        artists_list = [artist]
         
-    return artist, title, feat_from_artist
+    return artist, title, feat_from_artist, artists_list
 
 def get_exact_album_cover(stream_url):
     """Directly inspect filesystem for the album's cover based on the stream URL."""
@@ -308,7 +330,7 @@ def build_catalog():
                 
                 # Determine artist and track name
                 effective_artist = current_artist
-                track_artist, track_title, feat_from_artist = clean_track(raw_title, effective_artist, is_mixed=is_mixed)
+                track_artist, track_title, feat_from_artist, track_artists = clean_track(raw_title, effective_artist, is_mixed=is_mixed)
                 
                 # Check for featured artist
                 feat = feat_from_artist
@@ -331,6 +353,7 @@ def build_catalog():
                     "id": track_id,
                     "title": track_title,
                     "artist": track_artist,
+                    "artists": track_artists,
                     "featured": feat,
                     "album": current_album,
                     "year": current_year,
@@ -377,7 +400,11 @@ def build_artists_map(catalog):
     if not artists_dir.exists():
         return {}
     
-    all_artists = sorted(list(set(t['artist'] for t in catalog)))
+    all_artists = set()
+    for t in catalog:
+        for a in t.get('artists', [t['artist']]):
+            all_artists.add(a)
+    all_artists = sorted(list(all_artists))
     img_files = [f for f in artists_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
     
     def normalize_slug(s):
@@ -396,7 +423,6 @@ def build_artists_map(catalog):
         normalize_slug('durey'): normalize_slug('duray'),
         normalize_slug('mohakaal'): normalize_slug('mohakal'),
         normalize_slug('the icons'): normalize_slug('icons'),
-        normalize_slug('artcell, black & cryptic fate'): normalize_slug('artcell'),
         normalize_slug('bassbaba sumon & anila naz chowdhury'): normalize_slug('bassbaba_sumon'),
         normalize_slug('stentorian feat. bassbaba sumon'): normalize_slug('stentorian'),
         normalize_slug('bishop fuad'): normalize_slug('fuad'),

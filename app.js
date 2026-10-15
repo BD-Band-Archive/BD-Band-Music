@@ -31,24 +31,24 @@
     'track-5',  // Adhar O Ishshor
     'track-7',  // Omanush
     // Black
-    'track-265', // Kobor
-    'track-272', // Miththa
-    'track-275', // Sloak
-    'track-295', // Na-Thaka Jibon
-    'track-308', // Ajo
-    'track-458', // Opolap
+    'track-266', // Kobor
+    'track-273', // Miththa
+    'track-276', // Sloak
+    'track-296', // Na-Thaka Jibon
+    'track-309', // Ajo
+    'track-503', // Opolap
     // Artcell
     'track-61', // Gontobbohin
     'track-75', // Ei Bidaye
     // The Watson Brothers
-    'track-417', // Ohom
-    'track-422', // Shore Daray, Shesh Barer Moto
-    'track-413', // Akash
+    'track-418', // Ohom
+    'track-423', // Shore Daray, Shesh Barer Moto
+    'track-414', // Akash
     // Aurthohin
-    'track-142', // Golper Shuru
-    'track-99',  // Rater Train
-    'track-116', // Rongdhonu
-    'track-138'  // Uru Uru Mon
+    'track-143', // Golper Shuru
+    'track-100', // Rater Train
+    'track-117', // Rongdhonu
+    'track-139'  // Uru Uru Mon
   ];
 
   // Audio Context & Visualizer State
@@ -108,6 +108,7 @@
   const volHighIcon = document.getElementById('volHighIcon');
   const volMuteIcon = document.getElementById('volMuteIcon');
   const playerDownloadBtn = document.getElementById('playerDownloadBtn');
+  const playerShareBtn = document.getElementById('playerShareBtn');
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const visualizerCanvas = document.getElementById('visualizerCanvas');
 
@@ -216,10 +217,13 @@
 
   // --- Initialize Artist Filter Pills ---
   function initArtistFilterBar() {
-    // Count tracks per artist
+    // Count tracks per artist (including collaborative tracks for all participating artists)
     const artistCounts = {};
     catalog.forEach(t => {
-      artistCounts[t.artist] = (artistCounts[t.artist] || 0) + 1;
+      const trackArtists = (t.artists && t.artists.length > 0) ? t.artists : [t.artist];
+      trackArtists.forEach(art => {
+        artistCounts[art] = (artistCounts[art] || 0) + 1;
+      });
     });
 
     // Top bands to showcase in order
@@ -383,9 +387,12 @@
       filtered = CURATED_HOMEPAGE_TRACK_IDS.map(id => catalog.find(t => t.id === id)).filter(Boolean);
     } else {
       filtered = catalog.filter(track => {
-        // Artist filter
-        if (activeArtistFilter !== 'all' && track.artist !== activeArtistFilter) {
-          return false;
+        // Artist filter (supports multi-artist collaborations like Ashirbad)
+        if (activeArtistFilter !== 'all') {
+          const trackArtists = (track.artists && track.artists.length > 0) ? track.artists : [track.artist];
+          if (!trackArtists.includes(activeArtistFilter) && track.artist !== activeArtistFilter) {
+            return false;
+          }
         }
 
         // Album filter
@@ -396,7 +403,8 @@
         // Keyword Search
         if (query) {
           const matchTitle = normalizeQuery(track.title).includes(query);
-          const matchArtist = normalizeQuery(track.artist).includes(query);
+          const trackArtists = (track.artists && track.artists.length > 0) ? track.artists : [track.artist];
+          const matchArtist = trackArtists.some(a => normalizeQuery(a).includes(query)) || normalizeQuery(track.artist).includes(query);
           const matchAlbum = normalizeQuery(track.album).includes(query);
           const matchYear = track.year && track.year.toString().includes(query);
           const matchFeat = track.featured && normalizeQuery(track.featured).includes(query);
@@ -507,6 +515,19 @@
     }
   }
 
+  // --- Format Artist Cell for Tracks Table (handles single and multi-artists) ---
+  function formatArtistCell(track) {
+    const artists = (track.artists && track.artists.length > 0) ? track.artists : [track.artist];
+    if (artists.length <= 1) {
+      return `<a href="#" class="clickable-link artist-link" data-artist="${escapeHtml(track.artist)}">${escapeHtml(track.artist)}</a>`;
+    }
+    const links = artists.map(a => `<a href="#" class="clickable-link artist-link" data-artist="${escapeHtml(a)}">${escapeHtml(a)}</a>`);
+    if (links.length === 2) {
+      return `${links[0]} &amp; ${links[1]}`;
+    }
+    return `${links.slice(0, -1).join(', ')} &amp; ${links[links.length - 1]}`;
+  }
+
   // --- Render Tracks Table ---
   function renderTracksTable() {
     let rowsHtml = '';
@@ -539,7 +560,7 @@
             </div>
           </td>
           <td class="td-artist">
-            <a href="#" class="clickable-link artist-link" data-artist="${escapeHtml(track.artist)}">${escapeHtml(track.artist)}</a>
+            ${formatArtistCell(track)}
           </td>
           <td class="td-album">
             <a href="#" class="clickable-link album-link" data-album="${escapeHtml(track.album)}">${escapeHtml(track.album)}</a>
@@ -548,6 +569,9 @@
           <td class="td-quality">${qualityTag}</td>
           <td class="td-actions">
             <div class="row-actions">
+              <button class="row-action-btn share-track-btn" title="Copy Direct Song Link" data-id="${track.id}">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              </button>
               <button class="row-action-btn add-queue-btn" title="Add to Queue" data-id="${track.id}">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/></svg>
               </button>
@@ -584,6 +608,15 @@
       link.addEventListener('click', (e) => {
         e.preventDefault();
         setAlbumFilter(link.dataset.album);
+      });
+    });
+
+    // Attach share link buttons
+    tracksTbody.querySelectorAll('.share-track-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const trackId = btn.dataset.id;
+        copyTrackShareLink(trackId);
       });
     });
 
@@ -680,7 +713,6 @@
   // --- Official Artist Logos & Images (OSINT & Verified Band Archives) ---
   const ARTIST_OFFICIAL_IMAGES = {
     'Artcell': 'assets/artists/artcell.jpg',
-    'Artcell, Black & Cryptic Fate': 'assets/artists/artcell.jpg',
     'Black': 'assets/artists/black.jpg',
     'Aurthohin': 'assets/artists/aurthohin.png',
     'Bassbaba Sumon': 'assets/artists/bassbaba_sumon.png',
@@ -787,19 +819,22 @@
     const sourceTracks = searchQuery ? currentFilteredTracks : catalog;
 
     sourceTracks.forEach(t => {
-      if (!artistsMap.has(t.artist)) {
-        // Strictly use official band logos/photos when found, or simple vibrant colors (green or violet)
-        const cover = getArtistLogo(t.artist) || getArtistFallbackSvg(t.artist);
-        artistsMap.set(t.artist, {
-          artist: t.artist,
-          coverUrl: cover,
-          tracksCount: 0,
-          albumsSet: new Set()
-        });
-      }
-      const a = artistsMap.get(t.artist);
-      a.tracksCount++;
-      a.albumsSet.add(t.album);
+      const trackArtists = (t.artists && t.artists.length > 0) ? t.artists : [t.artist];
+      trackArtists.forEach(art => {
+        if (!artistsMap.has(art)) {
+          // Strictly use official band logos/photos when found, or simple vibrant colors (green or violet)
+          const cover = getArtistLogo(art) || getArtistFallbackSvg(art);
+          artistsMap.set(art, {
+            artist: art,
+            coverUrl: cover,
+            tracksCount: 0,
+            albumsSet: new Set()
+          });
+        }
+        const a = artistsMap.get(art);
+        a.tracksCount++;
+        a.albumsSet.add(t.album);
+      });
     });
 
     const artistList = Array.from(artistsMap.values());
@@ -896,8 +931,15 @@
       playIcon.style.display = 'block';
     });
 
-    // Update URL hash
-    window.history.replaceState(null, '', `#track=${track.id}`);
+    // Update URL query parameter for clean sharing
+    try {
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.set('track', track.id);
+      currentUrl.hash = '';
+      window.history.replaceState({ trackId: track.id }, '', currentUrl.toString());
+    } catch (_) {
+      window.history.replaceState(null, '', `?track=${track.id}`);
+    }
   }
 
   function togglePlayPause() {
@@ -1702,14 +1744,96 @@
     }
   });
 
-  // --- Helper: URL Deep Linking ---
+  // --- Helper: Direct Song Link Sharing ---
+  function copyTrackShareLink(trackId) {
+    const track = catalog.find(t => t.id === trackId);
+    if (!track) return;
+    
+    // Construct clean canonical song link using ?track=
+    let shareUrl = '';
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('track', track.id);
+      url.hash = '';
+      shareUrl = url.toString();
+    } catch (_) {
+      shareUrl = `${window.location.origin}${window.location.pathname}?track=${track.id}`;
+    }
+
+    const songTitle = `${track.title} (${track.artist})`;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        showToast(`🔗 Copied direct link for "${songTitle}"!`);
+      }).catch(() => {
+        prompt('Direct Song Link:', shareUrl);
+      });
+    } else {
+      prompt('Direct Song Link:', shareUrl);
+    }
+  }
+
+  // Hook Bottom Player Bar Share Button
+  if (playerShareBtn) {
+    playerShareBtn.addEventListener('click', () => {
+      if (currentTrack) {
+        copyTrackShareLink(currentTrack.id);
+      } else {
+        showToast('Play or select a song to copy its direct link');
+      }
+    });
+  }
+
+  // --- Helper: URL Deep Linking & Direct Song Link Routing ---
   function initFromUrlParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryTrack = urlParams.get('track') || urlParams.get('song');
     const hash = window.location.hash;
-    if (hash.startsWith('#track=')) {
+
+    let targetTrack = null;
+
+    if (queryTrack) {
+      // 1. Direct ID match
+      targetTrack = catalog.find(t => t.id === queryTrack);
+      // 2. Slug / Title search match (e.g. ?track=ashirbad or ?track=shorger-shishura)
+      if (!targetTrack) {
+        const cleanQuery = queryTrack.toLowerCase().replace(/[\s_\-\W]+/g, '');
+        targetTrack = catalog.find(t => t.title.toLowerCase().replace(/[\s_\-\W]+/g, '').includes(cleanQuery));
+      }
+    } else if (hash.startsWith('#track=')) {
       const trackId = hash.replace('#track=', '');
-      playTrackById(trackId);
+      targetTrack = catalog.find(t => t.id === trackId);
+      if (!targetTrack) {
+        const cleanQuery = trackId.toLowerCase().replace(/[\s_\-\W]+/g, '');
+        targetTrack = catalog.find(t => t.title.toLowerCase().replace(/[\s_\-\W]+/g, '').includes(cleanQuery));
+      }
+    }
+
+    if (targetTrack) {
+      // Direct song link accessed: dismiss landing page overlay immediately
+      dismissLanding();
+      activeView = 'tracks';
+      activeArtistFilter = 'all';
+      activeAlbumFilter = 'all';
+      isFullTracksListExpanded = true;
+      updateViewTabs();
       applyFilters();
-    } else if (hash.startsWith('#artist=')) {
+      playTrackById(targetTrack.id);
+
+      setTimeout(() => {
+        const row = document.querySelector(`tr[data-id="${targetTrack.id}"]`);
+        if (row) {
+          row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          row.classList.add('highlight-shared');
+          setTimeout(() => row.classList.remove('highlight-shared'), 3500);
+        }
+      }, 400);
+
+      showToast(`🎵 Loaded: ${targetTrack.title} — ${targetTrack.artist}`);
+      return;
+    }
+
+    if (hash.startsWith('#artist=')) {
       const artist = decodeURIComponent(hash.replace('#artist=', ''));
       setArtistFilter(artist, false);
     } else if (hash.startsWith('#album=')) {
