@@ -103,6 +103,7 @@
   const activeFilterBanner = document.getElementById('activeFilterBanner');
   const activeFilterValue = document.getElementById('activeFilterValue');
   const resetFilterBtn = document.getElementById('resetFilterBtn');
+  const shareFilterBtn = document.getElementById('shareFilterBtn');
   const clearAllFiltersBtn = document.getElementById('clearAllFiltersBtn');
   const seeMoreWrap = document.getElementById('seeMoreWrap');
   const seeMoreBtn = document.getElementById('seeMoreBtn');
@@ -376,11 +377,14 @@
       if (activeAlbumFilter !== 'all') {
         activeFilterBanner.style.display = 'flex';
         activeFilterValue.textContent = `Album: ${activeAlbumFilter}`;
+        if (shareFilterBtn) shareFilterBtn.style.display = 'inline-flex';
       } else if (activeArtistFilter !== 'all') {
         activeFilterBanner.style.display = 'flex';
         activeFilterValue.textContent = activeArtistFilter;
+        if (shareFilterBtn) shareFilterBtn.style.display = 'inline-flex';
       } else {
         activeFilterBanner.style.display = 'none';
+        if (shareFilterBtn) shareFilterBtn.style.display = 'none';
       }
 
       updateViewTabs();
@@ -405,8 +409,10 @@
     if (artist !== 'all') {
       activeFilterBanner.style.display = 'flex';
       activeFilterValue.textContent = artist;
+      if (shareFilterBtn) shareFilterBtn.style.display = 'inline-flex';
     } else {
       activeFilterBanner.style.display = 'none';
+      if (shareFilterBtn) shareFilterBtn.style.display = 'none';
     }
 
     if (shouldPushState) {
@@ -431,8 +437,10 @@
     if (albumName !== 'all') {
       activeFilterBanner.style.display = 'flex';
       activeFilterValue.textContent = `Album: ${albumName}`;
+      if (shareFilterBtn) shareFilterBtn.style.display = 'inline-flex';
     } else {
       activeFilterBanner.style.display = 'none';
+      if (shareFilterBtn) shareFilterBtn.style.display = 'none';
     }
 
     if (shouldPushState) {
@@ -809,6 +817,9 @@
     albumList.forEach(albumObj => {
       gridHtml += `
         <div class="album-card" data-album="${escapeHtml(albumObj.album)}">
+          <button class="album-share-btn" data-album="${escapeHtml(albumObj.album)}" title="Share album preview link with artwork">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </button>
           <div class="album-cover-wrap">
             <img class="album-cover-img" src="${escapeHtml(albumObj.coverUrl)}" alt="${escapeHtml(albumObj.album)}" loading="lazy" onerror="this.src='assets/default_album_cover.svg'">
             <button class="album-play-overlay play-album-btn" title="Play Album">
@@ -829,6 +840,15 @@
     albumsGrid.innerHTML = gridHtml;
 
     albumsGrid.querySelectorAll('.album-card').forEach(card => {
+      const shareBtn = card.querySelector('.album-share-btn');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const albumName = card.dataset.album;
+          copyAlbumShareLink(albumName);
+        });
+      }
+
       const playBtn = card.querySelector('.play-album-btn');
       if (playBtn) {
         playBtn.addEventListener('click', (e) => {
@@ -846,7 +866,7 @@
       }
 
       card.addEventListener('click', (e) => {
-        if (e.target.closest('.play-album-btn')) return;
+        if (e.target.closest('.play-album-btn') || e.target.closest('.album-share-btn')) return;
         const albumName = card.dataset.album;
         pushNavState({ view: 'tracks', album: albumName, artist: 'all', search: '' });
         activeView = 'tracks';
@@ -1158,6 +1178,9 @@
     artistList.forEach(artistObj => {
       gridHtml += `
         <div class="artist-card" data-artist="${escapeHtml(artistObj.artist)}">
+          <button class="artist-share-btn" data-artist="${escapeHtml(artistObj.artist)}" title="Share artist preview link with photo">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </button>
           <img class="artist-avatar" src="${escapeHtml(artistObj.coverUrl)}" alt="${escapeHtml(artistObj.artist)}" loading="lazy" onerror="this.onerror=null; this.src=getArtistFallbackSvg('${escapeHtml(artistObj.artist)}')">
           <div class="artist-card-name">${escapeHtml(artistObj.artist)}</div>
           <div class="artist-card-count">${artistObj.tracks.length} tracks • ${artistObj.albumsSet.size} albums</div>
@@ -1167,8 +1190,17 @@
 
     artistsGrid.innerHTML = gridHtml;
 
+    artistsGrid.querySelectorAll('.artist-share-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const artist = btn.dataset.artist;
+        copyArtistShareLink(artist);
+      });
+    });
+
     artistsGrid.querySelectorAll('.artist-card').forEach(card => {
-      card.addEventListener('click', () => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.artist-share-btn')) return;
         const artist = card.dataset.artist;
         pushNavState({ view: 'tracks', artist: artist, album: 'all', search: '' });
         activeView = 'tracks';
@@ -1263,6 +1295,8 @@
     } catch (_) {
       window.history.replaceState(null, '', `?track=${track.id}`);
     }
+
+    updatePageMetaForTrack(track);
   }
 
   // --- Direct Song Link Autoplay Handlers (One-Touch / First-Gesture Autoplay) ---
@@ -1710,6 +1744,7 @@
       btn.classList.toggle('active', btn.dataset.artist === 'all');
     });
     activeFilterBanner.style.display = 'none';
+    if (shareFilterBtn) shareFilterBtn.style.display = 'none';
     applyFilters();
   });
 
@@ -1724,8 +1759,20 @@
       btn.classList.toggle('active', btn.dataset.artist === 'all');
     });
     activeFilterBanner.style.display = 'none';
+    if (shareFilterBtn) shareFilterBtn.style.display = 'none';
     applyFilters();
   });
+
+  if (shareFilterBtn) {
+    shareFilterBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (activeAlbumFilter !== 'all') {
+        copyAlbumShareLink(activeAlbumFilter);
+      } else if (activeArtistFilter !== 'all') {
+        copyArtistShareLink(activeArtistFilter);
+      }
+    });
+  }
 
   // --- See More Tracks Handler (Toggle Curated vs Full) ---
   if (seeMoreBtn) {
@@ -1760,6 +1807,7 @@
         btn.classList.toggle('active', btn.dataset.artist === 'all');
       });
       activeFilterBanner.style.display = 'none';
+      if (shareFilterBtn) shareFilterBtn.style.display = 'none';
 
       pushNavState({ view: activeView, artist: 'all', album: 'all' });
       updateViewTabs();
@@ -2478,33 +2526,92 @@
     }
   });
 
-  // --- Helper: Direct Song Link Sharing ---
+  // --- Helpers: Canonical URLs & Slug Generation for Social Previews ---
+  function getBaseSiteUrl() {
+    if (window.location.hostname.includes('github.io')) {
+      return 'https://ghostdog45.github.io/BD-Band-Music';
+    }
+    const path = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
+    return `${window.location.origin}${path}`;
+  }
+
+  function toSlug(text) {
+    if (!text) return '';
+    return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+
+  // --- Dynamic Open Graph & Page Title Injection ---
+  function updatePageMetaForTrack(track) {
+    if (!track) return;
+    document.title = `▶ ${track.title} — ${track.artist} | BD Band Music`;
+
+    const setMeta = (prop, content) => {
+      let el = document.querySelector(`meta[property="${prop}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute('property', prop);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', content);
+    };
+
+    setMeta('og:title', `${track.title} — ${track.artist}`);
+    setMeta('og:description', `Album: ${track.album}${track.year ? ` (${track.year})` : ''} • Stream Lossless FLAC`);
+    if (track.coverUrl) {
+      setMeta('og:image', track.coverUrl);
+    }
+    setMeta('og:url', `${getBaseSiteUrl()}/track/${track.id}/`);
+  }
+
+  // --- Helper: Native Web Share & Clipboard Fallback ---
+  function copyShareLink(shareUrl, title, successMsg) {
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        url: shareUrl
+      }).catch(err => {
+        if (err.name !== 'AbortError') {
+          copyToClipboardFallback(shareUrl, successMsg);
+        }
+      });
+    } else {
+      copyToClipboardFallback(shareUrl, successMsg);
+    }
+  }
+
+  function copyToClipboardFallback(shareUrl, successMsg) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        showToast(successMsg);
+      }).catch(() => {
+        prompt('Direct Link:', shareUrl);
+      });
+    } else {
+      prompt('Direct Link:', shareUrl);
+    }
+  }
+
+  // --- Share Triggers (Track, Artist, Album) with Full Image Unfurling ---
   function copyTrackShareLink(trackId) {
     const track = catalog.find(t => t.id === trackId);
     if (!track) return;
-    
-    // Construct clean canonical song link using ?track=
-    let shareUrl = '';
-    try {
-      const url = new URL(window.location.href);
-      url.searchParams.set('track', track.id);
-      url.hash = '';
-      shareUrl = url.toString();
-    } catch (_) {
-      shareUrl = `${window.location.origin}${window.location.pathname}?track=${track.id}`;
-    }
-
+    const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
     const songTitle = `${track.title} (${track.artist})`;
+    copyShareLink(shareUrl, songTitle, `🔗 Copied direct link for "${songTitle}"!`);
+  }
 
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(shareUrl).then(() => {
-        showToast(`🔗 Copied direct link for "${songTitle}"!`);
-      }).catch(() => {
-        prompt('Direct Song Link:', shareUrl);
-      });
-    } else {
-      prompt('Direct Song Link:', shareUrl);
-    }
+  function copyArtistShareLink(artistName) {
+    if (!artistName || artistName === 'all') return;
+    const slug = toSlug(artistName);
+    const shareUrl = `${getBaseSiteUrl()}/artist/${slug}/`;
+    copyShareLink(shareUrl, `${artistName} — BD Band Music`, `🔗 Copied artist preview link for "${artistName}"!`);
+  }
+
+  function copyAlbumShareLink(albumName) {
+    if (!albumName || albumName === 'all') return;
+    const slug = toSlug(albumName);
+    const shareUrl = `${getBaseSiteUrl()}/album/${slug}/`;
+    copyShareLink(shareUrl, `${albumName} — BD Band Music`, `🔗 Copied album preview link for "${albumName}"!`);
   }
 
   // Hook Bottom Player Bar Share Button
@@ -2522,6 +2629,8 @@
   function initFromUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     const queryTrack = urlParams.get('track') || urlParams.get('song');
+    const queryArtist = urlParams.get('artist');
+    const queryAlbum = urlParams.get('album');
     const hash = window.location.hash;
 
     let targetTrack = null;
@@ -2566,12 +2675,50 @@
       return;
     }
 
+    // Artist query or hash
+    if (queryArtist) {
+      dismissLanding();
+      activeView = 'tracks';
+      activeAlbumFilter = 'all';
+      const cleanQuery = toSlug(queryArtist);
+      let matchedArtist = null;
+      for (const t of catalog) {
+        const tArtists = (t.artists && t.artists.length > 0) ? t.artists : [t.artist];
+        const found = tArtists.find(a => a === queryArtist || toSlug(a) === cleanQuery);
+        if (found) {
+          matchedArtist = found;
+          break;
+        }
+      }
+      setArtistFilter(matchedArtist || queryArtist, false);
+      updateViewTabs();
+      return;
+    }
+
+    // Album query or hash
+    if (queryAlbum) {
+      dismissLanding();
+      activeView = 'tracks';
+      activeArtistFilter = 'all';
+      const cleanQuery = toSlug(queryAlbum);
+      const matchedTrack = catalog.find(t => t.album === queryAlbum || toSlug(t.album) === cleanQuery);
+      setAlbumFilter(matchedTrack ? matchedTrack.album : queryAlbum, false);
+      updateViewTabs();
+      return;
+    }
+
     if (hash.startsWith('#artist=')) {
+      dismissLanding();
       const artist = decodeURIComponent(hash.replace('#artist=', ''));
       setArtistFilter(artist, false);
+      updateViewTabs();
+      return;
     } else if (hash.startsWith('#album=')) {
+      dismissLanding();
       const album = decodeURIComponent(hash.replace('#album=', ''));
       setAlbumFilter(album, false);
+      updateViewTabs();
+      return;
     } else if (hash === '#albums' || hash === '#artists') {
       activeView = hash.replace('#', '');
       updateViewTabs();

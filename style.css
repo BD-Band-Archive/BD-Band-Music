@@ -716,6 +716,7 @@ body {
 }
 
 .album-card {
+  position: relative;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
@@ -812,6 +813,7 @@ body {
 }
 
 .artist-card {
+  position: relative;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
@@ -829,6 +831,66 @@ body {
   border-color: var(--border-hover);
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
+}
+
+.artist-share-btn,
+.album-share-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.artist-card:hover .artist-share-btn,
+.album-card:hover .album-share-btn {
+  opacity: 1;
+}
+
+.artist-share-btn:hover,
+.album-share-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+
+@media (hover: none) {
+  .artist-share-btn,
+  .album-share-btn {
+    opacity: 0.85;
+  }
+}
+
+.share-filter-btn {
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: #c4b5fd;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.share-filter-btn:hover {
+  background: var(--accent);
+  color: #fff;
 }
 
 .artist-avatar {

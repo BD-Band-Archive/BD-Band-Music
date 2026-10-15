@@ -11,6 +11,7 @@ import os
 import re
 import sys
 import json
+import html
 import urllib.parse
 from pathlib import Path
 from collections import Counter
@@ -680,7 +681,10 @@ def build_catalog():
     print(f" Successfully exported {len(album_covers_map)} album galleries to {out_covers}!")
     
     # Automatically map artist images from assets/artists/
-    build_artists_map(catalog)
+    artist_images = build_artists_map(catalog)
+    
+    # Generate static share pages for all tracks, artists, and albums for rich link image injection
+    generate_social_share_pages(catalog, album_covers_map, artist_images)
     
     # Update BD Band Music README with live track count badge and text
     readme_path = OUTPUT_DIR / "README.md"
@@ -752,6 +756,219 @@ def build_artists_map(catalog):
 
     print(f"[*] Generated artists_map.json with {len(artist_images)} artist images mapped.")
     return artist_images
+
+def generate_social_share_pages(catalog, album_covers_map, artist_images):
+    """
+    Generates static HTML landing pages with pre-rendered Open Graph & Twitter Card
+    metadata for every track, artist, and album in the archive.
+    
+    When shared on WhatsApp, Facebook, Telegram, Discord, Twitter/X, or iMessage,
+    crawlers parse the exact album cover or artist photo and title directly from the HTML.
+    When opened by real users, it instantly redirects to the web player with zero delay.
+    """
+    base_site_url = "https://ghostdog45.github.io/BD-Band-Music"
+    default_cover = "https://raw.githubusercontent.com/GhostDog45/BD-Band-Music/master/assets/band_cover.jpg"
+
+    # 1. Generate Track Share Pages
+    track_root = OUTPUT_DIR / "track"
+    track_root.mkdir(parents=True, exist_ok=True)
+    
+    for t in catalog:
+        track_id = t["id"]
+        t_dir = track_root / track_id
+        t_dir.mkdir(parents=True, exist_ok=True)
+        
+        title_esc = html.escape(t["title"])
+        artist_esc = html.escape(t["artist"])
+        album_esc = html.escape(t.get("album") or "Album")
+        year_str = f" ({t['year']})" if t.get("year") else ""
+        
+        cover = t.get("coverUrl") or default_cover
+        page_title = f"{title_esc} — {artist_esc} | BD Band Music"
+        desc = f"Album: {album_esc}{year_str} • Stream Lossless FLAC on BD Band Music"
+        
+        html_content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{page_title}</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="{page_title}">
+  <meta name="description" content="{desc}">
+  
+  <!-- Open Graph / WhatsApp / Facebook / Discord / Telegram -->
+  <meta property="og:type" content="music.song">
+  <meta property="og:site_name" content="BD Band Music">
+  <meta property="og:title" content="{title_esc} — {artist_esc}">
+  <meta property="og:description" content="{desc}">
+  <meta property="og:image" content="{cover}">
+  <meta property="og:image:secure_url" content="{cover}">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta property="og:url" content="{base_site_url}/track/{track_id}/">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{title_esc} — {artist_esc}">
+  <meta name="twitter:description" content="{desc}">
+  <meta name="twitter:image" content="{cover}">
+  
+  <!-- Instant Player Launch for Real Users -->
+  <meta http-equiv="refresh" content="0; url=../../?track={track_id}">
+  <script>window.location.replace("../../?track={track_id}");</script>
+</head>
+<body style="background:#0e1117; color:#f3f4f6; font-family:'Segoe UI',sans-serif; text-align:center; padding:15vh 1rem;">
+  <h2>🎵 {title_esc}</h2>
+  <h3 style="color:#a78bfa; margin-top:-0.5rem;">{artist_esc}</h3>
+  <p style="color:#9ca3af;">Loading lossless FLAC in BD Band Music player...</p>
+  <p><a href="../../?track={track_id}" style="color:#8b5cf6; text-decoration:none; font-weight:600;">Click here if not redirected automatically</a></p>
+</body>
+</html>
+"""
+        (t_dir / "index.html").write_text(html_content, encoding="utf-8")
+
+    # 2. Generate Artist Share Pages
+    artist_root = OUTPUT_DIR / "artist"
+    artist_root.mkdir(parents=True, exist_ok=True)
+    
+    artist_tracks_count = Counter()
+    for t in catalog:
+        for a in t.get("artists", [t["artist"]]):
+            artist_tracks_count[a] += 1
+            
+    for art, count in artist_tracks_count.items():
+        slug = re.sub(r'[^a-zA-Z0-9]+', '-', art.lower()).strip('-')
+        if not slug:
+            continue
+            
+        a_dir = artist_root / slug
+        a_dir.mkdir(parents=True, exist_ok=True)
+        
+        art_esc = html.escape(art)
+        quoted_art = urllib.parse.quote(art)
+        
+        rel_img = artist_images.get(art)
+        if rel_img:
+            art_img = f"https://raw.githubusercontent.com/GhostDog45/BD-Band-Music/master/{rel_img}"
+        else:
+            art_img = default_cover
+            
+        page_title = f"{art_esc} | BD Band Music Lossless Archive"
+        desc = f"Listen to all {count} lossless FLAC tracks by {art_esc} directly in your browser."
+        
+        html_content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{page_title}</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="{page_title}">
+  <meta name="description" content="{desc}">
+  
+  <!-- Open Graph / WhatsApp / Facebook / Discord / Telegram -->
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="BD Band Music">
+  <meta property="og:title" content="{art_esc} — BD Band Music">
+  <meta property="og:description" content="{desc}">
+  <meta property="og:image" content="{art_img}">
+  <meta property="og:image:secure_url" content="{art_img}">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta property="og:url" content="{base_site_url}/artist/{slug}/">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{art_esc} — BD Band Music">
+  <meta name="twitter:description" content="{desc}">
+  <meta name="twitter:image" content="{art_img}">
+  
+  <!-- Instant Player Launch for Real Users -->
+  <meta http-equiv="refresh" content="0; url=../../?artist={quoted_art}">
+  <script>window.location.replace("../../?artist={quoted_art}");</script>
+</head>
+<body style="background:#0e1117; color:#f3f4f6; font-family:'Segoe UI',sans-serif; text-align:center; padding:15vh 1rem;">
+  <h2>👑 {art_esc}</h2>
+  <p style="color:#9ca3af;">Loading {count} lossless FLAC tracks in BD Band Music player...</p>
+  <p><a href="../../?artist={quoted_art}" style="color:#8b5cf6; text-decoration:none; font-weight:600;">Click here if not redirected automatically</a></p>
+</body>
+</html>
+"""
+        (a_dir / "index.html").write_text(html_content, encoding="utf-8")
+
+    # 3. Generate Album Share Pages
+    album_root = OUTPUT_DIR / "album"
+    album_root.mkdir(parents=True, exist_ok=True)
+    
+    albums_set = set(t["album"] for t in catalog)
+    for alb in albums_set:
+        slug = re.sub(r'[^a-zA-Z0-9]+', '-', alb.lower()).strip('-')
+        if not slug:
+            continue
+            
+        alb_dir = album_root / slug
+        alb_dir.mkdir(parents=True, exist_ok=True)
+        
+        alb_esc = html.escape(alb)
+        quoted_alb = urllib.parse.quote(alb)
+        
+        first_t = next(t for t in catalog if t["album"] == alb)
+        art_esc = html.escape(first_t["artist"])
+        yr_str = f" ({first_t['year']})" if first_t.get("year") else ""
+        
+        gallery = album_covers_map.get(alb) or album_covers_map.get(f"{first_t['artist']} - {alb}") or []
+        alb_cover = gallery[0]["url"] if gallery else (first_t.get("coverUrl") or default_cover)
+        
+        alb_tracks = [t for t in catalog if t["album"] == alb]
+        page_title = f"{alb_esc}{yr_str} — {art_esc} | BD Band Music"
+        desc = f"{len(alb_tracks)} lossless FLAC tracks • Listen directly in your browser."
+        
+        html_content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{page_title}</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="{page_title}">
+  <meta name="description" content="{desc}">
+  
+  <!-- Open Graph / WhatsApp / Facebook / Discord / Telegram -->
+  <meta property="og:type" content="music.album">
+  <meta property="og:site_name" content="BD Band Music">
+  <meta property="og:title" content="{alb_esc}{yr_str} — {art_esc}">
+  <meta property="og:description" content="{desc}">
+  <meta property="og:image" content="{alb_cover}">
+  <meta property="og:image:secure_url" content="{alb_cover}">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta property="og:url" content="{base_site_url}/album/{slug}/">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{alb_esc}{yr_str} — {art_esc}">
+  <meta name="twitter:description" content="{desc}">
+  <meta name="twitter:image" content="{alb_cover}">
+  
+  <!-- Instant Player Launch for Real Users -->
+  <meta http-equiv="refresh" content="0; url=../../?album={quoted_alb}">
+  <script>window.location.replace("../../?album={quoted_alb}");</script>
+</head>
+<body style="background:#0e1117; color:#f3f4f6; font-family:'Segoe UI',sans-serif; text-align:center; padding:15vh 1rem;">
+  <h2>💿 {alb_esc}</h2>
+  <h3 style="color:#a78bfa; margin-top:-0.5rem;">{art_esc}</h3>
+  <p style="color:#9ca3af;">Loading album in BD Band Music player...</p>
+  <p><a href="../../?album={quoted_alb}" style="color:#8b5cf6; text-decoration:none; font-weight:600;">Click here if not redirected automatically</a></p>
+</body>
+</html>
+"""
+        (alb_dir / "index.html").write_text(html_content, encoding="utf-8")
+
+    print(f"[*] Generated social share pages with photo injection for {len(catalog)} tracks, {len(artist_tracks_count)} artists, and {len(albums_set)} albums.")
 
 if __name__ == "__main__":
     build_catalog()
