@@ -498,7 +498,8 @@ def build_catalog():
                 if any(skip_term in lower_head for skip_term in [
                     "about the band", "about the artist", "discography index",
                     "discography", "studio albums", "compilation", "git lfs",
-                    "special thanks", "acknowledgements"
+                    "special thanks", "acknowledgements", "contribution", "contributing",
+                    "dmca", "disclaimer"
                 ]):
                     continue
 
