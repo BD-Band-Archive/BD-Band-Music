@@ -42,7 +42,7 @@ def discover_repos():
     r"""Dynamically discovers all music and band repositories in D:\Music."""
     priority_bands = [
         "Arbovirus", "Artcell", "Aurthohin", "Bassbaba Sumon", "Black",
-        "Icons", "Indalo", "Minerva", "Stoic Bliss", "The Watson Brothers", "Vibe"
+        "Cryptic Fate", "Icons", "Indalo", "Minerva", "Stoic Bliss", "The Watson Brothers", "Vibe"
     ]
     repos = []
     
@@ -101,6 +101,7 @@ CANONICAL_ARTIST_MAP = {
     "darks": "Dark",
     "dark": "Dark",
     "bishop fuad": "Fuad",
+    "artcell": "Artcell",
     "stentorian feat. bassbaba sumon": "Stentorian",
     "bassbaba sumon & anila naz chowdhury": "Bassbaba Sumon",
 }
@@ -523,11 +524,15 @@ def build_artists_map(catalog):
     }
 
     artist_images = {}
+    seen_norm = set()
     for art in all_artists:
         norm_art = normalize_slug(art)
+        if norm_art in seen_norm:
+            continue
         target_key = alias_map.get(norm_art, norm_art)
         if target_key in file_map:
             artist_images[art] = file_map[target_key]
+            seen_norm.add(norm_art)
 
     out_map_file = artists_dir / "artists_map.json"
     with open(out_map_file, "w", encoding="utf-8") as f:
