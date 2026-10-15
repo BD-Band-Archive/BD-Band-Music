@@ -167,10 +167,19 @@
   async function loadCatalog() {
     try {
       trackCountLabel.textContent = 'Loading catalogue...';
-      const response = await fetch('catalog.json?v=2.6');
+      const response = await fetch('catalog.json?v=2.7');
       if (!response.ok) throw new Error('Failed to load catalog.json');
       catalog = await response.json();
       
+      // Dynamically update search placeholder and hints from live catalog size
+      if (globalSearchInput) {
+        globalSearchInput.placeholder = `Search ${catalog.length}+ songs, bands, albums, or lyrics...`;
+      }
+      const seeMoreHint = document.getElementById('seeMoreHint');
+      if (seeMoreHint) {
+        seeMoreHint.textContent = `Or use the search bar above to instantly find any of the ${catalog.length} songs`;
+      }
+
       isFullTracksListExpanded = false;
       initArtistFilterBar();
       initFromUrlParams();

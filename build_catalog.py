@@ -20,20 +20,15 @@ sys.stdout.reconfigure(encoding='utf-8')
 MUSIC_DIR = Path("D:/Music")
 OUTPUT_DIR = MUSIC_DIR / "BD Band Music"
 
-REPOS = [
-    ("Arbovirus", "Arbovirus"),
-    ("Artcell", "Artcell"),
-    ("Aurthohin", "Aurthohin"),
-    ("Bassbaba Sumon", "Bassbaba-Sumon"),
-    ("Black", "Black"),
-    ("Icons", "Icons"),
-    ("Indalo", "Indalo"),
-    ("Minerva", "Minerva"),
-    ("Stoic Bliss", "Stoic-Bliss"),
-    ("The Watson Brothers", "The-Watson-Brothers"),
-    ("Vibe", "Vibe"),
-    ("Mixed Albums", "Mixed-Albums")
-]
+EXCLUDE_DIRS = {
+    "BD Band Music",
+    "Yani Neko",
+    "Mindhunter.S01-S02.1080p.NF.WEBRip.AAC.5.1.x265-ALiEN",
+    "Music",
+    "__pycache__",
+    ".git",
+    "assets"
+}
 
 FOLDER_MAP = {
     'Mixed-Albums': 'Mixed Albums',
@@ -42,6 +37,43 @@ FOLDER_MAP = {
     'The-Watson-Brothers': 'The Watson Brothers',
     'Bassbaba-Sumon': 'Bassbaba Sumon'
 }
+
+def discover_repos():
+    r"""Dynamically discovers all music and band repositories in D:\Music."""
+    priority_bands = [
+        "Arbovirus", "Artcell", "Aurthohin", "Bassbaba Sumon", "Black",
+        "Icons", "Indalo", "Minerva", "Stoic Bliss", "The Watson Brothers", "Vibe"
+    ]
+    repos = []
+    
+    # 1. First add priority bands if they exist
+    for band in priority_bands:
+        p = MUSIC_DIR / band
+        if p.is_dir() and (p / "README.md").exists():
+            slug = band.replace(" ", "-")
+            repos.append((band, slug))
+            FOLDER_MAP[slug] = band
+            FOLDER_MAP[band] = band
+
+    # 2. Automatically discover any other band/artist repositories
+    for p in sorted(MUSIC_DIR.iterdir()):
+        if not p.is_dir() or p.name in EXCLUDE_DIRS or p.name in priority_bands or p.name == "Mixed Albums" or p.name.startswith("."):
+            continue
+        readme = p / "README.md"
+        if readme.exists():
+            slug = p.name.replace(" ", "-")
+            repos.append((p.name, slug))
+            FOLDER_MAP[slug] = p.name
+            FOLDER_MAP[p.name] = p.name
+
+    # 3. Always append Mixed Albums at the end
+    mixed_dir = MUSIC_DIR / "Mixed Albums"
+    if mixed_dir.is_dir() and (mixed_dir / "README.md").exists():
+        repos.append(("Mixed Albums", "Mixed-Albums"))
+        FOLDER_MAP["Mixed-Albums"] = "Mixed Albums"
+        FOLDER_MAP["Mixed Albums"] = "Mixed Albums"
+
+    return repos
 
 def clean_track(raw_title, default_artist, is_mixed=False):
     raw = raw_title.strip()
@@ -119,8 +151,10 @@ def get_exact_album_cover(stream_url):
 def build_catalog():
     catalog = []
     seen_urls = set()
+    repos = discover_repos()
+    print(f"[*] Discovered {len(repos)} repositories to process.")
     
-    for folder_name, repo_name in REPOS:
+    for folder_name, repo_name in repos:
         readme_path = MUSIC_DIR / folder_name / "README.md"
         repo_dir = MUSIC_DIR / folder_name
         if not readme_path.exists():
@@ -268,6 +302,16 @@ def build_catalog():
         json.dump(catalog, f, ensure_ascii=False, indent=2)
         
     print(f"\n Successfully wrote {len(catalog)} tracks to {out_json}!")
+    
+    # Update BD Band Music README with live track count badge and text
+    readme_path = OUTPUT_DIR / "README.md"
+    if readme_path.exists():
+        readme_text = readme_path.read_text(encoding="utf-8")
+        updated_text = re.sub(r'Catalog-\d+%20FLAC%20Tracks', f'Catalog-{len(catalog)}%20FLAC%20Tracks', readme_text)
+        updated_text = re.sub(r'\*\*\d+\s+lossless\s+FLAC\s+tracks\*\*', f'**{len(catalog)} lossless FLAC tracks**', updated_text)
+        if updated_text != readme_text:
+            readme_path.write_text(updated_text, encoding="utf-8")
+            print(f" Updated README.md badge and count to {len(catalog)} tracks.")
     
     # Print summary statistics
     artists = Counter(t['artist'] for t in catalog)
