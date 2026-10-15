@@ -230,7 +230,7 @@
   async function loadCatalog() {
     try {
       trackCountLabel.textContent = 'Loading catalogue...';
-      const response = await fetch('catalog.json?v=3.1');
+      const response = await fetch('catalog.json?v=3.2');
       if (!response.ok) throw new Error('Failed to load catalog.json');
       catalog = await response.json();
       
@@ -245,7 +245,7 @@
 
       // Dynamically load any newly mapped artist images from artists_map.json
       try {
-        const artResp = await fetch('assets/artists/artists_map.json?v=3.1');
+        const artResp = await fetch('assets/artists/artists_map.json?v=3.2');
         if (artResp.ok) {
           const dynamicMap = await artResp.json();
           Object.assign(ARTIST_OFFICIAL_IMAGES, dynamicMap);
@@ -256,7 +256,7 @@
 
       // Dynamically load album artwork & physical archive scans
       try {
-        const covResp = await fetch('assets/album_covers.json?v=3.1');
+        const covResp = await fetch('assets/album_covers.json?v=3.2');
         if (covResp.ok) {
           albumCoversMap = await covResp.json();
         }
@@ -620,7 +620,8 @@
         : `<span class="track-num-text">${index + 1}</span>
            <button class="row-play-btn" title="Play">▶</button>`;
 
-      const featTag = track.featured ? `<span class="track-feat">(ft. ${escapeHtml(track.featured)})</span>` : '';
+      const hasFeatInTitle = track.title.toLowerCase().includes('feat') || track.title.toLowerCase().includes('ft.');
+      const featTag = (track.featured && !hasFeatInTitle) ? `<span class="track-feat">(ft. ${escapeHtml(track.featured)})</span>` : '';
       
       const qualityTag = track.isLossyTranscode
         ? `<span class="lossy-badge" title="16 kHz shelf cutoff transcode">16-CUT</span>`
@@ -932,6 +933,7 @@
     'Black': 'assets/artists/black.jpg',
     'Aurthohin': 'assets/artists/aurthohin.png',
     'Bassbaba Sumon': 'assets/artists/bassbaba_sumon.png',
+    'Anila': 'assets/artists/anila.jpg',
     'Arbovirus': 'assets/artists/arbovirus.png',
     'Indalo': 'assets/artists/indalo.png',
     'Icons': 'assets/artists/icons.jpg',

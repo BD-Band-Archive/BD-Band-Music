@@ -103,7 +103,6 @@ CANONICAL_ARTIST_MAP = {
     "bishop fuad": "Fuad",
     "artcell": "Artcell",
     "stentorian feat. bassbaba sumon": "Stentorian",
-    "bassbaba sumon & anila naz chowdhury": "Bassbaba Sumon",
 }
 
 MULTI_ARTIST_MAP = {
@@ -112,6 +111,10 @@ MULTI_ARTIST_MAP = {
     "johan, fuad shanto": ["Johan", "Fuad", "Shanto"],
     "bassbaba sumon feat. arbovirus": ["Bassbaba Sumon", "Arbovirus"],
     "stentorian feat. bassbaba sumon": ["Stentorian", "Bassbaba Sumon"],
+    "bassbaba sumon & anila naz chowdhury": ["Bassbaba Sumon", "Anila"],
+    "bassbaba sumon & anila": ["Bassbaba Sumon", "Anila"],
+    "sumon & anila": ["Bassbaba Sumon", "Anila"],
+    "anila & sumon": ["Bassbaba Sumon", "Anila"],
 }
 
 def clean_track(raw_title, default_artist, is_mixed=False):
@@ -161,9 +164,6 @@ def clean_track(raw_title, default_artist, is_mixed=False):
     elif art_lower == "bishop fuad":
         artist = "Fuad"
         feat_from_artist = "Bishop"
-    elif art_lower == "bassbaba sumon & anila naz chowdhury":
-        artist = "Bassbaba Sumon"
-        feat_from_artist = "Anila Naz Chowdhury"
     elif art_lower in CANONICAL_ARTIST_MAP:
         artist = CANONICAL_ARTIST_MAP[art_lower]
 
@@ -179,6 +179,8 @@ def clean_track(raw_title, default_artist, is_mixed=False):
         artists_list = [artist]
     elif art_lower in MULTI_ARTIST_MAP:
         artists_list = list(MULTI_ARTIST_MAP[art_lower])
+        if art_lower in ["bassbaba sumon & anila naz chowdhury", "bassbaba sumon & anila", "sumon & anila", "anila & sumon"]:
+            artist = "Bassbaba Sumon & Anila"
     else:
         artists_list = [artist]
         
@@ -593,6 +595,26 @@ def build_catalog():
                     if m_feat:
                         feat = m_feat.group(1).strip()
                     
+                # Ekhon Ami is the celebrated duet album by Bassbaba Sumon & Anila
+                if "ekhon ami" in current_album.lower():
+                    track_artist = "Bassbaba Sumon & Anila"
+                    track_artists = ["Bassbaba Sumon", "Anila"]
+                    feat = None
+
+                # If featured artist exists, credit them in track_artists
+                if feat:
+                    feat_lower = feat.lower()
+                    if "anila" in feat_lower and "Anila" not in track_artists:
+                        track_artists.append("Anila")
+                    elif "elita" in feat_lower and "Elita" not in track_artists:
+                        track_artists.append("Elita")
+                    elif "tahsan" in feat_lower and "Tahsan" not in track_artists:
+                        track_artists.append("Tahsan")
+                    elif "arbovirus" in feat_lower and "Arbovirus" not in track_artists:
+                        track_artists.append("Arbovirus")
+                    elif "topu" in feat_lower and "Topu" not in track_artists:
+                        track_artists.append("Topu")
+                    
                 track_album = current_album
                 track_year = current_year
                 
@@ -708,7 +730,6 @@ def build_artists_map(catalog):
         normalize_slug('durey'): normalize_slug('duray'),
         normalize_slug('mohakaal'): normalize_slug('mohakal'),
         normalize_slug('the icons'): normalize_slug('icons'),
-        normalize_slug('bassbaba sumon & anila naz chowdhury'): normalize_slug('bassbaba_sumon'),
         normalize_slug('stentorian feat. bassbaba sumon'): normalize_slug('stentorian'),
         normalize_slug('bishop fuad'): normalize_slug('fuad'),
         normalize_slug('power surge'): normalize_slug('powersurge')
