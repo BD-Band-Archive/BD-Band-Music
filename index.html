@@ -21,7 +21,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
-  <link rel="stylesheet" href="style.css?v=2.5">
+  <link rel="stylesheet" href="style.css?v=2.6">
 </head>
 <body>
   <!-- Full-Screen Immersive Landing Page & Manifesto Overlay -->
@@ -36,9 +36,8 @@
             <span class="landing-brand-sub">Digital Lossless Archive</span>
           </div>
         </div>
-        <button id="closeLandingBtn" class="landing-skip-btn" title="Enter Player (Esc)">
+        <button id="closeLandingBtn" class="landing-skip-btn" title="Enter Lossless Archive">
           <span>Enter Archive</span>
-          <span class="landing-skip-key">Esc</span>
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </header>
@@ -109,15 +108,36 @@
           </div>
         </div>
 
+        <!-- Audiophile Streaming & Offline Listening Advisory -->
+        <div class="landing-advisory-card">
+          <div class="advisory-icon-wrap">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </div>
+          <div class="advisory-content">
+            <div class="advisory-badge">
+              <span class="pulse-amber-dot"></span>
+              <span>Important Audiophile Advisory • Web Streaming vs. True FLAC</span>
+            </div>
+            <h3 class="advisory-title">Recommended: Download for the Authentic Bit-Perfect Experience</h3>
+            <p class="advisory-text">
+              While this web player serves as a lightweight, instant exploration tool, genuine lossless FLAC files are inherently large (30 MB to 80+ MB per track) and served over GitHub’s distributed Git file storage. Because of network routing and internal browser audio engine limitations, streaming directly in the browser may experience buffering or audio resampling, preventing you from hearing the true depth, dynamic range, and clarity of the original masters.
+            </p>
+            <p class="advisory-highlight">
+              <strong>💡 For the true, uncompromising master sound:</strong> We strongly encourage you to download the songs directly using the download buttons (<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>) and play them locally on dedicated lossless audiophile players like <strong>Foobar2000</strong>, <strong>Poweramp</strong>, <strong>UAPP</strong>, or <strong>VLC</strong>.
+            </p>
+          </div>
+        </div>
+
         <!-- Enter Action Footer -->
         <div class="landing-actions">
           <button id="enterArchiveBtn" class="landing-enter-btn">
             <span>Enter Lossless Archive</span>
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </button>
-          <p class="landing-tap-hint">
-            <span>👆</span> Tap anywhere on screen or press <kbd class="kbd-badge">Space</kbd> / <kbd class="kbd-badge">Esc</kbd> to start listening
-          </p>
         </div>
       </main>
     </div>
@@ -491,6 +511,6 @@
 
   </div>
 
-  <script src="app.js?v=2.5"></script>
+  <script src="app.js?v=2.6"></script>
 </body>
 </html>

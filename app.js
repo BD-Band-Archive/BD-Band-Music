@@ -167,7 +167,7 @@
   async function loadCatalog() {
     try {
       trackCountLabel.textContent = 'Loading catalogue...';
-      const response = await fetch('catalog.json?v=2.5');
+      const response = await fetch('catalog.json?v=2.6');
       if (!response.ok) throw new Error('Failed to load catalog.json');
       catalog = await response.json();
       
@@ -176,11 +176,6 @@
       initFromUrlParams();
       pushNavState({}, true);
       setupDefaultVisualizer();
-
-      // Check if user previously dismissed landing in this session
-      if (sessionStorage.getItem('bd_landing_seen') === 'true' && landingOverlay) {
-        landingOverlay.classList.add('dismissed');
-      }
     } catch (err) {
       console.error('Catalog load error:', err);
       trackCountLabel.textContent = 'Failed to load catalogue';
@@ -1316,24 +1311,19 @@
     }
   }
 
-  if (landingOverlay) {
-    // Tap or click anywhere on the landing screen to dismiss into the player
-    landingOverlay.addEventListener('click', (e) => {
-      // If clicking an external anchor link, do not dismiss
-      if (e.target.closest('a')) return;
-      dismissLanding();
-    });
-  }
-
+  // Dismiss ONLY on explicit click of "Enter Lossless Archive" button
   if (enterArchiveBtn) {
     enterArchiveBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
       dismissLanding();
     });
   }
 
+  // Also support top header enter/close button
   if (closeLandingBtn) {
     closeLandingBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
       dismissLanding();
     });
@@ -1341,6 +1331,7 @@
 
   if (storyBtn) {
     storyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
       showLanding();
     });
@@ -1609,13 +1600,9 @@
 
   // --- Keyboard Shortcuts ---
   window.addEventListener('keydown', (e) => {
-    // If landing overlay is active, any dismiss key (Escape, Space, Enter) dismisses it
+    // If landing overlay is active, ignore audio shortcuts and do NOT dismiss via keyboard
     if (landingOverlay && !landingOverlay.classList.contains('dismissed')) {
-      if (e.key === 'Escape' || e.code === 'Space' || e.key === 'Enter') {
-        e.preventDefault();
-        dismissLanding();
-        return;
-      }
+      return;
     }
 
     if (e.key === 'Escape') {
