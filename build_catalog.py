@@ -265,23 +265,28 @@ def get_all_album_covers(stream_url):
         cov_dir = target_dir / cov_name
         if cov_dir.exists():
             files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
-            def sort_key(f):
+            def natural_sort_key(f):
                 n = f.name.lower()
-                if 'front' in n or 'artwork' in n:
-                    return (1, n)
-                elif 'booklet' in n or 'lyrics' in n:
-                    return (2, n)
+                cat = 8
+                if 'front' in n:
+                    cat = 1
+                elif 'artwork' in n:
+                    cat = 2
+                elif 'booklet' in n:
+                    cat = 3
+                elif 'lyrics' in n:
+                    cat = 4
                 elif 'inlay' in n or 'inset' in n or 'inlet' in n:
-                    return (3, n)
-                elif 'cd' in n or 'disc' in n:
-                    return (4, n)
+                    cat = 5
+                elif 'cd' in n or 'disc' in n or 'tape' in n or 'cassette' in n:
+                    cat = 6
                 elif 'back' in n:
-                    return (5, n)
+                    cat = 7
                 elif 'poster' in n:
-                    return (6, n)
-                return (7, n)
+                    cat = 8
+                return (cat, [int(t) if t.isdigit() else t.lower() for t in re.split(r'(\d+)', f.name)])
 
-            files.sort(key=sort_key)
+            files.sort(key=natural_sort_key)
             
             # Exclude redundant folder.jpg/png if a front/artwork image exists, and deduplicate by file hash
             has_front = any('front' in f.name.lower() or 'artwork' in f.name.lower() for f in files)
@@ -314,9 +319,14 @@ def get_all_album_covers(stream_url):
                 else:
                     raw_url = f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_cov}/{enc_file}'
                 
-                clean_name = f.stem
-                m_tag = re.search(r'\[([^\]]+)\]', clean_name)
-                tag_name = m_tag.group(1).strip() if m_tag else clean_name.strip()
+                clean_stem = f.stem.replace('+-5B', ' [').replace('-5B', ' [').replace('+-5D', ']').replace('-5D', ']').replace('+', ' ')
+                m_tag = re.search(r'\[([^\]]+)\](?:\s*\((.*?)\))?', clean_stem)
+                if m_tag:
+                    tag_name = m_tag.group(1).strip()
+                    if m_tag.group(2):
+                        tag_name = f"{tag_name} ({m_tag.group(2).strip()})"
+                else:
+                    tag_name = clean_stem.strip()
                 
                 covers.append({
                     "title": tag_name,
@@ -563,10 +573,14 @@ def build_catalog():
                 track_cover = get_exact_album_cover(url) or current_cover
                 
                 # Dynamically collect all physical album covers/booklets for this album
-                if track_album not in album_covers_map:
+                artist_album_key = f"{track_artist} - {track_album}"
+                if artist_album_key not in album_covers_map or track_album not in album_covers_map:
                     covs = get_all_album_covers(clean_url)
                     if covs:
-                        album_covers_map[track_album] = covs
+                        if artist_album_key not in album_covers_map:
+                            album_covers_map[artist_album_key] = covs
+                        if track_album not in album_covers_map:
+                            album_covers_map[track_album] = covs
                 
                 track_id = f"track-{len(catalog)+1}"
                 

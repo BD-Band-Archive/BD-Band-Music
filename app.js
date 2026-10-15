@@ -800,7 +800,22 @@
       return;
     }
 
-    const covers = albumCoversMap[albumName] || [];
+    // Determine artist context if available
+    let artistName = (activeArtistFilter && activeArtistFilter !== 'all') ? activeArtistFilter : '';
+    if (!artistName && currentFilteredTracks && currentFilteredTracks.length > 0) {
+      const firstArtist = currentFilteredTracks[0].artist;
+      const allSame = currentFilteredTracks.every(t => t.artist === firstArtist);
+      if (allSame) {
+        artistName = firstArtist;
+      }
+    }
+
+    let covers = [];
+    if (artistName && albumCoversMap[`${artistName} - ${albumName}`]) {
+      covers = albumCoversMap[`${artistName} - ${albumName}`];
+    } else {
+      covers = albumCoversMap[albumName] || [];
+    }
     if (!covers || covers.length === 0) {
       albumGallerySection.style.display = 'none';
       return;
