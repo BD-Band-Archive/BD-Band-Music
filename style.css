@@ -1200,6 +1200,8 @@ body {
   text-overflow: ellipsis;
   flex-shrink: 0;
   max-width: 55%;
+  cursor: pointer;
+  transition: color 0.15s ease;
 }
 .player-album {
   white-space: nowrap;
@@ -1207,6 +1209,25 @@ body {
   text-overflow: ellipsis;
   flex: 1;
   min-width: 0;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.player-artist:hover,
+.player-album:hover,
+.player-link-item:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+.player-link-item {
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.player-cover-wrap {
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.player-cover-wrap:hover {
+  transform: scale(1.05);
 }
 .bullet { font-size: 0.6rem; opacity: 0.5; }
 

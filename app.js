@@ -1223,10 +1223,23 @@
     // Update Player UI with Full Tooltips to prevent text cutoff
     playerTitle.textContent = track.title;
     playerTitle.title = track.title;
-    playerArtist.textContent = track.artist;
-    playerAlbum.textContent = track.album;
-    playerAlbum.title = track.album;
+
+    // Render clickable artist link(s) (Spotify-style)
+    const trackArtists = (track.artists && track.artists.length > 0) ? track.artists : [track.artist];
+    if (trackArtists.length > 1) {
+      playerArtist.innerHTML = trackArtists.map(a => `<span class="player-link-item player-artist-link" data-artist="${escapeHtml(a)}" title="View ${escapeHtml(a)} discography">${escapeHtml(a)}</span>`).join(', ');
+      playerArtist.title = `Artists: ${trackArtists.join(', ')}`;
+    } else {
+      playerArtist.innerHTML = `<span class="player-link-item player-artist-link" data-artist="${escapeHtml(track.artist)}" title="View ${escapeHtml(track.artist)} discography">${escapeHtml(track.artist)}</span>`;
+      playerArtist.title = `View all songs by ${track.artist}`;
+    }
+
+    // Render clickable album link (Spotify-style)
+    playerAlbum.innerHTML = `<span class="player-link-item player-album-link" data-album="${escapeHtml(track.album)}" title="View album: ${escapeHtml(track.album)}">${escapeHtml(track.album)}</span>`;
+    playerAlbum.title = `View album: ${track.album}`;
+
     playerCoverImg.src = track.coverUrl || 'assets/default_album_cover.svg';
+    playerCoverImg.title = `Click to view ${track.album} artwork gallery`;
     playerCoverImg.onerror = () => { playerCoverImg.src = 'assets/default_album_cover.svg'; };
     playerDownloadBtn.href = track.downloadUrl || `${track.streamUrl}?download=true`;
     playerDownloadBtn.setAttribute('download', `${track.artist} - ${track.title}.flac`);
@@ -1713,6 +1726,51 @@
       showToast('Repeat: ALL');
     }
   });
+
+  // --- Spotify-style Artist, Album & Cover Click Navigation in Player Bar ---
+  if (playerArtist) {
+    playerArtist.addEventListener('click', (e) => {
+      const link = e.target.closest('.player-artist-link');
+      const artist = link ? link.dataset.artist : (currentTrack ? currentTrack.artist : null);
+      if (!artist || artist === '—') return;
+      dismissLanding();
+      activeView = 'tracks';
+      activeAlbumFilter = 'all';
+      updateViewTabs();
+      setArtistFilter(artist);
+      const targetEl = document.getElementById('mainContent') || document.getElementById('tracksTable');
+      if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showToast(`👑 Viewing artist: ${artist}`);
+    });
+  }
+
+  if (playerAlbum) {
+    playerAlbum.addEventListener('click', () => {
+      if (!currentTrack || !currentTrack.album || currentTrack.album === '—') return;
+      dismissLanding();
+      activeView = 'tracks';
+      activeArtistFilter = 'all';
+      updateViewTabs();
+      setAlbumFilter(currentTrack.album);
+      const targetEl = document.getElementById('albumGallerySection') || document.getElementById('mainContent') || document.getElementById('tracksTable');
+      if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showToast(`💿 Viewing album: ${currentTrack.album}`);
+    });
+  }
+
+  const playerCoverWrap = document.querySelector('.player-cover-wrap');
+  if (playerCoverWrap) {
+    playerCoverWrap.addEventListener('click', () => {
+      if (!currentTrack || !currentTrack.album) return;
+      dismissLanding();
+      activeView = 'tracks';
+      activeArtistFilter = 'all';
+      updateViewTabs();
+      setAlbumFilter(currentTrack.album);
+      const targetEl = document.getElementById('albumGallerySection') || document.getElementById('mainContent') || document.getElementById('tracksTable');
+      if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 
   // --- Search Input Events ---
   let searchDebounceTimer = null;
