@@ -282,7 +282,30 @@ def get_all_album_covers(stream_url):
                 return (7, n)
 
             files.sort(key=sort_key)
+            
+            # Exclude redundant folder.jpg/png if a front/artwork image exists, and deduplicate by file hash
+            has_front = any('front' in f.name.lower() or 'artwork' in f.name.lower() for f in files)
+            filtered_files = []
+            seen_hashes = set()
+            import hashlib
+            
+            def get_f_hash(p):
+                with open(p, 'rb') as fp:
+                    return hashlib.md5(fp.read()).hexdigest()
+
             for f in files:
+                if has_front and f.stem.lower() in ['folder']:
+                    continue
+                try:
+                    h = get_f_hash(f)
+                    if h in seen_hashes:
+                        continue
+                    seen_hashes.add(h)
+                except Exception:
+                    pass
+                filtered_files.append(f)
+
+            for f in filtered_files:
                 enc_cov = urllib.parse.quote(cov_name)
                 enc_file = urllib.parse.quote(f.name)
                 if album_folder:
