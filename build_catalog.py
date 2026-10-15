@@ -325,6 +325,83 @@ def get_all_album_covers(stream_url):
                 })
     return covers
 
+def validate_repo_structure(folder_name, readme_path):
+    """
+    Validates mandatory discography structural hierarchy:
+      1. Original Albums (Studio albums, Live albums, core EPs)
+      2. Solos / Singles (Solo releases, standalone singles, unreleased demo tracks)
+      3. Linked Mixed Albums (Mixed album / compilation appearances linking to Mixed-Albums or external repos)
+      
+    Also enforces:
+      - Sequential numbering without gaps (1, 2, 3, ...)
+      - If a 'Singles' folder exists on disk with audio tracks, a Singles section must exist in README
+      - No Tier 3 (Mixed) albums appearing before Tier 1 or Tier 2
+    """
+    if folder_name in ["Mixed Albums", "BD Band Music"]:
+        return True
+
+    repo_dir = MUSIC_DIR / folder_name
+    if not readme_path.exists():
+        return False
+
+    with open(readme_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    body_matches = re.findall(r"^##\s+(\d+)\.\s+([^\n]+)", content, re.MULTILINE)
+    if not body_matches:
+        return True
+
+    sections = []
+    for num_str, title in body_matches:
+        num = int(num_str)
+        t_clean = re.sub(r"\[.*?\]\((.*?)\)", r"\1", title).strip()
+        t_lower = title.lower()
+        if "mixed-albums" in t_lower or "github.com/ghostdog45/mixed-albums" in t_lower or ("http" in t_lower and folder_name.lower().replace(" ", "-") not in t_clean.lower()):
+            sec_type = "mixed"
+        elif any(k in t_lower for k in ["single", "standalone", "collaboration", "solos"]):
+            sec_type = "single"
+        else:
+            sec_type = "original"
+        sections.append((num, sec_type, title))
+
+    tier_map = {"original": 1, "single": 2, "mixed": 3}
+    errors = []
+
+    # Check Singles directory on disk
+    singles_dir = repo_dir / "Singles"
+    if singles_dir.is_dir():
+        flac_files = [f for f in singles_dir.iterdir() if f.is_file() and f.suffix.lower() == ".flac"]
+        has_single_sec = any(sec_type == "single" for _, sec_type, _ in sections)
+        if flac_files and not has_single_sec:
+            errors.append(f"Contains {len(flac_files)} Singles FLAC files on disk, but README.md is missing a Singles section!")
+
+    current_tier = 1
+    prev_num = 0
+    for num, sec_type, title in sections:
+        tier = tier_map[sec_type]
+        if num != prev_num + 1:
+            errors.append(f"Header numbering jump: expected {prev_num+1}, got {num} ('{title}')")
+        prev_num = num
+
+        if tier < current_tier:
+            errors.append(
+                f"Structure hierarchy violation: section {num} ('{title}') of tier '{sec_type}' "
+                f"appears after higher-tier section! Hierarchy must strictly follow: "
+                f"Original Albums -> Solos/Singles -> Linked Mixed Albums"
+            )
+        else:
+            current_tier = tier
+
+    if errors:
+        print(f"\n❌ [STRUCTURAL VIOLATION] in repository '{folder_name}':")
+        for err in errors:
+            print(f"   • {err}")
+        raise ValueError(f"Repository '{folder_name}' violates mandatory discography structure hierarchy.")
+    else:
+        summary_tiers = " -> ".join(s[1] for s in sections)
+        print(f"  [✓] Structure Verified ({len(sections)} sections: {summary_tiers})")
+        return True
+
 def build_catalog():
     catalog = []
     seen_urls = set()
@@ -340,6 +417,7 @@ def build_catalog():
             continue
             
         print(f"Parsing {folder_name}...")
+        validate_repo_structure(folder_name, readme_path)
         with open(readme_path, "r", encoding="utf-8") as f:
             lines = f.readlines()
             
