@@ -442,14 +442,46 @@
     applyFilters();
   }
 
+  // --- Empty State Display ---
+  function showNoResultsState(viewType) {
+    tracksView.style.display = 'none';
+    albumsView.style.display = 'none';
+    artistsView.style.display = 'none';
+    if (albumGallerySection) albumGallerySection.style.display = 'none';
+    tracksView.classList.remove('active');
+    albumsView.classList.remove('active');
+    artistsView.classList.remove('active');
+    noResultsState.style.display = 'block';
+    if (seeMoreWrap) seeMoreWrap.style.display = 'none';
+
+    const heading = noResultsState.querySelector('h3');
+    const desc = noResultsState.querySelector('p');
+
+    if (viewType === 'albums') {
+      resultsCount.textContent = 'Showing 0 albums';
+      if (heading) heading.textContent = 'No matching albums found';
+      if (desc) desc.textContent = 'Try searching for a different album title, artist, or release year.';
+    } else if (viewType === 'artists') {
+      resultsCount.textContent = 'Showing 0 artists';
+      if (heading) heading.textContent = 'No matching artists found';
+      if (desc) desc.textContent = 'Try searching for a different band or artist name.';
+    } else {
+      resultsCount.textContent = 'Showing 0 tracks';
+      if (heading) heading.textContent = 'No matching tracks found';
+      if (desc) desc.textContent = 'Try searching for a different song title, artist, or album keyword.';
+    }
+  }
+
   // --- Filter & Search Logic ---
   function applyFilters() {
     const rawQuery = globalSearchInput.value.trim();
     const query = normalizeQuery(rawQuery);
+    searchQuery = query;
+    const tokens = query.split(' ').filter(Boolean);
 
     const isCuratedHomepage = (
       activeView === 'tracks' &&
-      !query &&
+      tokens.length === 0 &&
       activeArtistFilter === 'all' &&
       activeAlbumFilter === 'all' &&
       !isFullTracksListExpanded
@@ -474,15 +506,12 @@
           return false;
         }
 
-        // Keyword Search
-        if (query) {
-          const matchTitle = normalizeQuery(track.title).includes(query);
-          const trackArtists = (track.artists && track.artists.length > 0) ? track.artists : [track.artist];
-          const matchArtist = trackArtists.some(a => normalizeQuery(a).includes(query)) || normalizeQuery(track.artist).includes(query);
-          const matchAlbum = normalizeQuery(track.album).includes(query);
-          const matchYear = track.year && track.year.toString().includes(query);
-          const matchFeat = track.featured && normalizeQuery(track.featured).includes(query);
-          return matchTitle || matchArtist || matchAlbum || matchYear || matchFeat;
+        // Multi-Token Keyword Search across title, artist, album, year, featured, and repo
+        if (tokens.length > 0) {
+          const trackArtists = (track.artists && track.artists.length > 0) ? track.artists.join(' ') : (track.artist || '');
+          const repo = (track.repo || '').replace(/-/g, ' ');
+          const blob = normalizeQuery(`${track.title} ${track.artist} ${trackArtists} ${track.album} ${track.year || ''} ${track.featured || ''} ${repo}`);
+          return tokens.every(tok => blob.includes(tok));
         }
 
         return true;
@@ -506,23 +535,13 @@
 
   // --- Render Views ---
   function renderCurrentView() {
-    if (currentFilteredTracks.length === 0) {
-      tracksView.style.display = 'none';
-      albumsView.style.display = 'none';
-      artistsView.style.display = 'none';
-      if (albumGallerySection) albumGallerySection.style.display = 'none';
-      tracksView.classList.remove('active');
-      albumsView.classList.remove('active');
-      artistsView.classList.remove('active');
-      noResultsState.style.display = 'block';
-      resultsCount.textContent = 'Showing 0 tracks';
-      if (seeMoreWrap) seeMoreWrap.style.display = 'none';
-      return;
-    }
-
-    noResultsState.style.display = 'none';
-
     if (activeView === 'tracks') {
+      if (currentFilteredTracks.length === 0) {
+        showNoResultsState('tracks');
+        return;
+      }
+
+      noResultsState.style.display = 'none';
       renderTracksTable();
       tracksView.style.display = 'block';
       albumsView.style.display = 'none';
@@ -574,22 +593,34 @@
       renderAlbumGallery(activeAlbumFilter);
     } else if (activeView === 'albums') {
       if (albumGallerySection) albumGallerySection.style.display = 'none';
-      renderAlbumsGrid();
       tracksView.style.display = 'none';
-      albumsView.style.display = 'block';
       artistsView.style.display = 'none';
       tracksView.classList.remove('active');
-      albumsView.classList.add('active');
       artistsView.classList.remove('active');
+
+      const albumList = renderAlbumsGrid();
+      if (!albumList || albumList.length === 0) {
+        showNoResultsState('albums');
+        return;
+      }
+      noResultsState.style.display = 'none';
+      albumsView.style.display = 'block';
+      albumsView.classList.add('active');
       albumsGrid.style.display = 'grid';
     } else if (activeView === 'artists') {
       if (albumGallerySection) albumGallerySection.style.display = 'none';
-      renderArtistsGrid();
       tracksView.style.display = 'none';
       albumsView.style.display = 'none';
-      artistsView.style.display = 'block';
       tracksView.classList.remove('active');
       albumsView.classList.remove('active');
+
+      const artistList = renderArtistsGrid();
+      if (!artistList || artistList.length === 0) {
+        showNoResultsState('artists');
+        return;
+      }
+      noResultsState.style.display = 'none';
+      artistsView.style.display = 'block';
       artistsView.classList.add('active');
       artistsGrid.style.display = 'grid';
     }
@@ -713,24 +744,51 @@
 
   // --- Render Albums Grid ---
   function renderAlbumsGrid() {
+    const rawQuery = globalSearchInput.value.trim();
+    const query = normalizeQuery(rawQuery);
+    const tokens = query.split(' ').filter(Boolean);
+
+    // Group catalog by album
     const albumsMap = new Map();
-    currentFilteredTracks.forEach(t => {
+    catalog.forEach(t => {
       if (!albumsMap.has(t.album)) {
-        // Resolve authentic front cover: first check albumCoversMap gallery, fallback to track coverUrl or safe SVG
         const gallery = albumCoversMap[t.album] || albumCoversMap[`${t.artist} - ${t.album}`] || [];
         const verifiedCover = (gallery.length > 0 && gallery[0].url) ? gallery[0].url : (t.coverUrl || 'assets/default_album_cover.svg');
         albumsMap.set(t.album, {
           album: t.album,
-          artist: t.artist,
+          artist: t.repo === 'Mixed-Albums' ? 'Mixed Albums' : t.artist,
           year: t.year,
           coverUrl: verifiedCover,
+          repo: (t.repo || '').replace(/-/g, ' '),
           tracks: []
         });
       }
       albumsMap.get(t.album).tracks.push(t);
     });
 
-    const albumList = Array.from(albumsMap.values());
+    let albumList = Array.from(albumsMap.values());
+
+    // Filter by activeArtistFilter if active
+    if (activeArtistFilter !== 'all') {
+      albumList = albumList.filter(album => {
+        return album.tracks.some(t => {
+          const trackArtists = (t.artists && t.artists.length > 0) ? t.artists : [t.artist];
+          return trackArtists.includes(activeArtistFilter) || t.artist === activeArtistFilter;
+        });
+      });
+    }
+
+    // Filter by search query tokens if present
+    if (tokens.length > 0) {
+      albumList = albumList.filter(album => {
+        const trackTitles = album.tracks.map(t => t.title).join(' ');
+        const trackArtists = album.tracks.map(t => (t.artists || [t.artist]).join(' ')).join(' ');
+        const blob = normalizeQuery(`${album.album} ${album.artist} ${album.year || ''} ${album.repo} ${trackTitles} ${trackArtists}`);
+        return tokens.every(tok => blob.includes(tok));
+      });
+    }
+
+    // Sort albums
     if (sortBy === 'title-asc') {
       albumList.sort((a, b) => a.album.localeCompare(b.album));
     } else if (sortBy === 'artist-asc') {
@@ -741,7 +799,11 @@
       albumList.sort((a, b) => (a.year || 9999) - (b.year || 9999));
     }
 
-    resultsCount.textContent = `Showing ${albumList.length} albums`;
+    if (albumList.length === 0) {
+      return [];
+    }
+
+    resultsCount.textContent = `Showing ${albumList.length} album${albumList.length === 1 ? '' : 's'}`;
 
     let gridHtml = '';
     albumList.forEach(albumObj => {
@@ -792,6 +854,8 @@
         setAlbumFilter(albumName, false);
       });
     });
+
+    return albumList;
   }
 
   // --- Dynamic Album Artwork & Physical Archive Gallery ---
@@ -1034,36 +1098,61 @@
 
   // --- Render Artists Grid ---
   function renderArtistsGrid() {
-    const artistsMap = new Map();
-    const sourceTracks = searchQuery ? currentFilteredTracks : catalog;
+    const rawQuery = globalSearchInput.value.trim();
+    const query = normalizeQuery(rawQuery);
+    const tokens = query.split(' ').filter(Boolean);
 
-    sourceTracks.forEach(t => {
+    // Group catalog by artist
+    const artistsMap = new Map();
+    catalog.forEach(t => {
       const trackArtists = (t.artists && t.artists.length > 0) ? t.artists : [t.artist];
       trackArtists.forEach(art => {
         if (!artistsMap.has(art)) {
-          // Strictly use official band logos/photos when found, or simple vibrant colors (green or violet)
           const cover = getArtistLogo(art) || getArtistFallbackSvg(art);
           artistsMap.set(art, {
             artist: art,
             coverUrl: cover,
-            tracksCount: 0,
+            tracks: [],
             albumsSet: new Set()
           });
         }
         const a = artistsMap.get(art);
-        a.tracksCount++;
+        a.tracks.push(t);
         a.albumsSet.add(t.album);
       });
     });
 
-    const artistList = Array.from(artistsMap.values());
+    let artistList = Array.from(artistsMap.values());
+
+    // Filter by activeArtistFilter if active
+    if (activeArtistFilter !== 'all') {
+      artistList = artistList.filter(a => a.artist === activeArtistFilter);
+    }
+
+    // Filter by search query tokens if present
+    if (tokens.length > 0) {
+      artistList = artistList.filter(artistObj => {
+        const artistNorm = normalizeQuery(artistObj.artist);
+        // Direct artist name match
+        if (tokens.every(tok => artistNorm.includes(tok))) return true;
+        // Or matching any track title or album title by this artist
+        const titlesBlob = normalizeQuery(artistObj.tracks.map(t => `${t.title} ${t.album}`).join(' '));
+        return tokens.every(tok => titlesBlob.includes(tok));
+      });
+    }
+
+    // Sort artists
     if (sortBy === 'title-asc' || sortBy === 'artist-asc') {
       artistList.sort((a, b) => a.artist.localeCompare(b.artist));
     } else {
-      artistList.sort((a, b) => b.tracksCount - a.tracksCount);
+      artistList.sort((a, b) => b.tracks.length - a.tracks.length);
     }
 
-    resultsCount.textContent = `Showing ${artistList.length} artists`;
+    if (artistList.length === 0) {
+      return [];
+    }
+
+    resultsCount.textContent = `Showing ${artistList.length} artist${artistList.length === 1 ? '' : 's'}`;
 
     let gridHtml = '';
     artistList.forEach(artistObj => {
@@ -1071,7 +1160,7 @@
         <div class="artist-card" data-artist="${escapeHtml(artistObj.artist)}">
           <img class="artist-avatar" src="${escapeHtml(artistObj.coverUrl)}" alt="${escapeHtml(artistObj.artist)}" loading="lazy" onerror="this.onerror=null; this.src=getArtistFallbackSvg('${escapeHtml(artistObj.artist)}')">
           <div class="artist-card-name">${escapeHtml(artistObj.artist)}</div>
-          <div class="artist-card-count">${artistObj.tracksCount} tracks • ${artistObj.albumsSet.size} albums</div>
+          <div class="artist-card-count">${artistObj.tracks.length} tracks • ${artistObj.albumsSet.size} albums</div>
         </div>
       `;
     });
@@ -1087,6 +1176,8 @@
         setArtistFilter(artist, false);
       });
     });
+
+    return artistList;
   }
 
   // --- Audio Player Logic ---
@@ -1662,7 +1753,15 @@
   viewTabs.forEach(tab => {
     tab.addEventListener('click', () => {
       activeView = tab.dataset.view;
-      pushNavState({ view: activeView, artist: activeArtistFilter, album: activeAlbumFilter });
+      // Switching view tabs cleanly resets sticky 1-album or 1-artist locks
+      activeAlbumFilter = 'all';
+      activeArtistFilter = 'all';
+      artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.artist === 'all');
+      });
+      activeFilterBanner.style.display = 'none';
+
+      pushNavState({ view: activeView, artist: 'all', album: 'all' });
       updateViewTabs();
       applyFilters();
     });
