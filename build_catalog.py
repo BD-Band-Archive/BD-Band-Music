@@ -303,6 +303,9 @@ def build_catalog():
         
     print(f"\n Successfully wrote {len(catalog)} tracks to {out_json}!")
     
+    # Automatically map artist images from assets/artists/
+    build_artists_map(catalog)
+    
     # Update BD Band Music README with live track count badge and text
     readme_path = OUTPUT_DIR / "README.md"
     if readme_path.exists():
@@ -321,6 +324,52 @@ def build_catalog():
     print("\nTop 15 Artists:")
     for a, count in artists.most_common(15):
         print(f"  • {a}: {count} tracks")
+
+def build_artists_map(catalog):
+    """Scans assets/artists directory and matches images to artists in catalog, exporting artists_map.json."""
+    artists_dir = OUTPUT_DIR / "assets" / "artists"
+    if not artists_dir.exists():
+        return {}
+    
+    all_artists = sorted(list(set(t['artist'] for t in catalog)))
+    img_files = [f for f in artists_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
+    
+    def normalize_slug(s):
+        return re.sub(r'[\s_\-\W]+', '', s.lower())
+
+    file_map = {}
+    for f in img_files:
+        stem = f.stem.lower()
+        clean_stem = re.sub(r'jpg$', '', stem)
+        clean_stem = re.sub(r'_logo$', '', clean_stem)
+        rel_path = f"assets/artists/{f.name}"
+        file_map[normalize_slug(clean_stem)] = rel_path
+        file_map[normalize_slug(stem)] = rel_path
+
+    alias_map = {
+        normalize_slug('durey'): normalize_slug('duray'),
+        normalize_slug('mohakaal'): normalize_slug('mohakal'),
+        normalize_slug('the icons'): normalize_slug('icons'),
+        normalize_slug('artcell, black & cryptic fate'): normalize_slug('artcell'),
+        normalize_slug('bassbaba sumon & anila naz chowdhury'): normalize_slug('bassbaba_sumon'),
+        normalize_slug('stentorian feat. bassbaba sumon'): normalize_slug('stentorian'),
+        normalize_slug('bishop fuad'): normalize_slug('fuad'),
+        normalize_slug('power surge'): normalize_slug('powersurge')
+    }
+
+    artist_images = {}
+    for art in all_artists:
+        norm_art = normalize_slug(art)
+        target_key = alias_map.get(norm_art, norm_art)
+        if target_key in file_map:
+            artist_images[art] = file_map[target_key]
+
+    out_map_file = artists_dir / "artists_map.json"
+    with open(out_map_file, "w", encoding="utf-8") as f:
+        json.dump(artist_images, f, ensure_ascii=False, indent=2)
+
+    print(f"[*] Generated artists_map.json with {len(artist_images)} artist images mapped.")
+    return artist_images
 
 if __name__ == "__main__":
     build_catalog()

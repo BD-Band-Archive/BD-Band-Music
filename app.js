@@ -180,6 +180,17 @@
         seeMoreHint.textContent = `Or use the search bar above to instantly find any of the ${catalog.length} songs`;
       }
 
+      // Dynamically load any newly mapped artist images from artists_map.json
+      try {
+        const artResp = await fetch('assets/artists/artists_map.json?v=2.7');
+        if (artResp.ok) {
+          const dynamicMap = await artResp.json();
+          Object.assign(ARTIST_OFFICIAL_IMAGES, dynamicMap);
+        }
+      } catch (err) {
+        console.warn('Notice: dynamic artists_map.json skipped, using built-in map.', err);
+      }
+
       isFullTracksListExpanded = false;
       initArtistFilterBar();
       initFromUrlParams();
@@ -674,7 +685,7 @@
     'Aurthohin': 'assets/artists/aurthohin.png',
     'Bassbaba Sumon': 'assets/artists/bassbaba_sumon.png',
     'Bassbaba Sumon & Anila Naz Chowdhury': 'assets/artists/bassbaba_sumon.png',
-    'Stentorian feat. Bassbaba Sumon': 'assets/artists/bassbaba_sumon.png',
+    'Stentorian feat. Bassbaba Sumon': 'assets/artists/stentorian.jpg',
     'Arbovirus': 'assets/artists/arbovirus.png',
     'Indalo': 'assets/artists/indalo.png',
     'Icons': 'assets/artists/icons.jpg',
@@ -697,8 +708,39 @@
     'Fuad': 'assets/artists/fuad.jpg',
     'Bishop Fuad': 'assets/artists/fuad.jpg',
     'Elita': 'assets/artists/elita.jpg',
-    'Jon Kabir': 'assets/artists/jon_kabir.jpg'
+    'Jon Kabir': 'assets/artists/jon_kabir.jpg',
+    'Bohemian': 'assets/artists/bohemian.jpg',
+    'Breach': 'assets/artists/breach.png',
+    'Durey': 'assets/artists/duray.jpg',
+    'Kral': 'assets/artists/kral.png',
+    'Metal Maze': 'assets/artists/metal_maze.jpg',
+    'Metal maze': 'assets/artists/metal_maze.jpg',
+    'Mohakaal': 'assets/artists/mohakal.png',
+    'Poizon Green': 'assets/artists/poizon_green.png',
+    'Reborn': 'assets/artists/reborn.jpg',
+    'Stentorian': 'assets/artists/stentorian.jpg',
+    'Striking': 'assets/artists/striking.jpg',
+    'Yaatri': 'assets/artists/yaatri.jpg'
   };
+
+  function normalizeArtistSlug(str) {
+    if (!str) return '';
+    return str.toLowerCase().replace(/[\s_\-\W]+/g, '');
+  }
+
+  function getArtistLogo(artistName) {
+    if (!artistName) return null;
+    if (ARTIST_OFFICIAL_IMAGES[artistName]) {
+      return ARTIST_OFFICIAL_IMAGES[artistName];
+    }
+    const slug = normalizeArtistSlug(artistName);
+    for (const [key, val] of Object.entries(ARTIST_OFFICIAL_IMAGES)) {
+      if (normalizeArtistSlug(key) === slug) {
+        return val;
+      }
+    }
+    return null;
+  }
 
   // --- Dynamic Color Avatars (Simple Colors: Green or Violet) for Artists ---
   function getArtistInitials(name) {
@@ -753,7 +795,7 @@
     sourceTracks.forEach(t => {
       if (!artistsMap.has(t.artist)) {
         // Strictly use official band logos/photos when found, or simple vibrant colors (green or violet)
-        const cover = ARTIST_OFFICIAL_IMAGES[t.artist] || getArtistFallbackSvg(t.artist);
+        const cover = getArtistLogo(t.artist) || getArtistFallbackSvg(t.artist);
         artistsMap.set(t.artist, {
           artist: t.artist,
           coverUrl: cover,
