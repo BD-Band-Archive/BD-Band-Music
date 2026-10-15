@@ -479,6 +479,24 @@
     <!-- Native Audio Element (Hidden) -->
     <audio id="audioElement" preload="metadata" crossorigin="anonymous"></audio>
 
+    <!-- Direct Link Autoplay Floating Prompt -->
+    <div id="directAutoplayPrompt" class="direct-autoplay-prompt" style="display: none;">
+      <div class="autoplay-pulse-ring"></div>
+      <button class="autoplay-play-icon" id="directAutoplayBtn" aria-label="Play Track">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="autoplay-info">
+        <div class="autoplay-header">
+          <span class="autoplay-dot"></span>
+          <span class="autoplay-badge-text">Autoplay Ready • Tap anywhere to play</span>
+        </div>
+        <div class="autoplay-title" id="autoplayPromptTrack">Song Title — Artist</div>
+      </div>
+      <button class="autoplay-dismiss-btn" id="directAutoplayDismiss" title="Dismiss (Pause)">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
     <!-- Floating Toast Notification -->
     <div id="toast" class="toast" style="display: none;">
       <span id="toastMsg">Track added to queue</span>

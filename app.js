@@ -136,6 +136,13 @@
   const enterArchiveBtn = document.getElementById('enterArchiveBtn');
   const closeLandingBtn = document.getElementById('closeLandingBtn');
   const storyBtn = document.getElementById('storyBtn');
+
+  // Direct Link Autoplay Floating Prompt Elements
+  const directAutoplayPrompt = document.getElementById('directAutoplayPrompt');
+  const directAutoplayBtn = document.getElementById('directAutoplayBtn');
+  const autoplayPromptTrack = document.getElementById('autoplayPromptTrack');
+  const directAutoplayDismiss = document.getElementById('directAutoplayDismiss');
+  let activeAutoplayGestureHandler = null;
   
   // Album Artwork Gallery Elements
   const albumGallerySection = document.getElementById('albumGallerySection');
@@ -1026,7 +1033,7 @@
   }
 
   // --- Audio Player Logic ---
-  function playTrackById(id) {
+  function playTrackById(id, isDirectLink = false) {
     const track = catalog.find(t => t.id === id);
     if (!track) return;
 
@@ -1056,10 +1063,12 @@
 
     // Set Clean Audio Source (strip any trailing query parameters)
     const cleanUrl = (track.streamUrl || '').split('?')[0];
-    if (audio.src !== cleanUrl) {
+    if (audio.src !== cleanUrl && !audio.src.endsWith(cleanUrl)) {
       audio.src = cleanUrl;
+      audio.load();
+    } else if (audio.readyState === 0) {
+      audio.load();
     }
-    audio.load();
 
     audioSpinner.style.display = 'block';
     playIcon.style.display = 'none';
@@ -1072,19 +1081,30 @@
       audioCtx.resume().catch(() => {});
     }
 
-    audio.play().then(() => {
-      isPlaying = true;
-      updatePlayPauseState();
-      updateMediaSession();
-      if (visualizerEnabled) {
-        initAudioVisualizer();
-      }
-      renderTracksTable(); // Update active row state
-    }).catch(err => {
-      console.warn('Playback error (possibly user interaction needed):', err);
-      audioSpinner.style.display = 'none';
-      playIcon.style.display = 'block';
-    });
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        isPlaying = true;
+        updatePlayPauseState();
+        updateMediaSession();
+        if (visualizerEnabled) {
+          initAudioVisualizer();
+        }
+        renderTracksTable(); // Update active row state
+        hideAutoplayPrompt();
+        if (isDirectLink) {
+          showToast(`▶ Now Playing: ${track.title} — ${track.artist}`);
+        }
+      }).catch(err => {
+        console.warn('Playback error (browser autoplay policy restriction):', err);
+        audioSpinner.style.display = 'none';
+        playIcon.style.display = 'block';
+
+        if (isDirectLink) {
+          armOneTouchAutoplay(track);
+        }
+      });
+    }
 
     // Update URL query parameter for clean sharing
     try {
@@ -1097,7 +1117,117 @@
     }
   }
 
+  // --- Direct Song Link Autoplay Handlers (One-Touch / First-Gesture Autoplay) ---
+  function showAutoplayPrompt(track) {
+    if (!directAutoplayPrompt) return;
+    if (autoplayPromptTrack) {
+      autoplayPromptTrack.textContent = `${track.title} — ${track.artist}`;
+    }
+    directAutoplayPrompt.style.display = 'flex';
+  }
+
+  function hideAutoplayPrompt() {
+    if (directAutoplayPrompt) {
+      directAutoplayPrompt.style.display = 'none';
+    }
+    if (activeAutoplayGestureHandler) {
+      ['pointerdown', 'touchstart', 'click', 'keydown'].forEach(evt => {
+        window.removeEventListener(evt, activeAutoplayGestureHandler, { capture: true });
+      });
+      activeAutoplayGestureHandler = null;
+    }
+  }
+
+  function armOneTouchAutoplay(track) {
+    showAutoplayPrompt(track);
+    showToast(`🎵 Loaded: ${track.title} — Tap anywhere to play`);
+
+    if (activeAutoplayGestureHandler) {
+      ['pointerdown', 'touchstart', 'click', 'keydown'].forEach(evt => {
+        window.removeEventListener(evt, activeAutoplayGestureHandler, { capture: true });
+      });
+    }
+
+    const gestureEvents = ['pointerdown', 'touchstart', 'click', 'keydown'];
+
+    activeAutoplayGestureHandler = function onFirstUserGesture(e) {
+      // If user specifically clicked the dismiss button, let dismiss button handle it
+      if (e.target && e.target.closest && e.target.closest('#directAutoplayDismiss')) {
+        return;
+      }
+
+      // Check if user clicked another song row
+      const clickedRow = e.target && e.target.closest ? e.target.closest('tr[data-id]') : null;
+      if (clickedRow && clickedRow.dataset.id !== track.id) {
+        hideAutoplayPrompt();
+        return;
+      }
+
+      // Play audio within genuine user gesture context
+      if (audio.paused && currentTrack && currentTrack.id === track.id) {
+        audio.play().then(() => {
+          isPlaying = true;
+          updatePlayPauseState();
+          updateMediaSession();
+          if (visualizerEnabled) {
+            initAudioVisualizer();
+            if (audioCtx && audioCtx.state === 'suspended') {
+              audioCtx.resume().catch(() => {});
+            }
+          }
+          renderTracksTable();
+          showToast(`▶ Now Playing: ${track.title} — ${track.artist}`);
+        }).catch(err => {
+          console.warn('Playback on user gesture failed:', err);
+        });
+      }
+
+      hideAutoplayPrompt();
+    };
+
+    // Attach capture listener so ANY user gesture on screen starts playback immediately
+    gestureEvents.forEach(evt => {
+      window.addEventListener(evt, activeAutoplayGestureHandler, { capture: true, once: true });
+    });
+  }
+
+  if (directAutoplayPrompt) {
+    directAutoplayPrompt.addEventListener('click', (e) => {
+      if (e.target.closest('#directAutoplayDismiss')) {
+        e.stopPropagation();
+        hideAutoplayPrompt();
+        showToast('Autoplay dismissed');
+        return;
+      }
+      if (currentTrack && audio.paused) {
+        audio.play().then(() => {
+          isPlaying = true;
+          updatePlayPauseState();
+          updateMediaSession();
+          if (visualizerEnabled) {
+            initAudioVisualizer();
+            if (audioCtx && audioCtx.state === 'suspended') {
+              audioCtx.resume().catch(() => {});
+            }
+          }
+          renderTracksTable();
+          showToast(`▶ Now Playing: ${currentTrack.title} — ${currentTrack.artist}`);
+        }).catch(() => {});
+      }
+      hideAutoplayPrompt();
+    });
+  }
+
+  if (directAutoplayDismiss) {
+    directAutoplayDismiss.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hideAutoplayPrompt();
+      showToast('Autoplay dismissed');
+    });
+  }
+
   function togglePlayPause() {
+    hideAutoplayPrompt();
     if (!currentTrack) {
       if (currentFilteredTracks.length > 0) {
         playTrackById(currentFilteredTracks[0].id);
@@ -1973,7 +2103,7 @@
       isFullTracksListExpanded = true;
       updateViewTabs();
       applyFilters();
-      playTrackById(targetTrack.id);
+      playTrackById(targetTrack.id, true);
 
       setTimeout(() => {
         const row = document.querySelector(`tr[data-id="${targetTrack.id}"]`);
@@ -1984,7 +2114,6 @@
         }
       }, 400);
 
-      showToast(`🎵 Loaded: ${targetTrack.title} — ${targetTrack.artist}`);
       return;
     }
 
