@@ -75,6 +75,36 @@ def discover_repos():
 
     return repos
 
+CANONICAL_ARTIST_MAP = {
+    "král": "Kral",
+    "kral": "Kral",
+    "metal maze": "Metal Maze",
+    "the icons": "Icons",
+    "icons": "Icons",
+    "power surge": "Powersurge",
+    "powersurge": "Powersurge",
+    "x-factor": "X Factor",
+    "x factor": "X Factor",
+    "fake plastic super heroes": "Fake Plastic Superheroes",
+    "fake plastic superheroes": "Fake Plastic Superheroes",
+    "high-way": "Highway",
+    "high way": "Highway",
+    "highway": "Highway",
+    "purbo-poshchim": "Purbo Poshchim",
+    "purbo poshchim": "Purbo Poshchim",
+    "sucide season": "Suicide Season",
+    "suicide season": "Suicide Season",
+    "koprofillia": "Coprophilia",
+    "coprophilia": "Coprophilia",
+    "aronnya": "Aronno",
+    "aronno": "Aronno",
+    "darks": "Dark",
+    "dark": "Dark",
+    "bishop fuad": "Fuad",
+    "stentorian feat. bassbaba sumon": "Stentorian",
+    "bassbaba sumon & anila naz chowdhury": "Bassbaba Sumon",
+}
+
 def clean_track(raw_title, default_artist, is_mixed=False):
     raw = raw_title.strip()
     
@@ -112,8 +142,23 @@ def clean_track(raw_title, default_artist, is_mixed=False):
         title = title[len(artist)+3:].strip()
     if title.endswith(f" - {artist}"):
         title = title[:-len(artist)-3].strip()
+
+    # Canonical artist normalization to prevent duplicate artist cards
+    art_lower = artist.lower().strip()
+    feat_from_artist = None
+    if art_lower == "stentorian feat. bassbaba sumon":
+        artist = "Stentorian"
+        feat_from_artist = "Bassbaba Sumon"
+    elif art_lower == "bishop fuad":
+        artist = "Fuad"
+        feat_from_artist = "Bishop"
+    elif art_lower == "bassbaba sumon & anila naz chowdhury":
+        artist = "Bassbaba Sumon"
+        feat_from_artist = "Anila Naz Chowdhury"
+    elif art_lower in CANONICAL_ARTIST_MAP:
+        artist = CANONICAL_ARTIST_MAP[art_lower]
         
-    return artist, title
+    return artist, title, feat_from_artist
 
 def get_exact_album_cover(stream_url):
     """Directly inspect filesystem for the album's cover based on the stream URL."""
@@ -263,15 +308,16 @@ def build_catalog():
                 
                 # Determine artist and track name
                 effective_artist = current_artist
-                track_artist, track_title = clean_track(raw_title, effective_artist, is_mixed=is_mixed)
+                track_artist, track_title, feat_from_artist = clean_track(raw_title, effective_artist, is_mixed=is_mixed)
                 
                 # Check for featured artist
-                feat = None
-                m_feat = re.search(r'\((?:feat|ft)\.?\s*([^)]+)\)', track_title, re.IGNORECASE)
-                if not m_feat:
-                    m_feat = re.search(r'-(?:feat|ft)\.?\s*([^-]+)', track_title, re.IGNORECASE)
-                if m_feat:
-                    feat = m_feat.group(1).strip()
+                feat = feat_from_artist
+                if not feat:
+                    m_feat = re.search(r'\((?:feat|ft)\.?\s*([^)]+)\)', track_title, re.IGNORECASE)
+                    if not m_feat:
+                        m_feat = re.search(r'-(?:feat|ft)\.?\s*([^-]+)', track_title, re.IGNORECASE)
+                    if m_feat:
+                        feat = m_feat.group(1).strip()
                     
                 # High-precision cover resolution:
                 # 1. Exact album cover deduced from streamUrl

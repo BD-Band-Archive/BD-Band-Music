@@ -2536,8 +2536,8 @@
   {
     "id": "track-182",
     "title": "Bishonno Andher",
-    "artist": "Stentorian feat. Bassbaba Sumon",
-    "featured": null,
+    "artist": "Stentorian",
+    "featured": "Bassbaba Sumon",
     "album": "Agontuk 3 (আগন্তুক ৩)",
     "year": 2005,
     "trackNo": 2,
@@ -3320,8 +3320,8 @@
   {
     "id": "track-238",
     "title": "Gaibona",
-    "artist": "Bassbaba Sumon & Anila Naz Chowdhury",
-    "featured": null,
+    "artist": "Bassbaba Sumon",
+    "featured": "Anila Naz Chowdhury",
     "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
     "year": 2007,
     "trackNo": 1,
@@ -3334,8 +3334,8 @@
   {
     "id": "track-239",
     "title": "Ekhon Ami",
-    "artist": "Bassbaba Sumon & Anila Naz Chowdhury",
-    "featured": null,
+    "artist": "Bassbaba Sumon",
+    "featured": "Anila Naz Chowdhury",
     "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
     "year": 2007,
     "trackNo": 2,
@@ -3348,8 +3348,8 @@
   {
     "id": "track-240",
     "title": "Shopnogulo Tomar Moto",
-    "artist": "Bassbaba Sumon & Anila Naz Chowdhury",
-    "featured": null,
+    "artist": "Bassbaba Sumon",
+    "featured": "Anila Naz Chowdhury",
     "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
     "year": 2007,
     "trackNo": 3,
@@ -3362,8 +3362,8 @@
   {
     "id": "track-241",
     "title": "Shobar Jonne Tumi",
-    "artist": "Bassbaba Sumon & Anila Naz Chowdhury",
-    "featured": null,
+    "artist": "Bassbaba Sumon",
+    "featured": "Anila Naz Chowdhury",
     "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
     "year": 2007,
     "trackNo": 4,
@@ -3376,8 +3376,8 @@
   {
     "id": "track-242",
     "title": "Tirjok",
-    "artist": "Bassbaba Sumon & Anila Naz Chowdhury",
-    "featured": null,
+    "artist": "Bassbaba Sumon",
+    "featured": "Anila Naz Chowdhury",
     "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
     "year": 2007,
     "trackNo": 5,
@@ -3390,8 +3390,8 @@
   {
     "id": "track-243",
     "title": "Tomar Jonno",
-    "artist": "Bassbaba Sumon & Anila Naz Chowdhury",
-    "featured": null,
+    "artist": "Bassbaba Sumon",
+    "featured": "Anila Naz Chowdhury",
     "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
     "year": 2007,
     "trackNo": 6,
@@ -3404,8 +3404,8 @@
   {
     "id": "track-244",
     "title": "Ghum Parie Dio",
-    "artist": "Bassbaba Sumon & Anila Naz Chowdhury",
-    "featured": null,
+    "artist": "Bassbaba Sumon",
+    "featured": "Anila Naz Chowdhury",
     "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
     "year": 2007,
     "trackNo": 7,
@@ -3418,8 +3418,8 @@
   {
     "id": "track-245",
     "title": "Jokhon Charidike",
-    "artist": "Bassbaba Sumon & Anila Naz Chowdhury",
-    "featured": null,
+    "artist": "Bassbaba Sumon",
+    "featured": "Anila Naz Chowdhury",
     "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
     "year": 2007,
     "trackNo": 8,
@@ -3432,8 +3432,8 @@
   {
     "id": "track-246",
     "title": "Onneshon",
-    "artist": "Bassbaba Sumon & Anila Naz Chowdhury",
-    "featured": null,
+    "artist": "Bassbaba Sumon",
+    "featured": "Anila Naz Chowdhury",
     "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
     "year": 2007,
     "trackNo": 9,
@@ -3446,8 +3446,8 @@
   {
     "id": "track-247",
     "title": "Noshto Neer",
-    "artist": "Bassbaba Sumon & Anila Naz Chowdhury",
-    "featured": null,
+    "artist": "Bassbaba Sumon",
+    "featured": "Anila Naz Chowdhury",
     "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
     "year": 2007,
     "trackNo": 10,
@@ -3460,8 +3460,8 @@
   {
     "id": "track-248",
     "title": "Shobar Jonne Tumi (Fuad Mix)",
-    "artist": "Bassbaba Sumon & Anila Naz Chowdhury",
-    "featured": null,
+    "artist": "Bassbaba Sumon",
+    "featured": "Anila Naz Chowdhury",
     "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
     "year": 2007,
     "trackNo": 11,
@@ -4860,7 +4860,7 @@
   {
     "id": "track-348",
     "title": "Nishpap Oporadh",
-    "artist": "The Icons",
+    "artist": "Icons",
     "featured": null,
     "album": "Din Bodol (দিন বদল)",
     "year": 2004,
@@ -7072,7 +7072,7 @@
   {
     "id": "track-506",
     "title": "Ochena",
-    "artist": "Koprofillia",
+    "artist": "Coprophilia",
     "featured": null,
     "album": "Agontuk 1 (আগন্তুক ১)",
     "year": 2003,
@@ -7310,7 +7310,7 @@
   {
     "id": "track-523",
     "title": "Osthir Shomoy",
-    "artist": "Metal maze",
+    "artist": "Metal Maze",
     "featured": null,
     "album": "Din Bodol (দিন বদল)",
     "year": 2004,
@@ -7548,7 +7548,7 @@
   {
     "id": "track-540",
     "title": "Kemon Jeno",
-    "artist": "HiGH-WaY",
+    "artist": "Highway",
     "featured": null,
     "album": "Shopnochura (স্বপ্নচূড়া)",
     "year": 2004,
@@ -7646,7 +7646,7 @@
   {
     "id": "track-547",
     "title": "Chayar Shorir",
-    "artist": "Fake Plastic Super Heroes",
+    "artist": "Fake Plastic Superheroes",
     "featured": null,
     "album": "Shopnochura (স্বপ্নচূড়া)",
     "year": 2004,
@@ -7926,7 +7926,7 @@
   {
     "id": "track-567",
     "title": "Ondhokarey.....",
-    "artist": "Darks",
+    "artist": "Dark",
     "featured": null,
     "album": "Shopnochura 2 (স্বপ্নচূড়া ২)",
     "year": 2005,
@@ -8374,7 +8374,7 @@
   {
     "id": "track-599",
     "title": "তার ছিঁড়ে গেছে",
-    "artist": "Aronnya",
+    "artist": "Aronno",
     "featured": null,
     "album": "Shopnochura 3 (স্বপ্নচূড়া ৩)",
     "year": 2007,
@@ -8486,7 +8486,7 @@
   {
     "id": "track-607",
     "title": "শেষপ্রান্ত",
-    "artist": "Purbo-Poshchim",
+    "artist": "Purbo Poshchim",
     "featured": null,
     "album": "Shopnochura 3 (স্বপ্নচূড়া ৩)",
     "year": 2007,
@@ -8556,8 +8556,8 @@
   {
     "id": "track-612",
     "title": "Bonno Rap",
-    "artist": "Bishop Fuad",
-    "featured": null,
+    "artist": "Fuad",
+    "featured": "Bishop",
     "album": "Bonno (বন্য)",
     "year": 2008,
     "trackNo": 5,
@@ -8892,7 +8892,7 @@
   {
     "id": "track-636",
     "title": "Kobor",
-    "artist": "X-Factor",
+    "artist": "X Factor",
     "featured": null,
     "album": "Rock 202 (রক ২০২)",
     "year": 2009,
@@ -9522,7 +9522,7 @@
   {
     "id": "track-681",
     "title": "Axe Of War",
-    "artist": "Power Surge",
+    "artist": "Powersurge",
     "featured": null,
     "album": "Rock 505 (রক ৫০৫)",
     "year": 2010,
@@ -9662,7 +9662,7 @@
   {
     "id": "track-691",
     "title": "Shurjaioner Shuru",
-    "artist": "Král",
+    "artist": "Kral",
     "featured": null,
     "album": "Rock 606 (রক ৬০৬)",
     "year": 2011,
@@ -9844,7 +9844,7 @@
   {
     "id": "track-704",
     "title": "Self Destructive",
-    "artist": "Sucide Season",
+    "artist": "Suicide Season",
     "featured": null,
     "album": "Rock 606 (রক ৬০৬)",
     "year": 2011,
@@ -11090,7 +11090,7 @@
   {
     "id": "track-793",
     "title": "Nishshongo Ekaki",
-    "artist": "High Way",
+    "artist": "Highway",
     "featured": null,
     "album": "Shopnochura 4 (স্বপ্নচূড়া ৪)",
     "year": 2014,
