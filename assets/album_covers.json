@@ -252,6 +252,43 @@
       "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Rock%20X0X%20%282015%29/Album%20Cover/Rock%20X0X%20%5BFront%5D.jpg"
     }
   ],
+  "Lokayot": [
+    {
+      "title": "Front",
+      "filename": "Lokayot+[Front].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Lokayot%20%282004%29/Album%20Cover/Lokayot%2B%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Lokayot [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Lokayot%20%282004%29/Album%20Cover/Lokayot%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Lokayot [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Lokayot%20%282004%29/Album%20Cover/Lokayot%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Lokayot [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Lokayot%20%282004%29/Album%20Cover/Lokayot%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "Inset-4",
+      "filename": "Lokayot [Inset-4].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Lokayot%20%282004%29/Album%20Cover/Lokayot%20%5BInset-4%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Lokayot [CD].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Lokayot%20%282004%29/Album%20Cover/Lokayot%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Lokayot [Back].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Lokayot%20%282004%29/Album%20Cover/Lokayot%20%5BBack%5D.jpg"
+    }
+  ],
   "Onno Shomoy (অন্য সময়)": [
     {
       "title": "Artwork",
@@ -561,6 +598,67 @@
       "title": "Front",
       "filename": "Rock 303 [Front].jpg",
       "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Rock%20303%20%282009%29/Album%20Cover/Rock%20303%20%5BFront%5D.jpg"
+    }
+  ],
+  "Charpotro": [
+    {
+      "title": "Charpotro+-5BFront-5D",
+      "filename": "Charpotro+-5BFront-5D.jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Charpotro%20%282001%29/Album%20Cover/Charpotro%2B-5BFront-5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Charpotro [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Charpotro%20%282001%29/Album%20Cover/Charpotro%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Charpotro [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Charpotro%20%282001%29/Album%20Cover/Charpotro%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Charporto [CD].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Charpotro%20%282001%29/Album%20Cover/Charporto%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Charpotro [Back].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Charpotro%20%282001%29/Album%20Cover/Charpotro%20%5BBack%5D.jpg"
+    }
+  ],
+  "Projonmo": [
+    {
+      "title": "Front",
+      "filename": "Projonmo [Front].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Projonmo%20%282002%29/Album%20Cover/Projonmo%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Projonmo [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Projonmo%20%282002%29/Album%20Cover/Projonmo%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Projonmo [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Projonmo%20%282002%29/Album%20Cover/Projonmo%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Projonmo [CD].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Projonmo%20%282002%29/Album%20Cover/Projonmo%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Projonmo [Back].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Projonmo%20%282002%29/Album%20Cover/Projonmo%20%5BBack%5D.jpg"
+    }
+  ],
+  "Riotous 14": [
+    {
+      "title": "Front",
+      "filename": "Riotous 14 [Front].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Riotous%2014%20%282015%29/Album%20Cover/Riotous%2014%20%5BFront%5D.jpg"
     }
   ],
   "Trimatrik (ত্রিমাত্রিক)": [
@@ -1005,6 +1103,13 @@
       "title": "folder",
       "filename": "folder.jpg",
       "url": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Singles/Album%20Cover/folder.jpg"
+    }
+  ],
+  "Jewel With The Stars": [
+    {
+      "title": "Front",
+      "filename": "Jewel with the stars [Front].jpg",
+      "url": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/Album%20Cover/Jewel%20with%20the%20stars%20%5BFront%5D.jpg"
     }
   ],
   "Soul Food, Pt. 1": [
