@@ -397,7 +397,7 @@ def validate_repo_structure(folder_name, readme_path):
         num = int(num_str)
         t_clean = re.sub(r"\[.*?\]\((.*?)\)", r"\1", title).strip()
         t_lower = title.lower()
-        if "mixed-albums" in t_lower or "github.com/ghostdog45/mixed-albums" in t_lower or ("http" in t_lower and folder_name.lower().replace(" ", "-") not in t_clean.lower()):
+        if "mixed-albums" in t_lower or "github.com/bd-band-archive/mixed-albums" in t_lower or "github.com/ghostdog45/mixed-albums" in t_lower or ("http" in t_lower and folder_name.lower().replace(" ", "-") not in t_clean.lower()):
             sec_type = "mixed"
         elif any(k in t_lower for k in ["single", "standalone", "collaboration", "solos"]):
             sec_type = "single"

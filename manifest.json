@@ -9,7 +9,7 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "https://raw.githubusercontent.com/GhostDog45/BD-Band-Music/master/assets/band_cover.jpg",
+      "src": "https://raw.githubusercontent.com/BD-Band-Archive/BD-Band-Music/master/assets/band_cover.jpg",
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any maskable"
