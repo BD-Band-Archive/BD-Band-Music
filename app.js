@@ -910,7 +910,7 @@
 
   // --- Official Artist Logos & Images (OSINT & Verified Band Archives) ---
   const ARTIST_OFFICIAL_IMAGES = {
-    'Artcell': 'assets/artists/artcell.jpg',
+    'Artcell': 'assets/artists/artcell_logo.png',
     'Black': 'assets/artists/black.jpg',
     'Aurthohin': 'assets/artists/aurthohin.png',
     'Bassbaba Sumon': 'assets/artists/bassbaba_sumon.png',
@@ -918,7 +918,7 @@
     'Indalo': 'assets/artists/indalo.png',
     'Icons': 'assets/artists/icons.jpg',
     'Minerva': 'assets/artists/minerva.png',
-    'Stoic Bliss': 'assets/artists/stoic_bliss.jpg',
+    'Stoic Bliss': 'assets/artists/stoic_bliss_logo.png',
     'The Watson Brothers': 'assets/artists/the_watson_brothers.jpg',
     'Vibe': 'assets/artists/vibe.jpg',
     'Warfaze': 'assets/artists/warfaze.jpg',
@@ -934,6 +934,7 @@
     'Fuad': 'assets/artists/fuad.jpg',
     'Elita': 'assets/artists/elita.jpg',
     'Jon Kabir': 'assets/artists/jon_kabir.jpg',
+    'Disciples': 'assets/artists/disciples_logo.jpg',
     'Bohemian': 'assets/artists/bohemian.jpg',
     'Breach': 'assets/artists/breach.png',
     'Durey': 'assets/artists/duray.jpg',

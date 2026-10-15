@@ -184,50 +184,80 @@ def clean_track(raw_title, default_artist, is_mixed=False):
         
     return artist, title, feat_from_artist, artists_list
 
+def get_local_repo_dir(repo):
+    if repo in FOLDER_MAP:
+        return MUSIC_DIR / FOLDER_MAP[repo]
+    if (MUSIC_DIR / repo).exists():
+        return MUSIC_DIR / repo
+    rep_space = repo.replace('-', ' ')
+    if (MUSIC_DIR / rep_space).exists():
+        return MUSIC_DIR / rep_space
+    return MUSIC_DIR / repo
+
 def get_exact_album_cover(stream_url):
     """Directly inspect filesystem for the album's cover based on the stream URL."""
     m = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/([^/]+)/master/([^/]+)/', stream_url)
-    if not m:
-        return ''
-    repo = m.group(1)
-    album_folder = urllib.parse.unquote(m.group(2))
-    local_repo_folder = FOLDER_MAP.get(repo, repo)
-    target_dir = MUSIC_DIR / local_repo_folder / album_folder
+    repo = None
+    target_dir = None
+    album_folder = None
     
-    if not target_dir.exists():
+    if m:
+        repo = m.group(1)
+        album_folder = urllib.parse.unquote(m.group(2))
+        repo_dir = get_local_repo_dir(repo)
+        target_dir = repo_dir / album_folder
+    else:
+        m_root = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/([^/]+)/master/([^/]+)$', stream_url)
+        if m_root:
+            repo = m_root.group(1)
+            repo_dir = get_local_repo_dir(repo)
+            target_dir = repo_dir
+            album_folder = ""
+        else:
+            return ''
+
+    if not target_dir or not target_dir.exists():
         return ''
         
     for cov_name in ['Album Cover', 'Album Covers']:
         cov_dir = target_dir / cov_name
         if cov_dir.exists():
-            files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png']]
+            files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
             if files:
-                front = next((f for f in files if 'front' in f.name.lower()), files[0])
-                enc_alb = urllib.parse.quote(album_folder)
+                front = next((f for f in files if 'front' in f.name.lower() or 'artwork' in f.name.lower()), files[0])
                 enc_cov = urllib.parse.quote(cov_name)
                 enc_file = urllib.parse.quote(front.name)
-                return f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
-                
-    # Fallback to repo banner if no album cover directory exists (e.g. remastered collections / singles)
-    assets_dir = MUSIC_DIR / local_repo_folder / 'assets'
-    if assets_dir.exists():
-        for banner in ['band_cover.png', 'band_cover.jpg']:
-            if (assets_dir / banner).exists():
-                return f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/assets/{banner}'
+                if album_folder:
+                    enc_alb = urllib.parse.quote(album_folder)
+                    return f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
+                else:
+                    return f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_cov}/{enc_file}'
                 
     return ''
 
 def get_all_album_covers(stream_url):
     """Directly inspect filesystem for all album covers and booklet scans based on stream URL."""
     m = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/([^/]+)/master/([^/]+)/', stream_url)
-    if not m:
-        return []
-    repo = m.group(1)
-    album_folder = urllib.parse.unquote(m.group(2))
-    local_repo_folder = FOLDER_MAP.get(repo, repo)
-    target_dir = MUSIC_DIR / local_repo_folder / album_folder
+    repo = None
+    target_dir = None
+    album_folder = None
     
-    if not target_dir.exists():
+    if m:
+        repo = m.group(1)
+        album_folder = urllib.parse.unquote(m.group(2))
+        repo_dir = get_local_repo_dir(repo)
+        target_dir = repo_dir / album_folder
+    else:
+        m_root = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/([^/]+)/master/([^/]+)$', stream_url)
+        if m_root:
+            repo = m_root.group(1)
+            repo_dir = get_local_repo_dir(repo)
+            target_dir = repo_dir
+            album_folder = ""
+        else:
+            return []
+
+    if not target_dir or not target_dir.exists():
         return []
         
     covers = []
@@ -253,10 +283,13 @@ def get_all_album_covers(stream_url):
 
             files.sort(key=sort_key)
             for f in files:
-                enc_alb = urllib.parse.quote(album_folder)
                 enc_cov = urllib.parse.quote(cov_name)
                 enc_file = urllib.parse.quote(f.name)
-                raw_url = f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
+                if album_folder:
+                    enc_alb = urllib.parse.quote(album_folder)
+                    raw_url = f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
+                else:
+                    raw_url = f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_cov}/{enc_file}'
                 
                 clean_name = f.stem
                 m_tag = re.search(r'\[([^\]]+)\]', clean_name)
