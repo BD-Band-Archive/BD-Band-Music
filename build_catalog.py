@@ -199,7 +199,7 @@ def get_local_repo_dir(repo):
 
 def get_exact_album_cover(stream_url):
     """Directly inspect filesystem for the album's cover based on the stream URL."""
-    m = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/([^/]+)/master/([^/]+)/', stream_url)
+    m = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/([^/]+)/master/([^/]+)/', stream_url)
     repo = None
     target_dir = None
     album_folder = None
@@ -210,7 +210,7 @@ def get_exact_album_cover(stream_url):
         repo_dir = get_local_repo_dir(repo)
         target_dir = repo_dir / album_folder
     else:
-        m_root = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/([^/]+)/master/([^/]+)$', stream_url)
+        m_root = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/([^/]+)/master/([^/]+)$', stream_url)
         if m_root:
             repo = m_root.group(1)
             repo_dir = get_local_repo_dir(repo)
@@ -232,15 +232,15 @@ def get_exact_album_cover(stream_url):
                 enc_file = urllib.parse.quote(front.name)
                 if album_folder:
                     enc_alb = urllib.parse.quote(album_folder)
-                    return f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
+                    return f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
                 else:
-                    return f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_cov}/{enc_file}'
+                    return f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_cov}/{enc_file}'
                 
     return ''
 
 def get_all_album_covers(stream_url):
     """Directly inspect filesystem for all album covers and booklet scans based on stream URL."""
-    m = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/([^/]+)/master/([^/]+)/', stream_url)
+    m = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/([^/]+)/master/([^/]+)/', stream_url)
     repo = None
     target_dir = None
     album_folder = None
@@ -251,7 +251,7 @@ def get_all_album_covers(stream_url):
         repo_dir = get_local_repo_dir(repo)
         target_dir = repo_dir / album_folder
     else:
-        m_root = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/([^/]+)/master/([^/]+)$', stream_url)
+        m_root = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/([^/]+)/master/([^/]+)$', stream_url)
         if m_root:
             repo = m_root.group(1)
             repo_dir = get_local_repo_dir(repo)
@@ -318,9 +318,9 @@ def get_all_album_covers(stream_url):
                 enc_file = urllib.parse.quote(f.name)
                 if album_folder:
                     enc_alb = urllib.parse.quote(album_folder)
-                    raw_url = f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
+                    raw_url = f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
                 else:
-                    raw_url = f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_cov}/{enc_file}'
+                    raw_url = f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_cov}/{enc_file}'
                 
                 clean_stem = f.stem.replace('+-5B', ' [').replace('-5B', ' [').replace('+-5D', ']').replace('-5D', ']').replace('+', ' ')
                 m_tag = re.search(r'\[([^\]]+)\](?:\s*\((.*?)\))?', clean_stem)
@@ -557,7 +557,7 @@ def build_catalog():
                     if not img_src.startswith("http"):
                         unquoted = urllib.parse.unquote(img_src.replace("\\", "/"))
                         encoded_path = "/".join(urllib.parse.quote(seg) for seg in unquoted.split("/"))
-                        img_src = f"https://raw.githubusercontent.com/GhostDog45/{repo_name}/master/{encoded_path}"
+                        img_src = f"https://raw.githubusercontent.com/BD-Band-Archive/{repo_name}/master/{encoded_path}"
                     else:
                         unquoted = urllib.parse.unquote(img_src)
                         parts = unquoted.split("://", 1)
@@ -621,7 +621,7 @@ def build_catalog():
                 track_year = current_year
                 
                 # If current_album is Unknown Album or generic, extract album subfolder from stream URL
-                m_subfolder = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/[^/]+/master/([^/]+)/', clean_url)
+                m_subfolder = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/[^/]+/master/([^/]+)/', clean_url)
                 if m_subfolder:
                     folder_in_url = urllib.parse.unquote(m_subfolder.group(1)).strip()
                     if folder_in_url and not folder_in_url.lower().endswith(('.flac', '.wav', '.mp3', '.m4a')):
@@ -767,8 +767,8 @@ def generate_social_share_pages(catalog, album_covers_map, artist_images):
     crawlers parse the exact album cover or artist photo and title directly from the HTML.
     When opened by real users, it instantly redirects to the web player with zero delay.
     """
-    base_site_url = "https://ghostdog45.github.io/BD-Band-Music"
-    default_cover = "https://raw.githubusercontent.com/GhostDog45/BD-Band-Music/master/assets/band_cover.jpg"
+    base_site_url = "https://bd-band-archive.github.io/BD-Band-Music"
+    default_cover = "https://raw.githubusercontent.com/BD-Band-Archive/BD-Band-Music/master/assets/band_cover.jpg"
 
     # 1. Generate Track Share Pages
     track_root = OUTPUT_DIR / "track"
@@ -852,7 +852,7 @@ def generate_social_share_pages(catalog, album_covers_map, artist_images):
         
         rel_img = artist_images.get(art)
         if rel_img:
-            art_img = f"https://raw.githubusercontent.com/GhostDog45/BD-Band-Music/master/{rel_img}"
+            art_img = f"https://raw.githubusercontent.com/BD-Band-Archive/BD-Band-Music/master/{rel_img}"
         else:
             art_img = default_cover
             

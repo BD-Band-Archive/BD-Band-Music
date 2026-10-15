@@ -2529,7 +2529,7 @@
   // --- Helpers: Canonical URLs & Slug Generation for Social Previews ---
   function getBaseSiteUrl() {
     if (window.location.hostname.includes('github.io')) {
-      return 'https://ghostdog45.github.io/BD-Band-Music';
+      return 'https://bd-band-archive.github.io/BD-Band-Music';
     }
     const path = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
     return `${window.location.origin}${path}`;
