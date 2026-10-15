@@ -215,9 +215,62 @@ def get_exact_album_cover(stream_url):
                 
     return ''
 
+def get_all_album_covers(stream_url):
+    """Directly inspect filesystem for all album covers and booklet scans based on stream URL."""
+    m = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/([^/]+)/master/([^/]+)/', stream_url)
+    if not m:
+        return []
+    repo = m.group(1)
+    album_folder = urllib.parse.unquote(m.group(2))
+    local_repo_folder = FOLDER_MAP.get(repo, repo)
+    target_dir = MUSIC_DIR / local_repo_folder / album_folder
+    
+    if not target_dir.exists():
+        return []
+        
+    covers = []
+    for cov_name in ['Album Cover', 'Album Covers']:
+        cov_dir = target_dir / cov_name
+        if cov_dir.exists():
+            files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
+            def sort_key(f):
+                n = f.name.lower()
+                if 'front' in n or 'artwork' in n:
+                    return (1, n)
+                elif 'booklet' in n or 'lyrics' in n:
+                    return (2, n)
+                elif 'inlay' in n or 'inset' in n or 'inlet' in n:
+                    return (3, n)
+                elif 'cd' in n or 'disc' in n:
+                    return (4, n)
+                elif 'back' in n:
+                    return (5, n)
+                elif 'poster' in n:
+                    return (6, n)
+                return (7, n)
+
+            files.sort(key=sort_key)
+            for f in files:
+                enc_alb = urllib.parse.quote(album_folder)
+                enc_cov = urllib.parse.quote(cov_name)
+                enc_file = urllib.parse.quote(f.name)
+                raw_url = f'https://raw.githubusercontent.com/GhostDog45/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
+                
+                clean_name = f.stem
+                m_tag = re.search(r'\[([^\]]+)\]', clean_name)
+                tag_name = m_tag.group(1).strip() if m_tag else clean_name.strip()
+                
+                covers.append({
+                    "title": tag_name,
+                    "filename": f.name,
+                    "url": raw_url
+                })
+    return covers
+
 def build_catalog():
     catalog = []
     seen_urls = set()
+    album_covers_map = {}
     repos = discover_repos()
     print(f"[*] Discovered {len(repos)} repositories to process.")
     
@@ -347,6 +400,12 @@ def build_catalog():
                 # 3. Fallback
                 track_cover = get_exact_album_cover(url) or current_cover
                 
+                # Dynamically collect all physical album covers/booklets for this album
+                if current_album not in album_covers_map:
+                    covs = get_all_album_covers(clean_url)
+                    if covs:
+                        album_covers_map[current_album] = covs
+                
                 track_id = f"track-{len(catalog)+1}"
                 
                 catalog.append({
@@ -371,6 +430,13 @@ def build_catalog():
         json.dump(catalog, f, ensure_ascii=False, indent=2)
         
     print(f"\n Successfully wrote {len(catalog)} tracks to {out_json}!")
+    
+    # Export dynamic album covers and booklets map for album page gallery
+    out_covers = OUTPUT_DIR / "assets" / "album_covers.json"
+    out_covers.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_covers, "w", encoding="utf-8") as f:
+        json.dump(album_covers_map, f, ensure_ascii=False, indent=2)
+    print(f" Successfully exported {len(album_covers_map)} album galleries to {out_covers}!")
     
     # Automatically map artist images from assets/artists/
     build_artists_map(catalog)

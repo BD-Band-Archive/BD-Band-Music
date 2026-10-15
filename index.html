@@ -273,6 +273,27 @@
           </button>
           <span class="see-more-hint" id="seeMoreHint">Or use the search bar above to instantly find any song in the archive</span>
         </div>
+
+        <!-- Album Artwork & Archive Gallery Section (Dynamic: Shown under tracklist when entering an album) -->
+        <section class="album-gallery-section" id="albumGallerySection" style="display: none;">
+          <div class="album-gallery-header">
+            <div class="gallery-title-wrap">
+              <div class="gallery-badge">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                <span>Physical Archive &amp; Artwork</span>
+              </div>
+              <h3 class="gallery-heading" id="galleryAlbumTitle">Album Artwork &amp; Physical Scans</h3>
+              <p class="gallery-subtext" id="gallerySubtext">Original high-resolution CD scans, booklets, inlays, and promotional artwork.</p>
+            </div>
+            <div class="gallery-meta">
+              <span class="gallery-count-badge" id="galleryCountBadge">0 Scans</span>
+            </div>
+          </div>
+
+          <div class="album-gallery-grid" id="albumGalleryGrid">
+            <!-- Dynamically populated album covers -->
+          </div>
+        </section>
       </section>
 
       <!-- VIEW 2: Albums Grid View -->
@@ -510,6 +531,33 @@
         </div>
         <div class="modal-footer">
           <button id="okCreditsBtn" class="primary-btn">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fullscreen Image Lightbox Modal for Physical Album Artwork -->
+    <div id="imageLightboxModal" class="lightbox-modal" style="display: none;">
+      <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+      <div class="lightbox-container">
+        <div class="lightbox-header">
+          <div class="lightbox-info">
+            <span class="lightbox-title" id="lightboxTitle">Front Cover</span>
+            <span class="lightbox-counter" id="lightboxCounter">1 / 1</span>
+          </div>
+          <div class="lightbox-actions">
+            <a id="lightboxDownloadBtn" href="#" class="lightbox-action-btn" target="_blank" download title="Open / Download High-Res Image">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              <span>Open HD</span>
+            </a>
+            <button id="closeLightboxBtn" class="lightbox-close-btn" title="Close (Esc)">✕</button>
+          </div>
+        </div>
+        <div class="lightbox-body">
+          <button id="lightboxPrevBtn" class="lightbox-nav-btn prev" title="Previous Image (Left Arrow)">❮</button>
+          <div class="lightbox-img-wrap">
+            <img id="lightboxImg" src="" alt="Album Artwork Preview">
+          </div>
+          <button id="lightboxNextBtn" class="lightbox-nav-btn next" title="Next Image (Right Arrow)">❯</button>
         </div>
       </div>
     </div>

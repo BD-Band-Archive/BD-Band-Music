@@ -23,6 +23,9 @@
   let sortBy = 'default';
   let isSeeking = false;
   let isFullTracksListExpanded = false;
+  let albumCoversMap = {};
+  let currentLightboxImages = [];
+  let currentLightboxIndex = 0;
 
   // Curated 18 Essential / Iconic Tracks for Instant Homepage Load
   const CURATED_HOMEPAGE_TRACK_IDS = [
@@ -133,6 +136,24 @@
   const enterArchiveBtn = document.getElementById('enterArchiveBtn');
   const closeLandingBtn = document.getElementById('closeLandingBtn');
   const storyBtn = document.getElementById('storyBtn');
+  
+  // Album Artwork Gallery Elements
+  const albumGallerySection = document.getElementById('albumGallerySection');
+  const galleryAlbumTitle = document.getElementById('galleryAlbumTitle');
+  const gallerySubtext = document.getElementById('gallerySubtext');
+  const galleryCountBadge = document.getElementById('galleryCountBadge');
+  const albumGalleryGrid = document.getElementById('albumGalleryGrid');
+
+  // Fullscreen Image Lightbox Modal Elements
+  const imageLightboxModal = document.getElementById('imageLightboxModal');
+  const lightboxBackdrop = document.getElementById('lightboxBackdrop');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const lightboxDownloadBtn = document.getElementById('lightboxDownloadBtn');
+  const closeLightboxBtn = document.getElementById('closeLightboxBtn');
+  const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
+  const lightboxNextBtn = document.getElementById('lightboxNextBtn');
+  const lightboxImg = document.getElementById('lightboxImg');
 
   // --- Phonetic Normalizer for Bengali & English ---
   function normalizeQuery(str) {
@@ -190,6 +211,16 @@
         }
       } catch (err) {
         console.warn('Notice: dynamic artists_map.json skipped, using built-in map.', err);
+      }
+
+      // Dynamically load album artwork & physical archive scans
+      try {
+        const covResp = await fetch('assets/album_covers.json?v=2.8');
+        if (covResp.ok) {
+          albumCoversMap = await covResp.json();
+        }
+      } catch (err) {
+        console.warn('Notice: dynamic album_covers.json skipped.', err);
       }
 
       isFullTracksListExpanded = false;
@@ -436,6 +467,7 @@
       tracksView.style.display = 'none';
       albumsView.style.display = 'none';
       artistsView.style.display = 'none';
+      if (albumGallerySection) albumGallerySection.style.display = 'none';
       tracksView.classList.remove('active');
       albumsView.classList.remove('active');
       artistsView.classList.remove('active');
@@ -494,7 +526,11 @@
           }
         }
       }
+
+      // Dynamically render album covers gallery if viewing an album
+      renderAlbumGallery(activeAlbumFilter);
     } else if (activeView === 'albums') {
+      if (albumGallerySection) albumGallerySection.style.display = 'none';
       renderAlbumsGrid();
       tracksView.style.display = 'none';
       albumsView.style.display = 'block';
@@ -504,6 +540,7 @@
       artistsView.classList.remove('active');
       albumsGrid.style.display = 'grid';
     } else if (activeView === 'artists') {
+      if (albumGallerySection) albumGallerySection.style.display = 'none';
       renderArtistsGrid();
       tracksView.style.display = 'none';
       albumsView.style.display = 'none';
@@ -709,6 +746,124 @@
       });
     });
   }
+
+  // --- Dynamic Album Artwork & Physical Archive Gallery ---
+  function renderAlbumGallery(albumName) {
+    if (!albumGallerySection) return;
+
+    // Only display when inside an individual album and in tracks view
+    if (activeView !== 'tracks' || activeAlbumFilter === 'all' || !albumName) {
+      albumGallerySection.style.display = 'none';
+      return;
+    }
+
+    const covers = albumCoversMap[albumName] || [];
+    if (!covers || covers.length === 0) {
+      albumGallerySection.style.display = 'none';
+      return;
+    }
+
+    albumGallerySection.style.display = 'block';
+    if (galleryAlbumTitle) {
+      galleryAlbumTitle.textContent = `${albumName} — Physical Artwork & Archive`;
+    }
+    if (gallerySubtext) {
+      gallerySubtext.textContent = `High-resolution scans of original physical release: booklets, inlays, and CD artwork.`;
+    }
+    if (galleryCountBadge) {
+      galleryCountBadge.textContent = `${covers.length} ${covers.length === 1 ? 'Scan' : 'Scans / Art'}`;
+    }
+
+    let cardsHtml = '';
+    covers.forEach((item, idx) => {
+      cardsHtml += `
+        <div class="album-gallery-card" data-index="${idx}" title="Click to view ${escapeHtml(item.title)} in HD">
+          <div class="gallery-card-thumb-wrap">
+            <img class="gallery-card-thumb" src="${escapeHtml(item.url)}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='assets/band_cover.jpg'">
+            <div class="gallery-card-overlay">
+              <div class="gallery-zoom-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-card-info">
+            <span class="gallery-card-tag">${escapeHtml(item.title)}</span>
+          </div>
+        </div>
+      `;
+    });
+
+    if (albumGalleryGrid) {
+      albumGalleryGrid.innerHTML = cardsHtml;
+
+      albumGalleryGrid.querySelectorAll('.album-gallery-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const idx = parseInt(card.dataset.index, 10);
+          openLightbox(idx, covers);
+        });
+      });
+    }
+  }
+
+  // --- Fullscreen Artwork Lightbox Modal ---
+  function openLightbox(index, images) {
+    if (!images || images.length === 0 || !imageLightboxModal) return;
+    currentLightboxImages = images;
+    currentLightboxIndex = index;
+    updateLightboxView();
+    imageLightboxModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!imageLightboxModal) return;
+    imageLightboxModal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function updateLightboxView() {
+    if (!currentLightboxImages || currentLightboxImages.length === 0) return;
+    const current = currentLightboxImages[currentLightboxIndex];
+    if (lightboxImg) lightboxImg.src = current.url;
+    if (lightboxTitle) lightboxTitle.textContent = current.title;
+    if (lightboxCounter) lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentLightboxImages.length}`;
+    if (lightboxDownloadBtn) {
+      lightboxDownloadBtn.href = current.url;
+      lightboxDownloadBtn.setAttribute('download', current.filename || `${current.title}.jpg`);
+    }
+
+    if (lightboxPrevBtn) {
+      lightboxPrevBtn.style.display = currentLightboxImages.length > 1 ? 'flex' : 'none';
+    }
+    if (lightboxNextBtn) {
+      lightboxNextBtn.style.display = currentLightboxImages.length > 1 ? 'flex' : 'none';
+    }
+  }
+
+  function lightboxPrev() {
+    if (currentLightboxImages.length <= 1) return;
+    currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+    updateLightboxView();
+  }
+
+  function lightboxNext() {
+    if (currentLightboxImages.length <= 1) return;
+    currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+    updateLightboxView();
+  }
+
+  if (closeLightboxBtn) closeLightboxBtn.addEventListener('click', closeLightbox);
+  if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+  if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', lightboxPrev);
+  if (lightboxNextBtn) lightboxNextBtn.addEventListener('click', lightboxNext);
+
+  document.addEventListener('keydown', (e) => {
+    if (imageLightboxModal && imageLightboxModal.style.display === 'flex') {
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowLeft') lightboxPrev();
+      else if (e.key === 'ArrowRight') lightboxNext();
+    }
+  });
 
   // --- Official Artist Logos & Images (OSINT & Verified Band Archives) ---
   const ARTIST_OFFICIAL_IMAGES = {
