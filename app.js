@@ -230,7 +230,7 @@
   async function loadCatalog() {
     try {
       trackCountLabel.textContent = 'Loading catalogue...';
-      const response = await fetch('catalog.json?v=2.9');
+      const response = await fetch('catalog.json?v=3.1');
       if (!response.ok) throw new Error('Failed to load catalog.json');
       catalog = await response.json();
       
@@ -245,7 +245,7 @@
 
       // Dynamically load any newly mapped artist images from artists_map.json
       try {
-        const artResp = await fetch('assets/artists/artists_map.json?v=2.9');
+        const artResp = await fetch('assets/artists/artists_map.json?v=3.1');
         if (artResp.ok) {
           const dynamicMap = await artResp.json();
           Object.assign(ARTIST_OFFICIAL_IMAGES, dynamicMap);
@@ -256,7 +256,7 @@
 
       // Dynamically load album artwork & physical archive scans
       try {
-        const covResp = await fetch('assets/album_covers.json?v=2.9');
+        const covResp = await fetch('assets/album_covers.json?v=3.1');
         if (covResp.ok) {
           albumCoversMap = await covResp.json();
         }
@@ -633,7 +633,7 @@
           </td>
           <td class="td-title">
             <div class="track-main-cell">
-              <img class="track-thumb" src="${escapeHtml(track.coverUrl)}" alt="Cover" loading="lazy" onerror="this.src='assets/band_cover.jpg'">
+              <img class="track-thumb" src="${escapeHtml(track.coverUrl)}" alt="Cover" loading="lazy" onerror="this.src='assets/default_album_cover.svg'">
               <div class="track-details">
                 <span class="track-title-cell">${escapeHtml(track.title)} ${featTag}</span>
               </div>
@@ -715,11 +715,14 @@
     const albumsMap = new Map();
     currentFilteredTracks.forEach(t => {
       if (!albumsMap.has(t.album)) {
+        // Resolve authentic front cover: first check albumCoversMap gallery, fallback to track coverUrl or safe SVG
+        const gallery = albumCoversMap[t.album] || albumCoversMap[`${t.artist} - ${t.album}`] || [];
+        const verifiedCover = (gallery.length > 0 && gallery[0].url) ? gallery[0].url : (t.coverUrl || 'assets/default_album_cover.svg');
         albumsMap.set(t.album, {
           album: t.album,
           artist: t.artist,
           year: t.year,
-          coverUrl: t.coverUrl,
+          coverUrl: verifiedCover,
           tracks: []
         });
       }
@@ -744,7 +747,7 @@
       gridHtml += `
         <div class="album-card" data-album="${escapeHtml(albumObj.album)}">
           <div class="album-cover-wrap">
-            <img class="album-cover-img" src="${escapeHtml(albumObj.coverUrl)}" alt="${escapeHtml(albumObj.album)}" loading="lazy" onerror="this.src='assets/band_cover.jpg'">
+            <img class="album-cover-img" src="${escapeHtml(albumObj.coverUrl)}" alt="${escapeHtml(albumObj.album)}" loading="lazy" onerror="this.src='assets/default_album_cover.svg'">
             <button class="album-play-overlay play-album-btn" title="Play Album">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             </button>
@@ -837,7 +840,7 @@
       cardsHtml += `
         <div class="album-gallery-card" data-index="${idx}" title="Click to view ${escapeHtml(item.title)} in HD">
           <div class="gallery-card-thumb-wrap">
-            <img class="gallery-card-thumb" src="${escapeHtml(item.url)}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='assets/band_cover.jpg'">
+            <img class="gallery-card-thumb" src="${escapeHtml(item.url)}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='assets/default_album_cover.svg'">
             <div class="gallery-card-overlay">
               <div class="gallery-zoom-icon">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
@@ -1096,10 +1099,10 @@
     playerTitle.textContent = track.title;
     playerTitle.title = track.title;
     playerArtist.textContent = track.artist;
-    playerArtist.title = track.artist;
     playerAlbum.textContent = track.album;
     playerAlbum.title = track.album;
-    playerCoverImg.src = track.coverUrl;
+    playerCoverImg.src = track.coverUrl || 'assets/default_album_cover.svg';
+    playerCoverImg.onerror = () => { playerCoverImg.src = 'assets/default_album_cover.svg'; };
     playerDownloadBtn.href = track.downloadUrl || `${track.streamUrl}?download=true`;
     playerDownloadBtn.setAttribute('download', `${track.artist} - ${track.title}.flac`);
 
@@ -1398,7 +1401,7 @@
       if (!track) return;
       itemsHtml += `
         <div class="queue-item" data-index="${index}">
-          <img class="queue-thumb" src="${escapeHtml(track.coverUrl)}" alt="Cover">
+          <img class="queue-thumb" src="${escapeHtml(track.coverUrl)}" alt="Cover" onerror="this.src='assets/default_album_cover.svg'">
           <div class="queue-info">
             <div class="queue-title">${escapeHtml(track.title)}</div>
             <div class="queue-artist">${escapeHtml(track.artist)}</div>

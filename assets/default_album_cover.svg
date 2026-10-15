@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141824"/>
+      <stop offset="100%" stop-color="#0a0d14"/>
+    </linearGradient>
+    <linearGradient id="discGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a2e3d"/>
+      <stop offset="50%" stop-color="#181b24"/>
+      <stop offset="100%" stop-color="#10131a"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <!-- Card Background -->
+  <rect width="500" height="500" rx="16" fill="url(#bgGrad)"/>
+  <rect width="496" height="496" x="2" y="2" rx="14" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+  
+  <!-- Vinyl Disc Background -->
+  <circle cx="250" cy="250" r="175" fill="url(#discGrad)"/>
+  <circle cx="250" cy="250" r="175" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+  
+  <!-- Vinyl Grooves -->
+  <circle cx="250" cy="250" r="155" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
+  <circle cx="250" cy="250" r="135" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1.5"/>
+  <circle cx="250" cy="250" r="115" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
+  <circle cx="250" cy="250" r="95" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1.5"/>
+  
+  <!-- Center Label -->
+  <circle cx="250" cy="250" r="65" fill="url(#accentGrad)"/>
+  <circle cx="250" cy="250" r="65" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  
+  <!-- Center Spindle Hole -->
+  <circle cx="250" cy="250" r="14" fill="#0a0d14"/>
+  <circle cx="250" cy="250" r="14" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+  
+  <!-- Music Icon -->
+  <path d="M260 215v35a18 18 0 1 1-14-10v-25h26v-10h-26a10 10 0 0 0-10 10v35a22 22 0 1 0 24 20v-55z" fill="#ffffff" opacity="0.9"/>
+</svg>
