@@ -3166,23 +3166,6 @@
   },
   {
     "id": "track-187",
-    "title": "Bishonno Andher",
-    "artist": "Stentorian",
-    "artists": [
-      "Stentorian"
-    ],
-    "featured": "Bassbaba Sumon",
-    "album": "Agontuk 3 (আগন্তুক ৩)",
-    "year": 2005,
-    "trackNo": 2,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Agontuk%203%20%282005%29/15%20Bishonno%20Andher.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Agontuk%203%20%282005%29/15%20Bishonno%20Andher.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-188",
     "title": "Hollow (Attohonon-2)",
     "artist": "Aurthohin",
     "artists": [
@@ -3199,7 +3182,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-189",
+    "id": "track-188",
     "title": "Loke Bole Bolere",
     "artist": "Aurthohin",
     "artists": [
@@ -3216,7 +3199,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-190",
+    "id": "track-189",
     "title": "Ekdin Tor Hoibore Shoron",
     "artist": "Aurthohin",
     "artists": [
@@ -3233,7 +3216,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-191",
+    "id": "track-190",
     "title": "Matiro Pinjira",
     "artist": "Aurthohin",
     "artists": [
@@ -3250,1112 +3233,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-192",
-    "title": "Aurthohin",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/09%20-%20Aurthohin%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/09%20-%20Aurthohin%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-193",
-    "title": "Ekti Nokhkhotrer Gaan",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 2,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/07%20-%20Ekti%20Nokhkhotrer%20Gaan%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/07%20-%20Ekti%20Nokhkhotrer%20Gaan%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-194",
-    "title": "Hyenar Ottohashi",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 3,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/11%20-%20Hyena%27r%20Ottohashi%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/11%20-%20Hyena%27r%20Ottohashi%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-195",
-    "title": "Jokhon Charidike",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 4,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/10%20-%20Jokhon%20Charidikey%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/10%20-%20Jokhon%20Charidikey%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-196",
-    "title": "Kono Ek Nijhum Raate",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 5,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/03%20-%20Kono%20Ek%20Nijhum%20Raate%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/03%20-%20Kono%20Ek%20Nijhum%20Raate%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-197",
-    "title": "Kono Ek Nijhum Raate 2",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 6,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/15%20-%20Kono%20Ek%20Nijhum%20Raate-2%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/15%20-%20Kono%20Ek%20Nijhum%20Raate-2%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-198",
-    "title": "Majh Raate",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 7,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/14%20-%20Majh%20Raate%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/14%20-%20Majh%20Raate%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-199",
-    "title": "Mission Accomplished",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 8,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/13%20-%20Mission%20Accomplished%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/13%20-%20Mission%20Accomplished%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-200",
-    "title": "Mone Koro",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 9,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/02%20-%20Mone%20Koro%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/02%20-%20Mone%20Koro%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-201",
-    "title": "Shadhinota",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 10,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/04%20-%20Shadhinota%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/04%20-%20Shadhinota%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-202",
-    "title": "Shey",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 11,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/05%20-%20She%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/05%20-%20She%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-203",
-    "title": "Shopner Daar",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 12,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/12%20-%20Shopner%20Daar%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/12%20-%20Shopner%20Daar%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-204",
-    "title": "Tahader Kotha 71",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 13,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/08%20-%20Tahader%20Kotha%20%2771%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/08%20-%20Tahader%20Kotha%20%2771%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-205",
-    "title": "Tarar Pane",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 14,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/06%20-%20Tarar%20Paane%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/06%20-%20Tarar%20Paane%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-206",
-    "title": "Tomar Jonno Noy",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
-    "year": 1997,
-    "trackNo": 15,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/01%20-%20Tomar%20Jonno%20Noy%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/01%20-%20Tomar%20Jonno%20Noy%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-207",
-    "title": "Osthirota",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
-    "year": 2002,
-    "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/01%20-%20Austhirota%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/01%20-%20Austhirota%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-208",
-    "title": "Adhare",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
-    "year": 2002,
-    "trackNo": 2,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/02%20-%20Aadhare%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/02%20-%20Aadhare%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-209",
-    "title": "Rupoker Gaan",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
-    "year": 2002,
-    "trackNo": 3,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/04%20-%20Rupoker%20Gaan%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/04%20-%20Rupoker%20Gaan%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-210",
-    "title": "Onneshon",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
-    "year": 2002,
-    "trackNo": 4,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/05%20-%20Onneshon%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/05%20-%20Onneshon%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-211",
-    "title": "Shopnogulo Tomar Moto",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
-    "year": 2002,
-    "trackNo": 5,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/06%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/06%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-212",
-    "title": "Hisebe Bhul Chhilo",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
-    "year": 2002,
-    "trackNo": 6,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/07%20-%20Hishebe%20Bhool%20Chilo%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/07%20-%20Hishebe%20Bhool%20Chilo%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-213",
-    "title": "Kannar Rong",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
-    "year": 2002,
-    "trackNo": 7,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/08%20-%20Kannar%20Rong%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/08%20-%20Kannar%20Rong%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-214",
-    "title": "Alor Michile",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
-    "year": 2002,
-    "trackNo": 8,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/09%20-%20Alor%20Michile%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/09%20-%20Alor%20Michile%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-215",
-    "title": "Ei Poth",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
-    "year": 2002,
-    "trackNo": 9,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/10%20-%20Ei%20Path%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/10%20-%20Ei%20Path%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-216",
-    "title": "Hotash Hridoy",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
-    "year": 2002,
-    "trackNo": 10,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/11%20-%20Hotash%20Hridoy%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/11%20-%20Hotash%20Hridoy%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-217",
-    "title": "Amar Bagan",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Megher Deshe (মেঘের দেশে)",
-    "year": 2005,
-    "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/06.%20Amar%20Bagan.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/06.%20Amar%20Bagan.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-218",
-    "title": "Bohu Dure",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Megher Deshe (মেঘের দেশে)",
-    "year": 2005,
-    "trackNo": 2,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/08.%20Bohu%20Dure.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/08.%20Bohu%20Dure.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-219",
-    "title": "Ei Guitar",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Megher Deshe (মেঘের দেশে)",
-    "year": 2005,
-    "trackNo": 3,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/07.%20Ei%20Guitar.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/07.%20Ei%20Guitar.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-220",
-    "title": "Hoytoba Bhalobasha",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Megher Deshe (মেঘের দেশে)",
-    "year": 2005,
-    "trackNo": 4,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/09.%20Hoytoba%20Bhalobasha.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/09.%20Hoytoba%20Bhalobasha.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-221",
-    "title": "Kabita Prarthona O Protigga",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Megher Deshe (মেঘের দেশে)",
-    "year": 2005,
-    "trackNo": 5,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/05.%20Kabita%20Prarthona%20O%20Protigga.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/05.%20Kabita%20Prarthona%20O%20Protigga.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-222",
-    "title": "Metho Poth",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Megher Deshe (মেঘের দেশে)",
-    "year": 2005,
-    "trackNo": 6,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/03.%20Metho%20Poth.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/03.%20Metho%20Poth.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-223",
-    "title": "Nil Akasher Pothe",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Megher Deshe (মেঘের দেশে)",
-    "year": 2005,
-    "trackNo": 7,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/02.%20Nil%20Akasher%20Pothe.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/02.%20Nil%20Akasher%20Pothe.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-224",
-    "title": "Shopner Deshe",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Megher Deshe (মেঘের দেশে)",
-    "year": 2005,
-    "trackNo": 8,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/04.%20Shopner%20Deshe.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/04.%20Shopner%20Deshe.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-225",
-    "title": "Tomar Jonno",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Megher Deshe (মেঘের দেশে)",
-    "year": 2005,
-    "trackNo": 9,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/01.%20Tomar%20Jonno.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/01.%20Tomar%20Jonno.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-226",
-    "title": "Tomar Jonno (J Mix)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Megher Deshe (মেঘের দেশে)",
-    "year": 2005,
-    "trackNo": 10,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/10.%20Tomar%20Jonno%20%28J%20Mix%29.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/10.%20Tomar%20Jonno%20%28J%20Mix%29.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-227",
-    "title": "Gaanwala",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/01%20-%20Gaanwala%20-%20Boka%20Manushta%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/01%20-%20Gaanwala%20-%20Boka%20Manushta%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-228",
-    "title": "Ghum Ashena (feat. Anila)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila",
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 2,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/02%20-%20Ghum%20Ashena%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Anila.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/02%20-%20Ghum%20Ashena%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Anila.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-229",
-    "title": "Obhiman",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 3,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/03%20-%20Obhiman%20-%20Boka%20Manushta%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/03%20-%20Obhiman%20-%20Boka%20Manushta%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-230",
-    "title": "Porajoy (feat. Elita)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Elita",
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 4,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/04%20-%20Porajoy%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Elita.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/04%20-%20Porajoy%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Elita.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-231",
-    "title": "Jhor (feat. Fuad Al-Muqtadir & Ahnaf)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Fuad Al-Muqtadir & Ahnaf",
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 5,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/05_Jhor_Boka_Manushta_Sumon_feat_Fuad_Al_Muqtadir_%26_Ahnaf_Son.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/05_Jhor_Boka_Manushta_Sumon_feat_Fuad_Al_Muqtadir_%26_Ahnaf_Son.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-232",
-    "title": "Ke (feat. Shompa Reza)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Shompa Reza",
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 6,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/06%20-%20Ke%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Shompa%20Reza.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/06%20-%20Ke%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Shompa%20Reza.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-233",
-    "title": "Amar Golpo",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 7,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/07%20-%20Amar%20Golpo%20-%20Boka%20Manushta%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/07%20-%20Amar%20Golpo%20-%20Boka%20Manushta%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-234",
-    "title": "Ghumparanir Gaan (feat. Aurora)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Aurora",
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 8,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/08_Ghumparanir_Gaan_Boka_Manushta_Sumon_feat_Aurora_Daughter.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/08_Ghumparanir_Gaan_Boka_Manushta_Sumon_feat_Aurora_Daughter.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-235",
-    "title": "Protigga (feat. Tahsan)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Tahsan",
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 9,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/09%20-%20Protigga%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Tahsan.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/09%20-%20Protigga%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Tahsan.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-236",
-    "title": "Boka Manushta O Ek Surer Gaan",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 10,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/11%20-%20Boka%20Manushta%20O%20Ek%20Surer%20Gaan%20-%20Boka%20Manushta%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/11%20-%20Boka%20Manushta%20O%20Ek%20Surer%20Gaan%20-%20Boka%20Manushta%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-237",
-    "title": "Brishti (feat. Simin)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Simin",
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 11,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/12%20-%20Brishti%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Simin.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/12%20-%20Brishti%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Simin.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-238",
-    "title": "Ditiyo Jibon (feat. Topu)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Topu",
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 12,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/13%20-%20Ditiyo%20Jibon%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Topu.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/13%20-%20Ditiyo%20Jibon%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Topu.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-239",
-    "title": "Tobuo (feat. Nabila)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Nabila",
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 13,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/14%20-%20Tobuo%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Nabila.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/14%20-%20Tobuo%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Nabila.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-240",
-    "title": "Fulgulo Shob Gelo Kothay (feat. Shakib, Lincoln, Jon, Imtiaz & Tanvyr)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Shakib, Lincoln, Jon, Imtiaz & Tanvyr",
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 14,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/15_Fulgulo_Shob_Gelo_Kothay_Boka_Manushta_Sumon_feat_Shakib%2C_Lincoln.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/15_Fulgulo_Shob_Gelo_Kothay_Boka_Manushta_Sumon_feat_Shakib%2C_Lincoln.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-241",
-    "title": "Neer",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 15,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/16%20-%20Neer%20-%20Boka%20Manushta%20-%20Sumon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/16%20-%20Neer%20-%20Boka%20Manushta%20-%20Sumon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-242",
-    "title": "Shesh (feat. Buno & Punam)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Buno & Punam",
-    "album": "Boka Manushta (বোকা মানুষটা)",
-    "year": 2007,
-    "trackNo": 16,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/17%20-%20Shesh%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Buno%20%26%20Punam.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/17%20-%20Shesh%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Buno%20%26%20Punam.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-243",
-    "title": "Gaibona",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila Naz Chowdhury",
-    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
-    "year": 2007,
-    "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/01.%20Gaibona.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/01.%20Gaibona.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-244",
-    "title": "Ekhon Ami",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila Naz Chowdhury",
-    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
-    "year": 2007,
-    "trackNo": 2,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/02.%20Ekhon%20Ami.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/02.%20Ekhon%20Ami.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-245",
-    "title": "Shopnogulo Tomar Moto",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila Naz Chowdhury",
-    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
-    "year": 2007,
-    "trackNo": 3,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/03.%20Shopnogulo%20Tomar%20Moto.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/03.%20Shopnogulo%20Tomar%20Moto.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-246",
-    "title": "Shobar Jonne Tumi",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila Naz Chowdhury",
-    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
-    "year": 2007,
-    "trackNo": 4,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/04.%20Shobar%20Jonne%20Tumi.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/04.%20Shobar%20Jonne%20Tumi.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-247",
-    "title": "Tirjok",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila Naz Chowdhury",
-    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
-    "year": 2007,
-    "trackNo": 5,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/05.%20Tirjok.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/05.%20Tirjok.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-248",
-    "title": "Tomar Jonno",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila Naz Chowdhury",
-    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
-    "year": 2007,
-    "trackNo": 6,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/06.%20Tomar%20Jonno.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/06.%20Tomar%20Jonno.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-249",
-    "title": "Ghum Parie Dio",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila Naz Chowdhury",
-    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
-    "year": 2007,
-    "trackNo": 7,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/07.%20Ghum%20Parie%20Dio.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/07.%20Ghum%20Parie%20Dio.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-250",
-    "title": "Jokhon Charidike",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila Naz Chowdhury",
-    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
-    "year": 2007,
-    "trackNo": 8,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/08.%20Jokhon%20Charidike.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/08.%20Jokhon%20Charidike.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-251",
-    "title": "Onneshon",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila Naz Chowdhury",
-    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
-    "year": 2007,
-    "trackNo": 9,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/09.%20Onneshon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/09.%20Onneshon.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-252",
-    "title": "Noshto Neer",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila Naz Chowdhury",
-    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
-    "year": 2007,
-    "trackNo": 10,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/10.%20Noshto%20Neer.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/10.%20Noshto%20Neer.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-253",
-    "title": "Shobar Jonne Tumi (Fuad Mix)",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": "Anila Naz Chowdhury",
-    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
-    "year": 2007,
-    "trackNo": 11,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/11.%20Shobar%20Jonne%20Tumi%20%28Fuad%20Mix%29.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/11.%20Shobar%20Jonne%20Tumi%20%28Fuad%20Mix%29.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-254",
-    "title": "Boyosh Holo Amar",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Bassbaba Sumon — Standalone Solo Singles",
-    "year": 2007,
-    "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Boyosh%20Holo%20Amar.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Boyosh%20Holo%20Amar.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Singles/Album%20Cover/Bassbaba%20Sumon%20-%20Singles%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-255",
-    "title": "Oniyomer Golpo",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Bassbaba Sumon — Standalone Solo Singles",
-    "year": 2007,
-    "trackNo": 2,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Oniyomer%20Golpo.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Oniyomer%20Golpo.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Singles/Album%20Cover/Bassbaba%20Sumon%20-%20Singles%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-256",
-    "title": "Purano Shei Diner Kotha",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Bassbaba Sumon — Standalone Solo Singles",
-    "year": 2007,
-    "trackNo": 3,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Purano%20Shei%20Diner%20Kotha.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Purano%20Shei%20Diner%20Kotha.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Singles/Album%20Cover/Bassbaba%20Sumon%20-%20Singles%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-257",
+    "id": "track-191",
     "title": "Attohonon",
     "artist": "Aurthohin",
     "artists": [
@@ -4372,41 +3250,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-258",
-    "title": "Anubhobe",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Jewel With The Stars",
-    "year": 2006,
-    "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/05.%20Anubhobe.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/05.%20Anubhobe.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/Album%20Cover/Jewel%20with%20the%20stars%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-259",
-    "title": "Notun Aami",
-    "artist": "Bassbaba Sumon",
-    "artists": [
-      "Bassbaba Sumon"
-    ],
-    "featured": null,
-    "album": "Jewel With The Stars",
-    "year": 2006,
-    "trackNo": 2,
-    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/09.%20Notun%20Aami.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/09.%20Notun%20Aami.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/Album%20Cover/Jewel%20with%20the%20stars%20%5BFront%5D.jpg",
-    "repo": "Aurthohin",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-260",
+    "id": "track-192",
     "title": "Boyosh",
     "artist": "Aurthohin",
     "artists": [
@@ -4423,7 +3267,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-261",
+    "id": "track-193",
     "title": "Otit/Aurthohin",
     "artist": "Aurthohin",
     "artists": [
@@ -4440,7 +3284,1112 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-262",
+    "id": "track-194",
+    "title": "Aurthohin",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 1,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/09%20-%20Aurthohin%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/09%20-%20Aurthohin%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-195",
+    "title": "Ekti Nokhkhotrer Gaan",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 2,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/07%20-%20Ekti%20Nokhkhotrer%20Gaan%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/07%20-%20Ekti%20Nokhkhotrer%20Gaan%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-196",
+    "title": "Hyenar Ottohashi",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 3,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/11%20-%20Hyena%27r%20Ottohashi%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/11%20-%20Hyena%27r%20Ottohashi%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-197",
+    "title": "Jokhon Charidike",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 4,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/10%20-%20Jokhon%20Charidikey%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/10%20-%20Jokhon%20Charidikey%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-198",
+    "title": "Kono Ek Nijhum Raate",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 5,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/03%20-%20Kono%20Ek%20Nijhum%20Raate%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/03%20-%20Kono%20Ek%20Nijhum%20Raate%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-199",
+    "title": "Kono Ek Nijhum Raate 2",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 6,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/15%20-%20Kono%20Ek%20Nijhum%20Raate-2%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/15%20-%20Kono%20Ek%20Nijhum%20Raate-2%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-200",
+    "title": "Majh Raate",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 7,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/14%20-%20Majh%20Raate%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/14%20-%20Majh%20Raate%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-201",
+    "title": "Mission Accomplished",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 8,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/13%20-%20Mission%20Accomplished%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/13%20-%20Mission%20Accomplished%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-202",
+    "title": "Mone Koro",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 9,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/02%20-%20Mone%20Koro%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/02%20-%20Mone%20Koro%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-203",
+    "title": "Shadhinota",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 10,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/04%20-%20Shadhinota%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/04%20-%20Shadhinota%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-204",
+    "title": "Shey",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 11,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/05%20-%20She%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/05%20-%20She%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-205",
+    "title": "Shopner Daar",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 12,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/12%20-%20Shopner%20Daar%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/12%20-%20Shopner%20Daar%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-206",
+    "title": "Tahader Kotha 71",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 13,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/08%20-%20Tahader%20Kotha%20%2771%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/08%20-%20Tahader%20Kotha%20%2771%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-207",
+    "title": "Tarar Pane",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 14,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/06%20-%20Tarar%20Paane%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/06%20-%20Tarar%20Paane%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-208",
+    "title": "Tomar Jonno Noy",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Sumon O Aurthohin (সুমন ও অর্থহীন)",
+    "year": 1997,
+    "trackNo": 15,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/01%20-%20Tomar%20Jonno%20Noy%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/01%20-%20Tomar%20Jonno%20Noy%20-%20Sumon%20O%20Aurthohin%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Sumon%20O%20Aurthohin/Album%20Cover/Sumon%20O%20Aurthohin%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-209",
+    "title": "Osthirota",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
+    "year": 2002,
+    "trackNo": 1,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/01%20-%20Austhirota%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/01%20-%20Austhirota%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-210",
+    "title": "Adhare",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
+    "year": 2002,
+    "trackNo": 2,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/02%20-%20Aadhare%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/02%20-%20Aadhare%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-211",
+    "title": "Rupoker Gaan",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
+    "year": 2002,
+    "trackNo": 3,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/04%20-%20Rupoker%20Gaan%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/04%20-%20Rupoker%20Gaan%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-212",
+    "title": "Onneshon",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
+    "year": 2002,
+    "trackNo": 4,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/05%20-%20Onneshon%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/05%20-%20Onneshon%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-213",
+    "title": "Shopnogulo Tomar Moto",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
+    "year": 2002,
+    "trackNo": 5,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/06%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/06%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-214",
+    "title": "Hisebe Bhul Chhilo",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
+    "year": 2002,
+    "trackNo": 6,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/07%20-%20Hishebe%20Bhool%20Chilo%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/07%20-%20Hishebe%20Bhool%20Chilo%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-215",
+    "title": "Kannar Rong",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
+    "year": 2002,
+    "trackNo": 7,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/08%20-%20Kannar%20Rong%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/08%20-%20Kannar%20Rong%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-216",
+    "title": "Alor Michile",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
+    "year": 2002,
+    "trackNo": 8,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/09%20-%20Alor%20Michile%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/09%20-%20Alor%20Michile%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-217",
+    "title": "Ei Poth",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
+    "year": 2002,
+    "trackNo": 9,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/10%20-%20Ei%20Path%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/10%20-%20Ei%20Path%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-218",
+    "title": "Hotash Hridoy",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Shopnogulo Tomar Moto (স্বপ্নগুলো তোমার মত)",
+    "year": 2002,
+    "trackNo": 10,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/11%20-%20Hotash%20Hridoy%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/11%20-%20Hotash%20Hridoy%20-%20Shopnogulo%20Tomar%20Moto%20-%20Shumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Shopnogulo%20Tomar%20Moto/Album%20Cover/Shopnogulo%20Tomar%20Moto%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-219",
+    "title": "Amar Bagan",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Megher Deshe (মেঘের দেশে)",
+    "year": 2005,
+    "trackNo": 1,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/06.%20Amar%20Bagan.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/06.%20Amar%20Bagan.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-220",
+    "title": "Bohu Dure",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Megher Deshe (মেঘের দেশে)",
+    "year": 2005,
+    "trackNo": 2,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/08.%20Bohu%20Dure.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/08.%20Bohu%20Dure.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-221",
+    "title": "Ei Guitar",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Megher Deshe (মেঘের দেশে)",
+    "year": 2005,
+    "trackNo": 3,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/07.%20Ei%20Guitar.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/07.%20Ei%20Guitar.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-222",
+    "title": "Hoytoba Bhalobasha",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Megher Deshe (মেঘের দেশে)",
+    "year": 2005,
+    "trackNo": 4,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/09.%20Hoytoba%20Bhalobasha.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/09.%20Hoytoba%20Bhalobasha.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-223",
+    "title": "Kabita Prarthona O Protigga",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Megher Deshe (মেঘের দেশে)",
+    "year": 2005,
+    "trackNo": 5,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/05.%20Kabita%20Prarthona%20O%20Protigga.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/05.%20Kabita%20Prarthona%20O%20Protigga.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-224",
+    "title": "Metho Poth",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Megher Deshe (মেঘের দেশে)",
+    "year": 2005,
+    "trackNo": 6,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/03.%20Metho%20Poth.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/03.%20Metho%20Poth.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-225",
+    "title": "Nil Akasher Pothe",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Megher Deshe (মেঘের দেশে)",
+    "year": 2005,
+    "trackNo": 7,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/02.%20Nil%20Akasher%20Pothe.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/02.%20Nil%20Akasher%20Pothe.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-226",
+    "title": "Shopner Deshe",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Megher Deshe (মেঘের দেশে)",
+    "year": 2005,
+    "trackNo": 8,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/04.%20Shopner%20Deshe.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/04.%20Shopner%20Deshe.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-227",
+    "title": "Tomar Jonno",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Megher Deshe (মেঘের দেশে)",
+    "year": 2005,
+    "trackNo": 9,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/01.%20Tomar%20Jonno.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/01.%20Tomar%20Jonno.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-228",
+    "title": "Tomar Jonno (J Mix)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Megher Deshe (মেঘের দেশে)",
+    "year": 2005,
+    "trackNo": 10,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/10.%20Tomar%20Jonno%20%28J%20Mix%29.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/10.%20Tomar%20Jonno%20%28J%20Mix%29.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Megher%20Deshe/Album%20Cover/Megher%20Deshe%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-229",
+    "title": "Gaanwala",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 1,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/01%20-%20Gaanwala%20-%20Boka%20Manushta%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/01%20-%20Gaanwala%20-%20Boka%20Manushta%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-230",
+    "title": "Ghum Ashena (feat. Anila)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila",
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 2,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/02%20-%20Ghum%20Ashena%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Anila.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/02%20-%20Ghum%20Ashena%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Anila.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-231",
+    "title": "Obhiman",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 3,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/03%20-%20Obhiman%20-%20Boka%20Manushta%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/03%20-%20Obhiman%20-%20Boka%20Manushta%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-232",
+    "title": "Porajoy (feat. Elita)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Elita",
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 4,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/04%20-%20Porajoy%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Elita.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/04%20-%20Porajoy%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Elita.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-233",
+    "title": "Jhor (feat. Fuad Al-Muqtadir & Ahnaf)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Fuad Al-Muqtadir & Ahnaf",
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 5,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/05_Jhor_Boka_Manushta_Sumon_feat_Fuad_Al_Muqtadir_%26_Ahnaf_Son.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/05_Jhor_Boka_Manushta_Sumon_feat_Fuad_Al_Muqtadir_%26_Ahnaf_Son.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-234",
+    "title": "Ke (feat. Shompa Reza)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Shompa Reza",
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 6,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/06%20-%20Ke%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Shompa%20Reza.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/06%20-%20Ke%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Shompa%20Reza.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-235",
+    "title": "Amar Golpo",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 7,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/07%20-%20Amar%20Golpo%20-%20Boka%20Manushta%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/07%20-%20Amar%20Golpo%20-%20Boka%20Manushta%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-236",
+    "title": "Ghumparanir Gaan (feat. Aurora)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Aurora",
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 8,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/08_Ghumparanir_Gaan_Boka_Manushta_Sumon_feat_Aurora_Daughter.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/08_Ghumparanir_Gaan_Boka_Manushta_Sumon_feat_Aurora_Daughter.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-237",
+    "title": "Protigga (feat. Tahsan)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Tahsan",
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 9,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/09%20-%20Protigga%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Tahsan.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/09%20-%20Protigga%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Tahsan.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-238",
+    "title": "Boka Manushta O Ek Surer Gaan",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 10,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/11%20-%20Boka%20Manushta%20O%20Ek%20Surer%20Gaan%20-%20Boka%20Manushta%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/11%20-%20Boka%20Manushta%20O%20Ek%20Surer%20Gaan%20-%20Boka%20Manushta%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-239",
+    "title": "Brishti (feat. Simin)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Simin",
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 11,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/12%20-%20Brishti%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Simin.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/12%20-%20Brishti%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Simin.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-240",
+    "title": "Ditiyo Jibon (feat. Topu)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Topu",
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 12,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/13%20-%20Ditiyo%20Jibon%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Topu.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/13%20-%20Ditiyo%20Jibon%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Topu.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-241",
+    "title": "Tobuo (feat. Nabila)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Nabila",
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 13,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/14%20-%20Tobuo%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Nabila.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/14%20-%20Tobuo%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Nabila.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-242",
+    "title": "Fulgulo Shob Gelo Kothay (feat. Shakib, Lincoln, Jon, Imtiaz & Tanvyr)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Shakib, Lincoln, Jon, Imtiaz & Tanvyr",
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 14,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/15_Fulgulo_Shob_Gelo_Kothay_Boka_Manushta_Sumon_feat_Shakib%2C_Lincoln.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/15_Fulgulo_Shob_Gelo_Kothay_Boka_Manushta_Sumon_feat_Shakib%2C_Lincoln.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-243",
+    "title": "Neer",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 15,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/16%20-%20Neer%20-%20Boka%20Manushta%20-%20Sumon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/16%20-%20Neer%20-%20Boka%20Manushta%20-%20Sumon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-244",
+    "title": "Shesh (feat. Buno & Punam)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Buno & Punam",
+    "album": "Boka Manushta (বোকা মানুষটা)",
+    "year": 2007,
+    "trackNo": 16,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/17%20-%20Shesh%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Buno%20%26%20Punam.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/17%20-%20Shesh%20-%20Boka%20Manushta%20-%20Sumon%20feat.%20Buno%20%26%20Punam.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Boka%20Manushta/Album%20Cover/Boka%20Manushta%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-245",
+    "title": "Gaibona",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila Naz Chowdhury",
+    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
+    "year": 2007,
+    "trackNo": 1,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/01.%20Gaibona.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/01.%20Gaibona.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-246",
+    "title": "Ekhon Ami",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila Naz Chowdhury",
+    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
+    "year": 2007,
+    "trackNo": 2,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/02.%20Ekhon%20Ami.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/02.%20Ekhon%20Ami.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-247",
+    "title": "Shopnogulo Tomar Moto",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila Naz Chowdhury",
+    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
+    "year": 2007,
+    "trackNo": 3,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/03.%20Shopnogulo%20Tomar%20Moto.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/03.%20Shopnogulo%20Tomar%20Moto.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-248",
+    "title": "Shobar Jonne Tumi",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila Naz Chowdhury",
+    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
+    "year": 2007,
+    "trackNo": 4,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/04.%20Shobar%20Jonne%20Tumi.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/04.%20Shobar%20Jonne%20Tumi.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-249",
+    "title": "Tirjok",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila Naz Chowdhury",
+    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
+    "year": 2007,
+    "trackNo": 5,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/05.%20Tirjok.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/05.%20Tirjok.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-250",
+    "title": "Tomar Jonno",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila Naz Chowdhury",
+    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
+    "year": 2007,
+    "trackNo": 6,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/06.%20Tomar%20Jonno.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/06.%20Tomar%20Jonno.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-251",
+    "title": "Ghum Parie Dio",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila Naz Chowdhury",
+    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
+    "year": 2007,
+    "trackNo": 7,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/07.%20Ghum%20Parie%20Dio.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/07.%20Ghum%20Parie%20Dio.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-252",
+    "title": "Jokhon Charidike",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila Naz Chowdhury",
+    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
+    "year": 2007,
+    "trackNo": 8,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/08.%20Jokhon%20Charidike.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/08.%20Jokhon%20Charidike.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-253",
+    "title": "Onneshon",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila Naz Chowdhury",
+    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
+    "year": 2007,
+    "trackNo": 9,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/09.%20Onneshon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/09.%20Onneshon.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-254",
+    "title": "Noshto Neer",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila Naz Chowdhury",
+    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
+    "year": 2007,
+    "trackNo": 10,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/10.%20Noshto%20Neer.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/10.%20Noshto%20Neer.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-255",
+    "title": "Shobar Jonne Tumi (Fuad Mix)",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": "Anila Naz Chowdhury",
+    "album": "Ekhon Ami (এখন আমি) (Sumon & Anila)",
+    "year": 2007,
+    "trackNo": 11,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/11.%20Shobar%20Jonne%20Tumi%20%28Fuad%20Mix%29.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/11.%20Shobar%20Jonne%20Tumi%20%28Fuad%20Mix%29.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Ekhon%20Ami/Album%20Cover/Ekhon%20Ami%20%5BFront-Back%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-256",
+    "title": "Boyosh Holo Amar",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Bassbaba Sumon — Standalone Solo Singles",
+    "year": 2007,
+    "trackNo": 1,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Boyosh%20Holo%20Amar.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Boyosh%20Holo%20Amar.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Singles/Album%20Cover/Bassbaba%20Sumon%20-%20Singles%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-257",
+    "title": "Oniyomer Golpo",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Bassbaba Sumon — Standalone Solo Singles",
+    "year": 2007,
+    "trackNo": 2,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Oniyomer%20Golpo.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Oniyomer%20Golpo.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Singles/Album%20Cover/Bassbaba%20Sumon%20-%20Singles%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-258",
+    "title": "Purano Shei Diner Kotha",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Bassbaba Sumon — Standalone Solo Singles",
+    "year": 2007,
+    "trackNo": 3,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Purano%20Shei%20Diner%20Kotha.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Singles/Bassbaba%20Sumon%20-%20Purano%20Shei%20Diner%20Kotha.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Singles/Album%20Cover/Bassbaba%20Sumon%20-%20Singles%20%5BFront%5D.jpg",
+    "repo": "Aurthohin",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-259",
     "title": "Amader Gaane",
     "artist": "Bassbaba Sumon",
     "artists": [
@@ -4457,7 +4406,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-263",
+    "id": "track-260",
     "title": "Funkedelic Fried Rice",
     "artist": "Bassbaba Sumon",
     "artists": [
@@ -4474,7 +4423,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-264",
+    "id": "track-261",
     "title": "Jhor (feat. Fuad & Ahnaf)",
     "artist": "Bassbaba Sumon",
     "artists": [
@@ -4491,7 +4440,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-265",
+    "id": "track-262",
     "title": "Ghumparanir Gaan (feat. Aurora)",
     "artist": "Bassbaba Sumon",
     "artists": [
@@ -4508,7 +4457,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-266",
+    "id": "track-263",
     "title": "Fulgulo Shob Gelo Kothay (feat. Shakib & Lincoln)",
     "artist": "Bassbaba Sumon",
     "artists": [
@@ -4525,7 +4474,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-267",
+    "id": "track-264",
     "title": "Cancer Casserole",
     "artist": "Bassbaba Sumon",
     "artists": [
@@ -4542,7 +4491,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-268",
+    "id": "track-265",
     "title": "Chef Johns Ragadelic Baba Ghanoush",
     "artist": "Bassbaba Sumon",
     "artists": [
@@ -4559,7 +4508,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-269",
+    "id": "track-266",
     "title": "Better Call Salt & The Walking Bread",
     "artist": "Bassbaba Sumon",
     "artists": [
@@ -4576,7 +4525,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-270",
+    "id": "track-267",
     "title": "Tapping Tempura",
     "artist": "Bassbaba Sumon",
     "artists": [
@@ -4593,7 +4542,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-271",
+    "id": "track-268",
     "title": "Licence to Ham Stew",
     "artist": "Bassbaba Sumon",
     "artists": [
@@ -4610,7 +4559,7 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-272",
+    "id": "track-269",
     "title": "1UP Adventures and Quest Promo",
     "artist": "Bassbaba Sumon",
     "artists": [
@@ -4623,6 +4572,57 @@
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Soul%20Food%2C%20Pt.%201%20%282016%29/06.%201UP%20Adventures%20and%20Quest%20Promo.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Bassbaba-Sumon/master/Soul%20Food%2C%20Pt.%201%20%282016%29/06.%201UP%20Adventures%20and%20Quest%20Promo.flac?download=true",
     "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Bassbaba-Sumon/master/Soul%20Food%2C%20Pt.%201%20%282016%29/Album%20Cover/Soul%20Food%2C%20Pt.%201%20%5BFront%5D.jpg",
+    "repo": "Bassbaba-Sumon",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-270",
+    "title": "Bishonno Andher",
+    "artist": "Stentorian",
+    "artists": [
+      "Stentorian"
+    ],
+    "featured": "Bassbaba Sumon",
+    "album": "Agontuk 3 (আগন্তুক ৩)",
+    "year": 2005,
+    "trackNo": 1,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Agontuk%203%20%282005%29/15%20Bishonno%20Andher.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Agontuk%203%20%282005%29/15%20Bishonno%20Andher.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BFront%5D.jpg",
+    "repo": "Bassbaba-Sumon",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-271",
+    "title": "Anubhobe",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Jewel With The Stars",
+    "year": 2006,
+    "trackNo": 1,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/05.%20Anubhobe.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/05.%20Anubhobe.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/Album%20Cover/Jewel%20with%20the%20stars%20%5BFront%5D.jpg",
+    "repo": "Bassbaba-Sumon",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-272",
+    "title": "Notun Aami",
+    "artist": "Bassbaba Sumon",
+    "artists": [
+      "Bassbaba Sumon"
+    ],
+    "featured": null,
+    "album": "Jewel With The Stars",
+    "year": 2006,
+    "trackNo": 2,
+    "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/09.%20Notun%20Aami.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/09.%20Notun%20Aami.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/Album%20Cover/Jewel%20with%20the%20stars%20%5BFront%5D.jpg",
     "repo": "Bassbaba-Sumon",
     "isLossyTranscode": false
   },
@@ -8804,7 +8804,7 @@
     "trackNo": 1,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/01.%20Syd%2C%20Rajib%2C%20Moe%20%26%20Chuckie%20-%20Asha%20Jage.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/01.%20Syd%2C%20Rajib%2C%20Moe%20%26%20Chuckie%20-%20Asha%20Jage.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -8821,7 +8821,7 @@
     "trackNo": 2,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/02.%20Kazi%20%28Stoic%20Bliss%29%20-%20SHanti%20Melena.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/02.%20Kazi%20%28Stoic%20Bliss%29%20-%20SHanti%20Melena.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -8838,7 +8838,7 @@
     "trackNo": 3,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/03.%20Rupom%20%26%20Moe%20-%20Biborno%20Prithibi.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/03.%20Rupom%20%26%20Moe%20-%20Biborno%20Prithibi.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -8855,7 +8855,7 @@
     "trackNo": 4,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/04.%20Moe%20%26%20Rajib%20-%20Evil%20In%20My%20Head.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/04.%20Moe%20%26%20Rajib%20-%20Evil%20In%20My%20Head.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -8872,7 +8872,7 @@
     "trackNo": 5,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/05.%20Rajib%20-%20Nikosh%20Adhar%20%28Unplugged%29.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/05.%20Rajib%20-%20Nikosh%20Adhar%20%28Unplugged%29.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -8889,7 +8889,7 @@
     "trackNo": 6,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/06.%20Moe%20%26%20Ac1D%20-%20Death%20Sentence.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/06.%20Moe%20%26%20Ac1D%20-%20Death%20Sentence.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -8906,7 +8906,7 @@
     "trackNo": 7,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/07.%20Rajib%20%26%20Kazi%20-%20Khoniker%20Jonno.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/07.%20Rajib%20%26%20Kazi%20-%20Khoniker%20Jonno.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -8923,7 +8923,7 @@
     "trackNo": 8,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/08.%20Rajib%20-%20Durer%20Tomay.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/08.%20Rajib%20-%20Durer%20Tomay.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -8940,7 +8940,7 @@
     "trackNo": 9,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/09.%20Syd%2C%20Chuckie%2C%20Moe%20%26%20Ed%20-%20Deep%20Thoughts.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/09.%20Syd%2C%20Chuckie%2C%20Moe%20%26%20Ed%20-%20Deep%20Thoughts.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -8957,7 +8957,7 @@
     "trackNo": 10,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/10.%20Minni%20%26%20Rajib%20-%20Jibon%20Amar.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/10.%20Minni%20%26%20Rajib%20-%20Jibon%20Amar.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -8974,7 +8974,7 @@
     "trackNo": 11,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/11.%20Zahid%20-%20Shomoy.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/11.%20Zahid%20-%20Shomoy.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -8991,7 +8991,7 @@
     "trackNo": 12,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/12.%20Syd%20%26%20Moe%20-%20Day%20By%20Day.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/12.%20Syd%20%26%20Moe%20-%20Day%20By%20Day.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -9008,7 +9008,7 @@
     "trackNo": 13,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/13.%20Rajib%20-%20Debotari%20Khob.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/13.%20Rajib%20-%20Debotari%20Khob.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -9025,7 +9025,7 @@
     "trackNo": 14,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/14.%20Moe%2C%20Syd%20%26%20Ed%20-%20Disciples.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/14.%20Moe%2C%20Syd%20%26%20Ed%20-%20Disciples.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
@@ -9042,7 +9042,7 @@
     "trackNo": 15,
     "streamUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/15.%20Moe%20%26%20Palowa%20-%20Move%20Ya.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/15.%20Moe%20%26%20Palowa%20-%20Move%20Ya.flac?download=true",
-    "coverUrl": "",
+    "coverUrl": "https://raw.githubusercontent.com/GhostDog45/Disciples/master/Harano%20Podochchap%20%282006%29/Album%20Cover/harano%20podochchap%20%5Bfront%5D.jpg",
     "repo": "Disciples",
     "isLossyTranscode": false
   },
