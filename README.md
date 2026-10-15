@@ -1,12 +1,5 @@
 # 🇧🇩 BD Band Music
 
-[![Live Web Player](https://img.shields.io/badge/▶_Launch-Live_Web_Player-8b5cf6?style=for-the-badge&logo=googlechrome&logoColor=white)](https://ghostdog45.github.io/BD-Band-Music/)
-
-> 🌐 **Interactive Web Player & Search Engine:**  
-> Search, browse, and stream all **lossless FLAC tracks** across all bands and compilations directly in your browser with instant search, playlists, and background lock-screen playback:  
-> **👉 [https://ghostdog45.github.io/BD-Band-Music/](https://ghostdog45.github.io/BD-Band-Music/)**
-
----
 ---
 
 # 🎸 [Arbovirus](https://github.com/GhostDog45/Arbovirus)
