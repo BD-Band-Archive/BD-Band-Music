@@ -300,6 +300,16 @@ def build_catalog():
             m_head = re.match(r'^##\s+(?:\[?\d+[\.\)]?\s*)?([^#\n]+)', line_str)
             if m_head:
                 header_text = m_head.group(1).strip()
+                
+                # Filter out standard non-album section headers
+                lower_head = header_text.lower()
+                if any(skip_term in lower_head for skip_term in [
+                    "about the band", "about the artist", "discography index",
+                    "discography", "studio albums", "compilation", "git lfs",
+                    "special thanks", "acknowledgements"
+                ]):
+                    continue
+
                 album_track_counter = 0
                 
                 # Is this header pointing to Mixed Albums?
@@ -394,6 +404,22 @@ def build_catalog():
                     if m_feat:
                         feat = m_feat.group(1).strip()
                     
+                track_album = current_album
+                track_year = current_year
+                
+                # If current_album is Unknown Album or generic, extract album subfolder from stream URL
+                m_subfolder = re.match(r'https://media\.githubusercontent\.com/media/GhostDog45/[^/]+/master/([^/]+)/', clean_url)
+                if m_subfolder:
+                    folder_in_url = urllib.parse.unquote(m_subfolder.group(1)).strip()
+                    if folder_in_url and not folder_in_url.lower().endswith(('.flac', '.wav', '.mp3', '.m4a')):
+                        if track_album == "Unknown Album" or "about the band" in track_album.lower():
+                            m_y = re.search(r'\((\d{4})\)', folder_in_url)
+                            if m_y:
+                                track_year = int(m_y.group(1))
+                                track_album = re.sub(r'\s*\(\d{4}\)', '', folder_in_url).strip()
+                            else:
+                                track_album = folder_in_url
+
                 # High-precision cover resolution:
                 # 1. Exact album cover deduced from streamUrl
                 # 2. Markdown cover if valid
@@ -401,10 +427,10 @@ def build_catalog():
                 track_cover = get_exact_album_cover(url) or current_cover
                 
                 # Dynamically collect all physical album covers/booklets for this album
-                if current_album not in album_covers_map:
+                if track_album not in album_covers_map:
                     covs = get_all_album_covers(clean_url)
                     if covs:
-                        album_covers_map[current_album] = covs
+                        album_covers_map[track_album] = covs
                 
                 track_id = f"track-{len(catalog)+1}"
                 
@@ -414,8 +440,8 @@ def build_catalog():
                     "artist": track_artist,
                     "artists": track_artists,
                     "featured": feat,
-                    "album": current_album,
-                    "year": current_year,
+                    "album": track_album,
+                    "year": track_year,
                     "trackNo": album_track_counter,
                     "streamUrl": clean_url,
                     "downloadUrl": f"{clean_url}?download=true",
