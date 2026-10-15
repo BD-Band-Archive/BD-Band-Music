@@ -24,181 +24,121 @@
   <link rel="stylesheet" href="style.css?v=2.7">
 </head>
 <body>
-  <!-- Modern Archival Landing Page & Telemetry Index -->
-  <div id="landingOverlay" class="landing-overlay" role="dialog" aria-modal="true" aria-label="BD Band Music Digital Lossless Archive">
+  <!-- Full-Screen Immersive Landing Page & Manifesto Overlay -->
+  <div id="landingOverlay" class="landing-overlay" role="dialog" aria-modal="true" aria-label="Welcome to BD Band Music Lossless Library">
     <div class="landing-container">
-      
-      <!-- Top Navigation & Direct Bypass -->
+      <!-- Top Bar with Skip/Enter Action -->
       <header class="landing-header">
         <div class="landing-brand">
           <span class="landing-flag">🇧🇩</span>
           <div class="landing-brand-text">
             <span class="landing-brand-title">BD BAND MUSIC</span>
-            <span class="landing-brand-sub">Non-Commercial Lossless Preservation Archive</span>
+            <span class="landing-brand-sub">Digital Lossless Archive</span>
           </div>
         </div>
-        <div class="landing-header-actions">
-          <button id="closeLandingBtn" class="landing-skip-btn" title="Enter Lossless Archive (Esc)">
-            <span>Enter Archive</span>
-            <span class="landing-key-hint">Esc</span>
-          </button>
-        </div>
+        <button id="closeLandingBtn" class="landing-skip-btn" title="Enter Lossless Archive">
+          <span>Enter Archive</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
       </header>
 
+      <!-- Main Landing Content -->
       <main class="landing-main">
         <!-- Hero Section -->
-        <section class="landing-hero">
-          <div class="landing-meta-chip">
-            <span class="meta-dot live"></span>
-            <span>PUBLIC ARCHIVE • LOSSLESS PRESERVATION</span>
+        <div class="landing-hero">
+          <div class="landing-pill-badge">
+            <span class="sparkle-dot"></span>
+            <span>The Underground Preservation Initiative</span>
           </div>
 
           <h1 class="landing-headline">
-            The Underground BD Rock &amp; Metal Era.<br>
-            <span class="headline-light">Preserved in Bit-Perfect Studio Master Fidelity.</span>
+            The Golden Underground Era.<br>
+            <span class="gradient-text">Preserved in Lossless Fidelity.</span>
           </h1>
 
-          <p class="landing-hero-desc">
-            A comprehensive, non-commercial digital archive honoring Bangladesh's underground rock, metal, and alternative movement. Preserved bit-for-bit from physical compact discs, EAC verified logs, and community archives.
-          </p>
-
-          <!-- Live Archival Metrics Grid -->
-          <div class="landing-metrics-bar">
-            <div class="metric-item">
-              <span class="metric-val" id="landingTrackCount">825</span>
-              <span class="metric-label">Lossless Master Tracks</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val" id="landingAlbumCount">69</span>
-              <span class="metric-label">Studio Albums &amp; EPs</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val" id="landingBandCount">16+</span>
-              <span class="metric-label">Bands &amp; Artists</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val">10-Band</span>
-              <span class="metric-label">Hardware DSP Equalizer</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- Interactive Direct Discovery Hub -->
-        <section class="landing-section">
-          <div class="section-label-row">
-            <span class="section-badge">EXPLORE DISCOGRAPHIES</span>
-            <span class="section-subtext">Click any band to immediately open their preserved catalog</span>
-          </div>
-          <div class="landing-band-matrix" id="landingBandMatrix">
-            <button class="landing-band-chip" data-artist="Artcell">Artcell</button>
-            <button class="landing-band-chip" data-artist="Black">Black</button>
-            <button class="landing-band-chip" data-artist="Aurthohin">Aurthohin</button>
-            <button class="landing-band-chip" data-artist="Bassbaba Sumon">Bassbaba Sumon</button>
-            <button class="landing-band-chip" data-artist="Arbovirus">Arbovirus</button>
-            <button class="landing-band-chip" data-artist="Cryptic Fate">Cryptic Fate</button>
-            <button class="landing-band-chip" data-artist="Vibe">Vibe</button>
-            <button class="landing-band-chip" data-artist="Stoic Bliss">Stoic Bliss</button>
-            <button class="landing-band-chip" data-artist="Indalo">Indalo</button>
-            <button class="landing-band-chip" data-artist="Icons">Icons</button>
-            <button class="landing-band-chip" data-artist="Minerva">Minerva</button>
-            <button class="landing-band-chip" data-artist="The Watson Brothers">The Watson Brothers</button>
-            <button class="landing-band-chip" data-artist="Disciples">Disciples</button>
-            <button class="landing-band-chip" data-artist="Jon Kabir">Jon Kabir</button>
-            <button class="landing-band-chip" data-artist="Mila">Mila</button>
-          </div>
-        </section>
-
-        <!-- Curator's Archival Manifesto -->
-        <section class="landing-curator-dossier">
-          <div class="dossier-inner">
-            <div class="dossier-header">
-              <span class="dossier-badge">CURATOR'S NOTE &amp; MISSION</span>
-              <span class="dossier-id">ARCHIVE REF: BD-UND-FLAC</span>
-            </div>
-            <blockquote class="dossier-quote">
+          <!-- Manifesto Card with Exact User Philosophy -->
+          <div class="landing-manifesto-card">
+            <div class="manifesto-quote-icon">“</div>
+            <blockquote class="landing-quote">
               From the ultimate regret for not being born into the <strong>UNDERGROUND era of BD BAND MUSIC</strong> &amp; not collecting the CDs when I had the chances, here I present <strong>Digital Lossless Library</strong>.
             </blockquote>
-            <p class="dossier-gratitude">
+            <p class="landing-gratitude">
               Heartfelt thanks to all the dedicated folks from <strong>Telegram</strong>, <strong>Soulseek</strong> &amp; <strong>TorrentBD (TBD)</strong>, for keeping these gems alive to this day.
             </p>
-            <div class="dossier-footer">
-              <div class="dossier-curator">
-                <span class="curator-dot"></span>
+            <div class="landing-curator">
+              <span class="curator-avatar">🇧🇩</span>
+              <div class="curator-meta">
                 <span class="curator-name">Md. Maniruzzaman Mridul</span>
-                <span class="curator-sep">•</span>
                 <span class="curator-title">Archival Curator &amp; Developer</span>
               </div>
             </div>
           </div>
-        </section>
+        </div>
 
-        <!-- Technical Specification Matrix -->
-        <section class="landing-specs-grid">
+        <!-- 3 Feature & Media Specs Pillars -->
+        <div class="landing-specs-grid">
+          <!-- Pillar 1: Audio Quality -->
           <div class="landing-spec-card">
-            <div class="spec-header">
-              <span class="spec-num">01</span>
-              <h4>Bit-for-Bit Lossless FLAC</h4>
+            <div class="spec-icon-wrap cyan-glow">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
             </div>
-            <p>Direct 16-bit / 44.1 kHz Red Book CD audio and 24-bit studio FLAC (~850–1411 kbps) with uncompressed dynamic range. Spectrogram-verified to distinguish genuine masters from lossy transcode pressings.</p>
-            <div class="spec-footer-tag">FLAC 1.4+ • UNCOMPRESSED PCM DYNAMICS</div>
+            <div class="spec-tag">Audio Quality</div>
+            <h3>Bit-for-Bit Lossless FLAC</h3>
+            <p>Pure 16-bit / 44.1 kHz Red Book CD audio and 24-bit studio FLAC (~850–1411 kbps) with uncompressed dynamic range. Spectrogram-verified to distinguish genuine lossless from lossy transcode pressings, visualized live with our real-time audio spectrum.</p>
           </div>
 
+          <!-- Pillar 2: Sources & Community -->
           <div class="landing-spec-card">
-            <div class="spec-header">
-              <span class="spec-num">02</span>
-              <h4>CD Provenance &amp; Verification</h4>
+            <div class="spec-icon-wrap purple-glow">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
             </div>
-            <p>Preserved from original compact discs and EAC (Exact Audio Copy) accurate rip logs shared by generous archivists across Soulseek, Telegram channels, and TorrentBD, safeguarding rare pressings against disc rot.</p>
-            <div class="spec-footer-tag">EAC / ACCURATERIP CHECKSUMS VERIFIED</div>
+            <div class="spec-tag">Archival Sources</div>
+            <h3>Physical CD Rip Provenance</h3>
+            <p>Preserved from original compact discs and EAC bit-perfect logs shared by generous archivists across Soulseek, Telegram channels, and TorrentBD, safeguarding rare pressings against disc rot and obsolescence.</p>
           </div>
 
+          <!-- Pillar 3: Visual Artwork -->
           <div class="landing-spec-card">
-            <div class="spec-header">
-              <span class="spec-num">03</span>
-              <h4>Physical Inlays &amp; Cover Scans</h4>
+            <div class="spec-icon-wrap emerald-glow">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
             </div>
-            <p>Includes high-resolution front covers, back inlays, and booklet scans from <a href="https://banglacdcovers.blogspot.com/" target="_blank" rel="noopener noreferrer" class="credit-link">banglacdcovers.blogspot.com</a> (Shohail Ibne Mahbub - XTR), restoring physical album provenance.</p>
-            <div class="spec-footer-tag">AUTHENTIC PHYSICAL INLAY SCANS</div>
+            <div class="spec-tag">Visual Archives</div>
+            <h3>Authentic Inlay &amp; Cover Arts</h3>
+            <p>Includes high-resolution front covers and album inlay scans curated from <a href="https://banglacdcovers.blogspot.com/" target="_blank" rel="noopener noreferrer" class="credit-link">banglacdcovers.blogspot.com</a> (Shohail Ibne Mahbub - XTR) and verified rock archives, restoring the full physical album experience.</p>
           </div>
+        </div>
 
-          <div class="landing-spec-card">
-            <div class="spec-header">
-              <span class="spec-num">04</span>
-              <h4>10-Band Studio DSP Equalizer</h4>
-            </div>
-            <p>Native browser Web Audio API 10-band IIR filter engine (32 Hz – 16 kHz) with pre-amp headroom gain staging and curated Bangladesh rock/metal acoustic tuning profiles.</p>
-            <div class="spec-footer-tag">NATIVE 64-BIT IIR FILTER PIPELINE</div>
+        <!-- Audiophile Streaming & Offline Listening Advisory -->
+        <div class="landing-advisory-card">
+          <div class="advisory-icon-wrap">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
           </div>
-        </section>
-
-        <!-- Audiophile Playback Engineering Advisory -->
-        <section class="landing-advisory-dossier">
-          <div class="advisory-icon-col">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          </div>
-          <div class="advisory-body">
-            <div class="advisory-top">
-              <span class="advisory-tag">AUDIOPHILE NOTICE</span>
-              <span class="advisory-title">Browser Streaming vs. Local Bit-Perfect Master Playback</span>
+          <div class="advisory-content">
+            <div class="advisory-badge">
+              <span class="pulse-amber-dot"></span>
+              <span>Important Audiophile Advisory • Web Streaming vs. True FLAC</span>
             </div>
-            <p class="advisory-p">
-              While this web player serves as a lightweight exploration tool, genuine lossless FLAC files are large (30 MB to 80+ MB per track). Web browser audio engines may resample audio or experience network buffer jitter.
+            <h3 class="advisory-title">Recommended: Download for the Authentic Bit-Perfect Experience</h3>
+            <p class="advisory-text">
+              While this web player serves as a lightweight, instant exploration tool, genuine lossless FLAC files are inherently large (30 MB to 80+ MB per track) and served over GitHub’s distributed Git file storage. Because of network routing and internal browser audio engine limitations, streaming directly in the browser may experience buffering or audio resampling, preventing you from hearing the true depth, dynamic range, and clarity of the original masters.
             </p>
-            <p class="advisory-p emphasis">
-              <strong>For bit-perfect fidelity:</strong> Download tracks using the download buttons (<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>) and play locally via dedicated lossless audio software like <strong>Foobar2000</strong> (Windows/Mac), <strong>Poweramp</strong> / <strong>UAPP</strong> (Android), or <strong>VLC</strong>.
+            <p class="advisory-highlight">
+              <strong>💡 For the true, uncompromising master sound:</strong> We strongly encourage you to download the songs directly using the download buttons (<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>) and play them locally on dedicated lossless audiophile players like <strong>Foobar2000</strong>, <strong>Poweramp</strong>, <strong>UAPP</strong>, or <strong>VLC</strong>.
             </p>
           </div>
-        </section>
+        </div>
 
-        <!-- Sleek Primary Action Row -->
-        <section class="landing-cta-row">
-          <button id="enterArchiveBtn" class="landing-primary-btn">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            <span>Enter Lossless Library</span>
-            <span class="btn-kbd-chip">Enter</span>
+        <!-- Enter Action Footer -->
+        <div class="landing-actions">
+          <button id="enterArchiveBtn" class="landing-enter-btn">
+            <span>Enter Lossless Archive</span>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </button>
-        </section>
-
+        </div>
       </main>
     </div>
   </div>

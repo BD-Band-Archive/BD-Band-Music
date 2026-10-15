@@ -264,24 +264,6 @@
         console.warn('Notice: dynamic album_covers.json skipped.', err);
       }
 
-      // Populate landing page live telemetry stats
-      const landingTrackCount = document.getElementById('landingTrackCount');
-      const landingAlbumCount = document.getElementById('landingAlbumCount');
-      const landingBandCount = document.getElementById('landingBandCount');
-      if (landingTrackCount) landingTrackCount.textContent = catalog.length;
-      if (landingAlbumCount) {
-        const uniqueAlbums = new Set(catalog.map(t => t.album).filter(Boolean));
-        landingAlbumCount.textContent = uniqueAlbums.size;
-      }
-      if (landingBandCount) {
-        const uniqueArtists = new Set();
-        catalog.forEach(t => {
-          if (t.artists && t.artists.length > 0) t.artists.forEach(a => uniqueArtists.add(a));
-          else if (t.artist) uniqueArtists.add(t.artist);
-        });
-        landingBandCount.textContent = uniqueArtists.size + '+';
-      }
-
       isFullTracksListExpanded = false;
       initArtistFilterBar();
       initFromUrlParams();
@@ -1763,20 +1745,6 @@
     });
   }
 
-  // Interactive Band Discovery Matrix on Landing Overlay
-  const landingBandMatrix = document.getElementById('landingBandMatrix');
-  if (landingBandMatrix) {
-    landingBandMatrix.addEventListener('click', (e) => {
-      const chip = e.target.closest('.landing-band-chip');
-      if (!chip) return;
-      const artist = chip.dataset.artist;
-      if (artist) {
-        dismissLanding();
-        setArtistFilter(artist);
-      }
-    });
-  }
-
   // --- Brand Home Button ---
   brandHomeBtn.addEventListener('click', () => {
     globalSearchInput.value = '';
@@ -2326,11 +2294,8 @@
 
   // --- Keyboard Shortcuts ---
   window.addEventListener('keydown', (e) => {
-    // If landing overlay is active, allow Enter or Escape to enter the archive
+    // If landing overlay is active, ignore audio shortcuts and do NOT dismiss via keyboard
     if (landingOverlay && !landingOverlay.classList.contains('dismissed')) {
-      if (e.key === 'Escape' || e.key === 'Enter') {
-        dismissLanding();
-      }
       return;
     }
 
