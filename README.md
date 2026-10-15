@@ -52,6 +52,10 @@
 
 ---
 
+# 🎸 [Disciples](https://github.com/GhostDog45/Disciples)
+
+---
+
 # 🎸 [Icons](https://github.com/GhostDog45/Icons)
 
 <p align="center">
@@ -69,6 +73,14 @@
     <img src="https://raw.githubusercontent.com/GhostDog45/Indalo/master/assets/band_cover.png" alt="Indalo Band Cover" width="750" />
   </a>
 </p>
+
+---
+
+# 🎸 [Jon Kabir](https://github.com/GhostDog45/Jon-Kabir)
+
+---
+
+# 🎸 [Mila](https://github.com/GhostDog45/Mila)
 
 ---
 
