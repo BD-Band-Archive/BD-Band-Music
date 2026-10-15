@@ -110,6 +110,7 @@ MULTI_ARTIST_MAP = {
     "lamia, shaheen, johan shihab": ["Lamia", "Shaheen", "Johan", "Shihab"],
     "johan, fuad shanto": ["Johan", "Fuad", "Shanto"],
     "bassbaba sumon feat. arbovirus": ["Bassbaba Sumon", "Arbovirus"],
+    "stentorian feat. bassbaba sumon": ["Stentorian", "Bassbaba Sumon"],
 }
 
 def clean_track(raw_title, default_artist, is_mixed=False):
