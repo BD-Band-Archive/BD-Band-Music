@@ -693,15 +693,11 @@
     </div>
 
     <!-- Spotify-Style Share to Story Dialog -->
-    <dialog id="storyShareDialog" class="story-share-dialog" closedby="any" aria-labelledby="storyShareTitle">
+    <dialog id="storyShareDialog" class="story-share-dialog" closedby="any" aria-label="Share Track">
       <div class="story-dialog-box">
-        <div class="story-dialog-header">
-          <div class="story-dialog-title-wrap">
-            <span class="story-dialog-badge">SPOTIFY-STYLE STORY SHARING</span>
-            <h3 id="storyShareTitle">Share Track to Story</h3>
-          </div>
-          <button id="closeStoryShareBtn" class="story-dialog-close" title="Close (Esc)">✕</button>
-        </div>
+        <button id="closeStoryShareBtn" class="story-close-float" title="Close (Esc)" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
 
         <div class="story-dialog-body">
           <!-- Story Card Visual Preview (400x300) -->
@@ -714,10 +710,8 @@
               <canvas id="storyCanvas" width="800" height="600" class="story-canvas"></canvas>
               <div id="storyCanvasLoading" class="story-loading-overlay">
                 <div class="story-spinner"></div>
-                <span>Rendering Card Preview...</span>
               </div>
             </div>
-            <span class="story-preview-hint" id="storyPreviewHint">Web Card • 400 × 300</span>
           </div>
 
           <!-- Sharing Actions & Options -->
@@ -784,6 +778,6 @@
 
   </div>
 
-  <script src="app.js?v=3.4"></script>
+  <script src="app.js?v=3.5"></script>
 </body>
 </html>

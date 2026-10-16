@@ -2680,7 +2680,6 @@
   const storyCanvas = document.getElementById('storyCanvas');
   const storyCanvasLoading = document.getElementById('storyCanvasLoading');
   const storyPreviewFrame = document.getElementById('storyPreviewFrame');
-  const storyPreviewHint = document.getElementById('storyPreviewHint');
   const storyFormatWebBtn = document.getElementById('storyFormatWebBtn');
   const storyFormatStoryBtn = document.getElementById('storyFormatStoryBtn');
   const storyTrackThumb = document.getElementById('storyTrackThumb');
@@ -3145,11 +3144,9 @@
     try {
       if (activeStoryFormat === 'web') {
         if (storyPreviewFrame) storyPreviewFrame.classList.remove('aspect-story');
-        if (storyPreviewHint) storyPreviewHint.textContent = 'Web Card • 400 × 300';
         await renderWebCard(activeStoryTrack, storyCanvas);
       } else {
         if (storyPreviewFrame) storyPreviewFrame.classList.add('aspect-story');
-        if (storyPreviewHint) storyPreviewHint.textContent = 'Story View • 9:16 Vertical Preview';
         await renderStoryCardVertical(activeStoryTrack, storyCanvas, 1080, 1920);
       }
     } catch (err) {
