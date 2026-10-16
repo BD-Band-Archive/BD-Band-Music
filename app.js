@@ -2715,6 +2715,7 @@
   let activeStoryTrack = null;
   let activeStoryFormat = 'web'; // 'web' (400x300) or 'story' (9:16)
   let storyCtaBounds = { x: 0, y: 0, w: 0, h: 0 };
+  let storyQrBounds = { x: 0, y: 0, w: 0, h: 0 };
 
   function drawRoundRect(ctx, x, y, width, height, radius) {
     if (ctx.roundRect) {
@@ -2733,6 +2734,46 @@
     ctx.lineTo(x, y + radius);
     ctx.quadraticCurveTo(x, y, x + radius, y);
     ctx.closePath();
+  }
+
+  // Helper: Draw crisp, high-contrast QR code directly on canvas with quiet-zone padding
+  function drawQrCodeToCanvas(ctx, x, y, size, url) {
+    if (typeof qrcode !== 'function') return;
+    try {
+      const qr = qrcode(0, 'M');
+      qr.addData(url);
+      qr.make();
+      const count = qr.getModuleCount();
+
+      // Rounded white background plate
+      const padding = Math.max(5, Math.round(size * 0.055));
+      const innerSize = size - padding * 2;
+      const cellSize = innerSize / count;
+
+      ctx.save();
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.45)';
+      ctx.shadowBlur = 12;
+      ctx.shadowOffsetY = 4;
+      drawRoundRect(ctx, x, y, size, size, Math.round(size * 0.08));
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+      ctx.shadowColor = 'transparent';
+
+      // Draw dark modules
+      ctx.fillStyle = '#0b0e14';
+      for (let r = 0; r < count; r++) {
+        for (let c = 0; c < count; c++) {
+          if (qr.isDark(r, c)) {
+            const mx = x + padding + c * cellSize;
+            const my = y + padding + r * cellSize;
+            ctx.fillRect(mx, my, Math.ceil(cellSize), Math.ceil(cellSize));
+          }
+        }
+      }
+      ctx.restore();
+    } catch (e) {
+      console.warn('QR code draw error:', e);
+    }
   }
 
   // Detects the default Story resolution for the current device/platform
@@ -2853,13 +2894,14 @@
 
     // Right Column Track Details
     const textX = 375;
+    const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
     ctx.save();
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
 
     // Track Title
     ctx.fillStyle = '#ffffff';
-    ctx.font = '800 32px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.font = '800 30px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
     let title = track.title;
     if (ctx.measureText(title).width > 385) {
       while (ctx.measureText(title + '...').width > 385 && title.length > 0) {
@@ -2867,11 +2909,11 @@
       }
       title += '...';
     }
-    ctx.fillText(title, textX, 135);
+    ctx.fillText(title, textX, 115);
 
     // Artist
     ctx.fillStyle = '#c084fc';
-    ctx.font = '700 24px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.font = '700 22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
     let artist = track.artist;
     if (ctx.measureText(artist).width > 385) {
       while (ctx.measureText(artist + '...').width > 385 && artist.length > 0) {
@@ -2879,11 +2921,11 @@
       }
       artist += '...';
     }
-    ctx.fillText(artist, textX, 178);
+    ctx.fillText(artist, textX, 155);
 
     // Album
     ctx.fillStyle = '#94a3b8';
-    ctx.font = '600 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.font = '600 17px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
     let album = track.album;
     if (ctx.measureText(album).width > 385) {
       while (ctx.measureText(album + '...').width > 385 && album.length > 0) {
@@ -2891,11 +2933,11 @@
       }
       album += '...';
     }
-    ctx.fillText(album, textX, 214);
+    ctx.fillText(album, textX, 188);
 
     // FLAC Bit-Perfect Badge Pill
-    const pillY = 265;
-    drawRoundRect(ctx, textX, pillY - 18, 385, 36, 18);
+    const pillY = 228;
+    drawRoundRect(ctx, textX, pillY - 16, 385, 32, 16);
     ctx.fillStyle = 'rgba(34, 211, 238, 0.12)';
     ctx.fill();
     ctx.lineWidth = 1.2;
@@ -2903,47 +2945,111 @@
     ctx.stroke();
 
     ctx.fillStyle = '#38bdf8';
-    ctx.font = '700 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.font = '700 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('FLAC 16-BIT / 44.1 KHZ • BIT-PERFECT CDDA', textX + 192, pillY);
 
-    // CTA Stream Pill
-    const ctaY = 325;
+    // CTA Stream Pill (Interactive White Button)
+    const ctaY = 276;
     const ctaText = '▶ Listen on bd-band-archive.github.io/BD-Band-Music';
     const ctaPillX = textX;
-    const ctaPillY = ctaY - 22;
+    const ctaPillY = ctaY - 19;
     const ctaPillW = 385;
-    const ctaPillH = 44;
+    const ctaPillH = 38;
     ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
     ctx.shadowBlur = 16;
     ctx.shadowOffsetY = 6;
-    drawRoundRect(ctx, ctaPillX, ctaPillY, ctaPillW, ctaPillH, 22);
+    drawRoundRect(ctx, ctaPillX, ctaPillY, ctaPillW, ctaPillH, 19);
     ctx.fillStyle = '#ffffff';
     ctx.fill();
     ctx.shadowColor = 'transparent';
 
     ctx.fillStyle = '#0b0e14';
-    ctx.font = '800 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.font = '800 12.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText(ctaText, ctaPillX + ctaPillW / 2, ctaY);
+
+    // Sleek Spotify-Style QR Code Badge
+    const qrCardX = textX;
+    const qrCardY = 320;
+    const qrCardW = 385;
+    const qrCardH = 188;
+    const qrSize = 148;
+    const qrX = qrCardX + 16;
+    const qrY = qrCardY + (qrCardH - qrSize) / 2;
+
+    ctx.save();
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+    ctx.shadowBlur = 20;
+    ctx.shadowOffsetY = 8;
+    drawRoundRect(ctx, qrCardX, qrCardY, qrCardW, qrCardH, 18);
+    const qrBgGrad = ctx.createLinearGradient(qrCardX, qrCardY, qrCardX + qrCardW, qrCardY + qrCardH);
+    qrBgGrad.addColorStop(0, '#131826');
+    qrBgGrad.addColorStop(1, '#090b11');
+    ctx.fillStyle = qrBgGrad;
+    ctx.fill();
+    ctx.lineWidth = 1.4;
+    ctx.strokeStyle = 'rgba(139, 92, 246, 0.4)';
+    ctx.stroke();
+    ctx.restore();
+
+    // Draw QR Code directly on canvas
+    drawQrCodeToCanvas(ctx, qrX, qrY, qrSize, shareUrl);
+
+    // Spotify-style Labels beside QR
+    const metaX = qrX + qrSize + 18;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+
+    // Mini Brand Pill
+    const tagY = qrCardY + 32;
+    drawRoundRect(ctx, metaX, tagY - 12, 160, 24, 12);
+    ctx.fillStyle = 'rgba(139, 92, 246, 0.2)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(139, 92, 246, 0.5)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    ctx.fillStyle = '#c084fc';
+    ctx.font = '700 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🇧🇩 BD BAND CODE', metaX + 80, tagY);
+
+    // Main Scan Callout
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '800 17px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('📷 Scan to Stream', metaX, qrCardY + 74);
+
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = '700 12.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('⚡ Instant 16-Bit FLAC', metaX, qrCardY + 104);
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+    ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('Point Camera or Lens', metaX, qrCardY + 130);
+
+    ctx.fillStyle = '#a78bfa';
+    ctx.font = '700 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('Direct Playback • No App', metaX, qrCardY + 154);
     ctx.restore();
 
     if (targetCanvas === storyCanvas) {
       storyCtaBounds = { x: ctaPillX, y: ctaPillY, w: ctaPillW, h: ctaPillH };
+      storyQrBounds = { x: qrCardX, y: qrCardY, w: qrCardW, h: qrCardH };
     }
 
-    // Bottom Waveform Visualizer
-    const waveY = 475;
-    const barCount = 44;
-    const barWidth = 6;
-    const barGap = 10;
-    const totalWaveWidth = barCount * (barWidth + barGap) - barGap;
-    const startX = (W - totalWaveWidth) / 2;
+    // Left Column: Equalizer Waveform Bars centered directly under Album Artwork
+    const waveY = 445;
+    const waveCount = 20;
+    const barWidth = 7;
+    const barGap = 7;
+    const totalWaveWidth = waveCount * (barWidth + barGap) - barGap;
+    const startX = artX + (artSize - totalWaveWidth) / 2;
 
     const waveHeights = [
       18, 28, 42, 60, 45, 30, 52, 70, 55, 38, 62, 80, 68, 48, 58, 75,
-      60, 42, 54, 70, 50, 32, 45, 62, 48, 35, 52, 68, 54, 38, 48, 62,
-      44, 28, 40, 52, 38, 24, 36, 48, 32, 22, 16, 12
+      60, 42, 32, 22
     ];
 
     const waveGrad = ctx.createLinearGradient(startX, 0, startX + totalWaveWidth, 0);
@@ -2952,7 +3058,7 @@
     waveGrad.addColorStop(1, '#22d3ee');
     ctx.fillStyle = waveGrad;
 
-    for (let i = 0; i < barCount; i++) {
+    for (let i = 0; i < waveCount; i++) {
       const bx = startX + i * (barWidth + barGap);
       const bh = (waveHeights[i % waveHeights.length]) * 0.75;
       const by = waveY - bh / 2;
@@ -2960,11 +3066,17 @@
       ctx.fill();
     }
 
-    // Footnote Watermark
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-    ctx.font = '600 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    // Under-waveform audiophile label
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+    ctx.font = '600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('bd-band-archive.github.io/BD-Band-Music • Bit-Perfect CD Archive', W / 2, 555);
+    ctx.fillText('BIT-PERFECT MASTER AUDIO', artX + artSize / 2, 492);
+
+    // Footnote Watermark across the bottom
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+    ctx.font = '600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('bd-band-archive.github.io/BD-Band-Music • Bit-Perfect CD Archive', W / 2, 565);
   }
 
   // 2. Render Vertical 9:16 Story Card (Scales dynamically to device or standard 1080x1920)
@@ -2998,7 +3110,7 @@
     ctx.fillRect(0, 100 * scale, W, 1100 * scale);
 
     // 3. Header Branding Badge
-    const badgeY = 160 * scale;
+    const badgeY = 145 * scale;
     const badgeW = 520 * scale;
     const badgeH = 64 * scale;
     ctx.save();
@@ -3017,9 +3129,9 @@
     ctx.restore();
 
     // 4. Centerpiece Album Artwork
-    const artSize = 680 * scale;
+    const artSize = 640 * scale;
     const artX = (W - artSize) / 2;
-    const artY = 270 * scale;
+    const artY = 240 * scale;
     const artRadius = 36 * scale;
 
     ctx.save();
@@ -3059,7 +3171,7 @@
 
     // Title
     ctx.fillStyle = '#ffffff';
-    ctx.font = `800 ${Math.round(54 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    ctx.font = `800 ${Math.round(52 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
     let title = track.title;
     const maxTitleW = 860 * scale;
     if (ctx.measureText(title).width > maxTitleW) {
@@ -3068,11 +3180,11 @@
       }
       title += '...';
     }
-    ctx.fillText(title, W / 2, 1050 * scale);
+    ctx.fillText(title, W / 2, 955 * scale);
 
     // Artist & Album
     ctx.fillStyle = '#c084fc';
-    ctx.font = `700 ${Math.round(38 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    ctx.font = `700 ${Math.round(36 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
     let subtitle = `${track.artist} • ${track.album}`;
     const maxSubW = 880 * scale;
     if (ctx.measureText(subtitle).width > maxSubW) {
@@ -3081,13 +3193,13 @@
       }
       subtitle += '...';
     }
-    ctx.fillText(subtitle, W / 2, 1120 * scale);
+    ctx.fillText(subtitle, W / 2, 1020 * scale);
 
     // 6. Quality Badge Pill
-    const qualityY = 1210 * scale;
+    const qualityY = 1090 * scale;
     const qualityW = 540 * scale;
-    const qualityH = 52 * scale;
-    drawRoundRect(ctx, (W - qualityW) / 2, qualityY - qualityH / 2, qualityW, qualityH, 26 * scale);
+    const qualityH = 50 * scale;
+    drawRoundRect(ctx, (W - qualityW) / 2, qualityY - qualityH / 2, qualityW, qualityH, 25 * scale);
     ctx.fillStyle = 'rgba(34, 211, 238, 0.12)';
     ctx.fill();
     ctx.lineWidth = 1.5 * scale;
@@ -3095,11 +3207,11 @@
     ctx.stroke();
 
     ctx.fillStyle = '#38bdf8';
-    ctx.font = `700 ${Math.round(22 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    ctx.font = `700 ${Math.round(21 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
     ctx.fillText('FLAC 16-BIT / 44.1 KHZ • BIT-PERFECT CDDA', W / 2, qualityY);
 
     // 7. Equalizer Audio Waveform Bars
-    const waveY = 1350 * scale;
+    const waveY = 1185 * scale;
     const barCount = 32;
     const barWidth = 8 * scale;
     const barGap = 12 * scale;
@@ -3121,14 +3233,84 @@
 
     for (let i = 0; i < barCount; i++) {
       const bx = startX + i * (barWidth + barGap);
-      const bh = (waveHeights[i % waveHeights.length]) * scale;
+      const bh = (waveHeights[i % waveHeights.length]) * 0.7 * scale;
       const by = waveY - bh / 2;
       drawRoundRect(ctx, bx, by, barWidth, bh, 4 * scale);
       ctx.fill();
     }
+    ctx.restore();
 
-    // 8. Bottom CTA Pill (Spotify-style)
-    const ctaY = 1560 * scale;
+    // 8. Sleek Spotify-Style QR Code Scan Bar
+    const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
+    const qrCardW = 860 * scale;
+    const qrCardH = 205 * scale;
+    const qrCardX = (W - qrCardW) / 2;
+    const qrCardY = 1280 * scale;
+    const qrSize = 165 * scale;
+    const qrX = qrCardX + 22 * scale;
+    const qrY = qrCardY + (qrCardH - qrSize) / 2;
+
+    ctx.save();
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+    ctx.shadowBlur = 32 * scale;
+    ctx.shadowOffsetY = 12 * scale;
+    drawRoundRect(ctx, qrCardX, qrCardY, qrCardW, qrCardH, 26 * scale);
+    const qrBgGrad = ctx.createLinearGradient(qrCardX, qrCardY, qrCardX + qrCardW, qrCardY + qrCardH);
+    qrBgGrad.addColorStop(0, '#131826');
+    qrBgGrad.addColorStop(1, '#090b10');
+    ctx.fillStyle = qrBgGrad;
+    ctx.fill();
+    ctx.lineWidth = 2 * scale;
+    ctx.strokeStyle = 'rgba(139, 92, 246, 0.45)';
+    ctx.stroke();
+    ctx.restore();
+
+    // Draw QR Code directly on canvas
+    drawQrCodeToCanvas(ctx, qrX, qrY, qrSize, shareUrl);
+
+    // Spotify-style Labels beside QR
+    ctx.save();
+    const metaX = qrX + qrSize + 26 * scale;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+
+    // Mini Brand Pill
+    const tagY = qrCardY + 38 * scale;
+    drawRoundRect(ctx, metaX, tagY - 14 * scale, 210 * scale, 28 * scale, 14 * scale);
+    ctx.fillStyle = 'rgba(139, 92, 246, 0.2)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(139, 92, 246, 0.5)';
+    ctx.lineWidth = 1.2 * scale;
+    ctx.stroke();
+
+    ctx.fillStyle = '#c084fc';
+    ctx.font = `700 ${Math.round(14 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText('🇧🇩 BD BAND CODE', metaX + 105 * scale, tagY);
+
+    // Heading
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#ffffff';
+    ctx.font = `800 ${Math.round(26 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    ctx.fillText('📷 Scan with Camera to Stream', metaX, qrCardY + 86 * scale);
+
+    // Subheading
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = `700 ${Math.round(18 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    ctx.fillText('⚡ Instant 16-Bit / 44.1 kHz FLAC Master', metaX, qrCardY + 124 * scale);
+
+    // Instructions
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+    ctx.font = `600 ${Math.round(14 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    ctx.fillText('Point iPhone / Android camera or Google Lens', metaX, qrCardY + 158 * scale);
+    ctx.restore();
+
+    if (targetCanvas === storyCanvas) {
+      storyQrBounds = { x: qrCardX, y: qrCardY, w: qrCardW, h: qrCardH };
+    }
+
+    // 9. Bottom CTA Pill (Interactive White Button)
+    const ctaY = 1575 * scale;
     const ctaText = '▶ Listen on bd-band-archive.github.io/BD-Band-Music';
     ctx.font = `800 ${Math.round(24 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
     const textW = ctx.measureText(ctaText).width;
@@ -3137,6 +3319,7 @@
     const ctaX = (W - ctaW) / 2;
     const ctaTop = ctaY - ctaH / 2;
 
+    ctx.save();
     ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
     ctx.shadowBlur = 25 * scale;
     ctx.shadowOffsetY = 10 * scale;
@@ -3149,15 +3332,17 @@
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(ctaText, W / 2, ctaY);
+    ctx.restore();
 
     if (targetCanvas === storyCanvas) {
       storyCtaBounds = { x: ctaX, y: ctaTop, w: ctaW, h: ctaH };
     }
 
-    // 9. Footnote Watermark
+    // 10. Footnote Watermark
     ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-    ctx.font = `600 ${Math.round(20 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-    ctx.fillText('Archived with Lossless CD Packaging Artwork', W / 2, 1720 * scale);
+    ctx.font = `600 ${Math.round(19 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText('Archived with Lossless CD Packaging Artwork • Bit-Perfect CDDA', W / 2, 1715 * scale);
 
     ctx.restore();
   }
@@ -3440,24 +3625,31 @@
     });
   }
 
-  // 6. Interactive Click & Hover on Story Preview CTA Button
+  // 6. Interactive Click & Hover on Story Preview (CTA Button & QR Code Card)
   if (storyCanvas) {
-    const isPillHovered = (clientX, clientY) => {
+    const isTargetHovered = (clientX, clientY) => {
       if (!activeStoryTrack) return false;
       const rect = storyCanvas.getBoundingClientRect();
       if (!rect.width || !rect.height) return false;
       const x = (clientX - rect.left) * (storyCanvas.width / rect.width);
       const y = (clientY - rect.top) * (storyCanvas.height / rect.height);
-      return (
+      const inCta = (
         x >= storyCtaBounds.x &&
         x <= storyCtaBounds.x + storyCtaBounds.w &&
         y >= storyCtaBounds.y &&
         y <= storyCtaBounds.y + storyCtaBounds.h
       );
+      const inQr = (
+        x >= storyQrBounds.x &&
+        x <= storyQrBounds.x + storyQrBounds.w &&
+        y >= storyQrBounds.y &&
+        y <= storyQrBounds.y + storyQrBounds.h
+      );
+      return inCta || inQr;
     };
 
     storyCanvas.addEventListener('mousemove', (e) => {
-      if (isPillHovered(e.clientX, e.clientY)) {
+      if (isTargetHovered(e.clientX, e.clientY)) {
         storyCanvas.style.cursor = 'pointer';
         storyCanvas.title = activeStoryTrack ? `Click to open "${activeStoryTrack.title}" directly` : '';
       } else {
@@ -3467,7 +3659,7 @@
     });
 
     storyCanvas.addEventListener('click', (e) => {
-      if (isPillHovered(e.clientX, e.clientY) && activeStoryTrack) {
+      if (isTargetHovered(e.clientX, e.clientY) && activeStoryTrack) {
         const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(activeStoryTrack.id)}/`;
         window.open(shareUrl, '_blank');
         showToast(`🔗 Redirecting to "${activeStoryTrack.title}"...`);
@@ -3477,7 +3669,7 @@
     storyCanvas.addEventListener('touchend', (e) => {
       if (!activeStoryTrack || !e.changedTouches || e.changedTouches.length === 0) return;
       const touch = e.changedTouches[0];
-      if (isPillHovered(touch.clientX, touch.clientY)) {
+      if (isTargetHovered(touch.clientX, touch.clientY)) {
         const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(activeStoryTrack.id)}/`;
         window.open(shareUrl, '_blank');
         showToast(`🔗 Redirecting to "${activeStoryTrack.title}"...`);
