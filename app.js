@@ -3253,44 +3253,117 @@
     }, 300);
   }
 
-  // 1. Native Mobile Story Share (Uses Default Story Size of Current Device/Platform)
+  // 1. Multi-Platform Social Share Handlers
+  const storyShareWhatsAppBtn = document.getElementById('storyShareWhatsAppBtn');
+  const storyShareTelegramBtn = document.getElementById('storyShareTelegramBtn');
+  const storyShareFbBtn = document.getElementById('storyShareFbBtn');
+  const storyShareXBtn = document.getElementById('storyShareXBtn');
+  const storyShareRedditBtn = document.getElementById('storyShareRedditBtn');
+
+  if (storyShareWhatsAppBtn) {
+    storyShareWhatsAppBtn.addEventListener('click', () => {
+      if (!activeStoryTrack) return;
+      const track = activeStoryTrack;
+      const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
+      const text = `🎵 Listening to "${track.title}" by ${track.artist} on BD Band Music! Lossless FLAC Audio:\n${shareUrl}`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+    });
+  }
+
+  if (storyShareTelegramBtn) {
+    storyShareTelegramBtn.addEventListener('click', () => {
+      if (!activeStoryTrack) return;
+      const track = activeStoryTrack;
+      const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
+      const text = `🎵 ${track.title} — ${track.artist} (Bit-Perfect FLAC)`;
+      window.open(`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(text)}`, '_blank');
+    });
+  }
+
+  if (storyShareFbBtn) {
+    storyShareFbBtn.addEventListener('click', () => {
+      if (!activeStoryTrack) return;
+      const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(activeStoryTrack.id)}/`;
+      const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+      window.open(fbUrl, '_blank', 'width=620,height=580,menubar=no,toolbar=no,resizable=yes');
+    });
+  }
+
+  if (storyShareXBtn) {
+    storyShareXBtn.addEventListener('click', () => {
+      if (!activeStoryTrack) return;
+      const track = activeStoryTrack;
+      const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
+      const text = `🎵 Listening to "${track.title}" by ${track.artist} on BD Band Music! 🇧🇩 Lossless FLAC`;
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'width=620,height=480');
+    });
+  }
+
+  if (storyShareRedditBtn) {
+    storyShareRedditBtn.addEventListener('click', () => {
+      if (!activeStoryTrack) return;
+      const track = activeStoryTrack;
+      const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
+      const title = `[Lossless FLAC] ${track.artist} - ${track.title}`;
+      window.open(`https://reddit.com/submit?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(title)}`, '_blank');
+    });
+  }
+
+  // 2. Native Share via Device Apps (Instagram / WhatsApp / OS Share Sheet)
+  // NEVER silently triggers download - download is reserved for explicit download buttons!
   if (storyNativeShareBtn) {
     storyNativeShareBtn.addEventListener('click', async () => {
       if (!activeStoryTrack) return;
       const track = activeStoryTrack;
       const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
-      showToast('Rendering story image for your device...');
+      const shareText = `🎵 Listening to ${track.title} by ${track.artist} on BD Band Music!`;
 
-      const blob = await generateFullStoryBlob(track);
-      const dims = getDeviceStoryDimensions();
-      const fileName = `${track.artist} - ${track.title} Story (${dims.width}x${dims.height}).png`;
-      const file = new File([blob], fileName, { type: 'image/png' });
+      if (navigator.share) {
+        // Mobile with file support: send story image to Instagram Stories / WhatsApp
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        if (isMobile && navigator.canShare) {
+          try {
+            showToast('Preparing story card for your device...');
+            const blob = await generateFullStoryBlob(track);
+            const fileName = `${track.artist} - ${track.title} Story.png`;
+            const file = new File([blob], fileName, { type: 'image/png' });
+            if (navigator.canShare({ files: [file] })) {
+              await navigator.share({
+                title: `${track.title} — ${track.artist}`,
+                text: shareText,
+                files: [file]
+              });
+              showToast('🎉 Shared to Story!');
+              return;
+            }
+          } catch (fileErr) {
+            if (fileErr.name === 'AbortError') return;
+            console.warn('File share skipped, using link share:', fileErr);
+          }
+        }
 
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        // Standard native OS share sheet (Windows / Mac / mobile apps)
         try {
           await navigator.share({
             title: `${track.title} — ${track.artist}`,
-            text: `🎵 Listening to ${track.title} by ${track.artist} on BD Band Music!`,
-            files: [file],
+            text: shareText,
             url: shareUrl
           });
-          showToast('🎉 Shared to Story!');
-        } catch (shareErr) {
-          if (shareErr.name !== 'AbortError') {
-            console.warn('Native share failed, downloading card:', shareErr);
-            triggerStoryDownload(blob, fileName);
-            copyToClipboardFallback(shareUrl, '⬇️ Saved Story Card & copied direct link!');
-          }
+          showToast('🎉 Shared successfully!');
+          return;
+        } catch (err) {
+          if (err.name === 'AbortError') return;
+          console.warn('Native share aborted or failed:', err);
         }
-      } else {
-        // Desktop / Unsupported fallback
-        triggerStoryDownload(blob, fileName);
-        copyToClipboardFallback(shareUrl, `⬇️ Saved Story Card (${dims.width}×${dims.height}) & copied link!`);
       }
+
+      // If navigator.share is unsupported (desktop Chrome/Firefox):
+      // Copy direct link and notify user to use WhatsApp/Telegram/FB buttons right above
+      copyToClipboard(shareUrl, '🔗 Link copied! Tap WhatsApp, Telegram, Facebook, or X above to share.');
     });
   }
 
-  // 2. Download Story Image (Default Platform / Device Story Size)
+  // 3. Download Story Image (1080x1920 HD or Device Story Size)
   if (storyDownloadBtn) {
     storyDownloadBtn.addEventListener('click', async () => {
       if (!activeStoryTrack) return;
@@ -3304,7 +3377,7 @@
     });
   }
 
-  // 3. Download 400x300 Web Card
+  // 4. Download 400x300 Web Card
   if (storyDownloadWebBtn) {
     storyDownloadWebBtn.addEventListener('click', async () => {
       if (!activeStoryTrack) return;
@@ -3314,16 +3387,6 @@
       const fileName = `${track.artist} - ${track.title} Web Card (400x300).png`;
       triggerStoryDownload(blob, fileName);
       showToast('⬇️ Downloaded Web Card (400×300)!');
-    });
-  }
-
-  // 4. Share to Facebook Web Dialog
-  if (storyFbShareBtn) {
-    storyFbShareBtn.addEventListener('click', () => {
-      if (!activeStoryTrack) return;
-      const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(activeStoryTrack.id)}/`;
-      const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-      window.open(fbUrl, '_blank', 'width=620,height=580,menubar=no,toolbar=no,resizable=yes');
     });
   }
 

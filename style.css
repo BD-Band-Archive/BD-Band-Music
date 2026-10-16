@@ -3650,6 +3650,80 @@ dialog.story-share-dialog::backdrop {
   letter-spacing: 0.05em;
 }
 
+/* Multi-Platform Social Grid */
+.story-social-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.45rem;
+}
+
+.story-social-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0.55rem 0.2rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+}
+
+.story-social-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.story-social-btn span {
+  font-size: 0.62rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.story-social-btn:hover {
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.story-social-btn.whatsapp:hover {
+  background: #25d366;
+  border-color: #25d366;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+
+.story-social-btn.telegram:hover {
+  background: #229ed9;
+  border-color: #229ed9;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(34, 158, 217, 0.35);
+}
+
+.story-social-btn.facebook:hover {
+  background: #1877f2;
+  border-color: #1877f2;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(24, 119, 242, 0.35);
+}
+
+.story-social-btn.x-twitter:hover {
+  background: #0f1419;
+  border-color: #536471;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+}
+
+.story-social-btn.reddit:hover {
+  background: #ff4500;
+  border-color: #ff4500;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(255, 69, 0, 0.35);
+}
+
 .story-buttons-list {
   display: flex;
   flex-direction: column;
