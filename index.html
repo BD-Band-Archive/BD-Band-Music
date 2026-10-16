@@ -704,16 +704,20 @@
         </div>
 
         <div class="story-dialog-body">
-          <!-- Story Card Visual Preview -->
+          <!-- Story Card Visual Preview (400x300) -->
           <div class="story-preview-col">
-            <div class="story-preview-frame">
-              <canvas id="storyCanvas" width="1080" height="1920" class="story-canvas"></canvas>
+            <div class="story-format-tabs" role="tablist">
+              <button id="storyFormatWebBtn" class="story-format-tab active" role="tab" aria-selected="true" title="400x300 Web Card view">🌐 Web Card (400×300)</button>
+              <button id="storyFormatStoryBtn" class="story-format-tab" role="tab" aria-selected="false" title="9:16 Vertical Story view">📱 Story View (9:16)</button>
+            </div>
+            <div class="story-preview-frame" id="storyPreviewFrame">
+              <canvas id="storyCanvas" width="800" height="600" class="story-canvas"></canvas>
               <div id="storyCanvasLoading" class="story-loading-overlay">
                 <div class="story-spinner"></div>
-                <span>Rendering Story Card...</span>
+                <span>Rendering Card Preview...</span>
               </div>
             </div>
-            <span class="story-preview-hint">9:16 Story Card • 1080 × 1920 HD</span>
+            <span class="story-preview-hint" id="storyPreviewHint">Web Card • 400 × 300</span>
           </div>
 
           <!-- Sharing Actions & Options -->
@@ -733,16 +737,25 @@
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
                 <div class="story-btn-text">
                   <strong>Share to Stories</strong>
-                  <small>Instagram, Facebook &amp; WhatsApp</small>
+                  <small>Auto-fits Platform / Device Story Size</small>
                 </div>
               </button>
 
-              <!-- Download Story Image -->
-              <button id="storyDownloadBtn" class="story-btn story-secondary-btn" title="Download High-Res 1080x1920 PNG Image">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <!-- Download Full Device / 1080x1920 Story Image -->
+              <button id="storyDownloadBtn" class="story-btn story-secondary-btn" title="Download Full-Size Story Card (Auto Device / 1080x1920 HD)">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                 <div class="story-btn-text">
                   <strong>Download Story Card</strong>
-                  <small>1080×1920 PNG Image</small>
+                  <small id="storyDownloadBtnHint">Device Story Size (1080×1920 HD)</small>
+                </div>
+              </button>
+
+              <!-- Download 400x300 Web Card -->
+              <button id="storyDownloadWebBtn" class="story-btn story-secondary-btn" title="Download 400x300 Web Card PNG">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="15" rx="2"/><polygon points="8 21 12 17 16 21"/></svg>
+                <div class="story-btn-text">
+                  <strong>Download Web Card</strong>
+                  <small>400×300 PNG for Web &amp; Discord</small>
                 </div>
               </button>
 
@@ -771,6 +784,6 @@
 
   </div>
 
-  <script src="app.js?v=3.3"></script>
+  <script src="app.js?v=3.4"></script>
 </body>
 </html>

@@ -2673,23 +2673,29 @@
   }
 
   // ==========================================================================
-  // Spotify-Style Share to Story Modal & Dynamic Canvas Generator
+  // Spotify-Style Share to Story & Web Card Generator (400x300 & Full Story Size)
   // ==========================================================================
   const storyShareDialog = document.getElementById('storyShareDialog');
   const closeStoryShareBtn = document.getElementById('closeStoryShareBtn');
   const storyCanvas = document.getElementById('storyCanvas');
   const storyCanvasLoading = document.getElementById('storyCanvasLoading');
+  const storyPreviewFrame = document.getElementById('storyPreviewFrame');
+  const storyPreviewHint = document.getElementById('storyPreviewHint');
+  const storyFormatWebBtn = document.getElementById('storyFormatWebBtn');
+  const storyFormatStoryBtn = document.getElementById('storyFormatStoryBtn');
   const storyTrackThumb = document.getElementById('storyTrackThumb');
   const storyTrackTitle = document.getElementById('storyTrackTitle');
   const storyTrackArtist = document.getElementById('storyTrackArtist');
   const storyNativeShareBtn = document.getElementById('storyNativeShareBtn');
   const storyDownloadBtn = document.getElementById('storyDownloadBtn');
+  const storyDownloadBtnHint = document.getElementById('storyDownloadBtnHint');
+  const storyDownloadWebBtn = document.getElementById('storyDownloadWebBtn');
   const storyFbShareBtn = document.getElementById('storyFbShareBtn');
   const storyCopyLinkBtn = document.getElementById('storyCopyLinkBtn');
   const storyLinkUrlDisplay = document.getElementById('storyLinkUrlDisplay');
 
   let activeStoryTrack = null;
-  let activeStoryBlob = null;
+  let activeStoryFormat = 'web'; // 'web' (400x300) or 'story' (9:16)
 
   function drawRoundRect(ctx, x, y, width, height, radius) {
     if (ctx.roundRect) {
@@ -2710,67 +2716,29 @@
     ctx.closePath();
   }
 
-  async function renderStoryCard(track) {
-    if (!storyCanvas) return;
-    const ctx = storyCanvas.getContext('2d');
-    const W = 1080;
-    const H = 1920;
-    storyCanvas.width = W;
-    storyCanvas.height = H;
+  // Detects the default Story resolution for the current device/platform
+  function getDeviceStoryDimensions() {
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || 
+                     (window.innerWidth <= 768 && window.innerHeight > window.innerWidth);
+    if (isMobile && window.screen && window.screen.width && window.screen.height) {
+      const screenW = Math.min(window.screen.width, window.screen.height);
+      const screenH = Math.max(window.screen.width, window.screen.height);
+      const dpr = Math.min(window.devicePixelRatio || 2, 3);
+      let targetW = Math.round(screenW * dpr);
+      let targetH = Math.round(screenH * dpr);
+      if (targetW < 1080) {
+        const scale = 1080 / targetW;
+        targetW = 1080;
+        targetH = Math.round(targetH * scale);
+      }
+      return { width: targetW, height: targetH, label: `${targetW}×${targetH} Device Native` };
+    }
+    // Universal 9:16 story standard (Instagram, Facebook, WhatsApp, Snapchat)
+    return { width: 1080, height: 1920, label: '1080×1920 HD Story' };
+  }
 
-    // 1. Background Gradient (Dark Audiophile Violet/Midnight)
-    const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
-    bgGrad.addColorStop(0, '#1c1033');
-    bgGrad.addColorStop(0.35, '#0f111a');
-    bgGrad.addColorStop(0.7, '#080a0f');
-    bgGrad.addColorStop(1, '#040508');
-    ctx.fillStyle = bgGrad;
-    ctx.fillRect(0, 0, W, H);
-
-    // 2. Ambient Radial Glow Behind Artwork
-    const glowGrad = ctx.createRadialGradient(W / 2, 650, 40, W / 2, 650, 520);
-    glowGrad.addColorStop(0, 'rgba(139, 92, 246, 0.42)');
-    glowGrad.addColorStop(0.5, 'rgba(217, 70, 239, 0.15)');
-    glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-    ctx.fillStyle = glowGrad;
-    ctx.fillRect(0, 100, W, 1100);
-
-    // 3. Header Branding Badge
-    const badgeY = 160;
-    ctx.save();
-    drawRoundRect(ctx, W / 2 - 260, badgeY - 32, 520, 64, 32);
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
-    ctx.fill();
-    ctx.lineWidth = 1.5;
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
-    ctx.stroke();
-
-    ctx.fillStyle = '#f8fafc';
-    ctx.font = '700 24px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('🇧🇩 BD BAND ARCHIVE • FLAC', W / 2, badgeY);
-    ctx.restore();
-
-    // 4. Centerpiece Album Artwork
-    const artSize = 680;
-    const artX = (W - artSize) / 2;
-    const artY = 270;
-    const artRadius = 36;
-
-    // Draw Artwork Drop Shadow
-    ctx.save();
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.75)';
-    ctx.shadowBlur = 48;
-    ctx.shadowOffsetY = 24;
-    drawRoundRect(ctx, artX, artY, artSize, artSize, artRadius);
-    ctx.fillStyle = '#121721';
-    ctx.fill();
-    ctx.restore();
-
-    // Load and Draw Image
-    let coverLoaded = false;
-    const coverUrl = track.coverUrl || 'assets/default_album_cover.svg';
+  async function loadCoverImage(coverUrl) {
+    if (!coverUrl) return null;
     try {
       const img = new Image();
       img.crossOrigin = 'anonymous';
@@ -2779,81 +2747,334 @@
         img.onerror = () => reject(new Error('Image failed to load'));
         img.src = coverUrl;
       });
-
-      ctx.save();
-      drawRoundRect(ctx, artX, artY, artSize, artSize, artRadius);
-      ctx.clip();
-      ctx.drawImage(img, artX, artY, artSize, artSize);
-      ctx.restore();
-      coverLoaded = true;
-    } catch (err) {
-      console.warn('Cover image failed for canvas, using stylized emblem fallback:', err);
+      return img;
+    } catch (e) {
+      return null;
     }
+  }
 
-    if (!coverLoaded) {
-      ctx.save();
-      drawRoundRect(ctx, artX, artY, artSize, artSize, artRadius);
-      ctx.clip();
+  // 1. Render 400x300 Web Card (at 800x600 for 2x retina sharpness)
+  async function renderWebCard(track, targetCanvas) {
+    if (!targetCanvas) return;
+    const ctx = targetCanvas.getContext('2d');
+    const W = 800;
+    const H = 600;
+    targetCanvas.width = W;
+    targetCanvas.height = H;
+
+    // Background Gradient (Dark Audiophile Violet/Midnight)
+    const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+    bgGrad.addColorStop(0, '#1a1030');
+    bgGrad.addColorStop(0.45, '#0e111a');
+    bgGrad.addColorStop(1, '#05070a');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Ambient Radial Glow behind Artwork
+    const glowGrad = ctx.createRadialGradient(200, 240, 20, 200, 240, 260);
+    glowGrad.addColorStop(0, 'rgba(139, 92, 246, 0.42)');
+    glowGrad.addColorStop(0.6, 'rgba(217, 70, 239, 0.12)');
+    glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = glowGrad;
+    ctx.fillRect(0, 0, 480, 500);
+
+    // Header Badge Pill
+    const badgeY = 48;
+    ctx.save();
+    drawRoundRect(ctx, 36, badgeY - 18, 260, 36, 18);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.fill();
+    ctx.lineWidth = 1.2;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+    ctx.stroke();
+
+    ctx.fillStyle = '#f8fafc';
+    ctx.font = '700 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🇧🇩 BD BAND ARCHIVE • FLAC', 166, badgeY);
+    ctx.restore();
+
+    // Center-left Album Artwork (Square with soft shadow & rounded corners)
+    const artSize = 310;
+    const artX = 36;
+    const artY = 88;
+    const artRadius = 20;
+
+    ctx.save();
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+    ctx.shadowBlur = 24;
+    ctx.shadowOffsetY = 12;
+    drawRoundRect(ctx, artX, artY, artSize, artSize, artRadius);
+    ctx.fillStyle = '#121721';
+    ctx.fill();
+    ctx.restore();
+
+    // Load & Draw Cover
+    const coverUrl = track.coverUrl || 'assets/default_album_cover.svg';
+    const img = await loadCoverImage(coverUrl);
+    ctx.save();
+    drawRoundRect(ctx, artX, artY, artSize, artSize, artRadius);
+    ctx.clip();
+    if (img) {
+      ctx.drawImage(img, artX, artY, artSize, artSize);
+    } else {
       const fallbackGrad = ctx.createLinearGradient(artX, artY, artX + artSize, artY + artSize);
       fallbackGrad.addColorStop(0, '#8b5cf6');
       fallbackGrad.addColorStop(1, '#3b82f6');
       ctx.fillStyle = fallbackGrad;
       ctx.fillRect(artX, artY, artSize, artSize);
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 96px sans-serif';
+      ctx.font = 'bold 72px sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('🎸', artX + artSize / 2, artY + artSize / 2);
-      ctx.restore();
+    }
+    ctx.restore();
+
+    // Right Column Track Details
+    const textX = 375;
+    ctx.save();
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+
+    // Track Title
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '800 32px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    let title = track.title;
+    if (ctx.measureText(title).width > 385) {
+      while (ctx.measureText(title + '...').width > 385 && title.length > 0) {
+        title = title.slice(0, -1);
+      }
+      title += '...';
+    }
+    ctx.fillText(title, textX, 135);
+
+    // Artist
+    ctx.fillStyle = '#c084fc';
+    ctx.font = '700 24px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    let artist = track.artist;
+    if (ctx.measureText(artist).width > 385) {
+      while (ctx.measureText(artist + '...').width > 385 && artist.length > 0) {
+        artist = artist.slice(0, -1);
+      }
+      artist += '...';
+    }
+    ctx.fillText(artist, textX, 178);
+
+    // Album
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '600 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    let album = track.album;
+    if (ctx.measureText(album).width > 385) {
+      while (ctx.measureText(album + '...').width > 385 && album.length > 0) {
+        album = album.slice(0, -1);
+      }
+      album += '...';
+    }
+    ctx.fillText(album, textX, 214);
+
+    // FLAC Bit-Perfect Badge Pill
+    const pillY = 265;
+    drawRoundRect(ctx, textX, pillY - 18, 385, 36, 18);
+    ctx.fillStyle = 'rgba(34, 211, 238, 0.12)';
+    ctx.fill();
+    ctx.lineWidth = 1.2;
+    ctx.strokeStyle = 'rgba(34, 211, 238, 0.35)';
+    ctx.stroke();
+
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = '700 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('FLAC 16-BIT / 44.1 KHZ • BIT-PERFECT CDDA', textX + 192, pillY);
+
+    // CTA Stream Pill
+    const ctaY = 325;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+    ctx.shadowBlur = 16;
+    ctx.shadowOffsetY = 6;
+    drawRoundRect(ctx, textX, ctaY - 22, 385, 44, 22);
+    ctx.fillStyle = '#ffffff';
+    ctx.fill();
+    ctx.shadowColor = 'transparent';
+
+    ctx.fillStyle = '#0b0e14';
+    ctx.font = '800 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('▶ Listen on BD Band Music Player', textX + 192, ctaY);
+    ctx.restore();
+
+    // Bottom Waveform Visualizer
+    const waveY = 475;
+    const barCount = 44;
+    const barWidth = 6;
+    const barGap = 10;
+    const totalWaveWidth = barCount * (barWidth + barGap) - barGap;
+    const startX = (W - totalWaveWidth) / 2;
+
+    const waveHeights = [
+      18, 28, 42, 60, 45, 30, 52, 70, 55, 38, 62, 80, 68, 48, 58, 75,
+      60, 42, 54, 70, 50, 32, 45, 62, 48, 35, 52, 68, 54, 38, 48, 62,
+      44, 28, 40, 52, 38, 24, 36, 48, 32, 22, 16, 12
+    ];
+
+    const waveGrad = ctx.createLinearGradient(startX, 0, startX + totalWaveWidth, 0);
+    waveGrad.addColorStop(0, '#8b5cf6');
+    waveGrad.addColorStop(0.5, '#ec4899');
+    waveGrad.addColorStop(1, '#22d3ee');
+    ctx.fillStyle = waveGrad;
+
+    for (let i = 0; i < barCount; i++) {
+      const bx = startX + i * (barWidth + barGap);
+      const bh = (waveHeights[i % waveHeights.length]) * 0.75;
+      const by = waveY - bh / 2;
+      drawRoundRect(ctx, bx, by, barWidth, bh, 3);
+      ctx.fill();
     }
 
-    // 5. Song Title & Artist Typography
+    // Footnote Watermark
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.font = '600 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('bd-band-archive.github.io/BD-Band-Music • Bit-Perfect CD Archive', W / 2, 555);
+  }
+
+  // 2. Render Vertical 9:16 Story Card (Scales dynamically to device or standard 1080x1920)
+  async function renderStoryCardVertical(track, targetCanvas, targetW = 1080, targetH = 1920) {
+    if (!targetCanvas) return;
+    const ctx = targetCanvas.getContext('2d');
+    const W = targetW;
+    const H = targetH;
+    targetCanvas.width = W;
+    targetCanvas.height = H;
+
+    const scale = W / 1080;
+
+    // 1. Background Gradient
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+    bgGrad.addColorStop(0, '#1c1033');
+    bgGrad.addColorStop(0.35, '#0f111a');
+    bgGrad.addColorStop(0.7, '#080a0f');
+    bgGrad.addColorStop(1, '#040508');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    // 2. Ambient Radial Glow
+    const glowY = 650 * scale;
+    const glowRadius = 520 * scale;
+    const glowGrad = ctx.createRadialGradient(W / 2, glowY, 40 * scale, W / 2, glowY, glowRadius);
+    glowGrad.addColorStop(0, 'rgba(139, 92, 246, 0.42)');
+    glowGrad.addColorStop(0.5, 'rgba(217, 70, 239, 0.15)');
+    glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = glowGrad;
+    ctx.fillRect(0, 100 * scale, W, 1100 * scale);
+
+    // 3. Header Branding Badge
+    const badgeY = 160 * scale;
+    const badgeW = 520 * scale;
+    const badgeH = 64 * scale;
+    ctx.save();
+    drawRoundRect(ctx, (W - badgeW) / 2, badgeY - badgeH / 2, badgeW, badgeH, 32 * scale);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.fill();
+    ctx.lineWidth = 1.5 * scale;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+    ctx.stroke();
+
+    ctx.fillStyle = '#f8fafc';
+    ctx.font = `700 ${Math.round(24 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🇧🇩 BD BAND ARCHIVE • FLAC', W / 2, badgeY);
+    ctx.restore();
+
+    // 4. Centerpiece Album Artwork
+    const artSize = 680 * scale;
+    const artX = (W - artSize) / 2;
+    const artY = 270 * scale;
+    const artRadius = 36 * scale;
+
+    ctx.save();
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.75)';
+    ctx.shadowBlur = 48 * scale;
+    ctx.shadowOffsetY = 24 * scale;
+    drawRoundRect(ctx, artX, artY, artSize, artSize, artRadius);
+    ctx.fillStyle = '#121721';
+    ctx.fill();
+    ctx.restore();
+
+    const coverUrl = track.coverUrl || 'assets/default_album_cover.svg';
+    const img = await loadCoverImage(coverUrl);
+    ctx.save();
+    drawRoundRect(ctx, artX, artY, artSize, artSize, artRadius);
+    ctx.clip();
+    if (img) {
+      ctx.drawImage(img, artX, artY, artSize, artSize);
+    } else {
+      const fallbackGrad = ctx.createLinearGradient(artX, artY, artX + artSize, artY + artSize);
+      fallbackGrad.addColorStop(0, '#8b5cf6');
+      fallbackGrad.addColorStop(1, '#3b82f6');
+      ctx.fillStyle = fallbackGrad;
+      ctx.fillRect(artX, artY, artSize, artSize);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = `bold ${Math.round(96 * scale)}px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('🎸', artX + artSize / 2, artY + artSize / 2);
+    }
+    ctx.restore();
+
+    // 5. Typography
     ctx.save();
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
     // Title
     ctx.fillStyle = '#ffffff';
-    ctx.font = '800 54px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.font = `800 ${Math.round(54 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
     let title = track.title;
-    if (ctx.measureText(title).width > 860) {
-      while (ctx.measureText(title + '...').width > 860 && title.length > 0) {
+    const maxTitleW = 860 * scale;
+    if (ctx.measureText(title).width > maxTitleW) {
+      while (ctx.measureText(title + '...').width > maxTitleW && title.length > 0) {
         title = title.slice(0, -1);
       }
       title += '...';
     }
-    ctx.fillText(title, W / 2, 1050);
+    ctx.fillText(title, W / 2, 1050 * scale);
 
     // Artist & Album
     ctx.fillStyle = '#c084fc';
-    ctx.font = '700 38px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.font = `700 ${Math.round(38 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
     let subtitle = `${track.artist} • ${track.album}`;
-    if (ctx.measureText(subtitle).width > 880) {
-      while (ctx.measureText(subtitle + '...').width > 880 && subtitle.length > 0) {
+    const maxSubW = 880 * scale;
+    if (ctx.measureText(subtitle).width > maxSubW) {
+      while (ctx.measureText(subtitle + '...').width > maxSubW && subtitle.length > 0) {
         subtitle = subtitle.slice(0, -1);
       }
       subtitle += '...';
     }
-    ctx.fillText(subtitle, W / 2, 1120);
+    ctx.fillText(subtitle, W / 2, 1120 * scale);
 
     // 6. Quality Badge Pill
-    const qualityY = 1210;
-    drawRoundRect(ctx, W / 2 - 270, qualityY - 26, 540, 52, 26);
+    const qualityY = 1210 * scale;
+    const qualityW = 540 * scale;
+    const qualityH = 52 * scale;
+    drawRoundRect(ctx, (W - qualityW) / 2, qualityY - qualityH / 2, qualityW, qualityH, 26 * scale);
     ctx.fillStyle = 'rgba(34, 211, 238, 0.12)';
     ctx.fill();
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = 1.5 * scale;
     ctx.strokeStyle = 'rgba(34, 211, 238, 0.35)';
     ctx.stroke();
 
     ctx.fillStyle = '#38bdf8';
-    ctx.font = '700 22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.font = `700 ${Math.round(22 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
     ctx.fillText('FLAC 16-BIT / 44.1 KHZ • BIT-PERFECT CDDA', W / 2, qualityY);
 
     // 7. Equalizer Audio Waveform Bars
-    const waveY = 1350;
+    const waveY = 1350 * scale;
     const barCount = 32;
-    const barWidth = 8;
-    const barGap = 12;
+    const barWidth = 8 * scale;
+    const barGap = 12 * scale;
     const totalWaveWidth = barCount * (barWidth + barGap) - barGap;
     const startX = (W - totalWaveWidth) / 2;
 
@@ -2872,41 +3093,84 @@
 
     for (let i = 0; i < barCount; i++) {
       const bx = startX + i * (barWidth + barGap);
-      const bh = waveHeights[i % waveHeights.length];
+      const bh = (waveHeights[i % waveHeights.length]) * scale;
       const by = waveY - bh / 2;
-      drawRoundRect(ctx, bx, by, barWidth, bh, 4);
+      drawRoundRect(ctx, bx, by, barWidth, bh, 4 * scale);
       ctx.fill();
     }
 
     // 8. Bottom CTA Pill (Spotify-style)
-    const ctaY = 1560;
+    const ctaY = 1560 * scale;
+    const ctaW = 620 * scale;
+    const ctaH = 76 * scale;
     ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
-    ctx.shadowBlur = 25;
-    ctx.shadowOffsetY = 10;
-    drawRoundRect(ctx, W / 2 - 310, ctaY - 38, 620, 76, 38);
+    ctx.shadowBlur = 25 * scale;
+    ctx.shadowOffsetY = 10 * scale;
+    drawRoundRect(ctx, (W - ctaW) / 2, ctaY - ctaH / 2, ctaW, ctaH, 38 * scale);
     ctx.fillStyle = '#ffffff';
     ctx.fill();
     ctx.shadowColor = 'transparent';
 
     ctx.fillStyle = '#0b0e14';
-    ctx.font = '800 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.font = `800 ${Math.round(28 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
     ctx.fillText('▶ Listen on bd-band-archive.github.io', W / 2, ctaY);
 
     // 9. Footnote Watermark
     ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-    ctx.font = '600 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText('Archived with Lossless CD Packaging Artwork', W / 2, 1720);
+    ctx.font = `600 ${Math.round(20 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    ctx.fillText('Archived with Lossless CD Packaging Artwork', W / 2, 1720 * scale);
 
     ctx.restore();
+  }
 
-    // Generate and store blob
-    activeStoryBlob = await new Promise(resolve => storyCanvas.toBlob(resolve, 'image/png'));
+  // Generates high-res story blob at current device/platform default story size
+  async function generateFullStoryBlob(track) {
+    const dims = getDeviceStoryDimensions();
+    const offscreen = document.createElement('canvas');
+    await renderStoryCardVertical(track, offscreen, dims.width, dims.height);
+    return await new Promise(resolve => offscreen.toBlob(resolve, 'image/png'));
+  }
+
+  // Generates 400x300 web card blob
+  async function generateWebCardBlob(track) {
+    const offscreen = document.createElement('canvas');
+    await renderWebCard(track, offscreen);
+    return await new Promise(resolve => offscreen.toBlob(resolve, 'image/png'));
+  }
+
+  // Refreshes the on-screen preview based on activeStoryFormat
+  async function refreshStoryPreview() {
+    if (!activeStoryTrack || !storyCanvas) return;
+    if (storyCanvasLoading) storyCanvasLoading.classList.remove('hidden');
+    try {
+      if (activeStoryFormat === 'web') {
+        if (storyPreviewFrame) storyPreviewFrame.classList.remove('aspect-story');
+        if (storyPreviewHint) storyPreviewHint.textContent = 'Web Card • 400 × 300';
+        await renderWebCard(activeStoryTrack, storyCanvas);
+      } else {
+        if (storyPreviewFrame) storyPreviewFrame.classList.add('aspect-story');
+        if (storyPreviewHint) storyPreviewHint.textContent = 'Story View • 9:16 Vertical Preview';
+        await renderStoryCardVertical(activeStoryTrack, storyCanvas, 1080, 1920);
+      }
+    } catch (err) {
+      console.error('Error rendering preview:', err);
+    } finally {
+      if (storyCanvasLoading) storyCanvasLoading.classList.add('hidden');
+    }
   }
 
   async function openStoryShareModal(track) {
     if (!track || !storyShareDialog) return;
     activeStoryTrack = track;
-    activeStoryBlob = null;
+    activeStoryFormat = 'web'; // Default to 400x300 for website
+
+    if (storyFormatWebBtn) storyFormatWebBtn.classList.add('active');
+    if (storyFormatStoryBtn) storyFormatStoryBtn.classList.remove('active');
+
+    const dims = getDeviceStoryDimensions();
+    if (storyDownloadBtnHint) {
+      storyDownloadBtnHint.textContent = `Default Story Size (${dims.width}×${dims.height})`;
+    }
 
     if (storyTrackTitle) storyTrackTitle.textContent = track.title;
     if (storyTrackArtist) storyTrackArtist.textContent = `${track.artist} • ${track.album}`;
@@ -2919,8 +3183,6 @@
       storyLinkUrlDisplay.textContent = shareUrl.replace(/^https?:\/\//, '');
     }
 
-    if (storyCanvasLoading) storyCanvasLoading.classList.remove('hidden');
-
     // Open native dialog with showModal (Modern Web Guidance)
     if (typeof storyShareDialog.showModal === 'function') {
       try {
@@ -2932,14 +3194,28 @@
       storyShareDialog.setAttribute('open', '');
     }
 
-    // Render Canvas
-    try {
-      await renderStoryCard(track);
-    } catch (err) {
-      console.error('Error rendering story card:', err);
-    } finally {
-      if (storyCanvasLoading) storyCanvasLoading.classList.add('hidden');
-    }
+    await refreshStoryPreview();
+  }
+
+  // Format Toggle Listeners
+  if (storyFormatWebBtn) {
+    storyFormatWebBtn.addEventListener('click', () => {
+      if (activeStoryFormat === 'web') return;
+      activeStoryFormat = 'web';
+      storyFormatWebBtn.classList.add('active');
+      if (storyFormatStoryBtn) storyFormatStoryBtn.classList.remove('active');
+      refreshStoryPreview();
+    });
+  }
+
+  if (storyFormatStoryBtn) {
+    storyFormatStoryBtn.addEventListener('click', () => {
+      if (activeStoryFormat === 'story') return;
+      activeStoryFormat = 'story';
+      storyFormatStoryBtn.classList.add('active');
+      if (storyFormatWebBtn) storyFormatWebBtn.classList.remove('active');
+      refreshStoryPreview();
+    });
   }
 
   // Close Dialog Actions
@@ -2975,20 +3251,18 @@
     }, 300);
   }
 
-  // 1. Native Mobile Story Share (Instagram / Facebook / WhatsApp)
+  // 1. Native Mobile Story Share (Uses Default Story Size of Current Device/Platform)
   if (storyNativeShareBtn) {
     storyNativeShareBtn.addEventListener('click', async () => {
       if (!activeStoryTrack) return;
       const track = activeStoryTrack;
       const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
+      showToast('Rendering story image for your device...');
 
-      if (!activeStoryBlob) {
-        showToast('Rendering story image, please wait...');
-        await renderStoryCard(track);
-      }
-
-      const fileName = `${track.artist} - ${track.title} Story.png`;
-      const file = new File([activeStoryBlob], fileName, { type: 'image/png' });
+      const blob = await generateFullStoryBlob(track);
+      const dims = getDeviceStoryDimensions();
+      const fileName = `${track.artist} - ${track.title} Story (${dims.width}x${dims.height}).png`;
+      const file = new File([blob], fileName, { type: 'image/png' });
 
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
@@ -3002,31 +3276,46 @@
         } catch (shareErr) {
           if (shareErr.name !== 'AbortError') {
             console.warn('Native share failed, downloading card:', shareErr);
-            triggerStoryDownload(activeStoryBlob, fileName);
+            triggerStoryDownload(blob, fileName);
             copyToClipboardFallback(shareUrl, '⬇️ Saved Story Card & copied direct link!');
           }
         }
       } else {
         // Desktop / Unsupported fallback
-        triggerStoryDownload(activeStoryBlob, fileName);
-        copyToClipboardFallback(shareUrl, '⬇️ Saved Story Card (1080×1920 HD) & copied link!');
+        triggerStoryDownload(blob, fileName);
+        copyToClipboardFallback(shareUrl, `⬇️ Saved Story Card (${dims.width}×${dims.height}) & copied link!`);
       }
     });
   }
 
-  // 2. Download Story Image (1080x1920 PNG)
+  // 2. Download Story Image (Default Platform / Device Story Size)
   if (storyDownloadBtn) {
     storyDownloadBtn.addEventListener('click', async () => {
       if (!activeStoryTrack) return;
       const track = activeStoryTrack;
-      if (!activeStoryBlob) await renderStoryCard(track);
-      const fileName = `${track.artist} - ${track.title} Story Card.png`;
-      triggerStoryDownload(activeStoryBlob, fileName);
-      showToast('⬇️ Downloaded Story Card (1080×1920 HD)!');
+      showToast('Rendering full-size story card...');
+      const blob = await generateFullStoryBlob(track);
+      const dims = getDeviceStoryDimensions();
+      const fileName = `${track.artist} - ${track.title} Story Card (${dims.width}x${dims.height}).png`;
+      triggerStoryDownload(blob, fileName);
+      showToast(`⬇️ Downloaded Story Card (${dims.width}×${dims.height})!`);
     });
   }
 
-  // 3. Share to Facebook Web Dialog
+  // 3. Download 400x300 Web Card
+  if (storyDownloadWebBtn) {
+    storyDownloadWebBtn.addEventListener('click', async () => {
+      if (!activeStoryTrack) return;
+      const track = activeStoryTrack;
+      showToast('Rendering 400×300 web card...');
+      const blob = await generateWebCardBlob(track);
+      const fileName = `${track.artist} - ${track.title} Web Card (400x300).png`;
+      triggerStoryDownload(blob, fileName);
+      showToast('⬇️ Downloaded Web Card (400×300)!');
+    });
+  }
+
+  // 4. Share to Facebook Web Dialog
   if (storyFbShareBtn) {
     storyFbShareBtn.addEventListener('click', () => {
       if (!activeStoryTrack) return;
@@ -3036,7 +3325,7 @@
     });
   }
 
-  // 4. Copy Direct Song Link
+  // 5. Copy Direct Song Link
   if (storyCopyLinkBtn) {
     storyCopyLinkBtn.addEventListener('click', () => {
       if (!activeStoryTrack) return;
