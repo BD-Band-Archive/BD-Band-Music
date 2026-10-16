@@ -2672,13 +2672,388 @@
     copyShareLink(shareUrl, `${albumName} — BD Band Music`, `🔗 Copied album preview link for "${albumName}"!`);
   }
 
-  // Hook Bottom Player Bar Share Button
+  // ==========================================================================
+  // Spotify-Style Share to Story Modal & Dynamic Canvas Generator
+  // ==========================================================================
+  const storyShareDialog = document.getElementById('storyShareDialog');
+  const closeStoryShareBtn = document.getElementById('closeStoryShareBtn');
+  const storyCanvas = document.getElementById('storyCanvas');
+  const storyCanvasLoading = document.getElementById('storyCanvasLoading');
+  const storyTrackThumb = document.getElementById('storyTrackThumb');
+  const storyTrackTitle = document.getElementById('storyTrackTitle');
+  const storyTrackArtist = document.getElementById('storyTrackArtist');
+  const storyNativeShareBtn = document.getElementById('storyNativeShareBtn');
+  const storyDownloadBtn = document.getElementById('storyDownloadBtn');
+  const storyFbShareBtn = document.getElementById('storyFbShareBtn');
+  const storyCopyLinkBtn = document.getElementById('storyCopyLinkBtn');
+  const storyLinkUrlDisplay = document.getElementById('storyLinkUrlDisplay');
+
+  let activeStoryTrack = null;
+  let activeStoryBlob = null;
+
+  function drawRoundRect(ctx, x, y, width, height, radius) {
+    if (ctx.roundRect) {
+      ctx.beginPath();
+      ctx.roundRect(x, y, width, height, radius);
+      return;
+    }
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+  }
+
+  async function renderStoryCard(track) {
+    if (!storyCanvas) return;
+    const ctx = storyCanvas.getContext('2d');
+    const W = 1080;
+    const H = 1920;
+    storyCanvas.width = W;
+    storyCanvas.height = H;
+
+    // 1. Background Gradient (Dark Audiophile Violet/Midnight)
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+    bgGrad.addColorStop(0, '#1c1033');
+    bgGrad.addColorStop(0.35, '#0f111a');
+    bgGrad.addColorStop(0.7, '#080a0f');
+    bgGrad.addColorStop(1, '#040508');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    // 2. Ambient Radial Glow Behind Artwork
+    const glowGrad = ctx.createRadialGradient(W / 2, 650, 40, W / 2, 650, 520);
+    glowGrad.addColorStop(0, 'rgba(139, 92, 246, 0.42)');
+    glowGrad.addColorStop(0.5, 'rgba(217, 70, 239, 0.15)');
+    glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = glowGrad;
+    ctx.fillRect(0, 100, W, 1100);
+
+    // 3. Header Branding Badge
+    const badgeY = 160;
+    ctx.save();
+    drawRoundRect(ctx, W / 2 - 260, badgeY - 32, 520, 64, 32);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.fill();
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+    ctx.stroke();
+
+    ctx.fillStyle = '#f8fafc';
+    ctx.font = '700 24px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🇧🇩 BD BAND ARCHIVE • FLAC', W / 2, badgeY);
+    ctx.restore();
+
+    // 4. Centerpiece Album Artwork
+    const artSize = 680;
+    const artX = (W - artSize) / 2;
+    const artY = 270;
+    const artRadius = 36;
+
+    // Draw Artwork Drop Shadow
+    ctx.save();
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.75)';
+    ctx.shadowBlur = 48;
+    ctx.shadowOffsetY = 24;
+    drawRoundRect(ctx, artX, artY, artSize, artSize, artRadius);
+    ctx.fillStyle = '#121721';
+    ctx.fill();
+    ctx.restore();
+
+    // Load and Draw Image
+    let coverLoaded = false;
+    const coverUrl = track.coverUrl || 'assets/default_album_cover.svg';
+    try {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      await new Promise((resolve, reject) => {
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('Image failed to load'));
+        img.src = coverUrl;
+      });
+
+      ctx.save();
+      drawRoundRect(ctx, artX, artY, artSize, artSize, artRadius);
+      ctx.clip();
+      ctx.drawImage(img, artX, artY, artSize, artSize);
+      ctx.restore();
+      coverLoaded = true;
+    } catch (err) {
+      console.warn('Cover image failed for canvas, using stylized emblem fallback:', err);
+    }
+
+    if (!coverLoaded) {
+      ctx.save();
+      drawRoundRect(ctx, artX, artY, artSize, artSize, artRadius);
+      ctx.clip();
+      const fallbackGrad = ctx.createLinearGradient(artX, artY, artX + artSize, artY + artSize);
+      fallbackGrad.addColorStop(0, '#8b5cf6');
+      fallbackGrad.addColorStop(1, '#3b82f6');
+      ctx.fillStyle = fallbackGrad;
+      ctx.fillRect(artX, artY, artSize, artSize);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 96px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('🎸', artX + artSize / 2, artY + artSize / 2);
+      ctx.restore();
+    }
+
+    // 5. Song Title & Artist Typography
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Title
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '800 54px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    let title = track.title;
+    if (ctx.measureText(title).width > 860) {
+      while (ctx.measureText(title + '...').width > 860 && title.length > 0) {
+        title = title.slice(0, -1);
+      }
+      title += '...';
+    }
+    ctx.fillText(title, W / 2, 1050);
+
+    // Artist & Album
+    ctx.fillStyle = '#c084fc';
+    ctx.font = '700 38px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    let subtitle = `${track.artist} • ${track.album}`;
+    if (ctx.measureText(subtitle).width > 880) {
+      while (ctx.measureText(subtitle + '...').width > 880 && subtitle.length > 0) {
+        subtitle = subtitle.slice(0, -1);
+      }
+      subtitle += '...';
+    }
+    ctx.fillText(subtitle, W / 2, 1120);
+
+    // 6. Quality Badge Pill
+    const qualityY = 1210;
+    drawRoundRect(ctx, W / 2 - 270, qualityY - 26, 540, 52, 26);
+    ctx.fillStyle = 'rgba(34, 211, 238, 0.12)';
+    ctx.fill();
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = 'rgba(34, 211, 238, 0.35)';
+    ctx.stroke();
+
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = '700 22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('FLAC 16-BIT / 44.1 KHZ • BIT-PERFECT CDDA', W / 2, qualityY);
+
+    // 7. Equalizer Audio Waveform Bars
+    const waveY = 1350;
+    const barCount = 32;
+    const barWidth = 8;
+    const barGap = 12;
+    const totalWaveWidth = barCount * (barWidth + barGap) - barGap;
+    const startX = (W - totalWaveWidth) / 2;
+
+    const waveHeights = [
+      24, 38, 55, 75, 95, 65, 45, 80,
+      110, 85, 60, 95, 120, 100, 70, 85,
+      115, 90, 65, 80, 105, 75, 50, 70,
+      85, 60, 45, 65, 80, 55, 38, 22
+    ];
+
+    const waveGrad = ctx.createLinearGradient(startX, 0, startX + totalWaveWidth, 0);
+    waveGrad.addColorStop(0, '#8b5cf6');
+    waveGrad.addColorStop(0.5, '#ec4899');
+    waveGrad.addColorStop(1, '#22d3ee');
+    ctx.fillStyle = waveGrad;
+
+    for (let i = 0; i < barCount; i++) {
+      const bx = startX + i * (barWidth + barGap);
+      const bh = waveHeights[i % waveHeights.length];
+      const by = waveY - bh / 2;
+      drawRoundRect(ctx, bx, by, barWidth, bh, 4);
+      ctx.fill();
+    }
+
+    // 8. Bottom CTA Pill (Spotify-style)
+    const ctaY = 1560;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+    ctx.shadowBlur = 25;
+    ctx.shadowOffsetY = 10;
+    drawRoundRect(ctx, W / 2 - 310, ctaY - 38, 620, 76, 38);
+    ctx.fillStyle = '#ffffff';
+    ctx.fill();
+    ctx.shadowColor = 'transparent';
+
+    ctx.fillStyle = '#0b0e14';
+    ctx.font = '800 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('▶ Listen on bd-band-archive.github.io', W / 2, ctaY);
+
+    // 9. Footnote Watermark
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.font = '600 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('Archived with Lossless CD Packaging Artwork', W / 2, 1720);
+
+    ctx.restore();
+
+    // Generate and store blob
+    activeStoryBlob = await new Promise(resolve => storyCanvas.toBlob(resolve, 'image/png'));
+  }
+
+  async function openStoryShareModal(track) {
+    if (!track || !storyShareDialog) return;
+    activeStoryTrack = track;
+    activeStoryBlob = null;
+
+    if (storyTrackTitle) storyTrackTitle.textContent = track.title;
+    if (storyTrackArtist) storyTrackArtist.textContent = `${track.artist} • ${track.album}`;
+    if (storyTrackThumb) {
+      storyTrackThumb.src = track.coverUrl || 'assets/default_album_cover.svg';
+      storyTrackThumb.onerror = () => { storyTrackThumb.src = 'assets/default_album_cover.svg'; };
+    }
+    const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
+    if (storyLinkUrlDisplay) {
+      storyLinkUrlDisplay.textContent = shareUrl.replace(/^https?:\/\//, '');
+    }
+
+    if (storyCanvasLoading) storyCanvasLoading.classList.remove('hidden');
+
+    // Open native dialog with showModal (Modern Web Guidance)
+    if (typeof storyShareDialog.showModal === 'function') {
+      try {
+        if (!storyShareDialog.open) storyShareDialog.showModal();
+      } catch (e) {
+        storyShareDialog.setAttribute('open', '');
+      }
+    } else {
+      storyShareDialog.setAttribute('open', '');
+    }
+
+    // Render Canvas
+    try {
+      await renderStoryCard(track);
+    } catch (err) {
+      console.error('Error rendering story card:', err);
+    } finally {
+      if (storyCanvasLoading) storyCanvasLoading.classList.add('hidden');
+    }
+  }
+
+  // Close Dialog Actions
+  if (closeStoryShareBtn && storyShareDialog) {
+    closeStoryShareBtn.addEventListener('click', () => {
+      storyShareDialog.close();
+    });
+  }
+
+  // Fallback for browsers without closedby support (Modern Web Guidance)
+  if (storyShareDialog && !('closedBy' in HTMLDialogElement.prototype)) {
+    storyShareDialog.addEventListener('click', (event) => {
+      if (event.target !== storyShareDialog) return;
+      const rect = storyShareDialog.getBoundingClientRect();
+      const isInside = (
+        rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+        rect.left <= event.clientX && event.clientX <= rect.left + rect.width
+      );
+      if (!isInside) storyShareDialog.close();
+    });
+  }
+
+  function triggerStoryDownload(blob, fileName) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 300);
+  }
+
+  // 1. Native Mobile Story Share (Instagram / Facebook / WhatsApp)
+  if (storyNativeShareBtn) {
+    storyNativeShareBtn.addEventListener('click', async () => {
+      if (!activeStoryTrack) return;
+      const track = activeStoryTrack;
+      const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
+
+      if (!activeStoryBlob) {
+        showToast('Rendering story image, please wait...');
+        await renderStoryCard(track);
+      }
+
+      const fileName = `${track.artist} - ${track.title} Story.png`;
+      const file = new File([activeStoryBlob], fileName, { type: 'image/png' });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            title: `${track.title} — ${track.artist}`,
+            text: `🎵 Listening to ${track.title} by ${track.artist} on BD Band Music!`,
+            files: [file],
+            url: shareUrl
+          });
+          showToast('🎉 Shared to Story!');
+        } catch (shareErr) {
+          if (shareErr.name !== 'AbortError') {
+            console.warn('Native share failed, downloading card:', shareErr);
+            triggerStoryDownload(activeStoryBlob, fileName);
+            copyToClipboardFallback(shareUrl, '⬇️ Saved Story Card & copied direct link!');
+          }
+        }
+      } else {
+        // Desktop / Unsupported fallback
+        triggerStoryDownload(activeStoryBlob, fileName);
+        copyToClipboardFallback(shareUrl, '⬇️ Saved Story Card (1080×1920 HD) & copied link!');
+      }
+    });
+  }
+
+  // 2. Download Story Image (1080x1920 PNG)
+  if (storyDownloadBtn) {
+    storyDownloadBtn.addEventListener('click', async () => {
+      if (!activeStoryTrack) return;
+      const track = activeStoryTrack;
+      if (!activeStoryBlob) await renderStoryCard(track);
+      const fileName = `${track.artist} - ${track.title} Story Card.png`;
+      triggerStoryDownload(activeStoryBlob, fileName);
+      showToast('⬇️ Downloaded Story Card (1080×1920 HD)!');
+    });
+  }
+
+  // 3. Share to Facebook Web Dialog
+  if (storyFbShareBtn) {
+    storyFbShareBtn.addEventListener('click', () => {
+      if (!activeStoryTrack) return;
+      const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(activeStoryTrack.id)}/`;
+      const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+      window.open(fbUrl, '_blank', 'width=620,height=580,menubar=no,toolbar=no,resizable=yes');
+    });
+  }
+
+  // 4. Copy Direct Song Link
+  if (storyCopyLinkBtn) {
+    storyCopyLinkBtn.addEventListener('click', () => {
+      if (!activeStoryTrack) return;
+      copyTrackShareLink(activeStoryTrack.id);
+    });
+  }
+
+  // Hook Bottom Player Bar Share Button -> Opens Spotify-Style Share to Story Modal
   if (playerShareBtn) {
+    playerShareBtn.title = 'Share Track to Story (Instagram / Facebook)';
     playerShareBtn.addEventListener('click', () => {
       if (currentTrack) {
-        copyTrackShareLink(currentTrack.id);
+        openStoryShareModal(currentTrack);
+      } else if (catalog && catalog.length > 0) {
+        openStoryShareModal(catalog[0]);
       } else {
-        showToast('Play or select a song to copy its direct link');
+        showToast('Play or select a song to share to Story');
       }
     });
   }

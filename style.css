@@ -3418,24 +3418,319 @@ body {
 
 .eq-flac-indicator {
   color: #10b981;
-  font-weight: 600;
+/* ==========================================================================
+   Spotify-Style Share to Story Modal Dialog
+   ========================================================================== */
+
+dialog.story-share-dialog {
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: var(--text-primary);
+  margin: auto;
+  max-width: 95vw;
+  max-height: 92vh;
+  border-radius: var(--radius-lg);
+  outline: none;
+  overflow: visible;
+}
+
+dialog.story-share-dialog::backdrop {
+  background: rgba(3, 7, 18, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.story-dialog-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  width: 740px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: modalScale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.story-dialog-header {
+  padding: 1.15rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.story-dialog-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.story-dialog-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+}
+
+.story-dialog-header h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.story-dialog-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+}
+
+.story-dialog-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.story-dialog-body {
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  overflow-y: auto;
+  align-items: flex-start;
+}
+
+.story-preview-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.story-preview-frame {
+  width: 250px;
+  aspect-ratio: 9 / 16;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  position: relative;
+  background: #08090d;
+}
+
+.story-canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.story-loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 14, 20, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  transition: opacity 0.2s ease;
+}
+
+.story-loading-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.story-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(139, 92, 246, 0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.story-preview-hint {
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.story-actions-col {
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.story-track-info-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.story-thumb {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.story-track-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.story-meta-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.story-meta-artist {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.story-meta-badge {
+  font-size: 0.64rem;
+  color: #22d3ee;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.story-buttons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.story-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.story-btn svg {
+  flex-shrink: 0;
+}
+
+.story-btn-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.story-btn-text strong {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.story-btn-text small {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  line-height: 1.2;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.story-primary-btn {
+  background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.story-primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.55);
+  filter: brightness(1.08);
+}
+
+.story-secondary-btn {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.story-secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+
+.story-fb-btn {
+  background: #1877f2;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.story-fb-btn:hover {
+  background: #166fe5;
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.story-link-btn {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.story-link-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-hover);
 }
 
 @media (max-width: 640px) {
-  .eq-panel {
-    max-width: 96vw;
-    border-radius: 10px;
+  .story-dialog-body {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.15rem;
+    gap: 1.15rem;
   }
-  .eq-header {
-    padding: 0.75rem 1rem;
-    gap: 0.5rem;
+  .story-preview-frame {
+    width: 200px;
   }
-  .eq-bands-rack {
-    min-width: 380px;
-    gap: 0.2rem;
+  .story-actions-col {
+    width: 100%;
+    min-width: 0;
   }
 }
-
-
-
-

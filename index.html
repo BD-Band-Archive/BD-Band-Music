@@ -692,8 +692,85 @@
       </div>
     </div>
 
+    <!-- Spotify-Style Share to Story Dialog -->
+    <dialog id="storyShareDialog" class="story-share-dialog" closedby="any" aria-labelledby="storyShareTitle">
+      <div class="story-dialog-box">
+        <div class="story-dialog-header">
+          <div class="story-dialog-title-wrap">
+            <span class="story-dialog-badge">SPOTIFY-STYLE STORY SHARING</span>
+            <h3 id="storyShareTitle">Share Track to Story</h3>
+          </div>
+          <button id="closeStoryShareBtn" class="story-dialog-close" title="Close (Esc)">✕</button>
+        </div>
+
+        <div class="story-dialog-body">
+          <!-- Story Card Visual Preview -->
+          <div class="story-preview-col">
+            <div class="story-preview-frame">
+              <canvas id="storyCanvas" width="1080" height="1920" class="story-canvas"></canvas>
+              <div id="storyCanvasLoading" class="story-loading-overlay">
+                <div class="story-spinner"></div>
+                <span>Rendering Story Card...</span>
+              </div>
+            </div>
+            <span class="story-preview-hint">9:16 Story Card • 1080 × 1920 HD</span>
+          </div>
+
+          <!-- Sharing Actions & Options -->
+          <div class="story-actions-col">
+            <div class="story-track-info-card">
+              <img id="storyTrackThumb" src="assets/default_album_cover.svg" alt="Track Cover" class="story-thumb">
+              <div class="story-track-meta">
+                <span class="story-meta-title" id="storyTrackTitle">Track Title</span>
+                <span class="story-meta-artist" id="storyTrackArtist">Artist • Album</span>
+                <span class="story-meta-badge">FLAC Lossless Audio</span>
+              </div>
+            </div>
+
+            <div class="story-buttons-list">
+              <!-- Native Share (Mobile Instagram / Facebook Stories / WhatsApp) -->
+              <button id="storyNativeShareBtn" class="story-btn story-primary-btn" title="Open Native Story Share">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                <div class="story-btn-text">
+                  <strong>Share to Stories</strong>
+                  <small>Instagram, Facebook &amp; WhatsApp</small>
+                </div>
+              </button>
+
+              <!-- Download Story Image -->
+              <button id="storyDownloadBtn" class="story-btn story-secondary-btn" title="Download High-Res 1080x1920 PNG Image">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <div class="story-btn-text">
+                  <strong>Download Story Card</strong>
+                  <small>1080×1920 PNG Image</small>
+                </div>
+              </button>
+
+              <!-- Share to Facebook Web -->
+              <button id="storyFbShareBtn" class="story-btn story-fb-btn" title="Share link directly to Facebook">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <div class="story-btn-text">
+                  <strong>Share on Facebook</strong>
+                  <small>Post link to feed &amp; stories</small>
+                </div>
+              </button>
+
+              <!-- Copy Direct Link -->
+              <button id="storyCopyLinkBtn" class="story-btn story-link-btn" title="Copy Direct Song URL">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                <div class="story-btn-text">
+                  <strong>Copy Direct Song Link</strong>
+                  <small id="storyLinkUrlDisplay">bd-band-archive.github.io/...</small>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
   </div>
 
-  <script src="app.js?v=3.2"></script>
+  <script src="app.js?v=3.3"></script>
 </body>
 </html>
