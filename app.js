@@ -1094,6 +1094,7 @@
     'Cryptic Fate': 'assets/artists/cryptic_fate.jpg',
     'Nemesis': 'assets/artists/nemesis.jpg',
     'Avoid Rafa': 'assets/artists/avoid_rafa.jpg',
+    'Rafa': 'assets/artists/avoid_rafa.jpg',
     'Karnival': 'assets/artists/karnival.jpg',
     'Powersurge': 'assets/artists/powersurge.jpg',
     'Mechanix': 'assets/artists/mechanix.jpg',

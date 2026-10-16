@@ -125,6 +125,8 @@ MULTI_ARTIST_MAP = {
     "bassbaba sumon & anila": ["Bassbaba Sumon", "Anila"],
     "sumon & anila": ["Bassbaba Sumon", "Anila"],
     "anila & sumon": ["Bassbaba Sumon", "Anila"],
+    "upol & maher": ["Upol", "Maher"],
+    "upol and maher": ["Upol", "Maher"],
 }
 
 def clean_track(raw_title, default_artist, is_mixed=False):

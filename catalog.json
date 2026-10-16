@@ -16274,5 +16274,125 @@
     "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20X0X%20%282015%29/Album%20Cover/Rock%20X0X%20%5BFront%5D.jpg",
     "repo": "Mixed-Albums",
     "isLossyTranscode": true
+  },
+  {
+    "id": "track-957",
+    "title": "Shaada Kaalo (Duet)",
+    "artist": "Upol & Maher",
+    "artists": [
+      "Upol",
+      "Maher"
+    ],
+    "featured": null,
+    "album": "Deep Nevar Age",
+    "year": 2015,
+    "trackNo": 1,
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/01%20Shaada%20Kaalo%20%28Duet%29.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/01%20Shaada%20Kaalo%20%28Duet%29.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg",
+    "repo": "Mixed-Albums",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-958",
+    "title": "Ghum Gari",
+    "artist": "Arnob",
+    "artists": [
+      "Arnob"
+    ],
+    "featured": null,
+    "album": "Deep Nevar Age",
+    "year": 2015,
+    "trackNo": 2,
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/02%20Ghum%20Gari.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/02%20Ghum%20Gari.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg",
+    "repo": "Mixed-Albums",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-959",
+    "title": "Tumi Nei Tai",
+    "artist": "Rafa",
+    "artists": [
+      "Rafa"
+    ],
+    "featured": null,
+    "album": "Deep Nevar Age",
+    "year": 2015,
+    "trackNo": 3,
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/03%20Tumi%20Nei%20Tai.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/03%20Tumi%20Nei%20Tai.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg",
+    "repo": "Mixed-Albums",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-960",
+    "title": "Hajaar Deen",
+    "artist": "Adit",
+    "artists": [
+      "Adit"
+    ],
+    "featured": null,
+    "album": "Deep Nevar Age",
+    "year": 2015,
+    "trackNo": 4,
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/04%20Hajaar%20Deen.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/04%20Hajaar%20Deen.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg",
+    "repo": "Mixed-Albums",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-961",
+    "title": "Shobugh Ghasher Golpo",
+    "artist": "Ayub Bachchu",
+    "artists": [
+      "Ayub Bachchu"
+    ],
+    "featured": null,
+    "album": "Deep Nevar Age",
+    "year": 2015,
+    "trackNo": 5,
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/05%20Shobugh%20Ghasher%20Golpo.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/05%20Shobugh%20Ghasher%20Golpo.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg",
+    "repo": "Mixed-Albums",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-962",
+    "title": "Jhor",
+    "artist": "Arnob",
+    "artists": [
+      "Arnob"
+    ],
+    "featured": null,
+    "album": "Deep Nevar Age",
+    "year": 2015,
+    "trackNo": 6,
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/06%20Jhor.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/06%20Jhor.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg",
+    "repo": "Mixed-Albums",
+    "isLossyTranscode": false
+  },
+  {
+    "id": "track-963",
+    "title": "Je O Na",
+    "artist": "Tahseen",
+    "artists": [
+      "Tahseen"
+    ],
+    "featured": null,
+    "album": "Deep Nevar Age",
+    "year": 2015,
+    "trackNo": 7,
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/07%20Je%20O%20Na.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/07%20Je%20O%20Na.flac?download=true",
+    "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg",
+    "repo": "Mixed-Albums",
+    "isLossyTranscode": false
   }
 ]
