@@ -689,7 +689,7 @@
           <td class="td-quality">${qualityTag}</td>
           <td class="td-actions">
             <div class="row-actions">
-              <button class="row-action-btn share-track-btn" title="Copy Direct Song Link" data-id="${track.id}">
+              <button class="row-action-btn share-track-btn" title="Copy Track Link to Clipboard" data-id="${track.id}">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
               </button>
               <button class="row-action-btn add-queue-btn" title="Add to Queue" data-id="${track.id}">
@@ -2621,55 +2621,60 @@
     setMeta('og:url', `${getBaseSiteUrl()}/track/${track.id}/`);
   }
 
-  // --- Helper: Native Web Share & Clipboard Fallback ---
-  function copyShareLink(shareUrl, title, successMsg) {
-    if (navigator.share) {
-      navigator.share({
-        title: title,
-        url: shareUrl
-      }).catch(err => {
-        if (err.name !== 'AbortError') {
-          copyToClipboardFallback(shareUrl, successMsg);
-        }
-      });
-    } else {
-      copyToClipboardFallback(shareUrl, successMsg);
-    }
-  }
-
-  function copyToClipboardFallback(shareUrl, successMsg) {
+  // --- Helper: Direct Clipboard Copy (Never calls navigator.share or generates images) ---
+  function copyToClipboard(text, successMsg) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(shareUrl).then(() => {
+      navigator.clipboard.writeText(text).then(() => {
         showToast(successMsg);
       }).catch(() => {
-        prompt('Direct Link:', shareUrl);
+        fallbackCopyText(text, successMsg);
       });
     } else {
-      prompt('Direct Link:', shareUrl);
+      fallbackCopyText(text, successMsg);
     }
   }
 
-  // --- Share Triggers (Track, Artist, Album) with Full Image Unfurling ---
+  function fallbackCopyText(text, successMsg) {
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      const success = document.execCommand('copy');
+      document.body.removeChild(textarea);
+      if (success) {
+        showToast(successMsg);
+        return;
+      }
+    } catch (e) {}
+    prompt('Direct Link:', text);
+  }
+
+  const copyToClipboardFallback = copyToClipboard;
+
+  // --- Share Triggers (Track, Artist, Album): Strictly copies URL to clipboard ---
   function copyTrackShareLink(trackId) {
     const track = catalog.find(t => t.id === trackId);
     if (!track) return;
     const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
     const songTitle = `${track.title} (${track.artist})`;
-    copyShareLink(shareUrl, songTitle, `🔗 Copied direct link for "${songTitle}"!`);
+    copyToClipboard(shareUrl, `🔗 Copied direct link for "${songTitle}"!`);
   }
 
   function copyArtistShareLink(artistName) {
     if (!artistName || artistName === 'all') return;
     const slug = toSlug(artistName);
     const shareUrl = `${getBaseSiteUrl()}/artist/${slug}/`;
-    copyShareLink(shareUrl, `${artistName} — BD Band Music`, `🔗 Copied artist preview link for "${artistName}"!`);
+    copyToClipboard(shareUrl, `🔗 Copied artist link for "${artistName}"!`);
   }
 
   function copyAlbumShareLink(albumName) {
     if (!albumName || albumName === 'all') return;
     const slug = toSlug(albumName);
     const shareUrl = `${getBaseSiteUrl()}/album/${slug}/`;
-    copyShareLink(shareUrl, `${albumName} — BD Band Music`, `🔗 Copied album preview link for "${albumName}"!`);
+    copyToClipboard(shareUrl, `🔗 Copied album link for "${albumName}"!`);
   }
 
   // ==========================================================================
