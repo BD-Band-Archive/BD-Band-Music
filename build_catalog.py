@@ -96,6 +96,7 @@ CANONICAL_ARTIST_MAP = {
     "sucide season": "Suicide Season",
     "suicide season": "Suicide Season",
     "koprofillia": "Coprophilia",
+    "koprophillia": "Coprophilia",
     "coprophilia": "Coprophilia",
     "aronnya": "Aronno",
     "aronno": "Aronno",
@@ -104,6 +105,14 @@ CANONICAL_ARTIST_MAP = {
     "bishop fuad": "Fuad",
     "artcell": "Artcell",
     "stentorian feat. bassbaba sumon": "Stentorian",
+    "reborn": "ReBORN",
+    "anything but six": "Anything But Six",
+    "fulbanuz revenge": "Fulbanu's Revenge",
+    "fulbanu's revenge": "Fulbanu's Revenge",
+    "srishty": "Srishti",
+    "srishti": "Srishti",
+    "hammer head": "Hammerhead",
+    "hammerhead": "Hammerhead",
 }
 
 MULTI_ARTIST_MAP = {
@@ -522,6 +531,9 @@ def build_catalog():
                 else:
                     clean_album = header_text
                 
+                # Strip Bengali script subtitles (e.g. "Lokayot (লোকাযত)" -> "Lokayot", "Charpotro (ছাড়পত্র)" -> "Charpotro")
+                clean_album = re.sub(r'\s*\([\u0980-\u09FF\s\d\w\-\.,]+\)', '', clean_album).strip()
+                
                 current_album = clean_album
                 current_cover = ""
                 lossy_note = "16 cut - Lossy version" in header_text or "Lossy" in header_text
@@ -632,6 +644,9 @@ def build_catalog():
                                 track_album = re.sub(r'\s*\(\d{4}\)', '', folder_in_url).strip()
                             else:
                                 track_album = folder_in_url
+
+                # Normalize album name by stripping Bengali script subtitles
+                track_album = re.sub(r'\s*\([\u0980-\u09FF\s\d\w\-\.,]+\)', '', track_album).strip()
 
                 # High-precision cover resolution:
                 # 1. Exact album cover deduced from streamUrl

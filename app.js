@@ -503,15 +503,21 @@
       filtered = catalog.filter(track => {
         // Artist filter (supports multi-artist collaborations like Ashirbad)
         if (activeArtistFilter !== 'all') {
+          const filterNorm = activeArtistFilter.toLowerCase().trim();
           const trackArtists = (track.artists && track.artists.length > 0) ? track.artists : [track.artist];
-          if (!trackArtists.includes(activeArtistFilter) && track.artist !== activeArtistFilter) {
+          const matchesArtist = trackArtists.some(a => (a || '').toLowerCase().trim() === filterNorm) || (track.artist || '').toLowerCase().trim() === filterNorm;
+          if (!matchesArtist) {
             return false;
           }
         }
 
-        // Album filter
-        if (activeAlbumFilter !== 'all' && track.album !== activeAlbumFilter) {
-          return false;
+        // Album filter (normalized to merge parenthetical subtitle variants)
+        if (activeAlbumFilter !== 'all') {
+          const cleanTrackAlb = (track.album || '').replace(/\s*\([\u0980-\u09FF\s\d\w\-\.,]+\)/g, '').trim().toLowerCase();
+          const cleanFilterAlb = activeAlbumFilter.replace(/\s*\([\u0980-\u09FF\s\d\w\-\.,]+\)/g, '').trim().toLowerCase();
+          if (cleanTrackAlb !== cleanFilterAlb && track.album !== activeAlbumFilter) {
+            return false;
+          }
         }
 
         // Multi-Token Keyword Search across title, artist, album, year, featured, and repo
@@ -756,14 +762,15 @@
     const query = normalizeQuery(rawQuery);
     const tokens = query.split(' ').filter(Boolean);
 
-    // Group catalog by album
+    // Group catalog by album (canonical normalization merges Lokayot, Charpotro, etc.)
     const albumsMap = new Map();
     catalog.forEach(t => {
-      if (!albumsMap.has(t.album)) {
-        const gallery = albumCoversMap[t.album] || albumCoversMap[`${t.artist} - ${t.album}`] || [];
+      const cleanAlbum = (t.album || 'Unknown Album').replace(/\s*\([\u0980-\u09FF\s\d\w\-\.,]+\)/g, '').trim();
+      if (!albumsMap.has(cleanAlbum)) {
+        const gallery = albumCoversMap[cleanAlbum] || albumCoversMap[t.album] || albumCoversMap[`${t.artist} - ${cleanAlbum}`] || [];
         const verifiedCover = (gallery.length > 0 && gallery[0].url) ? gallery[0].url : (t.coverUrl || 'assets/default_album_cover.svg');
-        albumsMap.set(t.album, {
-          album: t.album,
+        albumsMap.set(cleanAlbum, {
+          album: cleanAlbum,
           artist: t.repo === 'Mixed-Albums' ? 'Mixed Albums' : t.artist,
           year: t.year,
           coverUrl: verifiedCover,
@@ -771,7 +778,7 @@
           tracks: []
         });
       }
-      albumsMap.get(t.album).tracks.push(t);
+      albumsMap.get(cleanAlbum).tracks.push(t);
     });
 
     let albumList = Array.from(albumsMap.values());
@@ -1122,21 +1129,28 @@
     const query = normalizeQuery(rawQuery);
     const tokens = query.split(' ').filter(Boolean);
 
-    // Group catalog by artist
+    // Group catalog by artist (case-insensitive deduplication)
     const artistsMap = new Map();
+    const artistCanonicalKeyMap = new Map();
     catalog.forEach(t => {
       const trackArtists = (t.artists && t.artists.length > 0) ? t.artists : [t.artist];
       trackArtists.forEach(art => {
-        if (!artistsMap.has(art)) {
-          const cover = getArtistLogo(art) || getArtistFallbackSvg(art);
-          artistsMap.set(art, {
-            artist: art,
+        if (!art) return;
+        const normKey = art.toLowerCase().trim();
+        if (!artistCanonicalKeyMap.has(normKey)) {
+          artistCanonicalKeyMap.set(normKey, art);
+        }
+        const canonicalArt = artistCanonicalKeyMap.get(normKey);
+        if (!artistsMap.has(canonicalArt)) {
+          const cover = getArtistLogo(canonicalArt) || getArtistFallbackSvg(canonicalArt);
+          artistsMap.set(canonicalArt, {
+            artist: canonicalArt,
             coverUrl: cover,
             tracks: [],
             albumsSet: new Set()
           });
         }
-        const a = artistsMap.get(art);
+        const a = artistsMap.get(canonicalArt);
         a.tracks.push(t);
         a.albumsSet.add(t.album);
       });
