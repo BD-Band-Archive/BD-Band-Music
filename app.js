@@ -2969,74 +2969,18 @@
     ctx.textAlign = 'center';
     ctx.fillText(ctaText, ctaPillX + ctaPillW / 2, ctaY);
 
-    // Sleek Spotify-Style QR Code Badge
-    const qrCardX = textX;
-    const qrCardY = 320;
-    const qrCardW = 385;
-    const qrCardH = 188;
-    const qrSize = 148;
-    const qrX = qrCardX + 16;
-    const qrY = qrCardY + (qrCardH - qrSize) / 2;
-
-    ctx.save();
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-    ctx.shadowBlur = 20;
-    ctx.shadowOffsetY = 8;
-    drawRoundRect(ctx, qrCardX, qrCardY, qrCardW, qrCardH, 18);
-    const qrBgGrad = ctx.createLinearGradient(qrCardX, qrCardY, qrCardX + qrCardW, qrCardY + qrCardH);
-    qrBgGrad.addColorStop(0, '#131826');
-    qrBgGrad.addColorStop(1, '#090b11');
-    ctx.fillStyle = qrBgGrad;
-    ctx.fill();
-    ctx.lineWidth = 1.4;
-    ctx.strokeStyle = 'rgba(139, 92, 246, 0.4)';
-    ctx.stroke();
-    ctx.restore();
+    // Sleek Centered QR Code (No helper texts)
+    const qrSize = 160;
+    const qrX = textX + (385 - qrSize) / 2;
+    const qrY = 330;
 
     // Draw QR Code directly on canvas
     drawQrCodeToCanvas(ctx, qrX, qrY, qrSize, shareUrl);
-
-    // Spotify-style Labels beside QR
-    const metaX = qrX + qrSize + 18;
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'middle';
-
-    // Mini Brand Pill
-    const tagY = qrCardY + 32;
-    drawRoundRect(ctx, metaX, tagY - 12, 160, 24, 12);
-    ctx.fillStyle = 'rgba(139, 92, 246, 0.2)';
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(139, 92, 246, 0.5)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    ctx.fillStyle = '#c084fc';
-    ctx.font = '700 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('🇧🇩 BD BAND CODE', metaX + 80, tagY);
-
-    // Main Scan Callout
-    ctx.textAlign = 'left';
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '800 17px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText('📷 Scan to Stream', metaX, qrCardY + 74);
-
-    ctx.fillStyle = '#38bdf8';
-    ctx.font = '700 12.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText('⚡ Instant 16-Bit FLAC', metaX, qrCardY + 104);
-
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
-    ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText('Point Camera or Lens', metaX, qrCardY + 130);
-
-    ctx.fillStyle = '#a78bfa';
-    ctx.font = '700 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText('Direct Playback • No App', metaX, qrCardY + 154);
     ctx.restore();
 
     if (targetCanvas === storyCanvas) {
       storyCtaBounds = { x: ctaPillX, y: ctaPillY, w: ctaPillW, h: ctaPillH };
-      storyQrBounds = { x: qrCardX, y: qrCardY, w: qrCardW, h: qrCardH };
+      storyQrBounds = { x: qrX, y: qrY, w: qrSize, h: qrSize };
     }
 
     // Left Column: Equalizer Waveform Bars centered directly under Album Artwork
@@ -3240,73 +3184,17 @@
     }
     ctx.restore();
 
-    // 8. Sleek Spotify-Style QR Code Scan Bar
+    // 8. Sleek Centered QR Code (No helper texts)
     const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(track.id)}/`;
-    const qrCardW = 860 * scale;
-    const qrCardH = 205 * scale;
-    const qrCardX = (W - qrCardW) / 2;
-    const qrCardY = 1280 * scale;
-    const qrSize = 165 * scale;
-    const qrX = qrCardX + 22 * scale;
-    const qrY = qrCardY + (qrCardH - qrSize) / 2;
-
-    ctx.save();
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
-    ctx.shadowBlur = 32 * scale;
-    ctx.shadowOffsetY = 12 * scale;
-    drawRoundRect(ctx, qrCardX, qrCardY, qrCardW, qrCardH, 26 * scale);
-    const qrBgGrad = ctx.createLinearGradient(qrCardX, qrCardY, qrCardX + qrCardW, qrCardY + qrCardH);
-    qrBgGrad.addColorStop(0, '#131826');
-    qrBgGrad.addColorStop(1, '#090b10');
-    ctx.fillStyle = qrBgGrad;
-    ctx.fill();
-    ctx.lineWidth = 2 * scale;
-    ctx.strokeStyle = 'rgba(139, 92, 246, 0.45)';
-    ctx.stroke();
-    ctx.restore();
+    const qrSize = 215 * scale;
+    const qrX = (W - qrSize) / 2;
+    const qrY = 1285 * scale;
 
     // Draw QR Code directly on canvas
     drawQrCodeToCanvas(ctx, qrX, qrY, qrSize, shareUrl);
 
-    // Spotify-style Labels beside QR
-    ctx.save();
-    const metaX = qrX + qrSize + 26 * scale;
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'middle';
-
-    // Mini Brand Pill
-    const tagY = qrCardY + 38 * scale;
-    drawRoundRect(ctx, metaX, tagY - 14 * scale, 210 * scale, 28 * scale, 14 * scale);
-    ctx.fillStyle = 'rgba(139, 92, 246, 0.2)';
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(139, 92, 246, 0.5)';
-    ctx.lineWidth = 1.2 * scale;
-    ctx.stroke();
-
-    ctx.fillStyle = '#c084fc';
-    ctx.font = `700 ${Math.round(14 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.fillText('🇧🇩 BD BAND CODE', metaX + 105 * scale, tagY);
-
-    // Heading
-    ctx.textAlign = 'left';
-    ctx.fillStyle = '#ffffff';
-    ctx.font = `800 ${Math.round(26 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-    ctx.fillText('📷 Scan with Camera to Stream', metaX, qrCardY + 86 * scale);
-
-    // Subheading
-    ctx.fillStyle = '#38bdf8';
-    ctx.font = `700 ${Math.round(18 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-    ctx.fillText('⚡ Instant 16-Bit / 44.1 kHz FLAC Master', metaX, qrCardY + 124 * scale);
-
-    // Instructions
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
-    ctx.font = `600 ${Math.round(14 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-    ctx.fillText('Point iPhone / Android camera or Google Lens', metaX, qrCardY + 158 * scale);
-    ctx.restore();
-
     if (targetCanvas === storyCanvas) {
-      storyQrBounds = { x: qrCardX, y: qrCardY, w: qrCardW, h: qrCardH };
+      storyQrBounds = { x: qrX, y: qrY, w: qrSize, h: qrSize };
     }
 
     // 9. Bottom CTA Pill (Interactive White Button)
