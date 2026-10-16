@@ -633,7 +633,7 @@
 
       if (isTrendingHomepage) {
         trackCountLabel.textContent = `🔥 15 Trending (${catalog.length} in Archive)`;
-        resultsCount.textContent = `🔥 Top 15 Trending Songs • Most Listened All-Time (${catalog.length} Songs in Archive)`;
+        resultsCount.textContent = `🔥 Top 15 Trending Songs (${catalog.length} Songs in Archive)`;
         if (seeMoreWrap) {
           seeMoreWrap.style.display = 'flex';
           if (seeMoreBtn) {
@@ -646,7 +646,7 @@
       } else {
         trackCountLabel.textContent = `${catalog.length} FLAC Tracks`;
         if (sortBy === 'popular') {
-          resultsCount.textContent = `Showing ${currentFilteredTracks.length} of ${catalog.length} tracks • Sorted by Most Listened`;
+          resultsCount.textContent = `Showing ${currentFilteredTracks.length} of ${catalog.length} tracks • Sorted by Trending`;
         } else {
           resultsCount.textContent = `Showing ${currentFilteredTracks.length} of ${catalog.length} tracks`;
         }
@@ -727,7 +727,6 @@
     currentFilteredTracks.forEach((track, index) => {
       const isCurrent = currentTrack && currentTrack.id === track.id;
       const rowClass = isCurrent ? 'playing' : '';
-      const playCount = getTrackPlayCount(track.id);
       
       const rankNumClass = (isTrendingActive && index < 3) ? 'track-num-text top-rank' : 'track-num-text';
       const rankDisplay = index + 1;
@@ -739,10 +738,6 @@
 
       const hasFeatInTitle = track.title.toLowerCase().includes('feat') || track.title.toLowerCase().includes('ft.');
       const featTag = (track.featured && !hasFeatInTitle) ? `<span class="track-feat">(ft. ${escapeHtml(track.featured)})</span>` : '';
-      
-      const playBadge = (playCount > 0)
-        ? `<span class="trending-play-badge" title="${playCount.toLocaleString()} plays">🔥 ${formatPlayCount(playCount)}</span>`
-        : '';
 
       const qualityTag = track.isLossyTranscode
         ? `<span class="lossy-badge" title="16 kHz shelf cutoff transcode">16-CUT</span>`
@@ -758,7 +753,6 @@
               <img class="track-thumb" src="${escapeHtml(track.coverUrl)}" alt="Cover" loading="lazy" onerror="this.src='assets/default_album_cover.svg'">
               <div class="track-details">
                 <span class="track-title-cell">${escapeHtml(track.title)} ${featTag}</span>
-                ${playBadge}
               </div>
             </div>
           </td>
