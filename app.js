@@ -2714,6 +2714,7 @@
 
   let activeStoryTrack = null;
   let activeStoryFormat = 'web'; // 'web' (400x300) or 'story' (9:16)
+  let storyCtaBounds = { x: 0, y: 0, w: 0, h: 0 };
 
   function drawRoundRect(ctx, x, y, width, height, radius) {
     if (ctx.roundRect) {
@@ -2908,19 +2909,28 @@
 
     // CTA Stream Pill
     const ctaY = 325;
+    const ctaText = '▶ Listen on bd-band-archive.github.io/BD-Band-Music';
+    const ctaPillX = textX;
+    const ctaPillY = ctaY - 22;
+    const ctaPillW = 385;
+    const ctaPillH = 44;
     ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
     ctx.shadowBlur = 16;
     ctx.shadowOffsetY = 6;
-    drawRoundRect(ctx, textX, ctaY - 22, 385, 44, 22);
+    drawRoundRect(ctx, ctaPillX, ctaPillY, ctaPillW, ctaPillH, 22);
     ctx.fillStyle = '#ffffff';
     ctx.fill();
     ctx.shadowColor = 'transparent';
 
     ctx.fillStyle = '#0b0e14';
-    ctx.font = '800 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.font = '800 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('▶ Listen on BD Band Music Player', textX + 192, ctaY);
+    ctx.fillText(ctaText, ctaPillX + ctaPillW / 2, ctaY);
     ctx.restore();
+
+    if (targetCanvas === storyCanvas) {
+      storyCtaBounds = { x: ctaPillX, y: ctaPillY, w: ctaPillW, h: ctaPillH };
+    }
 
     // Bottom Waveform Visualizer
     const waveY = 475;
@@ -3119,19 +3129,30 @@
 
     // 8. Bottom CTA Pill (Spotify-style)
     const ctaY = 1560 * scale;
-    const ctaW = 620 * scale;
+    const ctaText = '▶ Listen on bd-band-archive.github.io/BD-Band-Music';
+    ctx.font = `800 ${Math.round(24 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    const textW = ctx.measureText(ctaText).width;
+    const ctaW = Math.min(W - 80 * scale, Math.max(760 * scale, textW + 60 * scale));
     const ctaH = 76 * scale;
+    const ctaX = (W - ctaW) / 2;
+    const ctaTop = ctaY - ctaH / 2;
+
     ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
     ctx.shadowBlur = 25 * scale;
     ctx.shadowOffsetY = 10 * scale;
-    drawRoundRect(ctx, (W - ctaW) / 2, ctaY - ctaH / 2, ctaW, ctaH, 38 * scale);
+    drawRoundRect(ctx, ctaX, ctaTop, ctaW, ctaH, 38 * scale);
     ctx.fillStyle = '#ffffff';
     ctx.fill();
     ctx.shadowColor = 'transparent';
 
     ctx.fillStyle = '#0b0e14';
-    ctx.font = `800 ${Math.round(28 * scale)}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-    ctx.fillText('▶ Listen on bd-band-archive.github.io', W / 2, ctaY);
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(ctaText, W / 2, ctaY);
+
+    if (targetCanvas === storyCanvas) {
+      storyCtaBounds = { x: ctaX, y: ctaTop, w: ctaW, h: ctaH };
+    }
 
     // 9. Footnote Watermark
     ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
@@ -3338,6 +3359,13 @@
         if (isMobile && navigator.canShare) {
           try {
             showToast('Preparing story card for your device...');
+            // Pre-copy song URL so user can effortlessly paste into Instagram / Facebook Link sticker
+            try {
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(shareUrl);
+              }
+            } catch (_) {}
+
             const blob = await generateFullStoryBlob(track);
             const fileName = `${track.artist} - ${track.title} Story.png`;
             const file = new File([blob], fileName, { type: 'image/png' });
@@ -3347,7 +3375,7 @@
                 text: shareText,
                 files: [file]
               });
-              showToast('🎉 Shared to Story!');
+              showToast('🎉 Shared to Story! (Track link copied for Link sticker)');
               return;
             }
           } catch (fileErr) {
@@ -3409,6 +3437,51 @@
     storyCopyLinkBtn.addEventListener('click', () => {
       if (!activeStoryTrack) return;
       copyTrackShareLink(activeStoryTrack.id);
+    });
+  }
+
+  // 6. Interactive Click & Hover on Story Preview CTA Button
+  if (storyCanvas) {
+    const isPillHovered = (clientX, clientY) => {
+      if (!activeStoryTrack) return false;
+      const rect = storyCanvas.getBoundingClientRect();
+      if (!rect.width || !rect.height) return false;
+      const x = (clientX - rect.left) * (storyCanvas.width / rect.width);
+      const y = (clientY - rect.top) * (storyCanvas.height / rect.height);
+      return (
+        x >= storyCtaBounds.x &&
+        x <= storyCtaBounds.x + storyCtaBounds.w &&
+        y >= storyCtaBounds.y &&
+        y <= storyCtaBounds.y + storyCtaBounds.h
+      );
+    };
+
+    storyCanvas.addEventListener('mousemove', (e) => {
+      if (isPillHovered(e.clientX, e.clientY)) {
+        storyCanvas.style.cursor = 'pointer';
+        storyCanvas.title = activeStoryTrack ? `Click to open "${activeStoryTrack.title}" directly` : '';
+      } else {
+        storyCanvas.style.cursor = 'default';
+        storyCanvas.title = '';
+      }
+    });
+
+    storyCanvas.addEventListener('click', (e) => {
+      if (isPillHovered(e.clientX, e.clientY) && activeStoryTrack) {
+        const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(activeStoryTrack.id)}/`;
+        window.open(shareUrl, '_blank');
+        showToast(`🔗 Redirecting to "${activeStoryTrack.title}"...`);
+      }
+    });
+
+    storyCanvas.addEventListener('touchend', (e) => {
+      if (!activeStoryTrack || !e.changedTouches || e.changedTouches.length === 0) return;
+      const touch = e.changedTouches[0];
+      if (isPillHovered(touch.clientX, touch.clientY)) {
+        const shareUrl = `${getBaseSiteUrl()}/track/${encodeURIComponent(activeStoryTrack.id)}/`;
+        window.open(shareUrl, '_blank');
+        showToast(`🔗 Redirecting to "${activeStoryTrack.title}"...`);
+      }
     });
   }
 
