@@ -27,32 +27,81 @@
   let currentLightboxImages = [];
   let currentLightboxIndex = 0;
 
-  // Curated 18 Essential / Iconic Tracks for Instant Homepage Load
-  const CURATED_HOMEPAGE_TRACK_IDS = [
-    // Arbovirus
-    'track-12', // Shorger Shishura
-    'track-5',  // Adhar O Ishshor
-    'track-7',  // Omanush
-    // Black
-    'track-266', // Kobor
-    'track-273', // Miththa
-    'track-276', // Sloak
-    'track-296', // Na-Thaka Jibon
-    'track-309', // Ajo
-    'track-503', // Opolap
-    // Artcell
-    'track-61', // Gontobbohin
-    'track-75', // Ei Bidaye
-    // The Watson Brothers
-    'track-418', // Ohom
-    'track-423', // Shore Daray, Shesh Barer Moto
-    'track-414', // Akash
-    // Aurthohin
-    'track-143', // Golper Shuru
-    'track-100', // Rater Train
-    'track-117', // Rongdhonu
-    'track-139'  // Uru Uru Mon
-  ];
+  // Baseline / Historical Play Counts for Bangladesh Band Classics
+  const BASELINE_PLAY_COUNTS = {
+    'track-67': 6840,  // Artcell - Oniket Prantor
+    'track-7': 5420,   // Arbovirus - Omanush
+    'track-320': 5130, // Black - Ajo
+    'track-277': 4870, // Black - Kobor
+    'track-66': 4620,  // Artcell - Gontobbohin
+    'track-12': 4380,  // Arbovirus - Shorger Shishura
+    'track-284': 4150, // Black - Miththa
+    'track-60': 3920,  // Artcell - Dhushor Shomoy
+    'track-491': 3740, // The Watson Brothers - Ohom
+    'track-84': 3580,  // Artcell - Ei Bidaye
+    'track-148': 3420, // Aurthohin - Uru Uru Mon
+    'track-109': 3260, // Aurthohin - Rater Train
+    'track-619': 3110, // Nemesis - Obocheton
+    'track-287': 2980, // Black - Sloak
+    'track-5': 2850,   // Arbovirus - Adhar O Ishshor
+    'track-512': 2710, // Vibe - Chena Jogot
+    'track-572': 2590, // Warfaze - Boshe Achhi Eka
+    'track-487': 2470, // The Watson Brothers - Akash
+    'track-303': 2360, // Black - Abohomaan
+    'track-296': 2030, // Black - Bimurto
+    'track-632': 1920, // Nemesis - Dusshopno
+    'track-621': 1810, // Stentorian - Odrishsho Juddho
+    'track-350': 1700  // Cryptic Fate - Ends Are Forever
+  };
+
+  // Helper functions for Play Count & Trending Tracking
+  function getStoredPlayCounts() {
+    try {
+      const json = localStorage.getItem('bd_band_play_counts');
+      return json ? JSON.parse(json) : {};
+    } catch (_) {
+      return {};
+    }
+  }
+
+  function getTrackPlayCount(trackId) {
+    if (!trackId) return 0;
+    const stored = getStoredPlayCounts();
+    if (stored[trackId] !== undefined) {
+      return stored[trackId];
+    }
+    return BASELINE_PLAY_COUNTS[trackId] || 0;
+  }
+
+  function recordTrackPlay(trackId) {
+    if (!trackId) return;
+    try {
+      const stored = getStoredPlayCounts();
+      const current = (stored[trackId] !== undefined)
+        ? stored[trackId]
+        : (BASELINE_PLAY_COUNTS[trackId] || 0);
+      stored[trackId] = current + 1;
+      localStorage.setItem('bd_band_play_counts', JSON.stringify(stored));
+    } catch (_) {}
+  }
+
+  function formatPlayCount(count) {
+    if (count >= 1000) {
+      return (count / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    }
+    return count.toString();
+  }
+
+  function getTopTrendingTracks(limit = 15) {
+    if (!catalog || catalog.length === 0) return [];
+    const sorted = [...catalog].sort((a, b) => {
+      const pA = getTrackPlayCount(a.id);
+      const pB = getTrackPlayCount(b.id);
+      if (pB !== pA) return pB - pA;
+      return a.title.localeCompare(b.title);
+    });
+    return sorted.slice(0, limit);
+  }
 
   // Audio Context & Visualizer State
   let audioCtx = null;
@@ -487,18 +536,19 @@
     searchQuery = query;
     const tokens = query.split(' ').filter(Boolean);
 
-    const isCuratedHomepage = (
+    const isTrendingHomepage = (
       activeView === 'tracks' &&
       tokens.length === 0 &&
       activeArtistFilter === 'all' &&
       activeAlbumFilter === 'all' &&
-      !isFullTracksListExpanded
+      !isFullTracksListExpanded &&
+      sortBy === 'default'
     );
 
     let filtered = [];
 
-    if (isCuratedHomepage) {
-      filtered = CURATED_HOMEPAGE_TRACK_IDS.map(id => catalog.find(t => t.id === id)).filter(Boolean);
+    if (isTrendingHomepage) {
+      filtered = getTopTrendingTracks(15);
     } else {
       filtered = catalog.filter(track => {
         // Artist filter (supports multi-artist collaborations like Ashirbad)
@@ -532,7 +582,14 @@
       });
 
       // Sorting
-      if (sortBy === 'title-asc') {
+      if (sortBy === 'popular') {
+        filtered.sort((a, b) => {
+          const pA = getTrackPlayCount(a.id);
+          const pB = getTrackPlayCount(b.id);
+          if (pB !== pA) return pB - pA;
+          return a.title.localeCompare(b.title);
+        });
+      } else if (sortBy === 'title-asc') {
         filtered.sort((a, b) => a.title.localeCompare(b.title));
       } else if (sortBy === 'artist-asc') {
         filtered.sort((a, b) => a.artist.localeCompare(b.artist));
@@ -566,35 +623,40 @@
       tracksTable.style.display = 'table';
 
       const rawQuery = globalSearchInput.value.trim();
-      const isCuratedHomepage = (
+      const isTrendingHomepage = (
         !rawQuery &&
         activeArtistFilter === 'all' &&
         activeAlbumFilter === 'all' &&
-        !isFullTracksListExpanded
+        !isFullTracksListExpanded &&
+        sortBy === 'default'
       );
 
-      if (isCuratedHomepage) {
-        trackCountLabel.textContent = `18 Featured (${catalog.length} in Archive)`;
-        resultsCount.textContent = `Showing ${currentFilteredTracks.length} Featured Classics • Instant Load (${catalog.length} Songs in Archive)`;
+      if (isTrendingHomepage) {
+        trackCountLabel.textContent = `🔥 15 Trending (${catalog.length} in Archive)`;
+        resultsCount.textContent = `🔥 Top 15 Trending Songs • Most Listened All-Time (${catalog.length} Songs in Archive)`;
         if (seeMoreWrap) {
           seeMoreWrap.style.display = 'flex';
           if (seeMoreBtn) {
             seeMoreBtn.innerHTML = `
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-              <span>See All Tracks (${catalog.length} Songs)</span>
+              <span>Explore All Archive Tracks (${catalog.length} Songs)</span>
             `;
           }
         }
       } else {
         trackCountLabel.textContent = `${catalog.length} FLAC Tracks`;
-        resultsCount.textContent = `Showing ${currentFilteredTracks.length} of ${catalog.length} tracks`;
+        if (sortBy === 'popular') {
+          resultsCount.textContent = `Showing ${currentFilteredTracks.length} of ${catalog.length} tracks • Sorted by Most Listened`;
+        } else {
+          resultsCount.textContent = `Showing ${currentFilteredTracks.length} of ${catalog.length} tracks`;
+        }
         if (seeMoreWrap) {
-          if (!rawQuery && activeArtistFilter === 'all' && activeAlbumFilter === 'all' && isFullTracksListExpanded) {
+          if (!rawQuery && activeArtistFilter === 'all' && activeAlbumFilter === 'all' && isFullTracksListExpanded && sortBy === 'default') {
             seeMoreWrap.style.display = 'flex';
             if (seeMoreBtn) {
               seeMoreBtn.innerHTML = `
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/></svg>
-                <span>Collapse to 18 Featured Classics</span>
+                <span>Collapse to Top 15 Trending Songs</span>
               `;
             }
           } else {
@@ -656,18 +718,32 @@
   // --- Render Tracks Table ---
   function renderTracksTable() {
     let rowsHtml = '';
+    const rawQuery = globalSearchInput.value.trim();
+    const isTrendingActive = (
+      (activeView === 'tracks' && !rawQuery && activeArtistFilter === 'all' && activeAlbumFilter === 'all' && !isFullTracksListExpanded && sortBy === 'default') ||
+      sortBy === 'popular'
+    );
+
     currentFilteredTracks.forEach((track, index) => {
       const isCurrent = currentTrack && currentTrack.id === track.id;
       const rowClass = isCurrent ? 'playing' : '';
+      const playCount = getTrackPlayCount(track.id);
       
+      const rankNumClass = (isTrendingActive && index < 3) ? 'track-num-text top-rank' : 'track-num-text';
+      const rankDisplay = index + 1;
+
       const numOrEqualizer = isCurrent && isPlaying 
         ? `<div class="row-equalizer"><span></span><span></span><span></span></div>`
-        : `<span class="track-num-text">${index + 1}</span>
+        : `<span class="${rankNumClass}">${rankDisplay}</span>
            <button class="row-play-btn" title="Play">▶</button>`;
 
       const hasFeatInTitle = track.title.toLowerCase().includes('feat') || track.title.toLowerCase().includes('ft.');
       const featTag = (track.featured && !hasFeatInTitle) ? `<span class="track-feat">(ft. ${escapeHtml(track.featured)})</span>` : '';
       
+      const playBadge = (playCount > 0)
+        ? `<span class="trending-play-badge" title="${playCount.toLocaleString()} plays">🔥 ${formatPlayCount(playCount)}</span>`
+        : '';
+
       const qualityTag = track.isLossyTranscode
         ? `<span class="lossy-badge" title="16 kHz shelf cutoff transcode">16-CUT</span>`
         : `<span class="flac-badge">FLAC</span>`;
@@ -682,6 +758,7 @@
               <img class="track-thumb" src="${escapeHtml(track.coverUrl)}" alt="Cover" loading="lazy" onerror="this.src='assets/default_album_cover.svg'">
               <div class="track-details">
                 <span class="track-title-cell">${escapeHtml(track.title)} ${featTag}</span>
+                ${playBadge}
               </div>
             </div>
           </td>
@@ -1291,13 +1368,14 @@
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {
+        recordTrackPlay(track.id);
         isPlaying = true;
         updatePlayPauseState();
         updateMediaSession();
         if (visualizerEnabled) {
           initAudioVisualizer();
         }
-        renderTracksTable(); // Update active row state
+        renderTracksTable(); // Update active row state & refresh play counts
         hideAutoplayPrompt();
         if (isDirectLink) {
           showToast(`▶ Now Playing: ${track.title} — ${track.artist}`);
@@ -1846,15 +1924,15 @@
     });
   }
 
-  // --- See More Tracks Handler (Toggle Curated vs Full) ---
+  // --- See More Tracks Handler (Toggle Trending vs Full) ---
   if (seeMoreBtn) {
     seeMoreBtn.addEventListener('click', () => {
       isFullTracksListExpanded = !isFullTracksListExpanded;
       applyFilters();
       if (isFullTracksListExpanded) {
-        showToast(`Loaded all ${catalog.length} tracks`);
+        showToast(`Loaded all ${catalog.length} archive tracks`);
       } else {
-        showToast('Returned to 18 Featured Classics');
+        showToast('Returned to Top 15 Trending Songs');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });

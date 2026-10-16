@@ -645,6 +645,29 @@ body {
   border-radius: 4px;
 }
 
+.trending-play-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: #ff9800;
+  background: rgba(255, 152, 0, 0.1);
+  border: 1px solid rgba(255, 152, 0, 0.25);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-top: 3px;
+  width: fit-content;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.track-num-text.top-rank {
+  color: #ff9800;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(255, 152, 0, 0.4);
+}
+
 /* Row Action Buttons */
 .row-actions {
   display: flex;
