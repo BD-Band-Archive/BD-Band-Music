@@ -27,37 +27,16 @@
   let currentLightboxImages = [];
   let currentLightboxIndex = 0;
 
-  // Baseline / Historical Play Counts for Bangladesh Band Classics
-  const BASELINE_PLAY_COUNTS = {
-    'track-67': 6840,  // Artcell - Oniket Prantor
-    'track-7': 5420,   // Arbovirus - Omanush
-    'track-320': 5130, // Black - Ajo
-    'track-277': 4870, // Black - Kobor
-    'track-66': 4620,  // Artcell - Gontobbohin
-    'track-12': 4380,  // Arbovirus - Shorger Shishura
-    'track-284': 4150, // Black - Miththa
-    'track-60': 3920,  // Artcell - Dhushor Shomoy
-    'track-491': 3740, // The Watson Brothers - Ohom
-    'track-84': 3580,  // Artcell - Ei Bidaye
-    'track-148': 3420, // Aurthohin - Uru Uru Mon
-    'track-109': 3260, // Aurthohin - Rater Train
-    'track-619': 3110, // Nemesis - Obocheton
-    'track-287': 2980, // Black - Sloak
-    'track-5': 2850,   // Arbovirus - Adhar O Ishshor
-    'track-512': 2710, // Vibe - Chena Jogot
-    'track-572': 2590, // Warfaze - Boshe Achhi Eka
-    'track-487': 2470, // The Watson Brothers - Akash
-    'track-303': 2360, // Black - Abohomaan
-    'track-296': 2030, // Black - Bimurto
-    'track-632': 1920, // Nemesis - Dusshopno
-    'track-621': 1810, // Stentorian - Odrishsho Juddho
-    'track-350': 1700  // Cryptic Fate - Ends Are Forever
-  };
+  // Play Count & Trending Tracking (All songs start at zero, incrementing with each listen)
+  const PLAYS_STORAGE_KEY = 'bd_band_plays_v1';
+  try {
+    // Clear legacy placeholder seed data if present
+    localStorage.removeItem('bd_band_play_counts');
+  } catch (_) {}
 
-  // Helper functions for Play Count & Trending Tracking
   function getStoredPlayCounts() {
     try {
-      const json = localStorage.getItem('bd_band_play_counts');
+      const json = localStorage.getItem(PLAYS_STORAGE_KEY);
       return json ? JSON.parse(json) : {};
     } catch (_) {
       return {};
@@ -67,21 +46,15 @@
   function getTrackPlayCount(trackId) {
     if (!trackId) return 0;
     const stored = getStoredPlayCounts();
-    if (stored[trackId] !== undefined) {
-      return stored[trackId];
-    }
-    return BASELINE_PLAY_COUNTS[trackId] || 0;
+    return stored[trackId] || 0;
   }
 
   function recordTrackPlay(trackId) {
     if (!trackId) return;
     try {
       const stored = getStoredPlayCounts();
-      const current = (stored[trackId] !== undefined)
-        ? stored[trackId]
-        : (BASELINE_PLAY_COUNTS[trackId] || 0);
-      stored[trackId] = current + 1;
-      localStorage.setItem('bd_band_play_counts', JSON.stringify(stored));
+      stored[trackId] = (stored[trackId] || 0) + 1;
+      localStorage.setItem(PLAYS_STORAGE_KEY, JSON.stringify(stored));
     } catch (_) {}
   }
 
@@ -94,13 +67,15 @@
 
   function getTopTrendingTracks(limit = 15) {
     if (!catalog || catalog.length === 0) return [];
-    const sorted = [...catalog].sort((a, b) => {
+    // Only feature tracks that have actually been listened to (playCount > 0)
+    const played = catalog.filter(t => getTrackPlayCount(t.id) > 0);
+    played.sort((a, b) => {
       const pA = getTrackPlayCount(a.id);
       const pB = getTrackPlayCount(b.id);
       if (pB !== pA) return pB - pA;
       return a.title.localeCompare(b.title);
     });
-    return sorted.slice(0, limit);
+    return played.slice(0, limit);
   }
 
   // Audio Context & Visualizer State
@@ -548,7 +523,8 @@
     let filtered = [];
 
     if (isTrendingHomepage) {
-      filtered = getTopTrendingTracks(15);
+      const trending = getTopTrendingTracks(15);
+      filtered = (trending.length > 0) ? trending : catalog;
     } else {
       filtered = catalog.filter(track => {
         // Artist filter (supports multi-artist collaborations like Ashirbad)
@@ -632,15 +608,24 @@
       );
 
       if (isTrendingHomepage) {
-        trackCountLabel.textContent = `🔥 15 Trending (${catalog.length} in Archive)`;
-        resultsCount.textContent = `🔥 Top 15 Trending Songs (${catalog.length} Songs in Archive)`;
-        if (seeMoreWrap) {
-          seeMoreWrap.style.display = 'flex';
-          if (seeMoreBtn) {
-            seeMoreBtn.innerHTML = `
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-              <span>Explore All Archive Tracks (${catalog.length} Songs)</span>
-            `;
+        const trendingCount = getTopTrendingTracks(15).length;
+        if (trendingCount > 0) {
+          trackCountLabel.textContent = `🔥 ${trendingCount} Trending (${catalog.length} in Archive)`;
+          resultsCount.textContent = `🔥 Top ${trendingCount} Trending Songs (${catalog.length} Songs in Archive)`;
+          if (seeMoreWrap) {
+            seeMoreWrap.style.display = 'flex';
+            if (seeMoreBtn) {
+              seeMoreBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                <span>Explore All Archive Tracks (${catalog.length} Songs)</span>
+              `;
+            }
+          }
+        } else {
+          trackCountLabel.textContent = `${catalog.length} FLAC Tracks`;
+          resultsCount.textContent = `Showing all ${catalog.length} archive tracks • Stream songs to build the Top 15 Trending`;
+          if (seeMoreWrap) {
+            seeMoreWrap.style.display = 'none';
           }
         }
       } else {
@@ -656,7 +641,7 @@
             if (seeMoreBtn) {
               seeMoreBtn.innerHTML = `
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/></svg>
-                <span>Collapse to Top 15 Trending Songs</span>
+                <span>Collapse to Top Trending Songs</span>
               `;
             }
           } else {
@@ -719,8 +704,9 @@
   function renderTracksTable() {
     let rowsHtml = '';
     const rawQuery = globalSearchInput.value.trim();
+    const trendingTracksList = getTopTrendingTracks(15);
     const isTrendingActive = (
-      (activeView === 'tracks' && !rawQuery && activeArtistFilter === 'all' && activeAlbumFilter === 'all' && !isFullTracksListExpanded && sortBy === 'default') ||
+      (activeView === 'tracks' && !rawQuery && activeArtistFilter === 'all' && activeAlbumFilter === 'all' && !isFullTracksListExpanded && sortBy === 'default' && trendingTracksList.length > 0) ||
       sortBy === 'popular'
     );
 
@@ -1926,7 +1912,7 @@
       if (isFullTracksListExpanded) {
         showToast(`Loaded all ${catalog.length} archive tracks`);
       } else {
-        showToast('Returned to Top 15 Trending Songs');
+        showToast('Returned to Top Trending Songs');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
