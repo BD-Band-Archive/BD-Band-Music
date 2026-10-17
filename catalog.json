@@ -759,8 +759,8 @@
     "album": "Rock 505",
     "year": 2010,
     "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20505%20%282010%29/02.%20Prarthona%20-.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20505%20%282010%29/02.%20Prarthona%20-.flac?download=true",
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20505%20%282010%29/02.%20Prarthona%20-%20.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20505%20%282010%29/02.%20Prarthona%20-%20.flac?download=true",
     "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20505%20%282010%29/Album%20Cover/Rock%20505%20%5BFront%5D.jpg",
     "repo": "Arbovirus",
     "isLossyTranscode": false
@@ -5646,23 +5646,6 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-332",
-    "title": "Sokol Biday",
-    "artist": "Black",
-    "artists": [
-      "Black"
-    ],
-    "featured": null,
-    "album": "Onushilon",
-    "year": 2002,
-    "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Onushilon%20%282002%29/08%20-%20%E0%A6%B8%E0%A6%95%E0%A6%B2%20%E0%A6%AC%E0%A6%BF%E0%A6%A6%E0%A6%BE%E0%A6%AF%E0%A6%BC.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Onushilon%20%282002%29/08%20-%20%E0%A6%B8%E0%A6%95%E0%A6%B2%20%E0%A6%AC%E0%A6%BF%E0%A6%A6%E0%A6%BE%E0%A6%AF%E0%A6%BC.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Onushilon%20%282002%29/Album%20Cover/Onushilon%20%5BFront-Back%5D.jpg",
-    "repo": "Black",
-    "isLossyTranscode": false
-  },
-  {
     "id": "track-333",
     "title": "Blues & Rod/Black",
     "artist": "Black",
@@ -5681,7 +5664,7 @@
   },
   {
     "id": "track-334",
-    "title": "Ostitto",
+    "title": "Ostitter Dike Pododdhonir Shommohon",
     "artist": "Black",
     "artists": [
       "Black"
@@ -5690,15 +5673,15 @@
     "album": "Agontuk 1",
     "year": 2003,
     "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Agontuk%201%20%282003%29/04%20Ostitto.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Agontuk%201%20%282003%29/04%20Ostitto.flac?download=true",
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Agontuk%201%20%282003%29/11%20Ostitter%20Dike%20Pododdhonir%20Shommohon.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Agontuk%201%20%282003%29/11%20Ostitter%20Dike%20Pododdhonir%20Shommohon.flac?download=true",
     "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%201%20%282003%29/Album%20Cover/Agontuk%201%20%5BFront%5D.jpg",
     "repo": "Black",
     "isLossyTranscode": false
   },
   {
     "id": "track-335",
-    "title": "Shabdhon",
+    "title": "Shokarto Upokul",
     "artist": "Black",
     "artists": [
       "Black"
@@ -5707,26 +5690,9 @@
     "album": "Agontuk 2",
     "year": 2004,
     "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/08%20-%20Black%20-%20Shabdhon.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/08%20-%20Black%20-%20Shabdhon.flac?download=true",
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/12%20-%20Black%20-%20Shokarto%20Upokul.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/12%20-%20Black%20-%20Shokarto%20Upokul.flac?download=true",
     "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BFront-Back%5D.jpg",
-    "repo": "Black",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-336",
-    "title": "35",
-    "artist": "Black",
-    "artists": [
-      "Black"
-    ],
-    "featured": null,
-    "album": "Din Bodol",
-    "year": 2004,
-    "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Din%20Bodol%20%282004%29/06.%2035.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Din%20Bodol%20%282004%29/06.%2035.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Din%20Bodol%20%282004%29/Album%20Cover/Din%20Bodol%20%5BFront%5D.jpg",
     "repo": "Black",
     "isLossyTranscode": false
   },
@@ -5765,23 +5731,6 @@
     "isLossyTranscode": false
   },
   {
-    "id": "track-339",
-    "title": "A Poth Shesh Kothae",
-    "artist": "Black",
-    "artists": [
-      "Black"
-    ],
-    "featured": null,
-    "album": "Agontuk 3",
-    "year": 2005,
-    "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/01%20A%20Poth%20Shesh%20Kothae.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/01%20A%20Poth%20Shesh%20Kothae.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BFront%5D.jpg",
-    "repo": "Black",
-    "isLossyTranscode": false
-  },
-  {
     "id": "track-340",
     "title": "Ondho",
     "artist": "Black",
@@ -5795,23 +5744,6 @@
     "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Shopnochura%202%20%282005%29/01%20-%20Ondho.flac",
     "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Shopnochura%202%20%282005%29/01%20-%20Ondho.flac?download=true",
     "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Shopnochura%202%20%282005%29/Album%20Cover/Shopnochura%202%20%5BFront%5D.jpg",
-    "repo": "Black",
-    "isLossyTranscode": false
-  },
-  {
-    "id": "track-341",
-    "title": "Shonkhonil",
-    "artist": "Black",
-    "artists": [
-      "Black"
-    ],
-    "featured": null,
-    "album": "Live Now",
-    "year": 2007,
-    "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Live%20Now%20%282007%29/05%20Shonkhonil.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Live%20Now%20%282007%29/05%20Shonkhonil.flac?download=true",
-    "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Live%20Now%20%282007%29/Album%20Cover/Live%20Now%20%5BFront-Back%5D.jpg",
     "repo": "Black",
     "isLossyTranscode": false
   },
@@ -5834,7 +5766,7 @@
   },
   {
     "id": "track-343",
-    "title": "Manush",
+    "title": "Shobdo",
     "artist": "Black",
     "artists": [
       "Black"
@@ -5843,8 +5775,8 @@
     "album": "Rock 101",
     "year": 2008,
     "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20101%20%282008%29/01%20Manush.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20101%20%282008%29/01%20Manush.flac?download=true",
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20101%20%282008%29/01.%20Black%20-%20Shobdo.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20101%20%282008%29/01.%20Black%20-%20Shobdo.flac?download=true",
     "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20101%20%282008%29/Album%20Cover/Rock%20101%20%5BFront%5D.jpg",
     "repo": "Black",
     "isLossyTranscode": false
@@ -5877,8 +5809,8 @@
     "album": "Rock 505",
     "year": 2010,
     "trackNo": 1,
-    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20505%20%282010%29/01.%20Bertho%20Shawpno%20-.flac",
-    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20505%20%282010%29/01.%20Bertho%20Shawpno%20-.flac?download=true",
+    "streamUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20505%20%282010%29/01.%20Bertho%20Shawpno%20-%20.flac",
+    "downloadUrl": "https://media.githubusercontent.com/media/BD-Band-Archive/Mixed-Albums/master/Rock%20505%20%282010%29/01.%20Bertho%20Shawpno%20-%20.flac?download=true",
     "coverUrl": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20505%20%282010%29/Album%20Cover/Rock%20505%20%5BFront%5D.jpg",
     "repo": "Black",
     "isLossyTranscode": false

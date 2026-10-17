@@ -28,7 +28,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.0.1';
+  const APP_VERSION = '5.0.2';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -45,6 +45,8 @@
   const TRENDING_API_BASE = defaultApiBase;
   const globalPlayCounts = {};
   let lastRecordedTrackId = null;
+  let consecutivePlaybackErrors = 0;
+  let autoAdvanceTimer = null;
 
   // Purge any old local storage counts & unregister stale service workers
   try {
@@ -1734,11 +1736,16 @@
       playerQualityBadge.title = 'Lossless FLAC Audio';
     }
 
+    // Clear any pending error auto-advance timer
+    if (autoAdvanceTimer) {
+      clearTimeout(autoAdvanceTimer);
+      autoAdvanceTimer = null;
+    }
+
     // Set Clean Audio Source (strip any trailing query parameters)
     const cleanUrl = (track.streamUrl || '').split('?')[0];
     if (audio.src !== cleanUrl && !audio.src.endsWith(cleanUrl)) {
       audio.src = cleanUrl;
-      audio.load();
     } else if (audio.readyState === 0) {
       audio.load();
     }
@@ -1757,6 +1764,7 @@
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {
+        consecutivePlaybackErrors = 0;
         recordTrackPlay(track);
         isPlaying = true;
         updatePlayPauseState();
@@ -1770,12 +1778,33 @@
           showToast(`▶ Now Playing: ${track.title} — ${track.artist}`);
         }
       }).catch(err => {
-        console.warn('Playback error (browser autoplay policy restriction):', err);
+        console.warn('[Audio Player] Playback start notice:', err.name, err.message);
         audioSpinner.style.display = 'none';
-        playIcon.style.display = 'block';
 
-        if (isDirectLink) {
+        if (err.name === 'AbortError') {
+          // Play request was superseded by a rapid track change or seek - ignore safely
+          return;
+        }
+
+        if (err.name === 'NotAllowedError') {
+          // Browser autoplay restriction paused consecutive playback without user gesture
+          isPlaying = false;
+          updatePlayPauseState();
           armOneTouchAutoplay(track);
+          return;
+        }
+
+        // For other network/media errors during auto-advance, automatically try next track
+        consecutivePlaybackErrors++;
+        if (consecutivePlaybackErrors < 4) {
+          showToast(`⚠️ Could not play "${track.title}". Skipping to next song...`);
+          autoAdvanceTimer = setTimeout(() => {
+            playNextTrack();
+          }, 1200);
+        } else {
+          isPlaying = false;
+          updatePlayPauseState();
+          showToast('⚠️ Playback paused. Tap play to resume.');
         }
       });
     }
@@ -1943,6 +1972,9 @@
       pauseIcon.style.display = 'none';
       audioSpinner.style.display = 'none';
       coverBars.classList.remove('playing');
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = 'paused';
+      }
     }
     renderTracksTable();
   }
@@ -1957,23 +1989,31 @@
       return;
     }
 
-    if (currentFilteredTracks.length === 0) return;
+    // Determine the pool of tracks to advance through (fallback to catalog if filtered tracks list is empty)
+    const pool = (currentFilteredTracks && currentFilteredTracks.length > 0) ? currentFilteredTracks : catalog;
+    if (!pool || pool.length === 0) return;
 
     if (isShuffle) {
-      const randomIndex = Math.floor(Math.random() * currentFilteredTracks.length);
-      playTrackById(currentFilteredTracks[randomIndex].id);
+      const randomIndex = Math.floor(Math.random() * pool.length);
+      playTrackById(pool[randomIndex].id);
       return;
     }
 
-    let nextIndex = currentTrackIndex + 1;
-    if (nextIndex >= currentFilteredTracks.length) {
+    // Dynamically find current track's position in active pool to prevent stale index halts
+    let activeIdx = currentTrack ? pool.findIndex(t => t.id === currentTrack.id) : currentTrackIndex;
+    if (activeIdx === -1) activeIdx = currentTrackIndex;
+
+    let nextIndex = activeIdx + 1;
+    if (nextIndex >= pool.length) {
       if (repeatMode === 'all') {
         nextIndex = 0;
       } else {
-        return; // Stopped at end
+        isPlaying = false;
+        updatePlayPauseState();
+        return; // Reached end of playlist
       }
     }
-    playTrackById(currentFilteredTracks[nextIndex].id);
+    playTrackById(pool[nextIndex].id);
   }
 
   function playPrevTrack() {
@@ -1982,13 +2022,17 @@
       return;
     }
 
-    if (currentFilteredTracks.length === 0) return;
+    const pool = (currentFilteredTracks && currentFilteredTracks.length > 0) ? currentFilteredTracks : catalog;
+    if (!pool || pool.length === 0) return;
 
-    let prevIndex = currentTrackIndex - 1;
+    let activeIdx = currentTrack ? pool.findIndex(t => t.id === currentTrack.id) : currentTrackIndex;
+    if (activeIdx === -1) activeIdx = currentTrackIndex;
+
+    let prevIndex = activeIdx - 1;
     if (prevIndex < 0) {
-      prevIndex = currentFilteredTracks.length - 1;
+      prevIndex = pool.length - 1;
     }
-    playTrackById(currentFilteredTracks[prevIndex].id);
+    playTrackById(pool[prevIndex].id);
   }
 
   // --- Queue Logic ---
@@ -2099,9 +2143,21 @@
     audioSpinner.style.display = 'none';
     if (isPlaying) {
       pauseIcon.style.display = 'block';
+      playIcon.style.display = 'none';
     } else {
       playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
     }
+  });
+
+  audio.addEventListener('playing', () => {
+    consecutivePlaybackErrors = 0;
+    if (autoAdvanceTimer) {
+      clearTimeout(autoAdvanceTimer);
+      autoAdvanceTimer = null;
+    }
+    isPlaying = true;
+    updatePlayPauseState();
   });
 
   audio.addEventListener('ended', () => {
@@ -2121,10 +2177,23 @@
   });
 
   audio.addEventListener('error', (e) => {
-    console.error('Audio stream error:', e);
-    showToast('Failed to stream audio file. Check network or CORS.');
+    const failedTitle = currentTrack ? currentTrack.title : 'track';
+    console.warn(`[Audio Player] Stream error on "${failedTitle}":`, audio.error ? (audio.error.message || audio.error.code) : e);
     audioSpinner.style.display = 'none';
-    playIcon.style.display = 'block';
+    isPlaying = false;
+    updatePlayPauseState();
+
+    consecutivePlaybackErrors++;
+    if (consecutivePlaybackErrors < 4) {
+      showToast(`⚠️ Could not stream "${failedTitle}". Skipping to next song...`);
+      clearTimeout(autoAdvanceTimer);
+      autoAdvanceTimer = setTimeout(() => {
+        playNextTrack();
+      }, 1000);
+    } else {
+      showToast('⚠️ Playback paused due to repeated stream errors. Please check your network.');
+      consecutivePlaybackErrors = 0;
+    }
   });
 
   // --- Seek Slider Interaction (Smooth Drag & Release) ---
