@@ -113,6 +113,14 @@ CANONICAL_ARTIST_MAP = {
     "srishti": "Srishti",
     "hammer head": "Hammerhead",
     "hammerhead": "Hammerhead",
+    "arnob": "Arnob",
+    "sahana": "Sahana Bajpaie",
+    "sahana bajpaie": "Sahana Bajpaie",
+    "armeen musa": "Armeen Musa",
+    "armin": "Armeen Musa",
+    "shovvota": "Shobbhota",
+    "sovvota": "Shobbhota",
+    "shobbhota": "Shobbhota",
 }
 
 MULTI_ARTIST_MAP = {
@@ -127,6 +135,8 @@ MULTI_ARTIST_MAP = {
     "anila & sumon": ["Bassbaba Sumon", "Anila"],
     "upol & maher": ["Upol", "Maher"],
     "upol and maher": ["Upol", "Maher"],
+    "armin & nabila": ["Armeen Musa", "Nabila"],
+    "armeen musa & nabila": ["Armeen Musa", "Nabila"],
 }
 
 def clean_track(raw_title, default_artist, is_mixed=False):
@@ -210,143 +220,146 @@ def get_local_repo_dir(repo):
 
 def get_exact_album_cover(stream_url):
     """Directly inspect filesystem for the album's cover based on the stream URL."""
-    m = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/([^/]+)/master/([^/]+)/', stream_url)
+    m = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/([^/]+)/master/(.+)/[^/]+$', stream_url)
     repo = None
-    target_dir = None
-    album_folder = None
+    target_dirs = []
     
     if m:
         repo = m.group(1)
-        album_folder = urllib.parse.unquote(m.group(2))
+        rel_folder = urllib.parse.unquote(m.group(2))
         repo_dir = get_local_repo_dir(repo)
-        target_dir = repo_dir / album_folder
+        target_dirs.append((rel_folder, repo_dir / rel_folder))
+        if '/' in rel_folder:
+            parent_folder = rel_folder.split('/')[0]
+            target_dirs.append((parent_folder, repo_dir / parent_folder))
     else:
         m_root = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/([^/]+)/master/([^/]+)$', stream_url)
         if m_root:
             repo = m_root.group(1)
             repo_dir = get_local_repo_dir(repo)
-            target_dir = repo_dir
-            album_folder = ""
+            target_dirs.append(("", repo_dir))
         else:
             return ''
 
-    if not target_dir or not target_dir.exists():
-        return ''
-        
-    for cov_name in ['Album Cover', 'Album Covers']:
-        cov_dir = target_dir / cov_name
-        if cov_dir.exists():
-            files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
-            if files:
-                front = next((f for f in files if 'front' in f.name.lower() or 'artwork' in f.name.lower()), files[0])
-                enc_cov = urllib.parse.quote(cov_name)
-                enc_file = urllib.parse.quote(front.name)
-                if album_folder:
-                    enc_alb = urllib.parse.quote(album_folder)
-                    return f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
-                else:
-                    return f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_cov}/{enc_file}'
+    for cur_folder, target_dir in target_dirs:
+        if not target_dir or not target_dir.exists():
+            continue
+        for cov_name in ['Album Cover', 'Album Covers']:
+            cov_dir = target_dir / cov_name
+            if cov_dir.exists():
+                files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
+                if files:
+                    front = next((f for f in files if 'front' in f.name.lower() or 'artwork' in f.name.lower()), files[0])
+                    enc_cov = urllib.parse.quote(cov_name)
+                    enc_file = urllib.parse.quote(front.name)
+                    if cur_folder:
+                        enc_alb = "/".join(urllib.parse.quote(seg) for seg in cur_folder.split("/"))
+                        return f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
+                    else:
+                        return f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_cov}/{enc_file}'
                 
     return ''
 
 def get_all_album_covers(stream_url):
     """Directly inspect filesystem for all album covers and booklet scans based on stream URL."""
-    m = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/([^/]+)/master/([^/]+)/', stream_url)
+    m = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/([^/]+)/master/(.+)/[^/]+$', stream_url)
     repo = None
-    target_dir = None
-    album_folder = None
+    target_dirs = []
     
     if m:
         repo = m.group(1)
-        album_folder = urllib.parse.unquote(m.group(2))
+        rel_folder = urllib.parse.unquote(m.group(2))
         repo_dir = get_local_repo_dir(repo)
-        target_dir = repo_dir / album_folder
+        target_dirs.append((rel_folder, repo_dir / rel_folder))
+        if '/' in rel_folder:
+            parent_folder = rel_folder.split('/')[0]
+            target_dirs.append((parent_folder, repo_dir / parent_folder))
     else:
         m_root = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/([^/]+)/master/([^/]+)$', stream_url)
         if m_root:
             repo = m_root.group(1)
             repo_dir = get_local_repo_dir(repo)
-            target_dir = repo_dir
-            album_folder = ""
+            target_dirs.append(("", repo_dir))
         else:
             return []
 
-    if not target_dir or not target_dir.exists():
-        return []
-        
     covers = []
-    for cov_name in ['Album Cover', 'Album Covers']:
-        cov_dir = target_dir / cov_name
-        if cov_dir.exists():
-            files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
-            def natural_sort_key(f):
-                n = f.name.lower()
-                cat = 8
-                if 'front' in n:
-                    cat = 1
-                elif 'artwork' in n:
-                    cat = 2
-                elif 'booklet' in n:
-                    cat = 3
-                elif 'lyrics' in n:
-                    cat = 4
-                elif 'inlay' in n or 'inset' in n or 'inlet' in n:
-                    cat = 5
-                elif 'cd' in n or 'disc' in n or 'tape' in n or 'cassette' in n:
-                    cat = 6
-                elif 'back' in n:
-                    cat = 7
-                elif 'poster' in n:
+    seen_hashes = set()
+    seen_urls = set()
+    import hashlib
+    
+    def get_f_hash(p):
+        with open(p, 'rb') as fp:
+            return hashlib.md5(fp.read()).hexdigest()
+
+    for cur_folder, target_dir in target_dirs:
+        if not target_dir or not target_dir.exists():
+            continue
+        for cov_name in ['Album Cover', 'Album Covers']:
+            cov_dir = target_dir / cov_name
+            if cov_dir.exists():
+                files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
+                def natural_sort_key(f):
+                    n = f.name.lower()
                     cat = 8
-                return (cat, [int(t) if t.isdigit() else t.lower() for t in re.split(r'(\d+)', f.name)])
+                    if 'front' in n:
+                        cat = 1
+                    elif 'artwork' in n:
+                        cat = 2
+                    elif 'booklet' in n:
+                        cat = 3
+                    elif 'lyrics' in n:
+                        cat = 4
+                    elif 'inlay' in n or 'inset' in n or 'inlet' in n:
+                        cat = 5
+                    elif 'cd' in n or 'disc' in n or 'tape' in n or 'cassette' in n:
+                        cat = 6
+                    elif 'back' in n:
+                        cat = 7
+                    elif 'poster' in n:
+                        cat = 8
+                    return (cat, [int(t) if t.isdigit() else t.lower() for t in re.split(r'(\d+)', f.name)])
 
-            files.sort(key=natural_sort_key)
-            
-            # Exclude redundant folder.jpg/png if a front/artwork image exists, and deduplicate by file hash
-            has_front = any('front' in f.name.lower() or 'artwork' in f.name.lower() for f in files)
-            filtered_files = []
-            seen_hashes = set()
-            import hashlib
-            
-            def get_f_hash(p):
-                with open(p, 'rb') as fp:
-                    return hashlib.md5(fp.read()).hexdigest()
+                files.sort(key=natural_sort_key)
+                has_front = any('front' in f.name.lower() or 'artwork' in f.name.lower() for f in files)
 
-            for f in files:
-                if has_front and f.stem.lower() in ['folder']:
-                    continue
-                try:
-                    h = get_f_hash(f)
-                    if h in seen_hashes:
+                for f in files:
+                    if has_front and f.stem.lower() in ['folder']:
                         continue
-                    seen_hashes.add(h)
-                except Exception:
-                    pass
-                filtered_files.append(f)
+                    try:
+                        h = get_f_hash(f)
+                        if h in seen_hashes:
+                            continue
+                        seen_hashes.add(h)
+                    except Exception:
+                        pass
+                    
+                    enc_cov = urllib.parse.quote(cov_name)
+                    enc_file = urllib.parse.quote(f.name)
+                    if cur_folder:
+                        enc_alb = "/".join(urllib.parse.quote(seg) for seg in cur_folder.split("/"))
+                        raw_url = f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
+                    else:
+                        raw_url = f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_cov}/{enc_file}'
 
-            for f in filtered_files:
-                enc_cov = urllib.parse.quote(cov_name)
-                enc_file = urllib.parse.quote(f.name)
-                if album_folder:
-                    enc_alb = urllib.parse.quote(album_folder)
-                    raw_url = f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
-                else:
-                    raw_url = f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_cov}/{enc_file}'
-                
-                clean_stem = f.stem.replace('+-5B', ' [').replace('-5B', ' [').replace('+-5D', ']').replace('-5D', ']').replace('+', ' ')
-                m_tag = re.search(r'\[([^\]]+)\](?:\s*\((.*?)\))?', clean_stem)
-                if m_tag:
-                    tag_name = m_tag.group(1).strip()
-                    if m_tag.group(2):
-                        tag_name = f"{tag_name} ({m_tag.group(2).strip()})"
-                else:
-                    tag_name = clean_stem.strip()
-                
-                covers.append({
-                    "title": tag_name,
-                    "filename": f.name,
-                    "url": raw_url
-                })
+                    if raw_url in seen_urls:
+                        continue
+                    seen_urls.add(raw_url)
+                    
+                    clean_stem = f.stem.replace('+-5B', ' [').replace('-5B', ' [').replace('+-5D', ']').replace('-5D', ']').replace('+', ' ')
+                    m_tag = re.search(r'\[([^\]]+)\](?:\s*\((.*?)\))?', clean_stem)
+                    if m_tag:
+                        tag_name = m_tag.group(1).strip()
+                        if m_tag.group(2):
+                            tag_name = f"{tag_name} ({m_tag.group(2).strip()})"
+                    else:
+                        tag_name = clean_stem.strip()
+                    
+                    covers.append({
+                        "title": tag_name,
+                        "filename": f.name,
+                        "url": raw_url
+                    })
     return covers
 
 def validate_repo_structure(folder_name, readme_path):
@@ -658,13 +671,21 @@ def build_catalog():
                 
                 # Dynamically collect all physical album covers/booklets for this album
                 artist_album_key = f"{track_artist} - {track_album}"
-                if artist_album_key not in album_covers_map or track_album not in album_covers_map:
-                    covs = get_all_album_covers(clean_url)
-                    if covs:
-                        if artist_album_key not in album_covers_map:
-                            album_covers_map[artist_album_key] = covs
-                        if track_album not in album_covers_map:
-                            album_covers_map[track_album] = covs
+                covs = get_all_album_covers(clean_url)
+                if covs:
+                    if artist_album_key not in album_covers_map:
+                        album_covers_map[artist_album_key] = list(covs)
+                    else:
+                        for cv in covs:
+                            if not any(x['url'] == cv['url'] for x in album_covers_map[artist_album_key]):
+                                album_covers_map[artist_album_key].append(cv)
+
+                    if track_album not in album_covers_map:
+                        album_covers_map[track_album] = list(covs)
+                    else:
+                        for cv in covs:
+                            if not any(x['url'] == cv['url'] for x in album_covers_map[track_album]):
+                                album_covers_map[track_album].append(cv)
                 
                 track_id = f"track-{len(catalog)+1}"
                 
@@ -713,6 +734,29 @@ def build_catalog():
         if updated_text != readme_text:
             readme_path.write_text(updated_text, encoding="utf-8")
             print(f" Updated README.md badge and count to {len(catalog)} tracks.")
+            
+    # Automatically bump cache-buster APP_VERSION in app.js and index.html to guarantee fresh cache
+    app_js_path = OUTPUT_DIR / "app.js"
+    index_html_path = OUTPUT_DIR / "index.html"
+    new_ver = None
+
+    if app_js_path.exists():
+        txt = app_js_path.read_text(encoding="utf-8")
+        m_v = re.search(r"const APP_VERSION = '(\d+)\.(\d+)(?:\.(\d+))?';", txt)
+        if m_v:
+            maj = int(m_v.group(1))
+            min_v = int(m_v.group(2))
+            new_ver = f"{maj}.{min_v + 1}"
+            txt = re.sub(r"const APP_VERSION = '[^']+';", f"const APP_VERSION = '{new_ver}';", txt)
+            app_js_path.write_text(txt, encoding="utf-8")
+            print(f"[*] Bumped app.js APP_VERSION to {new_ver}")
+
+    if index_html_path.exists() and new_ver:
+        txt = index_html_path.read_text(encoding="utf-8")
+        txt = re.sub(r'<script src="app\.js\?v=[^"]+"></script>', f'<script src="app.js?v={new_ver}"></script>', txt)
+        txt = re.sub(r'<link rel="stylesheet" href="style\.css\?v=[^"]+">', f'<link rel="stylesheet" href="style.css?v={new_ver}">', txt)
+        index_html_path.write_text(txt, encoding="utf-8")
+        print(f"[*] Bumped index.html cache busters to v={new_ver}")
     
     # Print summary statistics
     artists = Counter(t['artist'] for t in catalog)
@@ -934,7 +978,8 @@ def generate_social_share_pages(catalog, album_covers_map, artist_images):
         quoted_alb = urllib.parse.quote(alb)
         
         first_t = next(t for t in catalog if t["album"] == alb)
-        art_esc = html.escape(first_t["artist"])
+        art_name = "Various Artists" if first_t.get("repo") == "Mixed-Albums" else first_t["artist"]
+        art_esc = html.escape(art_name)
         yr_str = f" ({first_t['year']})" if first_t.get("year") else ""
         
         gallery = album_covers_map.get(alb) or album_covers_map.get(f"{first_t['artist']} - {alb}") or []

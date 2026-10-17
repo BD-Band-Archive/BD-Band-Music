@@ -1,9 +1,9 @@
 # 🇧🇩 BD Band Music
 
-[![Live Web Player](https://img.shields.io/badge/▶_Launch-Live_Web_Player-8b5cf6?style=for-the-badge&logo=googlechrome&logoColor=white)](https://bd-band-archive.github.io/BD-Band-Music/) [![Catalog - Lossless FLAC Tracks](https://img.shields.io/badge/Catalog-963%20FLAC%20Tracks-007ec6?style=for-the-badge&logo=flac&logoColor=white)](#) [![Git LFS - Enabled](https://img.shields.io/badge/Git%20LFS-Enabled-f05032?style=for-the-badge&logo=git-lfs&logoColor=white)](#)
+[![Live Web Player](https://img.shields.io/badge/▶_Launch-Live_Web_Player-8b5cf6?style=for-the-badge&logo=googlechrome&logoColor=white)](https://bd-band-archive.github.io/BD-Band-Music/) [![Catalog - Lossless FLAC Tracks](https://img.shields.io/badge/Catalog-979%20FLAC%20Tracks-007ec6?style=for-the-badge&logo=flac&logoColor=white)](#) [![Git LFS - Enabled](https://img.shields.io/badge/Git%20LFS-Enabled-f05032?style=for-the-badge&logo=git-lfs&logoColor=white)](#)
 
 > 🌐 **Interactive Web Player & Search Engine:**  
-> Search, browse, and stream all **963 lossless FLAC tracks** across all bands and compilations directly in your browser with instant search, playlists, and background lock-screen playback:  
+> Search, browse, and stream all **979 lossless FLAC tracks** across all bands and compilations directly in your browser with instant search, playlists, and background lock-screen playback:  
 > **👉 [https://bd-band-archive.github.io/BD-Band-Music/](https://bd-band-archive.github.io/BD-Band-Music/)**
 
 ---

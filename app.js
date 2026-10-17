@@ -255,8 +255,9 @@
   async function loadCatalog() {
     try {
       trackCountLabel.textContent = 'Loading catalogue...';
-      const APP_VERSION = '4.6';
-      const response = await fetch(`catalog.json?v=${APP_VERSION}`);
+      const APP_VERSION = '4.8';
+      const cacheBust = `${APP_VERSION}&t=${Date.now()}`;
+      const response = await fetch(`catalog.json?v=${cacheBust}`, { cache: 'no-cache' });
       if (!response.ok) throw new Error('Failed to load catalog.json');
       catalog = await response.json();
       
@@ -271,7 +272,7 @@
 
       // Dynamically load any newly mapped artist images from artists_map.json
       try {
-        const artResp = await fetch(`assets/artists/artists_map.json?v=${APP_VERSION}`);
+        const artResp = await fetch(`assets/artists/artists_map.json?v=${cacheBust}`, { cache: 'no-cache' });
         if (artResp.ok) {
           const dynamicMap = await artResp.json();
           Object.assign(ARTIST_OFFICIAL_IMAGES, dynamicMap);
@@ -282,7 +283,7 @@
 
       // Dynamically load album artwork & physical archive scans
       try {
-        const covResp = await fetch(`assets/album_covers.json?v=${APP_VERSION}`);
+        const covResp = await fetch(`assets/album_covers.json?v=${cacheBust}`, { cache: 'no-cache' });
         if (covResp.ok) {
           albumCoversMap = await covResp.json();
         }
