@@ -27,6 +27,9 @@
   let currentLightboxImages = [];
   let currentLightboxIndex = 0;
 
+  // Version identifier for cache busting and auto-update sync
+  const APP_VERSION = '5.0.0';
+
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
   if (typeof window !== 'undefined') {
@@ -42,11 +45,23 @@
   const TRENDING_API_BASE = defaultApiBase;
   const globalPlayCounts = {};
 
-  // Purge any old local storage counts so only database Neon checking is used
+  // Purge any old local storage counts & unregister stale service workers
   try {
     localStorage.removeItem('bd_band_plays_v1');
     localStorage.removeItem('bd_band_plays_v2');
+    localStorage.setItem('bd_band_app_version', APP_VERSION);
   } catch (_) {}
+
+  if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(registrations => {
+      for (const reg of registrations) reg.unregister();
+    }).catch(() => {});
+  }
+  if (typeof window !== 'undefined' && 'caches' in window) {
+    caches.keys().then(keys => {
+      for (const key of keys) caches.delete(key);
+    }).catch(() => {});
+  }
 
   // Benchmark Bangladeshi rock classics used to maintain a vibrant, complete Top 15
   // until a visitor has accumulated their own 15 custom plays
@@ -89,6 +104,14 @@
       const res = await fetch(`${TRENDING_API_BASE}/api/trending`, { cache: 'no-cache' });
       if (!res.ok) return;
       const data = await res.json();
+
+      // Auto-reload active clients if a new app version was deployed
+      if (data && data.version && data.version !== APP_VERSION) {
+        console.log('[Version Sync] New app version available:', data.version, '(current:', APP_VERSION + '). Reloading...');
+        window.location.reload(true);
+        return;
+      }
+
       let hasChanges = false;
       let lastChangedKey = null;
 
@@ -326,9 +349,14 @@
       }
     }, 8000);
 
-    // 3. Immediate check on tab focus
+    // 3. Immediate check on tab focus or visibility change
     window.addEventListener('focus', () => {
       fetchGlobalTrending(true);
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        fetchGlobalTrending(true);
+      }
     });
   }
 
@@ -561,7 +589,6 @@
   async function loadCatalog() {
     try {
       trackCountLabel.textContent = 'Loading catalogue...';
-      const APP_VERSION = '4.9';
       const cacheBust = `${APP_VERSION}&t=${Date.now()}`;
       const response = await fetch(`catalog.json?v=${cacheBust}`, { cache: 'no-cache' });
       if (!response.ok) throw new Error('Failed to load catalog.json');

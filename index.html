@@ -39,7 +39,27 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
-  <link rel="stylesheet" href="style.css?v=4.9">
+  <script>
+    // Ensure all visitors immediately upgrade to v5.0.0 and purge stale offline caches
+    (function() {
+      try {
+        var CURRENT_VER = '5.0.0';
+        var lastVer = localStorage.getItem('bd_band_app_version');
+        if (lastVer !== CURRENT_VER) {
+          localStorage.removeItem('bd_band_plays_v1');
+          localStorage.removeItem('bd_band_plays_v2');
+          localStorage.setItem('bd_band_app_version', CURRENT_VER);
+          if ('caches' in window) {
+            caches.keys().then(function(keys) {
+              keys.forEach(function(k) { caches.delete(k); });
+            });
+          }
+        }
+      } catch (_) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css?v=5.0.0">
 </head>
 <body>
   <!-- Full-Screen Immersive Landing Page & Manifesto Overlay -->
@@ -797,6 +817,6 @@
   </div>
 
   <script src="assets/qrcode.min.js"></script>
-  <script src="app.js?v=4.9"></script>
+  <script src="app.js?v=5.0.0"></script>
 </body>
 </html>
