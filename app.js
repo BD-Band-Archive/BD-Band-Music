@@ -28,7 +28,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.0.2';
+  const APP_VERSION = '5.0.3';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -47,6 +47,8 @@
   let lastRecordedTrackId = null;
   let consecutivePlaybackErrors = 0;
   let autoAdvanceTimer = null;
+  let currentTrackRetryCount = 0;
+  let trackRetryTimer = null;
 
   // Purge any old local storage counts & unregister stale service workers
   try {
@@ -1736,15 +1738,22 @@
       playerQualityBadge.title = 'Lossless FLAC Audio';
     }
 
-    // Clear any pending error auto-advance timer
+    // Clear any pending error timers
     if (autoAdvanceTimer) {
       clearTimeout(autoAdvanceTimer);
       autoAdvanceTimer = null;
     }
+    if (trackRetryTimer) {
+      clearTimeout(trackRetryTimer);
+      trackRetryTimer = null;
+    }
 
     // Set Clean Audio Source (strip any trailing query parameters)
     const cleanUrl = (track.streamUrl || '').split('?')[0];
-    if (audio.src !== cleanUrl && !audio.src.endsWith(cleanUrl)) {
+    const isNewSource = (audio.src !== cleanUrl && !audio.src.endsWith(cleanUrl));
+    if (isNewSource) {
+      currentTrackRetryCount = 0;
+      audio.preload = 'auto';
       audio.src = cleanUrl;
     } else if (audio.readyState === 0) {
       audio.load();
@@ -1764,6 +1773,7 @@
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {
+        currentTrackRetryCount = 0;
         consecutivePlaybackErrors = 0;
         recordTrackPlay(track);
         isPlaying = true;
@@ -1779,7 +1789,6 @@
         }
       }).catch(err => {
         console.warn('[Audio Player] Playback start notice:', err.name, err.message);
-        audioSpinner.style.display = 'none';
 
         if (err.name === 'AbortError') {
           // Play request was superseded by a rapid track change or seek - ignore safely
@@ -1788,24 +1797,25 @@
 
         if (err.name === 'NotAllowedError') {
           // Browser autoplay restriction paused consecutive playback without user gesture
+          audioSpinner.style.display = 'none';
           isPlaying = false;
           updatePlayPauseState();
           armOneTouchAutoplay(track);
           return;
         }
 
-        // For other network/media errors during auto-advance, automatically try next track
-        consecutivePlaybackErrors++;
-        if (consecutivePlaybackErrors < 4) {
-          showToast(`⚠️ Could not play "${track.title}". Skipping to next song...`);
-          autoAdvanceTimer = setTimeout(() => {
-            playNextTrack();
-          }, 1200);
-        } else {
-          isPlaying = false;
-          updatePlayPauseState();
-          showToast('⚠️ Playback paused. Tap play to resume.');
-        }
+        // On network delay or buffering stall: DO NOT SKIP! Wait for it to load
+        audioSpinner.style.display = 'block';
+        isPlaying = true;
+        updatePlayPauseState();
+
+        const onBufferedReady = () => {
+          audio.removeEventListener('canplay', onBufferedReady);
+          if (isPlaying && currentTrack && currentTrack.id === track.id) {
+            audio.play().catch(() => {});
+          }
+        };
+        audio.addEventListener('canplay', onBufferedReady, { once: true });
       });
     }
 
@@ -2134,9 +2144,15 @@
   });
 
   audio.addEventListener('waiting', () => {
+    // Audio playback paused because the stream is buffering more data
     audioSpinner.style.display = 'block';
     playIcon.style.display = 'none';
     pauseIcon.style.display = 'none';
+  });
+
+  audio.addEventListener('stalled', () => {
+    // Network transfer stalled while downloading audio - keep waiting and show spinner
+    audioSpinner.style.display = 'block';
   });
 
   audio.addEventListener('canplay', () => {
@@ -2152,10 +2168,16 @@
 
   audio.addEventListener('playing', () => {
     consecutivePlaybackErrors = 0;
+    currentTrackRetryCount = 0;
     if (autoAdvanceTimer) {
       clearTimeout(autoAdvanceTimer);
       autoAdvanceTimer = null;
     }
+    if (trackRetryTimer) {
+      clearTimeout(trackRetryTimer);
+      trackRetryTimer = null;
+    }
+    audioSpinner.style.display = 'none';
     isPlaying = true;
     updatePlayPauseState();
   });
@@ -2178,22 +2200,99 @@
 
   audio.addEventListener('error', (e) => {
     const failedTitle = currentTrack ? currentTrack.title : 'track';
-    console.warn(`[Audio Player] Stream error on "${failedTitle}":`, audio.error ? (audio.error.message || audio.error.code) : e);
-    audioSpinner.style.display = 'none';
-    isPlaying = false;
-    updatePlayPauseState();
+    const errObj = audio.error;
+    const errorCode = errObj ? errObj.code : 0;
+    console.warn(`[Audio Player] Stream event on "${failedTitle}" (code ${errorCode}):`, errObj ? (errObj.message || errorCode) : e);
 
-    consecutivePlaybackErrors++;
-    if (consecutivePlaybackErrors < 4) {
-      showToast(`⚠️ Could not stream "${failedTitle}". Skipping to next song...`);
-      clearTimeout(autoAdvanceTimer);
-      autoAdvanceTimer = setTimeout(() => {
-        playNextTrack();
-      }, 1000);
-    } else {
-      showToast('⚠️ Playback paused due to repeated stream errors. Please check your network.');
-      consecutivePlaybackErrors = 0;
+    // Code 1: MEDIA_ERR_ABORTED - Ignored safely
+    if (errorCode === 1) return;
+
+    // Code 2: MEDIA_ERR_NETWORK or offline - Network issue!
+    // NEVER skip the song. Wait for network and retry loading the current track.
+    const isNetworkProblem = (errorCode === 2) || (typeof navigator !== 'undefined' && !navigator.onLine);
+
+    if (isNetworkProblem) {
+      audioSpinner.style.display = 'block';
+      const resumePos = audio.currentTime || 0;
+
+      if (currentTrackRetryCount < 6) {
+        currentTrackRetryCount++;
+        showToast(`📶 Network buffering... Retrying "${failedTitle}" (${currentTrackRetryCount}/6)`);
+        
+        clearTimeout(trackRetryTimer);
+        trackRetryTimer = setTimeout(() => {
+          if (!currentTrack) return;
+          const cleanUrl = (currentTrack.streamUrl || '').split('?')[0];
+          audio.src = cleanUrl;
+          audio.load();
+          if (resumePos > 0) {
+            const onRestorePos = () => {
+              audio.removeEventListener('canplay', onRestorePos);
+              try { audio.currentTime = resumePos; } catch (_) {}
+              if (isPlaying) audio.play().catch(() => {});
+            };
+            audio.addEventListener('canplay', onRestorePos, { once: true });
+          } else {
+            if (isPlaying) audio.play().catch(() => {});
+          }
+        }, 2500);
+      } else {
+        // Repeated network timeouts: pause and wait for user or network reconnection
+        audioSpinner.style.display = 'none';
+        isPlaying = false;
+        updatePlayPauseState();
+        showToast('⚠️ Slow or unstable network. Tap play to resume when ready.');
+      }
+      return;
     }
+
+    // Code 3: MEDIA_ERR_DECODE - Try reloading current track once
+    if (errorCode === 3 && currentTrackRetryCount < 2) {
+      currentTrackRetryCount++;
+      audioSpinner.style.display = 'block';
+      clearTimeout(trackRetryTimer);
+      trackRetryTimer = setTimeout(() => {
+        if (!currentTrack) return;
+        audio.load();
+        if (isPlaying) audio.play().catch(() => {});
+      }, 1500);
+      return;
+    }
+
+    // Code 4: MEDIA_ERR_SRC_NOT_SUPPORTED - Unplayable source (404/unsupported)
+    if (errorCode === 4) {
+      if (currentTrackRetryCount < 1) {
+        currentTrackRetryCount++;
+        audioSpinner.style.display = 'block';
+        clearTimeout(trackRetryTimer);
+        trackRetryTimer = setTimeout(() => {
+          if (!currentTrack) return;
+          audio.load();
+          if (isPlaying) audio.play().catch(() => {});
+        }, 1500);
+        return;
+      }
+
+      // If permanently dead after retry and user is online, skip to next song
+      audioSpinner.style.display = 'none';
+      isPlaying = false;
+      updatePlayPauseState();
+      consecutivePlaybackErrors++;
+      if (consecutivePlaybackErrors < 4) {
+        showToast(`⚠️ Could not stream "${failedTitle}". Skipping to next song...`);
+        clearTimeout(autoAdvanceTimer);
+        autoAdvanceTimer = setTimeout(() => {
+          playNextTrack();
+        }, 1200);
+      } else {
+        showToast('⚠️ Playback paused. Please check your network.');
+        consecutivePlaybackErrors = 0;
+      }
+      return;
+    }
+
+    // Generic fallback: keep waiting and show spinner
+    audioSpinner.style.display = 'block';
   });
 
   // --- Seek Slider Interaction (Smooth Drag & Release) ---
@@ -3073,6 +3172,22 @@
       visualizerCanvas.width = window.innerWidth;
       visualizerCanvas.height = 90;
     }
+  });
+
+  // --- Network Online / Offline Reconnection Handlers ---
+  window.addEventListener('online', () => {
+    showToast('📶 Internet connection restored.');
+    if (currentTrack && isPlaying && audio.paused) {
+      audioSpinner.style.display = 'block';
+      currentTrackRetryCount = 0;
+      audio.load();
+      audio.play().catch(() => {});
+    }
+  });
+
+  window.addEventListener('offline', () => {
+    showToast('⚠️ Network connection lost. Waiting for internet...');
+    audioSpinner.style.display = 'block';
   });
 
   // --- Keyboard Shortcuts ---
