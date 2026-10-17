@@ -746,7 +746,8 @@ def build_catalog():
         if m_v:
             maj = int(m_v.group(1))
             min_v = int(m_v.group(2))
-            new_ver = f"{maj}.{min_v + 1}"
+            patch = int(m_v.group(3)) if m_v.group(3) else 0
+            new_ver = f"{maj}.{min_v}.{patch + 1}"
             txt = re.sub(r"const APP_VERSION = '[^']+';", f"const APP_VERSION = '{new_ver}';", txt)
             app_js_path.write_text(txt, encoding="utf-8")
             print(f"[*] Bumped app.js APP_VERSION to {new_ver}")
