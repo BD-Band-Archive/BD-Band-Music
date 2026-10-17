@@ -28,7 +28,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.0.0';
+  const APP_VERSION = '5.0.1';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -44,6 +44,7 @@
   }
   const TRENDING_API_BASE = defaultApiBase;
   const globalPlayCounts = {};
+  let lastRecordedTrackId = null;
 
   // Purge any old local storage counts & unregister stale service workers
   try {
@@ -162,6 +163,14 @@
   function recordTrackPlay(track) {
     if (!track) return;
     const key = getTrackKey(track);
+
+    // Guard: Only increment once per song listening session
+    if (lastRecordedTrackId === track.id) {
+      console.log('[Neon Trending] Play already recorded for active track session:', key, '- ignoring duplicate count');
+      return;
+    }
+    lastRecordedTrackId = track.id;
+
     const targetUrl = `${TRENDING_API_BASE}/api/play`;
 
     console.log('[Neon Trending] Recording play for track:', key, 'via', targetUrl);
@@ -1662,6 +1671,32 @@
     const track = catalog.find(t => t.id === id);
     if (!track) return;
 
+    // Check if this exact song is already the active track
+    if (currentTrack && currentTrack.id === id) {
+      if (isPlaying && !audio.paused) {
+        // Song is currently playing: pressing again pauses playback and does NOT increment counter
+        audio.pause();
+        isPlaying = false;
+        updatePlayPauseState();
+        renderTracksTable();
+        return;
+      } else if (audio.paused && audio.src && audio.currentTime > 0) {
+        // Song was paused: pressing again resumes playback and does NOT increment counter
+        const resumePromise = audio.play();
+        if (resumePromise !== undefined) {
+          resumePromise.then(() => {
+            isPlaying = true;
+            updatePlayPauseState();
+            updateMediaSession();
+            renderTracksTable();
+          }).catch(err => console.warn('Playback resume error:', err));
+        }
+        return;
+      }
+      // If audio is buffering / loading for this exact track, ignore duplicate presses
+      return;
+    }
+
     currentTrack = track;
     currentTrackIndex = currentFilteredTracks.findIndex(t => t.id === id);
 
@@ -2072,8 +2107,15 @@
   audio.addEventListener('ended', () => {
     if (repeatMode === 'one') {
       audio.currentTime = 0;
-      audio.play();
+      lastRecordedTrackId = null; // Reset so looping this track counts as a new play
+      const loopPromise = audio.play();
+      if (loopPromise !== undefined) {
+        loopPromise.then(() => {
+          recordTrackPlay(currentTrack);
+        }).catch(() => {});
+      }
     } else {
+      lastRecordedTrackId = null;
       playNextTrack();
     }
   });
