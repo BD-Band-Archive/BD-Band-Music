@@ -27,12 +27,37 @@
   let currentLightboxImages = [];
   let currentLightboxIndex = 0;
 
-  // Play Count & Trending Tracking (All songs start at zero, incrementing with each listen)
-  const PLAYS_STORAGE_KEY = 'bd_band_plays_v1';
-  try {
-    // Clear legacy placeholder seed data if present
-    localStorage.removeItem('bd_band_play_counts');
-  } catch (_) {}
+  // Play Count & Trending Tracking (Permanent canonical artist-title keying)
+  const PLAYS_STORAGE_KEY = 'bd_band_plays_v2';
+  const LEGACY_STORAGE_KEY = 'bd_band_plays_v1';
+
+  // Benchmark Bangladeshi rock classics used to maintain a vibrant, complete Top 15
+  // until a visitor has accumulated their own 15 custom plays
+  const POPULAR_CLASSICS_FALLBACK = [
+    { artist: 'Artcell', title: 'Oniket Prantor' },
+    { artist: 'Artcell', title: 'Dukkho Bilash' },
+    { artist: 'Black', title: 'Amar Prithibi' },
+    { artist: 'Aurthohin', title: 'Chaite Paro' },
+    { artist: 'Bassbaba Sumon & Anila', title: 'Gaibona' },
+    { artist: 'Artcell', title: 'Poth Chola' },
+    { artist: 'Black', title: 'Utshober Por' },
+    { artist: 'Aurthohin', title: 'Epitaph' },
+    { artist: 'The Watson Brothers', title: 'Shukhi' },
+    { artist: 'Arbovirus', title: 'Ja Icche Ta' },
+    { artist: 'Warfaze', title: 'Boshe Achhi Eka' },
+    { artist: 'Indalo', title: 'ISD' },
+    { artist: 'Vibe', title: 'Chena Jogot' },
+    { artist: 'Arnob', title: 'Chad Dekhe Keu' },
+    { artist: 'Artcell', title: 'Dhushor Shomoy' }
+  ];
+
+  function getTrackKey(track) {
+    if (!track) return '';
+    if (typeof track === 'string') return track;
+    const cleanTitle = (track.title || '').replace(/\s*\([\u0980-\u09FF\s\d\w\-\.,]+\)/g, '').trim().toLowerCase();
+    const cleanArtist = (track.artist || '').trim().toLowerCase();
+    return `${cleanArtist}::${cleanTitle}`;
+  }
 
   function getStoredPlayCounts() {
     try {
@@ -43,17 +68,53 @@
     }
   }
 
-  function getTrackPlayCount(trackId) {
-    if (!trackId) return 0;
-    const stored = getStoredPlayCounts();
-    return stored[trackId] || 0;
+  function migrateLegacyPlays() {
+    try {
+      const legacyJson = localStorage.getItem(LEGACY_STORAGE_KEY);
+      if (!legacyJson) return;
+      const legacy = JSON.parse(legacyJson);
+      const current = getStoredPlayCounts();
+      let changed = false;
+
+      for (const [key, count] of Object.entries(legacy)) {
+        if (key.startsWith('track-') && catalog.length > 0) {
+          const matchedTrack = catalog.find(t => t.id === key);
+          if (matchedTrack) {
+            const canonicalKey = getTrackKey(matchedTrack);
+            current[canonicalKey] = Math.max(current[canonicalKey] || 0, count);
+            changed = true;
+          }
+        } else {
+          current[key] = Math.max(current[key] || 0, count);
+          changed = true;
+        }
+      }
+
+      if (changed) {
+        localStorage.setItem(PLAYS_STORAGE_KEY, JSON.stringify(current));
+      }
+    } catch (_) {}
   }
 
-  function recordTrackPlay(trackId) {
-    if (!trackId) return;
+  function getTrackPlayCount(track) {
+    if (!track) return 0;
+    const stored = getStoredPlayCounts();
+    const key = getTrackKey(track);
+    const id = (typeof track === 'object' && track.id) ? track.id : track;
+    return stored[key] || stored[id] || 0;
+  }
+
+  function recordTrackPlay(track) {
+    if (!track) return;
     try {
+      const key = getTrackKey(track);
+      const id = (typeof track === 'object' && track.id) ? track.id : track;
       const stored = getStoredPlayCounts();
-      stored[trackId] = (stored[trackId] || 0) + 1;
+      const current = stored[key] || stored[id] || 0;
+      stored[key] = current + 1;
+      if (id && id !== key) {
+        stored[id] = stored[key];
+      }
       localStorage.setItem(PLAYS_STORAGE_KEY, JSON.stringify(stored));
     } catch (_) {}
   }
@@ -67,14 +128,46 @@
 
   function getTopTrendingTracks(limit = 15) {
     if (!catalog || catalog.length === 0) return [];
-    // Only feature tracks that have actually been listened to (playCount > 0)
-    const played = catalog.filter(t => getTrackPlayCount(t.id) > 0);
-    played.sort((a, b) => {
-      const pA = getTrackPlayCount(a.id);
-      const pB = getTrackPlayCount(b.id);
+    
+    // 1. All tracks with recorded plays, deduplicated by canonical key
+    const seenKeys = new Set();
+    const played = [];
+    
+    const allPlayed = catalog.filter(t => getTrackPlayCount(t) > 0);
+    allPlayed.sort((a, b) => {
+      const pA = getTrackPlayCount(a);
+      const pB = getTrackPlayCount(b);
       if (pB !== pA) return pB - pA;
       return a.title.localeCompare(b.title);
     });
+
+    for (const t of allPlayed) {
+      const key = getTrackKey(t);
+      if (!seenKeys.has(key)) {
+        seenKeys.add(key);
+        played.push(t);
+      }
+    }
+
+    // 2. If fewer than 'limit' played tracks exist on this device/profile,
+    // fill remaining slots with celebrated classics so the Top 15 is always complete
+    if (played.length < limit) {
+      for (const fallback of POPULAR_CLASSICS_FALLBACK) {
+        if (played.length >= limit) break;
+        const match = catalog.find(t => 
+          t.artist.toLowerCase() === fallback.artist.toLowerCase() &&
+          t.title.toLowerCase().includes(fallback.title.toLowerCase())
+        );
+        if (match) {
+          const key = getTrackKey(match);
+          if (!seenKeys.has(key)) {
+            seenKeys.add(key);
+            played.push(match);
+          }
+        }
+      }
+    }
+
     return played.slice(0, limit);
   }
 
@@ -255,11 +348,12 @@
   async function loadCatalog() {
     try {
       trackCountLabel.textContent = 'Loading catalogue...';
-      const APP_VERSION = '4.8';
+      const APP_VERSION = '4.9';
       const cacheBust = `${APP_VERSION}&t=${Date.now()}`;
       const response = await fetch(`catalog.json?v=${cacheBust}`, { cache: 'no-cache' });
       if (!response.ok) throw new Error('Failed to load catalog.json');
       catalog = await response.json();
+      migrateLegacyPlays();
       
       // Dynamically update search placeholder and hints from live catalog size
       if (globalSearchInput) {
@@ -562,8 +656,8 @@
       // Sorting
       if (sortBy === 'popular') {
         filtered.sort((a, b) => {
-          const pA = getTrackPlayCount(a.id);
-          const pB = getTrackPlayCount(b.id);
+          const pA = getTrackPlayCount(a);
+          const pB = getTrackPlayCount(b);
           if (pB !== pA) return pB - pA;
           return a.title.localeCompare(b.title);
         });
@@ -1351,7 +1445,7 @@
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {
-        recordTrackPlay(track.id);
+        recordTrackPlay(track);
         isPlaying = true;
         updatePlayPauseState();
         updateMediaSession();
