@@ -27,9 +27,26 @@
   let currentLightboxImages = [];
   let currentLightboxIndex = 0;
 
-  // Play Count & Trending Tracking (Permanent canonical artist-title keying)
-  const PLAYS_STORAGE_KEY = 'bd_band_plays_v2';
-  const LEGACY_STORAGE_KEY = 'bd_band_plays_v1';
+  // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
+  let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
+  if (typeof window !== 'undefined') {
+    if (window.NEON_API_BASE) {
+      defaultApiBase = window.NEON_API_BASE;
+    } else if (
+      (window.location.hostname === 'localhost' && window.location.port === '3000') ||
+      (window.location.hostname === '127.0.0.1' && window.location.port === '3000')
+    ) {
+      defaultApiBase = 'http://localhost:3000';
+    }
+  }
+  const TRENDING_API_BASE = defaultApiBase;
+  const globalPlayCounts = {};
+
+  // Purge any old local storage counts so only database Neon checking is used
+  try {
+    localStorage.removeItem('bd_band_plays_v1');
+    localStorage.removeItem('bd_band_plays_v2');
+  } catch (_) {}
 
   // Benchmark Bangladeshi rock classics used to maintain a vibrant, complete Top 15
   // until a visitor has accumulated their own 15 custom plays
@@ -59,64 +76,260 @@
     return `${cleanArtist}::${cleanTitle}`;
   }
 
-  function getStoredPlayCounts() {
+  // Pure Database Checking: Reads strictly from Neon Postgres (no local storage)
+  function getTrackPlayCount(track) {
+    if (!track) return 0;
+    const key = getTrackKey(track);
+    return globalPlayCounts[key] || 0;
+  }
+
+  // Fetch full trending and play counts from Neon Postgres
+  async function fetchGlobalTrending(isSilent = false) {
     try {
-      const json = localStorage.getItem(PLAYS_STORAGE_KEY);
-      return json ? JSON.parse(json) : {};
-    } catch (_) {
-      return {};
+      const res = await fetch(`${TRENDING_API_BASE}/api/trending`, { cache: 'no-cache' });
+      if (!res.ok) return;
+      const data = await res.json();
+      let hasChanges = false;
+      let lastChangedKey = null;
+
+      // Ingest complete global play counts map across all artists and albums
+      if (data && data.plays && typeof data.plays === 'object') {
+        for (const [key, count] of Object.entries(data.plays)) {
+          if (typeof count === 'number' && (!globalPlayCounts[key] || globalPlayCounts[key] < count)) {
+            globalPlayCounts[key] = count;
+            hasChanges = true;
+            lastChangedKey = key;
+          }
+        }
+      } else if (data && Array.isArray(data.trending)) {
+        data.trending.forEach(row => {
+          if (row.track_key && typeof row.count === 'number' && (!globalPlayCounts[row.track_key] || globalPlayCounts[row.track_key] < row.count)) {
+            globalPlayCounts[row.track_key] = row.count;
+            hasChanges = true;
+            lastChangedKey = row.track_key;
+          }
+        });
+      }
+
+      if (hasChanges) {
+        const rawQuery = globalSearchInput ? globalSearchInput.value.trim() : '';
+        const isTrendingHomepage = (
+          activeView === 'tracks' &&
+          !rawQuery &&
+          activeArtistFilter === 'all' &&
+          activeAlbumFilter === 'all' &&
+          !isFullTracksListExpanded &&
+          sortBy === 'default'
+        );
+
+        if (isTrendingHomepage || sortBy === 'popular') {
+          renderTracksTableWithFlip(lastChangedKey);
+        } else if (typeof renderCurrentView === 'function') {
+          renderCurrentView();
+        }
+      }
+    } catch (err) {
+      if (!isSilent) {
+        console.warn('Neon global trending endpoint not reachable, running in offline fallback mode.');
+      }
     }
   }
 
-  function migrateLegacyPlays() {
-    try {
-      const legacyJson = localStorage.getItem(LEGACY_STORAGE_KEY);
-      if (!legacyJson) return;
-      const legacy = JSON.parse(legacyJson);
-      const current = getStoredPlayCounts();
-      let changed = false;
-
-      for (const [key, count] of Object.entries(legacy)) {
-        if (key.startsWith('track-') && catalog.length > 0) {
-          const matchedTrack = catalog.find(t => t.id === key);
-          if (matchedTrack) {
-            const canonicalKey = getTrackKey(matchedTrack);
-            current[canonicalKey] = Math.max(current[canonicalKey] || 0, count);
-            changed = true;
-          }
-        } else {
-          current[key] = Math.max(current[key] || 0, count);
-          changed = true;
-        }
-      }
-
-      if (changed) {
-        localStorage.setItem(PLAYS_STORAGE_KEY, JSON.stringify(current));
-      }
-    } catch (_) {}
-  }
-
-  function getTrackPlayCount(track) {
-    if (!track) return 0;
-    const stored = getStoredPlayCounts();
-    const key = getTrackKey(track);
-    const id = (typeof track === 'object' && track.id) ? track.id : track;
-    return stored[key] || stored[id] || 0;
-  }
-
+  // Record Play: Persists strictly to Neon Postgres (no local storage writing)
   function recordTrackPlay(track) {
     if (!track) return;
+    const key = getTrackKey(track);
+    const targetUrl = `${TRENDING_API_BASE}/api/play`;
+
+    console.log('[Neon Trending] Recording play for track:', key, 'via', targetUrl);
     try {
-      const key = getTrackKey(track);
-      const id = (typeof track === 'object' && track.id) ? track.id : track;
-      const stored = getStoredPlayCounts();
-      const current = stored[key] || stored[id] || 0;
-      stored[key] = current + 1;
-      if (id && id !== key) {
-        stored[id] = stored[key];
+      fetch(targetUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ track_key: key })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+        return res.json();
+      })
+      .then(data => {
+        if (data && typeof data.count === 'number') {
+          console.log('[Neon Trending] Successfully updated in Neon Postgres:', key, '-> count:', data.count);
+          applyPlayCountUpdate(key, data.count);
+        }
+      })
+      .catch(err => {
+        console.warn('[Neon Trending] Play sync failed to reach backend:', err.message || err);
+      });
+    } catch (e) {
+      console.warn('[Neon Trending] Fetch dispatch error:', e);
+    }
+  }
+
+  // Visual pulse on the badge in DOM when count updates
+  function bumpTrackBadgeInDom(trackKey, newCount) {
+    if (!tracksTbody) return;
+    const rows = tracksTbody.querySelectorAll('tr[data-id]');
+    for (const row of rows) {
+      const trackId = row.dataset.id;
+      const track = catalog.find(t => t.id === trackId);
+      if (track && getTrackKey(track) === trackKey) {
+        let badge = row.querySelector('.trending-play-badge');
+        if (!badge) {
+          const details = row.querySelector('.track-details');
+          if (details) {
+            badge = document.createElement('span');
+            badge.className = 'trending-play-badge';
+            details.appendChild(badge);
+          }
+        }
+        if (badge) {
+          badge.textContent = `🔥 ${formatPlayCount(newCount)}`;
+          badge.title = `${newCount} global play${newCount === 1 ? '' : 's'}`;
+          badge.classList.remove('badge-bump');
+          void badge.offsetWidth; // Trigger reflow for animation restart
+          badge.classList.add('badge-bump');
+        }
+        break;
       }
-      localStorage.setItem(PLAYS_STORAGE_KEY, JSON.stringify(stored));
-    } catch (_) {}
+    }
+  }
+
+  // Dynamic Real-time Update Handler: Updates count and animates rows rising up/down
+  function applyPlayCountUpdate(trackKey, newCount) {
+    const oldCount = globalPlayCounts[trackKey] || 0;
+    if (newCount <= oldCount) return;
+    globalPlayCounts[trackKey] = newCount;
+
+    const rawQuery = globalSearchInput ? globalSearchInput.value.trim() : '';
+    const isTrendingHomepage = (
+      activeView === 'tracks' &&
+      !rawQuery &&
+      activeArtistFilter === 'all' &&
+      activeAlbumFilter === 'all' &&
+      !isFullTracksListExpanded &&
+      sortBy === 'default'
+    );
+
+    if (isTrendingHomepage || sortBy === 'popular') {
+      // Re-order and smoothly animate rows rising up / down
+      renderTracksTableWithFlip(trackKey);
+    } else if (activeView === 'albums' && sortBy === 'popular') {
+      renderAlbumsView();
+    } else if (activeView === 'artists' && sortBy === 'popular') {
+      renderArtistsView();
+    } else {
+      bumpTrackBadgeInDom(trackKey, newCount);
+    }
+  }
+
+  // FLIP (First, Last, Invert, Play) Animation for smooth row reordering
+  function renderTracksTableWithFlip(changedTrackKey = null) {
+    if (activeView !== 'tracks' || !tracksTbody) {
+      if (typeof renderCurrentView === 'function') renderCurrentView();
+      return;
+    }
+
+    // 1. FIRST: Record old row positions & ranks
+    const oldPositions = new Map();
+    const oldRanks = new Map();
+    tracksTbody.querySelectorAll('tr[data-id]').forEach((row, idx) => {
+      const id = row.dataset.id;
+      if (id) {
+        oldPositions.set(id, row.getBoundingClientRect().top);
+        oldRanks.set(id, idx);
+      }
+    });
+
+    // 2. Compute filtered tracks and re-render table
+    computeFilteredTracks();
+    renderTracksTable();
+
+    // Respect reduced-motion preferences
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (changedTrackKey) bumpTrackBadgeInDom(changedTrackKey, globalPlayCounts[changedTrackKey]);
+      return;
+    }
+
+    // 3. LAST & INVERT: Measure new positions
+    const newRows = tracksTbody.querySelectorAll('tr[data-id]');
+    const animated = [];
+
+    newRows.forEach((row, newIdx) => {
+      const id = row.dataset.id;
+      if (oldPositions.has(id)) {
+        const oldTop = oldPositions.get(id);
+        const newTop = row.getBoundingClientRect().top;
+        const deltaY = oldTop - newTop;
+        const oldIdx = oldRanks.get(id);
+
+        if (Math.abs(deltaY) > 1) {
+          row.style.transform = `translateY(${deltaY}px)`;
+          row.style.transition = 'none';
+          animated.push({ row, deltaY, isUp: newIdx < oldIdx });
+        }
+      }
+    });
+
+    // 4. PLAY: Transition smoothly to new positions
+    if (animated.length > 0) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          animated.forEach(({ row, isUp }) => {
+            row.style.transition = 'transform 0.5s cubic-bezier(0.2, 0, 0, 1), background-color 0.8s ease';
+            row.style.transform = 'translateY(0)';
+            if (isUp) {
+              row.classList.add('rank-shift-up');
+            } else {
+              row.classList.add('rank-shift-down');
+            }
+            setTimeout(() => {
+              row.style.transform = '';
+              row.style.transition = '';
+              row.classList.remove('rank-shift-up', 'rank-shift-down');
+            }, 900);
+          });
+        });
+      });
+    }
+
+    if (changedTrackKey) {
+      bumpTrackBadgeInDom(changedTrackKey, globalPlayCounts[changedTrackKey]);
+    }
+  }
+
+  let realtimeInitialized = false;
+  function initRealtimeSync() {
+    if (realtimeInitialized) return;
+    realtimeInitialized = true;
+
+    // 1. Server-Sent Events (SSE) for instant push notifications on plays
+    if (typeof EventSource !== 'undefined') {
+      try {
+        const es = new EventSource(`${TRENDING_API_BASE}/api/stream`);
+        es.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+            if (data && data.type === 'play' && data.track_key && typeof data.count === 'number') {
+              applyPlayCountUpdate(data.track_key, data.count);
+            }
+          } catch (_) {}
+        };
+        es.onerror = () => {};
+      } catch (_) {}
+    }
+
+    // 2. Periodic background sync fallback (every 8s when tab is active)
+    setInterval(() => {
+      if (!document.hidden) {
+        fetchGlobalTrending(true);
+      }
+    }, 8000);
+
+    // 3. Immediate check on tab focus
+    window.addEventListener('focus', () => {
+      fetchGlobalTrending(true);
+    });
   }
 
   function formatPlayCount(count) {
@@ -353,8 +566,10 @@
       const response = await fetch(`catalog.json?v=${cacheBust}`, { cache: 'no-cache' });
       if (!response.ok) throw new Error('Failed to load catalog.json');
       catalog = await response.json();
-      migrateLegacyPlays();
       
+      // Fetch latest global trending & multi-user play counts from Neon Postgres
+      await fetchGlobalTrending();
+      initRealtimeSync();
       // Dynamically update search placeholder and hints from live catalog size
       if (globalSearchInput) {
         globalSearchInput.placeholder = `Search ${catalog.length}+ songs, bands, albums, or lyrics...`;
@@ -601,7 +816,8 @@
   }
 
   // --- Filter & Search Logic ---
-  function applyFilters() {
+  // --- Compute Filtered & Sorted Tracks ---
+  function computeFilteredTracks() {
     const rawQuery = globalSearchInput.value.trim();
     const query = normalizeQuery(rawQuery);
     searchQuery = query;
@@ -659,6 +875,14 @@
           const pA = getTrackPlayCount(a);
           const pB = getTrackPlayCount(b);
           if (pB !== pA) return pB - pA;
+          // Tie-break: keep album track sequence if filtering by album
+          if (activeAlbumFilter !== 'all') {
+            return (a.trackNo || 0) - (b.trackNo || 0);
+          }
+          // Tie-break: keep chronological album release order if filtering by artist
+          if (activeArtistFilter !== 'all') {
+            return (a.year || 0) - (b.year || 0) || (a.trackNo || 0) - (b.trackNo || 0) || a.title.localeCompare(b.title);
+          }
           return a.title.localeCompare(b.title);
         });
       } else if (sortBy === 'title-asc') {
@@ -673,6 +897,12 @@
     }
 
     currentFilteredTracks = filtered;
+    return filtered;
+  }
+
+  // --- Filter & Search Logic ---
+  function applyFilters() {
+    computeFilteredTracks();
     renderCurrentView();
   }
 
@@ -825,6 +1055,11 @@
         ? `<span class="lossy-badge" title="16 kHz shelf cutoff transcode">16-CUT</span>`
         : `<span class="flac-badge">FLAC</span>`;
 
+      const playCount = getTrackPlayCount(track);
+      const playBadge = (playCount > 0)
+        ? `<span class="trending-play-badge" title="${playCount} global play${playCount === 1 ? '' : 's'}">🔥 ${formatPlayCount(playCount)}</span>`
+        : '';
+
       rowsHtml += `
         <tr class="${rowClass}" data-id="${track.id}" data-index="${index}">
           <td class="td-play">
@@ -835,6 +1070,7 @@
               <img class="track-thumb" src="${escapeHtml(track.coverUrl)}" alt="Cover" loading="lazy" onerror="this.src='assets/default_album_cover.svg'">
               <div class="track-details">
                 <span class="track-title-cell">${escapeHtml(track.title)} ${featTag}</span>
+                ${playBadge}
               </div>
             </div>
           </td>
@@ -957,7 +1193,14 @@
     }
 
     // Sort albums
-    if (sortBy === 'title-asc') {
+    if (sortBy === 'popular') {
+      albumList.sort((a, b) => {
+        const pA = a.tracks.reduce((sum, t) => sum + getTrackPlayCount(t), 0);
+        const pB = b.tracks.reduce((sum, t) => sum + getTrackPlayCount(t), 0);
+        if (pB !== pA) return pB - pA;
+        return a.album.localeCompare(b.album);
+      });
+    } else if (sortBy === 'title-asc') {
       albumList.sort((a, b) => a.album.localeCompare(b.album));
     } else if (sortBy === 'artist-asc') {
       albumList.sort((a, b) => a.artist.localeCompare(b.artist));
@@ -1330,7 +1573,14 @@
     }
 
     // Sort artists
-    if (sortBy === 'title-asc' || sortBy === 'artist-asc') {
+    if (sortBy === 'popular') {
+      artistList.sort((a, b) => {
+        const pA = a.tracks.reduce((sum, t) => sum + getTrackPlayCount(t), 0);
+        const pB = b.tracks.reduce((sum, t) => sum + getTrackPlayCount(t), 0);
+        if (pB !== pA) return pB - pA;
+        return b.tracks.length - a.tracks.length;
+      });
+    } else if (sortBy === 'title-asc' || sortBy === 'artist-asc') {
       artistList.sort((a, b) => a.artist.localeCompare(b.artist));
     } else {
       artistList.sort((a, b) => b.tracks.length - a.tracks.length);

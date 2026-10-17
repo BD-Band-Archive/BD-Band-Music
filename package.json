@@ -1,0 +1,17 @@
+{
+  "name": "bd-band-music",
+  "version": "1.0.0",
+  "description": "Lossless Bangladeshi Band Music Streaming Archive with Neon Postgres Global Trending",
+  "main": "server.js",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "start": "node server.js",
+    "test": "node scripts/test_services.js"
+  },
+  "dependencies": {
+    "@neon/config": "^1.9.2",
+    "@neon/env": "^1.6.3",
+    "@neondatabase/serverless": "^1.2.0",
+    "dotenv": "^18.0.8"
+  }
+}

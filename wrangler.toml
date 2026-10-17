@@ -1,0 +1,7 @@
+name = "bd-band-music-api"
+main = "worker/index.js"
+compatibility_date = "2024-04-01"
+
+# Set DATABASE_URL using:
+# npx wrangler secret put DATABASE_URL
+# (Paste the connection string from .env.local)
