@@ -1748,13 +1748,14 @@
       trackRetryTimer = null;
     }
 
-    // Set Clean Audio Source (strip any trailing query parameters)
-    const cleanUrl = (track.streamUrl || '').split('?')[0];
-    const isNewSource = (audio.src !== cleanUrl && !audio.src.endsWith(cleanUrl));
+    // Set Audio Source with version cache-busting to bypass any stale CDN 404 caches on newly added tracks
+    const baseStreamUrl = (track.streamUrl || '').split('?')[0];
+    const streamUrl = baseStreamUrl ? `${baseStreamUrl}?v=${APP_VERSION}` : '';
+    const isNewSource = (!audio.src || !audio.src.includes(baseStreamUrl));
     if (isNewSource) {
       currentTrackRetryCount = 0;
       audio.preload = 'auto';
-      audio.src = cleanUrl;
+      audio.src = streamUrl;
     } else if (audio.readyState === 0) {
       audio.load();
     }
@@ -2222,8 +2223,8 @@
         clearTimeout(trackRetryTimer);
         trackRetryTimer = setTimeout(() => {
           if (!currentTrack) return;
-          const cleanUrl = (currentTrack.streamUrl || '').split('?')[0];
-          audio.src = cleanUrl;
+          const baseCleanUrl = (currentTrack.streamUrl || '').split('?')[0];
+          audio.src = `${baseCleanUrl}?v=${APP_VERSION}&r=${Date.now()}`;
           audio.load();
           if (resumePos > 0) {
             const onRestorePos = () => {
