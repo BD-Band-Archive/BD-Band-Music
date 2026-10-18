@@ -10,6 +10,7 @@
   // --- App State ---
   let catalog = [];
   let currentFilteredTracks = [];
+  let activePlaybackPool = [];
   let queue = [];
   let currentTrack = null;
   let currentTrackIndex = -1;
@@ -28,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.1';
+  const APP_VERSION = '5.3.2';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -51,6 +52,8 @@
   let trackRetryTimer = null;
   let activePlaybackPosition = 0;
   let pendingAppReload = false;
+  let isHandlingTrackEnd = false;
+  let endWatchdogTimer = null;
 
   // Purge any old local storage counts & unregister stale service workers
   try {
@@ -1711,6 +1714,19 @@
     currentTrack = track;
     currentTrackIndex = currentFilteredTracks.findIndex(t => t.id === id);
 
+    // Maintain active playback context pool so navigation doesn't disrupt auto-advancement
+    if (currentFilteredTracks && currentFilteredTracks.some(t => t.id === id)) {
+      activePlaybackPool = [...currentFilteredTracks];
+    } else if (!activePlaybackPool || activePlaybackPool.length === 0 || !activePlaybackPool.some(t => t.id === id)) {
+      const albumTracks = catalog.filter(t => t.album === track.album && (t.artist === track.artist || (track.artists && track.artists.includes(t.artist))));
+      if (albumTracks.length > 0) {
+        albumTracks.sort((a, b) => (a.trackNo || 0) - (b.trackNo || 0));
+        activePlaybackPool = albumTracks;
+      } else {
+        activePlaybackPool = [...catalog];
+      }
+    }
+
     // Update Player UI with Full Tooltips to prevent text cutoff
     playerTitle.textContent = track.title;
     playerTitle.title = track.title;
@@ -1745,7 +1761,11 @@
       playerQualityBadge.title = 'Lossless FLAC Audio';
     }
 
-    // Clear any pending error timers
+    // Clear any pending error or watchdog timers
+    if (endWatchdogTimer) {
+      clearTimeout(endWatchdogTimer);
+      endWatchdogTimer = null;
+    }
     if (autoAdvanceTimer) {
       clearTimeout(autoAdvanceTimer);
       autoAdvanceTimer = null;
@@ -1998,6 +2018,44 @@
     renderTracksTable();
   }
 
+  // --- Intelligent Playback Pool Resolver ---
+  // Ensures that continuous auto-advancement never stalls or desyncs, even if the user
+  // navigates across artists, albums, or search views while music is playing.
+  function resolvePlaybackPool() {
+    // 1. If currently playing track exists in currentFilteredTracks, prioritize currentFilteredTracks
+    if (currentTrack && currentFilteredTracks && currentFilteredTracks.length > 0) {
+      const idx = currentFilteredTracks.findIndex(t => t.id === currentTrack.id);
+      if (idx !== -1) {
+        return { pool: currentFilteredTracks, index: idx };
+      }
+    }
+
+    // 2. If currentTrack exists in activePlaybackPool, use activePlaybackPool
+    if (currentTrack && activePlaybackPool && activePlaybackPool.length > 0) {
+      const idx = activePlaybackPool.findIndex(t => t.id === currentTrack.id);
+      if (idx !== -1) {
+        return { pool: activePlaybackPool, index: idx };
+      }
+    }
+
+    // 3. Fallback: find album tracks from catalog matching currentTrack
+    if (currentTrack && currentTrack.album) {
+      const albumTracks = catalog.filter(t => t.album === currentTrack.album && (t.artist === currentTrack.artist || (currentTrack.artists && currentTrack.artists.includes(t.artist))));
+      if (albumTracks.length > 0) {
+        albumTracks.sort((a, b) => (a.trackNo || 0) - (b.trackNo || 0));
+        const idx = albumTracks.findIndex(t => t.id === currentTrack.id);
+        if (idx !== -1) {
+          activePlaybackPool = albumTracks;
+          return { pool: albumTracks, index: idx };
+        }
+      }
+    }
+
+    // 4. Fallback to global catalog
+    const catIdx = currentTrack ? catalog.findIndex(t => t.id === currentTrack.id) : -1;
+    return { pool: catalog, index: catIdx !== -1 ? catIdx : 0 };
+  }
+
   function playNextTrack() {
     // If there is an item in the queue, pop from queue
     if (queue.length > 0) {
@@ -2008,28 +2066,35 @@
       return;
     }
 
-    // Determine the pool of tracks to advance through (fallback to catalog if filtered tracks list is empty)
-    const pool = (currentFilteredTracks && currentFilteredTracks.length > 0) ? currentFilteredTracks : catalog;
+    const { pool, index: activeIdx } = resolvePlaybackPool();
     if (!pool || pool.length === 0) return;
 
     if (isShuffle) {
-      const randomIndex = Math.floor(Math.random() * pool.length);
-      playTrackById(pool[randomIndex].id);
+      const shufflePool = (pool.length > 1) ? pool : catalog;
+      const randomIndex = Math.floor(Math.random() * shufflePool.length);
+      playTrackById(shufflePool[randomIndex].id);
       return;
     }
-
-    // Dynamically find current track's position in active pool to prevent stale index halts
-    let activeIdx = currentTrack ? pool.findIndex(t => t.id === currentTrack.id) : currentTrackIndex;
-    if (activeIdx === -1) activeIdx = currentTrackIndex;
 
     let nextIndex = activeIdx + 1;
     if (nextIndex >= pool.length) {
       if (repeatMode === 'all') {
         nextIndex = 0;
+      } else if (pool !== catalog) {
+        // Reached end of current album or filtered pool: advance seamlessly to next track in full catalog
+        const catIdx = currentTrack ? catalog.findIndex(t => t.id === currentTrack.id) : -1;
+        if (catIdx !== -1 && catIdx + 1 < catalog.length) {
+          playTrackById(catalog[catIdx + 1].id);
+          return;
+        } else {
+          isPlaying = false;
+          updatePlayPauseState();
+          return; // Reached end of entire catalog
+        }
       } else {
         isPlaying = false;
         updatePlayPauseState();
-        return; // Reached end of playlist
+        return; // Reached end of catalog
       }
     }
     playTrackById(pool[nextIndex].id);
@@ -2041,15 +2106,22 @@
       return;
     }
 
-    const pool = (currentFilteredTracks && currentFilteredTracks.length > 0) ? currentFilteredTracks : catalog;
+    const { pool, index: activeIdx } = resolvePlaybackPool();
     if (!pool || pool.length === 0) return;
-
-    let activeIdx = currentTrack ? pool.findIndex(t => t.id === currentTrack.id) : currentTrackIndex;
-    if (activeIdx === -1) activeIdx = currentTrackIndex;
 
     let prevIndex = activeIdx - 1;
     if (prevIndex < 0) {
-      prevIndex = pool.length - 1;
+      if (pool !== catalog) {
+        const catIdx = currentTrack ? catalog.findIndex(t => t.id === currentTrack.id) : -1;
+        if (catIdx > 0) {
+          playTrackById(catalog[catIdx - 1].id);
+          return;
+        } else {
+          prevIndex = pool.length - 1;
+        }
+      } else {
+        prevIndex = pool.length - 1;
+      }
     }
     playTrackById(pool[prevIndex].id);
   }
@@ -2120,6 +2192,42 @@
   }
 
   // --- Audio Element Event Listeners ---
+  function handleTrackPlaybackEnded() {
+    if (isHandlingTrackEnd) return;
+    isHandlingTrackEnd = true;
+    setTimeout(() => {
+      isHandlingTrackEnd = false;
+    }, 800);
+
+    if (endWatchdogTimer) {
+      clearTimeout(endWatchdogTimer);
+      endWatchdogTimer = null;
+    }
+
+    activePlaybackPosition = 0;
+    audioSpinner.style.display = 'none';
+
+    if (pendingAppReload) {
+      console.log('[Version Sync] Playback ended, applying deferred update reload.');
+      window.location.reload(true);
+      return;
+    }
+
+    if (repeatMode === 'one') {
+      audio.currentTime = 0;
+      lastRecordedTrackId = null; // Reset so looping this track counts as a new play
+      const loopPromise = audio.play();
+      if (loopPromise !== undefined) {
+        loopPromise.then(() => {
+          recordTrackPlay(currentTrack);
+        }).catch(() => {});
+      }
+    } else {
+      lastRecordedTrackId = null;
+      playNextTrack();
+    }
+  }
+
   audio.addEventListener('timeupdate', () => {
     if (audio.currentTime > 0 && isFinite(audio.currentTime) && !isSeeking) {
       activePlaybackPosition = audio.currentTime;
@@ -2130,6 +2238,23 @@
     seekSlider.value = progress;
     seekSlider.style.backgroundSize = `${progress}% 100%`;
     currentTimeLabel.textContent = formatTime(audio.currentTime);
+
+    // Watchdog for end of track: FLAC/VBR streams can stop firing audio frames right at duration
+    // If playback position is within 0.3s of duration or reached duration, schedule auto-advance
+    if (isPlaying && !audio.paused && audio.duration > 0 && (audio.duration - audio.currentTime <= 0.3 || audio.currentTime >= audio.duration)) {
+      if (!endWatchdogTimer) {
+        endWatchdogTimer = setTimeout(() => {
+          endWatchdogTimer = null;
+          if (isPlaying && !isSeeking && (audio.paused || audio.ended || (audio.duration > 0 && audio.duration - audio.currentTime <= 0.45))) {
+            console.log('[Audio Player] End watchdog fired; triggering continuous advance');
+            handleTrackPlaybackEnded();
+          }
+        }, 400);
+      }
+    } else if (endWatchdogTimer && (audio.duration - audio.currentTime > 0.8)) {
+      clearTimeout(endWatchdogTimer);
+      endWatchdogTimer = null;
+    }
 
     // Update MediaSession position state
     if ('mediaSession' in navigator && 'setPositionState' in navigator.mediaSession) {
@@ -2156,6 +2281,12 @@
   });
 
   audio.addEventListener('waiting', () => {
+    // Check if the stream stalled because it hit the EOF boundary
+    if (isPlaying && audio.duration > 0 && (audio.duration - audio.currentTime <= 0.65 || audio.currentTime >= audio.duration - 0.45)) {
+      console.log('[Audio Player] Stream waiting near EOF boundary; triggering track completion');
+      handleTrackPlaybackEnded();
+      return;
+    }
     // Audio playback paused because the stream is buffering more data
     audioSpinner.style.display = 'block';
     playIcon.style.display = 'none';
@@ -2163,6 +2294,12 @@
   });
 
   audio.addEventListener('stalled', () => {
+    // Check if the stream stalled because it hit the EOF boundary
+    if (isPlaying && audio.duration > 0 && (audio.duration - audio.currentTime <= 0.65 || audio.currentTime >= audio.duration - 0.45)) {
+      console.log('[Audio Player] Stream stalled near EOF boundary; triggering track completion');
+      handleTrackPlaybackEnded();
+      return;
+    }
     // Network transfer stalled while downloading audio - keep waiting and show spinner
     audioSpinner.style.display = 'block';
   });
@@ -2195,25 +2332,8 @@
   });
 
   audio.addEventListener('ended', () => {
-    activePlaybackPosition = 0;
-    if (pendingAppReload) {
-      console.log('[Version Sync] Playback ended, applying deferred update reload.');
-      window.location.reload(true);
-      return;
-    }
-    if (repeatMode === 'one') {
-      audio.currentTime = 0;
-      lastRecordedTrackId = null; // Reset so looping this track counts as a new play
-      const loopPromise = audio.play();
-      if (loopPromise !== undefined) {
-        loopPromise.then(() => {
-          recordTrackPlay(currentTrack);
-        }).catch(() => {});
-      }
-    } else {
-      lastRecordedTrackId = null;
-      playNextTrack();
-    }
+    console.log('[Audio Player] Native ended event fired');
+    handleTrackPlaybackEnded();
   });
 
   // --- Stream Recovery: Restores Exact Playback Timestamp on Network Stalls/Disconnects ---
@@ -2315,6 +2435,13 @@
 
     // Code 1: MEDIA_ERR_ABORTED - Ignored safely
     if (errorCode === 1) return;
+
+    // If an error fires near EOF boundary (e.g. server TCP connection closed after final byte range)
+    if (isPlaying && audio.duration > 0 && (audio.duration - audio.currentTime <= 0.8 || audio.currentTime >= audio.duration - 0.5)) {
+      console.log('[Audio Player] Error event fired near EOF; advancing to next track');
+      handleTrackPlaybackEnded();
+      return;
+    }
 
     // Code 2: MEDIA_ERR_NETWORK or offline - Network issue!
     // NEVER skip the song. NEVER restart from 0:00!
