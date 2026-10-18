@@ -28,7 +28,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.0';
+  const APP_VERSION = '5.3.1';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -49,6 +49,8 @@
   let autoAdvanceTimer = null;
   let currentTrackRetryCount = 0;
   let trackRetryTimer = null;
+  let activePlaybackPosition = 0;
+  let pendingAppReload = false;
 
   // Purge any old local storage counts & unregister stale service workers
   try {
@@ -110,8 +112,13 @@
       if (!res.ok) return;
       const data = await res.json();
 
-      // Auto-reload active clients if a new app version was deployed
+      // Auto-reload active clients if a new app version was deployed (deferred if music is playing)
       if (data && data.version && data.version !== APP_VERSION) {
+        if (isPlaying && !audio.paused) {
+          console.log('[Version Sync] New app version available:', data.version, '- deferring reload until song ends');
+          pendingAppReload = true;
+          return;
+        }
         console.log('[Version Sync] New app version available:', data.version, '(current:', APP_VERSION + '). Reloading...');
         window.location.reload(true);
         return;
@@ -1754,6 +1761,7 @@
     const isNewSource = (!audio.src || !audio.src.includes(baseStreamUrl));
     if (isNewSource) {
       currentTrackRetryCount = 0;
+      activePlaybackPosition = 0;
       audio.preload = 'auto';
       audio.src = streamUrl;
     } else if (audio.readyState === 0) {
@@ -2113,6 +2121,9 @@
 
   // --- Audio Element Event Listeners ---
   audio.addEventListener('timeupdate', () => {
+    if (audio.currentTime > 0 && isFinite(audio.currentTime) && !isSeeking) {
+      activePlaybackPosition = audio.currentTime;
+    }
     if (isSeeking) return; // Prevent overwriting slider position during active user drag
     if (!audio.duration || isNaN(audio.duration)) return;
     const progress = (audio.currentTime / audio.duration) * 100;
@@ -2184,6 +2195,12 @@
   });
 
   audio.addEventListener('ended', () => {
+    activePlaybackPosition = 0;
+    if (pendingAppReload) {
+      console.log('[Version Sync] Playback ended, applying deferred update reload.');
+      window.location.reload(true);
+      return;
+    }
     if (repeatMode === 'one') {
       audio.currentTime = 0;
       lastRecordedTrackId = null; // Reset so looping this track counts as a new play
@@ -2199,6 +2216,97 @@
     }
   });
 
+  // --- Stream Recovery: Restores Exact Playback Timestamp on Network Stalls/Disconnects ---
+  function reloadAndSeek(targetTime) {
+    if (!currentTrack) return;
+    const baseStreamUrl = (currentTrack.streamUrl || '').split('?')[0];
+    const streamUrl = baseStreamUrl ? `${baseStreamUrl}?v=${APP_VERSION}` : '';
+
+    audio.preload = 'auto';
+    if (!audio.src || !audio.src.includes(baseStreamUrl)) {
+      audio.src = streamUrl;
+    }
+    audio.load();
+
+    if (targetTime > 0 && isFinite(targetTime)) {
+      let seekAttempted = false;
+
+      const performSeek = () => {
+        if (seekAttempted) return;
+        seekAttempted = true;
+        try {
+          audio.currentTime = targetTime;
+        } catch (e) {
+          console.warn('[Audio Player] Failed setting currentTime during recovery:', e);
+        }
+      };
+
+      // 1. As soon as metadata (duration, seekable ranges) is loaded, apply currentTime
+      const onMetadata = () => {
+        audio.removeEventListener('loadedmetadata', onMetadata);
+        performSeek();
+      };
+      audio.addEventListener('loadedmetadata', onMetadata);
+
+      // 2. Play only AFTER seek has verified and buffered the requested range
+      const onSeeked = () => {
+        audio.removeEventListener('seeked', onSeeked);
+        audioSpinner.style.display = 'none';
+        if (isPlaying) {
+          audio.play().catch(err => {
+            console.warn('[Audio Player] Play after seek notice:', err);
+          });
+        }
+      };
+      audio.addEventListener('seeked', onSeeked);
+
+      // 3. Fallback: If seeked does not fire within 3.5s, ensure playback resumes
+      setTimeout(() => {
+        if (isPlaying && audio.paused && audio.readyState >= 2) {
+          audioSpinner.style.display = 'none';
+          try { audio.currentTime = targetTime; } catch (_) {}
+          audio.play().catch(() => {});
+        }
+      }, 3500);
+    } else {
+      const onCanPlay = () => {
+        audio.removeEventListener('canplay', onCanPlay);
+        audioSpinner.style.display = 'none';
+        if (isPlaying) {
+          audio.play().catch(() => {});
+        }
+      };
+      audio.addEventListener('canplay', onCanPlay);
+    }
+  }
+
+  function recoverAudioStream() {
+    if (!currentTrack) return;
+    const targetTime = activePlaybackPosition;
+    console.log(`[Audio Player] Recovering stream for "${currentTrack.title}" at ${targetTime.toFixed(1)}s`);
+    audioSpinner.style.display = 'block';
+
+    // Attempt gentle direct resume first without resetting the audio buffer
+    if (audio.readyState >= 2 && audio.src) {
+      if (targetTime > 0 && Math.abs(audio.currentTime - targetTime) > 1.5) {
+        try { audio.currentTime = targetTime; } catch (_) {}
+      }
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          audioSpinner.style.display = 'none';
+          isPlaying = true;
+          updatePlayPauseState();
+        }).catch(() => {
+          reloadAndSeek(targetTime);
+        });
+        return;
+      }
+    }
+
+    reloadAndSeek(targetTime);
+  }
+
   audio.addEventListener('error', (e) => {
     const failedTitle = currentTrack ? currentTrack.title : 'track';
     const errObj = audio.error;
@@ -2209,36 +2317,22 @@
     if (errorCode === 1) return;
 
     // Code 2: MEDIA_ERR_NETWORK or offline - Network issue!
-    // NEVER skip the song. Wait for network and retry loading the current track.
+    // NEVER skip the song. NEVER restart from 0:00!
     const isNetworkProblem = (errorCode === 2) || (typeof navigator !== 'undefined' && !navigator.onLine);
 
     if (isNetworkProblem) {
       audioSpinner.style.display = 'block';
-      const resumePos = audio.currentTime || 0;
 
       if (currentTrackRetryCount < 6) {
         currentTrackRetryCount++;
-        showToast(`📶 Network buffering... Retrying "${failedTitle}" (${currentTrackRetryCount}/6)`);
+        showToast(`📶 Network buffering... Resuming "${failedTitle}" (${currentTrackRetryCount}/6)`);
         
         clearTimeout(trackRetryTimer);
         trackRetryTimer = setTimeout(() => {
-          if (!currentTrack) return;
-          const baseCleanUrl = (currentTrack.streamUrl || '').split('?')[0];
-          audio.src = `${baseCleanUrl}?v=${APP_VERSION}&r=${Date.now()}`;
-          audio.load();
-          if (resumePos > 0) {
-            const onRestorePos = () => {
-              audio.removeEventListener('canplay', onRestorePos);
-              try { audio.currentTime = resumePos; } catch (_) {}
-              if (isPlaying) audio.play().catch(() => {});
-            };
-            audio.addEventListener('canplay', onRestorePos, { once: true });
-          } else {
-            if (isPlaying) audio.play().catch(() => {});
-          }
-        }, 2500);
+          recoverAudioStream();
+        }, 1500);
       } else {
-        // Repeated network timeouts: pause and wait for user or network reconnection
+        // Repeated network timeouts: pause cleanly and wait for connection
         audioSpinner.style.display = 'none';
         isPlaying = false;
         updatePlayPauseState();
@@ -2247,15 +2341,13 @@
       return;
     }
 
-    // Code 3: MEDIA_ERR_DECODE - Try reloading current track once
+    // Code 3: MEDIA_ERR_DECODE - Reload current track once at exact position
     if (errorCode === 3 && currentTrackRetryCount < 2) {
       currentTrackRetryCount++;
       audioSpinner.style.display = 'block';
       clearTimeout(trackRetryTimer);
       trackRetryTimer = setTimeout(() => {
-        if (!currentTrack) return;
-        audio.load();
-        if (isPlaying) audio.play().catch(() => {});
+        recoverAudioStream();
       }, 1500);
       return;
     }
@@ -2267,9 +2359,7 @@
         audioSpinner.style.display = 'block';
         clearTimeout(trackRetryTimer);
         trackRetryTimer = setTimeout(() => {
-          if (!currentTrack) return;
-          audio.load();
-          if (isPlaying) audio.play().catch(() => {});
+          recoverAudioStream();
         }, 1500);
         return;
       }
@@ -2305,6 +2395,7 @@
     if (isSeeking) {
       if (audio.duration && !isNaN(audio.duration)) {
         const targetTime = (parseFloat(seekSlider.value) / 100) * audio.duration;
+        activePlaybackPosition = targetTime;
         audio.currentTime = targetTime;
       }
       isSeeking = false;
@@ -2675,14 +2766,19 @@
     navigator.mediaSession.setActionHandler('nexttrack', playNextTrack);
     navigator.mediaSession.setActionHandler('seekto', (details) => {
       if (details.seekTime && audio.duration) {
+        activePlaybackPosition = details.seekTime;
         audio.currentTime = details.seekTime;
       }
     });
     navigator.mediaSession.setActionHandler('seekbackward', (details) => {
-      audio.currentTime = Math.max(audio.currentTime - (details.seekOffset || 10), 0);
+      const newTime = Math.max(audio.currentTime - (details.seekOffset || 10), 0);
+      activePlaybackPosition = newTime;
+      audio.currentTime = newTime;
     });
     navigator.mediaSession.setActionHandler('seekforward', (details) => {
-      audio.currentTime = Math.min(audio.currentTime + (details.seekOffset || 10), audio.duration);
+      const newTime = Math.min(audio.currentTime + (details.seekOffset || 10), audio.duration);
+      activePlaybackPosition = newTime;
+      audio.currentTime = newTime;
     });
   }
 
@@ -3181,8 +3277,7 @@
     if (currentTrack && isPlaying && audio.paused) {
       audioSpinner.style.display = 'block';
       currentTrackRetryCount = 0;
-      audio.load();
-      audio.play().catch(() => {});
+      recoverAudioStream();
     }
   });
 
