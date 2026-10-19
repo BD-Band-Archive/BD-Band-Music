@@ -759,8 +759,31 @@ def build_catalog():
         txt = index_html_path.read_text(encoding="utf-8")
         txt = re.sub(r'<script src="app\.js\?v=[^"]+"></script>', f'<script src="app.js?v={new_ver}"></script>', txt)
         txt = re.sub(r'<link rel="stylesheet" href="style\.css\?v=[^"]+">', f'<link rel="stylesheet" href="style.css?v={new_ver}">', txt)
+        txt = re.sub(r"var CURRENT_VER = '[^']+';", f"var CURRENT_VER = '{new_ver}';", txt)
+        txt = re.sub(r"Ensure all visitors immediately upgrade to v\S+", f"Ensure all visitors immediately upgrade to v{new_ver}", txt)
         index_html_path.write_text(txt, encoding="utf-8")
-        print(f"[*] Bumped index.html cache busters to v={new_ver}")
+        print(f"[*] Bumped index.html cache busters and CURRENT_VER to v={new_ver}")
+
+    package_json_path = OUTPUT_DIR / "package.json"
+    if package_json_path.exists() and new_ver:
+        txt = package_json_path.read_text(encoding="utf-8")
+        txt = re.sub(r'"version":\s*"[^"]+"', f'"version": "{new_ver}"', txt)
+        package_json_path.write_text(txt, encoding="utf-8")
+        print(f"[*] Bumped package.json version to {new_ver}")
+
+    server_js_path = OUTPUT_DIR / "server.js"
+    if server_js_path.exists() and new_ver:
+        txt = server_js_path.read_text(encoding="utf-8")
+        txt = re.sub(r"version:\s*'[^']+'", f"version: '{new_ver}'", txt)
+        server_js_path.write_text(txt, encoding="utf-8")
+        print(f"[*] Bumped server.js version to {new_ver}")
+
+    worker_js_path = OUTPUT_DIR / "worker" / "index.js"
+    if worker_js_path.exists() and new_ver:
+        txt = worker_js_path.read_text(encoding="utf-8")
+        txt = re.sub(r"version:\s*'[^']+'", f"version: '{new_ver}'", txt)
+        worker_js_path.write_text(txt, encoding="utf-8")
+        print(f"[*] Bumped worker/index.js version to {new_ver}")
     
     # Print summary statistics
     artists = Counter(t['artist'] for t in catalog)
