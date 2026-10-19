@@ -28,7 +28,10 @@ EXCLUDE_DIRS = {
     "Music",
     "__pycache__",
     ".git",
-    "assets"
+    "assets",
+    "Arnob",
+    "Ayub Bachchu 6 Albums Discography FLAC - NirZak",
+    "Warfaze [Full CD Discography FLAC] - NirZak"
 }
 
 FOLDER_MAP = {
