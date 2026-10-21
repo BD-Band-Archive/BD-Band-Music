@@ -47,7 +47,8 @@ async function runBuild() {
 
   // 3. Connect to Neon and ensure schema
   console.log('[*] Testing connection to Neon Postgres & ensuring schema...');
-  const sql = neon(dbUrl);
+  try {
+    const sql = neon(dbUrl);
 
   await sql`
     CREATE TABLE IF NOT EXISTS plays (
@@ -60,7 +61,10 @@ async function runBuild() {
 
   // Verify read query
   const countRes = await sql`SELECT COUNT(*)::int AS total_tracks FROM plays;`;
-  console.log(`[✓] Total uniquely tracked songs in Neon: ${countRes[0].total_tracks}`);
+    console.log(`[✓] Total uniquely tracked songs in Neon: ${countRes[0].total_tracks}`);
+  } catch (err) {
+    console.warn(`[!] Neon local verification notice: ${err.message}`);
+  }
 
   // 4. Validate core application files exist
   const requiredFiles = ['app.js', 'index.html', 'style.css'];

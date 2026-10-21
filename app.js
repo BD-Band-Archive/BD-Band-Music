@@ -29,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.3';
+  const APP_VERSION = '5.3.4';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -54,6 +54,7 @@
   let pendingAppReload = false;
   let isHandlingTrackEnd = false;
   let endWatchdogTimer = null;
+  let hasUserInitiatedPlayback = false;
 
   // Purge any old local storage counts & unregister stale service workers
   try {
@@ -1682,6 +1683,9 @@
 
   // --- Audio Player Logic ---
   function playTrackById(id, isDirectLink = false) {
+    if (!isDirectLink) {
+      hasUserInitiatedPlayback = true;
+    }
     const track = catalog.find(t => t.id === id);
     if (!track) return;
 
@@ -1788,6 +1792,11 @@
       audio.load();
     }
 
+    // Immediately signal active playback state and metadata to OS Lock Screen / MediaSession
+    isPlaying = true;
+    updatePlayPauseState();
+    updateMediaSession();
+
     audioSpinner.style.display = 'block';
     playIcon.style.display = 'none';
     pauseIcon.style.display = 'none';
@@ -1825,12 +1834,26 @@
         }
 
         if (err.name === 'NotAllowedError') {
-          // Browser autoplay restriction paused consecutive playback without user gesture
-          audioSpinner.style.display = 'none';
-          isPlaying = false;
+          // If cold-start direct link visit before user has ever tapped anything on page
+          if (!hasUserInitiatedPlayback && isDirectLink) {
+            audioSpinner.style.display = 'none';
+            isPlaying = false;
+            updatePlayPauseState();
+            armOneTouchAutoplay(track);
+            return;
+          }
+          // In background or locked screen during continuous playback: retain playing state
+          console.warn('[Audio Player] Background playback held by OS policy; retaining playing state and arming buffer resume');
+          audioSpinner.style.display = 'block';
+          isPlaying = true;
+          if ('mediaSession' in navigator) {
+            try { navigator.mediaSession.playbackState = 'playing'; } catch (_) {}
+          }
+        } else {
+          // On network delay or buffering stall: wait for it to load
+          audioSpinner.style.display = 'block';
+          isPlaying = true;
           updatePlayPauseState();
-          armOneTouchAutoplay(track);
-          return;
         }
 
         // On network delay or buffering stall: DO NOT SKIP! Wait for it to load
@@ -1841,7 +1864,12 @@
         const onBufferedReady = () => {
           audio.removeEventListener('canplay', onBufferedReady);
           if (isPlaying && currentTrack && currentTrack.id === track.id) {
-            audio.play().catch(() => {});
+            audio.play().then(() => {
+              hasUserInitiatedPlayback = true;
+              audioSpinner.style.display = 'none';
+              updatePlayPauseState();
+              updateMediaSession();
+            }).catch(() => {});
           }
         };
         audio.addEventListener('canplay', onBufferedReady, { once: true });
@@ -2006,6 +2034,9 @@
       pauseIcon.style.display = 'block';
       audioSpinner.style.display = 'none';
       coverBars.classList.add('playing');
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = 'playing';
+      }
     } else {
       playIcon.style.display = 'block';
       pauseIcon.style.display = 'none';
@@ -2197,7 +2228,7 @@
     isHandlingTrackEnd = true;
     setTimeout(() => {
       isHandlingTrackEnd = false;
-    }, 800);
+    }, 1500);
 
     if (endWatchdogTimer) {
       clearTimeout(endWatchdogTimer);
@@ -2239,21 +2270,11 @@
     seekSlider.style.backgroundSize = `${progress}% 100%`;
     currentTimeLabel.textContent = formatTime(audio.currentTime);
 
-    // Watchdog for end of track: FLAC/VBR streams can stop firing audio frames right at duration
-    // If playback position is within 0.3s of duration or reached duration, schedule auto-advance
-    if (isPlaying && !audio.paused && audio.duration > 0 && (audio.duration - audio.currentTime <= 0.3 || audio.currentTime >= audio.duration)) {
-      if (!endWatchdogTimer) {
-        endWatchdogTimer = setTimeout(() => {
-          endWatchdogTimer = null;
-          if (isPlaying && !isSeeking && (audio.paused || audio.ended || (audio.duration > 0 && audio.duration - audio.currentTime <= 0.45))) {
-            console.log('[Audio Player] End watchdog fired; triggering continuous advance');
-            handleTrackPlaybackEnded();
-          }
-        }, 400);
-      }
-    } else if (endWatchdogTimer && (audio.duration - audio.currentTime > 0.8)) {
-      clearTimeout(endWatchdogTimer);
-      endWatchdogTimer = null;
+    // Seamless near-end transition: when within 0.45s of track duration, advance immediately while
+    // the audio engine is actively outputting samples. This guarantees that mobile OSs (iOS / Android)
+    // NEVER drop the active audio session on lock screen or treat the next track as an unauthorized autoplay.
+    if (isPlaying && !audio.paused && !isSeeking && audio.duration > 0 && (audio.duration - audio.currentTime <= 0.45 || audio.currentTime >= audio.duration - 0.2)) {
+      handleTrackPlaybackEnded();
     }
 
     // Update MediaSession position state
@@ -2867,6 +2888,9 @@
   function updateMediaSession() {
     if (!('mediaSession' in navigator) || !currentTrack) return;
 
+    if ('playbackState' in navigator.mediaSession) {
+      navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+    }
     navigator.mediaSession.metadata = new MediaMetadata({
       title: currentTrack.title,
       artist: currentTrack.artist,
@@ -3370,6 +3394,19 @@
     } else {
       if (visualizerEnabled && isPlaying) {
         startVisualizerLoop();
+      }
+      // If returning to foreground from screen lock or background tab and audio was suspended or halted
+      if (isPlaying && audio.paused && !isSeeking && currentTrack) {
+        console.log('[Audio Player] Tab foregrounded; ensuring continuous playback is active');
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume().catch(() => {});
+        }
+        audio.play().then(() => {
+          updatePlayPauseState();
+          updateMediaSession();
+        }).catch(err => {
+          console.warn('[Audio Player] Resume on foreground notice:', err);
+        });
       }
     }
   });
