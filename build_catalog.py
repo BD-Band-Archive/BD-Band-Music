@@ -28,10 +28,7 @@ EXCLUDE_DIRS = {
     "Music",
     "__pycache__",
     ".git",
-    "assets",
-    "Arnob",
-    "Ayub Bachchu 6 Albums Discography FLAC - NirZak",
-    "Warfaze [Full CD Discography FLAC] - NirZak"
+    "assets"
 }
 
 FOLDER_MAP = {
@@ -39,14 +36,15 @@ FOLDER_MAP = {
     'BD-Band-Music': 'BD Band Music',
     'Stoic-Bliss': 'Stoic Bliss',
     'The-Watson-Brothers': 'The Watson Brothers',
-    'Bassbaba-Sumon': 'Bassbaba Sumon'
+    'Bassbaba-Sumon': 'Bassbaba Sumon',
+    'Ayub-Bachchu': 'Ayub Bachchu'
 }
 
 def discover_repos():
     r"""Dynamically discovers all music and band repositories in D:\Music."""
     priority_bands = [
-        "Arbovirus", "Artcell", "Aurthohin", "Bassbaba Sumon", "Black",
-        "Cryptic Fate", "Icons", "Indalo", "Minerva", "Stoic Bliss", "The Watson Brothers", "Vibe"
+        "Aftermath", "Arbovirus", "Arnob", "Artcell", "Aurthohin", "Ayub Bachchu", "Bassbaba Sumon", "Black",
+        "Cryptic Fate", "Icons", "Indalo", "LRB", "Minerva", "Stoic Bliss", "The Watson Brothers", "Vibe", "Warfaze"
     ]
     repos = []
     
@@ -116,7 +114,16 @@ CANONICAL_ARTIST_MAP = {
     "srishti": "Srishti",
     "hammer head": "Hammerhead",
     "hammerhead": "Hammerhead",
+    "aftermath": "Aftermath",
     "arnob": "Arnob",
+    "arnob & friends": "Arnob",
+    "ayub bachchu": "Ayub Bachchu",
+    "ayub bacchu": "Ayub Bachchu",
+    "ab": "Ayub Bachchu",
+    "lrb": "LRB",
+    "love runs blind": "LRB",
+    "warfaze": "Warfaze",
+    "wazfaze": "Warfaze",
     "sahana": "Sahana Bajpaie",
     "sahana bajpaie": "Sahana Bajpaie",
     "armeen musa": "Armeen Musa",
@@ -140,6 +147,10 @@ MULTI_ARTIST_MAP = {
     "upol and maher": ["Upol", "Maher"],
     "armin & nabila": ["Armeen Musa", "Nabila"],
     "armeen musa & nabila": ["Armeen Musa", "Nabila"],
+    "arnob;zerin": ["Arnob", "Zerin"],
+    "arnob feat. zerin": ["Arnob", "Zerin"],
+    "arnob & sahana bajpaie": ["Arnob", "Sahana Bajpaie"],
+    "arnob & sahana": ["Arnob", "Sahana Bajpaie"],
 }
 
 def clean_track(raw_title, default_artist, is_mixed=False):

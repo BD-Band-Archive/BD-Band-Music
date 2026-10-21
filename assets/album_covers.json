@@ -1,4 +1,82 @@
 {
+  "Aftermath - Jed": [
+    {
+      "title": "front",
+      "filename": "Jed [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/Jed/Album%20Cover/Jed%20%5Bfront%5D.jpg"
+    }
+  ],
+  "Jed": [
+    {
+      "title": "front",
+      "filename": "Jed [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/Jed/Album%20Cover/Jed%20%5Bfront%5D.jpg"
+    }
+  ],
+  "Aftermath - Singles & Standalone Releases": [
+    {
+      "title": "Front",
+      "filename": "Aftermath - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/Singles/Album%20Cover/Aftermath%20-%20Singles%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Aftermath - Biplobir",
+      "filename": "Aftermath - Biplobir.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/Singles/Album%20Cover/Aftermath%20-%20Biplobir.jpg"
+    }
+  ],
+  "Singles & Standalone Releases": [
+    {
+      "title": "Front",
+      "filename": "Aftermath - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/Singles/Album%20Cover/Aftermath%20-%20Singles%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Aftermath - Biplobir",
+      "filename": "Aftermath - Biplobir.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/Singles/Album%20Cover/Aftermath%20-%20Biplobir.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Arbovirus - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arbovirus/master/Singles/Album%20Cover/Arbovirus%20-%20Singles%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Arnob - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Singles/Album%20Cover/Arnob%20-%20Singles%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Arnob - Esho Shemolo Shundoro",
+      "filename": "Arnob - Esho Shemolo Shundoro.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Singles/Album%20Cover/Arnob%20-%20Esho%20Shemolo%20Shundoro.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Artcell - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Artcell/master/Singles/Album%20Cover/Artcell%20-%20Singles%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Bassbaba Sumon - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Bassbaba-Sumon/master/Singles/Album%20Cover/Bassbaba%20Sumon%20-%20Singles%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Black - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Black/master/Singles/Album%20Cover/Black%20-%20Singles%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Cryptic Fate - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Cryptic-Fate/master/Singles/Album%20Cover/Cryptic%20Fate%20-%20Singles%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Indalo - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Singles%20%5BFront%5D.jpg"
+    }
+  ],
   "Arbovirus - 64min53sec": [
     {
       "title": "Front",
@@ -170,38 +248,6 @@
       "title": "Front",
       "filename": "Arbovirus - Singles [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arbovirus/master/Singles/Album%20Cover/Arbovirus%20-%20Singles%20%5BFront%5D.jpg"
-    }
-  ],
-  "Singles & Standalone Releases": [
-    {
-      "title": "Front",
-      "filename": "Arbovirus - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arbovirus/master/Singles/Album%20Cover/Arbovirus%20-%20Singles%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Artcell - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Artcell/master/Singles/Album%20Cover/Artcell%20-%20Singles%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Bassbaba Sumon - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Bassbaba-Sumon/master/Singles/Album%20Cover/Bassbaba%20Sumon%20-%20Singles%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Black - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Black/master/Singles/Album%20Cover/Black%20-%20Singles%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Cryptic Fate - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Cryptic-Fate/master/Singles/Album%20Cover/Cryptic%20Fate%20-%20Singles%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Indalo - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Singles%20%5BFront%5D.jpg"
     }
   ],
   "Arbovirus - Agontuk 2": [
@@ -616,6 +662,570 @@
       "title": "Front",
       "filename": "Rock X0X [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20X0X%20%282015%29/Album%20Cover/Rock%20X0X%20%5BFront%5D.jpg"
+    }
+  ],
+  "Arnob - Chaina Bhabish": [
+    {
+      "title": "Front",
+      "filename": "Chaina Bhabish [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%20Bhabish%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inset-Front",
+      "filename": "Chaina bhabish [Inset-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%20bhabish%20%5BInset-Front%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Chaina+Bhabish+-5BArtwork-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%2BBhabish%2B-5BArtwork-5D.jpg"
+    },
+    {
+      "title": "Booklet",
+      "filename": "Chaina Bhabish [Booklet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%20Bhabish%20%5BBooklet%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Chaina Bhabish [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%20Bhabish%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Chaina Bhabish [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%20Bhabish%20%5BBack%5D.jpg"
+    }
+  ],
+  "Chaina Bhabish": [
+    {
+      "title": "Front",
+      "filename": "Chaina Bhabish [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%20Bhabish%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inset-Front",
+      "filename": "Chaina bhabish [Inset-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%20bhabish%20%5BInset-Front%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Chaina+Bhabish+-5BArtwork-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%2BBhabish%2B-5BArtwork-5D.jpg"
+    },
+    {
+      "title": "Booklet",
+      "filename": "Chaina Bhabish [Booklet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%20Bhabish%20%5BBooklet%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Chaina Bhabish [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%20Bhabish%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Chaina Bhabish [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Chaina%20Bhabish/Album%20Cover/Chaina%20Bhabish%20%5BBack%5D.jpg"
+    }
+  ],
+  "Arnob - Hok Kolorob": [
+    {
+      "title": "Front",
+      "filename": "Hok Kolorob [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Hok+Kolorob+-5BArtwork-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%2BKolorob%2B-5BArtwork-5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Hok Kolorob [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Hok Kolorob [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Hok Kolorob [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "Inset-4",
+      "filename": "Hok Kolorob [Inset-4].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BInset-4%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Hok Kolorob [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Hok Kolorob [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BBack%5D.jpg"
+    }
+  ],
+  "Hok Kolorob": [
+    {
+      "title": "Front",
+      "filename": "Hok Kolorob [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Hok+Kolorob+-5BArtwork-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%2BKolorob%2B-5BArtwork-5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Hok Kolorob [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Hok Kolorob [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Hok Kolorob [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "Inset-4",
+      "filename": "Hok Kolorob [Inset-4].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BInset-4%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Hok Kolorob [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Hok Kolorob [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Hok%20Kolorob/Album%20Cover/Hok%20Kolorob%20%5BBack%5D.jpg"
+    }
+  ],
+  "Arnob - Doob": [
+    {
+      "title": "Front",
+      "filename": "Doob [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Arnob & Friends Live [Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BArtwork%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Doob [Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BArtwork%5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Doob [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Doob [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Doob [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "Inset-4",
+      "filename": "Doob [Inset-4].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BInset-4%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Doob [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Doob [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BBack%5D.jpg"
+    }
+  ],
+  "Doob": [
+    {
+      "title": "Front",
+      "filename": "Doob [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Arnob & Friends Live [Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BArtwork%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Doob [Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BArtwork%5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Doob [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Doob [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Doob [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "Inset-4",
+      "filename": "Doob [Inset-4].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BInset-4%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Doob [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Doob [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Doob/Album%20Cover/Doob%20%5BBack%5D.jpg"
+    }
+  ],
+  "Arnob - Songs from World Tour '08": [
+    {
+      "title": "Front",
+      "filename": "Arnob+-26+Friends+Live+-5BFront-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%2B-26%2BFriends%2BLive%2B-5BFront-5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Arnob & Friends Live [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Arnob & Friends Live [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Arnob & Friends Live [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Arnob & Friends Live [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Arnob & Friends Live [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Feature",
+      "filename": "Arnob & Friends Live [Feature].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BFeature%5D.jpg"
+    }
+  ],
+  "Songs from World Tour '08": [
+    {
+      "title": "Front",
+      "filename": "Arnob+-26+Friends+Live+-5BFront-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%2B-26%2BFriends%2BLive%2B-5BFront-5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Arnob & Friends Live [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Arnob & Friends Live [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Arnob & Friends Live [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Arnob & Friends Live [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Arnob & Friends Live [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Feature",
+      "filename": "Arnob & Friends Live [Feature].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Songs%20from%20World%20Tour%20%2708/Album%20Cover/Arnob%20%26%20Friends%20Live%20%5BFeature%5D.jpg"
+    }
+  ],
+  "Arnob - Adheko Ghume": [
+    {
+      "title": "Front-Artwork-3",
+      "filename": "Adheko+Ghume+-5BFront-Artwork-3-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%2BGhume%2B-5BFront-Artwork-3-5D.jpg"
+    },
+    {
+      "title": "Main Artwork",
+      "filename": "Adheko Ghume [Main Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BMain%20Artwork%5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Adheko Ghume [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Adheko Ghume [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Adheko Ghume [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "Inset-4",
+      "filename": "Adheko Ghume [Inset-4].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BInset-4%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Adheko Ghume [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Adheko Ghume [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BBack%5D.jpg"
+    }
+  ],
+  "Adheko Ghume": [
+    {
+      "title": "Front-Artwork-3",
+      "filename": "Adheko+Ghume+-5BFront-Artwork-3-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%2BGhume%2B-5BFront-Artwork-3-5D.jpg"
+    },
+    {
+      "title": "Main Artwork",
+      "filename": "Adheko Ghume [Main Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BMain%20Artwork%5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Adheko Ghume [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Adheko Ghume [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Adheko Ghume [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "Inset-4",
+      "filename": "Adheko Ghume [Inset-4].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BInset-4%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Adheko Ghume [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Adheko Ghume [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Adheko%20Ghume/Album%20Cover/Adheko%20Ghume%20%5BBack%5D.jpg"
+    }
+  ],
+  "Arnob - Khoob Doob": [
+    {
+      "title": "Front",
+      "filename": "Khoob Doob [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Khoob%20Doob/Album%20Cover/Khoob%20Doob%20%5BFront%5D.jpg"
+    }
+  ],
+  "Khoob Doob": [
+    {
+      "title": "Front",
+      "filename": "Khoob Doob [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Khoob%20Doob/Album%20Cover/Khoob%20Doob%20%5BFront%5D.jpg"
+    }
+  ],
+  "Arnob - Singles & Standalone Releases": [
+    {
+      "title": "Front",
+      "filename": "Arnob - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Singles/Album%20Cover/Arnob%20-%20Singles%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Arnob - Esho Shemolo Shundoro",
+      "filename": "Arnob - Esho Shemolo Shundoro.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Singles/Album%20Cover/Arnob%20-%20Esho%20Shemolo%20Shundoro.jpg"
+    }
+  ],
+  "Arnob - Deep Nevar Age": [
+    {
+      "title": "Front",
+      "filename": "Deep Nevar Age [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg"
+    }
+  ],
+  "Deep Nevar Age": [
+    {
+      "title": "Front",
+      "filename": "Deep Nevar Age [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg"
+    }
+  ],
+  "Arnob - Vol 2": [
+    {
+      "title": "Front",
+      "filename": "Jhalmuri, Vol. 2 (2007) [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%202/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%282007%29%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Jhalmuri [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
+    }
+  ],
+  "Vol 2": [
+    {
+      "title": "Front",
+      "filename": "Jhalmuri, Vol. 2 (2007) [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%202/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%282007%29%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Jhalmuri [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Artcell - Onno Shomoy": [
@@ -2300,6 +2910,75 @@
       "title": "Front",
       "filename": "Shomorpon [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Shomorpon%20%282011%29/Album%20Cover/Shomorpon%20%5BFront%5D.jpg"
+    }
+  ],
+  "Ayub Bachchu - Rupali Guitar": [
+    {
+      "title": "Front",
+      "filename": "Rupali Guitar [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/Rupali%20Guitar/Album%20Cover/Rupali%20Guitar%20%5BFront%5D.jpg"
+    }
+  ],
+  "Rupali Guitar": [
+    {
+      "title": "Front",
+      "filename": "Rupali Guitar [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/Rupali%20Guitar/Album%20Cover/Rupali%20Guitar%20%5BFront%5D.jpg"
+    }
+  ],
+  "Ayub Bachchu - Prem Tumi Ki (প্রেম তুমি কি?)": [
+    {
+      "title": "Front",
+      "filename": "Prem Tumi Ki [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/Prem%20Tumi%20Ki/Album%20Cover/Prem%20Tumi%20Ki%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Prem Tumi Ki [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/Prem%20Tumi%20Ki/Album%20Cover/Prem%20Tumi%20Ki%20%5BCD%5D.jpg"
+    }
+  ],
+  "Prem Tumi Ki (প্রেম তুমি কি?)": [
+    {
+      "title": "Front",
+      "filename": "Prem Tumi Ki [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/Prem%20Tumi%20Ki/Album%20Cover/Prem%20Tumi%20Ki%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Prem Tumi Ki [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/Prem%20Tumi%20Ki/Album%20Cover/Prem%20Tumi%20Ki%20%5BCD%5D.jpg"
+    }
+  ],
+  "Ayub Bachchu - Duti Mon": [
+    {
+      "title": "Front",
+      "filename": "Duti Mon [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/Duti%20Mon/Album%20Cover/Duti%20Mon%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inlet",
+      "filename": "Duti Mon [Inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/Duti%20Mon/Album%20Cover/Duti%20Mon%20%5BInlet%5D.jpg"
+    }
+  ],
+  "Duti Mon": [
+    {
+      "title": "Front",
+      "filename": "Duti Mon [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/Duti%20Mon/Album%20Cover/Duti%20Mon%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inlet",
+      "filename": "Duti Mon [Inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/Duti%20Mon/Album%20Cover/Duti%20Mon%20%5BInlet%5D.jpg"
+    }
+  ],
+  "Ayub Bachchu - Deep Nevar Age": [
+    {
+      "title": "Front",
+      "filename": "Deep Nevar Age [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg"
     }
   ],
   "Bassbaba Sumon - Sumon O Aurthohin": [
@@ -4393,6 +5072,68 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Singles%20%5BFront%5D.jpg"
     }
   ],
+  "LRB - Ghumanta Sahare": [
+    {
+      "title": "Front",
+      "filename": "Ghumonto Shohore [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/Ghumanta%20Sahare/Album%20Cover/Ghumonto%20Shohore%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Ghumonto Shohore [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/Ghumanta%20Sahare/Album%20Cover/Ghumonto%20Shohore%20%5BLyrics%5D.jpg"
+    }
+  ],
+  "Ghumanta Sahare": [
+    {
+      "title": "Front",
+      "filename": "Ghumonto Shohore [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/Ghumanta%20Sahare/Album%20Cover/Ghumonto%20Shohore%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Ghumonto Shohore [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/Ghumanta%20Sahare/Album%20Cover/Ghumonto%20Shohore%20%5BLyrics%5D.jpg"
+    }
+  ],
+  "LRB - Swapno": [
+    {
+      "title": "Lyrics",
+      "filename": "Swapno [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/Swapno/Album%20Cover/Swapno%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Swapno",
+      "filename": "Swapno.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/Swapno/Album%20Cover/Swapno.jpg"
+    }
+  ],
+  "Swapno": [
+    {
+      "title": "Lyrics",
+      "filename": "Swapno [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/Swapno/Album%20Cover/Swapno%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Swapno",
+      "filename": "Swapno.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/Swapno/Album%20Cover/Swapno.jpg"
+    }
+  ],
+  "LRB - Ferari Mon: Unplugged Live": [
+    {
+      "title": "Front",
+      "filename": "Ferari Mon [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/Ferari%20Mon/Album%20Cover/Ferari%20Mon%20%5BFront%5D.jpg"
+    }
+  ],
+  "Ferari Mon: Unplugged Live": [
+    {
+      "title": "Front",
+      "filename": "Ferari Mon [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/Ferari%20Mon/Album%20Cover/Ferari%20Mon%20%5BFront%5D.jpg"
+    }
+  ],
   "Minerva - Biday Songbidhan": [
     {
       "title": "Front-Back",
@@ -4960,6 +5701,746 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%201%20%282003%29/Album%20Cover/Agontuk%201%20%5BBack%5D.jpg"
     }
   ],
+  "Warfaze - Warfaze": [
+    {
+      "title": "Front",
+      "filename": "Warfaze [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Warfaze%20%281991%29/Album%20Cover/Warfaze%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Warfaze+-5BArtwork-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Warfaze%20%281991%29/Album%20Cover/Warfaze%2B-5BArtwork-5D.jpg"
+    },
+    {
+      "title": "Cassette Sleeve",
+      "filename": "Warfaze [Cassette Sleeve].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Warfaze%20%281991%29/Album%20Cover/Warfaze%20%5BCassette%20Sleeve%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Warfaze [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Warfaze%20%281991%29/Album%20Cover/Warfaze%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Warfaze [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Warfaze%20%281991%29/Album%20Cover/Warfaze%20%5BBack%5D.jpg"
+    }
+  ],
+  "Warfaze": [
+    {
+      "title": "Front",
+      "filename": "Warfaze [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Warfaze%20%281991%29/Album%20Cover/Warfaze%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Warfaze+-5BArtwork-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Warfaze%20%281991%29/Album%20Cover/Warfaze%2B-5BArtwork-5D.jpg"
+    },
+    {
+      "title": "Cassette Sleeve",
+      "filename": "Warfaze [Cassette Sleeve].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Warfaze%20%281991%29/Album%20Cover/Warfaze%20%5BCassette%20Sleeve%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Warfaze [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Warfaze%20%281991%29/Album%20Cover/Warfaze%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Warfaze [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Warfaze%20%281991%29/Album%20Cover/Warfaze%20%5BBack%5D.jpg"
+    }
+  ],
+  "Warfaze - Obak Valobasha": [
+    {
+      "title": "Cassette Sleeve Front1",
+      "filename": "Obak Bhalobasha [Cassette Sleeve Front1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BCassette%20Sleeve%20Front1%5D.jpg"
+    },
+    {
+      "title": "Cassette Sleeve Front2",
+      "filename": "Obak Bhalobasha [Cassette Sleeve Front2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BCassette%20Sleeve%20Front2%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Obak Bhalobasha [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Obak Bhalobasha [Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BArtwork%5D.jpg"
+    },
+    {
+      "title": "Cassette Sleeve Inside",
+      "filename": "Obak Bhalobasha [Cassette Sleeve Inside].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BCassette%20Sleeve%20Inside%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Obak Bhalobasha [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Obak Bhalobasha [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BBack%5D.jpg"
+    }
+  ],
+  "Obak Valobasha": [
+    {
+      "title": "Cassette Sleeve Front1",
+      "filename": "Obak Bhalobasha [Cassette Sleeve Front1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BCassette%20Sleeve%20Front1%5D.jpg"
+    },
+    {
+      "title": "Cassette Sleeve Front2",
+      "filename": "Obak Bhalobasha [Cassette Sleeve Front2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BCassette%20Sleeve%20Front2%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Obak Bhalobasha [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Obak Bhalobasha [Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BArtwork%5D.jpg"
+    },
+    {
+      "title": "Cassette Sleeve Inside",
+      "filename": "Obak Bhalobasha [Cassette Sleeve Inside].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BCassette%20Sleeve%20Inside%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Obak Bhalobasha [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Obak Bhalobasha [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Obak%20Valobasha%20%281994%29/Album%20Cover/Obak%20Bhalobasha%20%5BBack%5D.jpg"
+    }
+  ],
+  "Warfaze - Jibondhara": [
+    {
+      "title": "Cassette Sleeve-Front",
+      "filename": "Jibon Dhara [Cassette Sleeve-Front].JPG",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BCassette%20Sleeve-Front%5D.JPG"
+    },
+    {
+      "title": "Front",
+      "filename": "Jibon Dhara [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Jibon+Dhara+-5BFront-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%2BDhara%2B-5BFront-5D.jpg"
+    },
+    {
+      "title": "Cassette Sleeve-Inside",
+      "filename": "Jibon Dhara [Cassette Sleeve-Inside].JPG",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BCassette%20Sleeve-Inside%5D.JPG"
+    },
+    {
+      "title": "CD",
+      "filename": "Jibon Dhara [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jibon Dhara [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jibon Dhara [Back]_2.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BBack%5D_2.jpg"
+    }
+  ],
+  "Jibondhara": [
+    {
+      "title": "Cassette Sleeve-Front",
+      "filename": "Jibon Dhara [Cassette Sleeve-Front].JPG",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BCassette%20Sleeve-Front%5D.JPG"
+    },
+    {
+      "title": "Front",
+      "filename": "Jibon Dhara [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Jibon+Dhara+-5BFront-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%2BDhara%2B-5BFront-5D.jpg"
+    },
+    {
+      "title": "Cassette Sleeve-Inside",
+      "filename": "Jibon Dhara [Cassette Sleeve-Inside].JPG",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BCassette%20Sleeve-Inside%5D.JPG"
+    },
+    {
+      "title": "CD",
+      "filename": "Jibon Dhara [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jibon Dhara [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jibon Dhara [Back]_2.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Jibondhara%20%281996%29/Album%20Cover/Jibon%20Dhara%20%5BBack%5D_2.jpg"
+    }
+  ],
+  "Warfaze - Oshamajik": [
+    {
+      "title": "Front-Re-Release-1",
+      "filename": "Oshamajik [Front-Re-Release-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BFront-Re-Release-1%5D.jpg"
+    },
+    {
+      "title": "Front-Re-Release-2",
+      "filename": "Oshamajik [Front-Re-Release-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BFront-Re-Release-2%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Oshamajik [Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BArtwork%5D.jpg"
+    },
+    {
+      "title": "Booklet",
+      "filename": "Oshamajik [Booklet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BBooklet%5D.jpg"
+    },
+    {
+      "title": "Cassette Inlay",
+      "filename": "Oshamajik [Cassette Inlay].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BCassette%20Inlay%5D.jpg"
+    },
+    {
+      "title": "Inlay-2",
+      "filename": "Oshamajik [Inlay-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BInlay-2%5D.jpg"
+    },
+    {
+      "title": "Inlay",
+      "filename": "Oshamajik [Inlay].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BInlay%5D.jpg"
+    },
+    {
+      "title": "CD-Re-Release",
+      "filename": "Oshamajik [CD-Re-Release].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BCD-Re-Release%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Oshamajik [CD].png",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BCD%5D.png"
+    },
+    {
+      "title": "Back-Re-Release",
+      "filename": "Oshamajik [Back-Re-Release].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BBack-Re-Release%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Oshamajik [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BBack%5D.jpg"
+    }
+  ],
+  "Oshamajik": [
+    {
+      "title": "Front-Re-Release-1",
+      "filename": "Oshamajik [Front-Re-Release-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BFront-Re-Release-1%5D.jpg"
+    },
+    {
+      "title": "Front-Re-Release-2",
+      "filename": "Oshamajik [Front-Re-Release-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BFront-Re-Release-2%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Oshamajik [Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BArtwork%5D.jpg"
+    },
+    {
+      "title": "Booklet",
+      "filename": "Oshamajik [Booklet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BBooklet%5D.jpg"
+    },
+    {
+      "title": "Cassette Inlay",
+      "filename": "Oshamajik [Cassette Inlay].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BCassette%20Inlay%5D.jpg"
+    },
+    {
+      "title": "Inlay-2",
+      "filename": "Oshamajik [Inlay-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BInlay-2%5D.jpg"
+    },
+    {
+      "title": "Inlay",
+      "filename": "Oshamajik [Inlay].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BInlay%5D.jpg"
+    },
+    {
+      "title": "CD-Re-Release",
+      "filename": "Oshamajik [CD-Re-Release].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BCD-Re-Release%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Oshamajik [CD].png",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BCD%5D.png"
+    },
+    {
+      "title": "Back-Re-Release",
+      "filename": "Oshamajik [Back-Re-Release].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BBack-Re-Release%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Oshamajik [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Oshamajik%20%281998%29/Album%20Cover/Oshamajik%20%5BBack%5D.jpg"
+    }
+  ],
+  "Warfaze - Aalo": [
+    {
+      "title": "Front",
+      "filename": "Aalo [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Aalo [Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BArtwork%5D.jpg"
+    },
+    {
+      "title": "Booklet",
+      "filename": "Aalo [Booklet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BBooklet%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Aalo [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back-Re-Release",
+      "filename": "Aalo [Back-Re-Release].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BBack-Re-Release%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Aalo [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Promo Art",
+      "filename": "Aalo [Promo Art].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BPromo%20Art%5D.jpg"
+    }
+  ],
+  "Aalo": [
+    {
+      "title": "Front",
+      "filename": "Aalo [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Aalo [Artwork].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BArtwork%5D.jpg"
+    },
+    {
+      "title": "Booklet",
+      "filename": "Aalo [Booklet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BBooklet%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Aalo [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back-Re-Release",
+      "filename": "Aalo [Back-Re-Release].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BBack-Re-Release%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Aalo [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Promo Art",
+      "filename": "Aalo [Promo Art].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Aalo%20%282001%29/Album%20Cover/Aalo%20%5BPromo%20Art%5D.jpg"
+    }
+  ],
+  "Warfaze - Moharaj": [
+    {
+      "title": "Front Inlay",
+      "filename": "Moharaaj [Front+Inlay].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%20%5BFront%2BInlay%5D.jpg"
+    },
+    {
+      "title": "Front-Back",
+      "filename": "Moharaaj [Front-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%20%5BFront-Back%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Moharaj [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaj%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Moharaaj+-5BArtwork-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%2B-5BArtwork-5D.jpg"
+    },
+    {
+      "title": "Booklet",
+      "filename": "Moharaaj [Booklet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%20%5BBooklet%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Moharaaj [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Moharaaj [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%20%5BBack%5D.jpg"
+    }
+  ],
+  "Moharaj": [
+    {
+      "title": "Front Inlay",
+      "filename": "Moharaaj [Front+Inlay].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%20%5BFront%2BInlay%5D.jpg"
+    },
+    {
+      "title": "Front-Back",
+      "filename": "Moharaaj [Front-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%20%5BFront-Back%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Moharaj [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaj%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Artwork",
+      "filename": "Moharaaj+-5BArtwork-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%2B-5BArtwork-5D.jpg"
+    },
+    {
+      "title": "Booklet",
+      "filename": "Moharaaj [Booklet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%20%5BBooklet%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Moharaaj [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Moharaaj [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Moharaj%20%282003%29/Album%20Cover/Moharaaj%20%5BBack%5D.jpg"
+    }
+  ],
+  "Warfaze - Pothchola": [
+    {
+      "title": "Artwork",
+      "filename": "Pothchola+-5BArtwork-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%2B-5BArtwork-5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Pothchola [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Pothchola [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Pothchola [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "Inset-4",
+      "filename": "Pothchola [Inset-4].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BInset-4%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Pothchola [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Pothchola [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Legacy Concert Band Photo",
+      "filename": "Pothchola [Legacy Concert Band Photo].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BLegacy%20Concert%20Band%20Photo%5D.jpg"
+    },
+    {
+      "title": "Legacy Concert Poster",
+      "filename": "Pothchola [Legacy Concert Poster].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BLegacy%20Concert%20Poster%5D.jpg"
+    },
+    {
+      "title": "Poster-1",
+      "filename": "Pothchola [Poster-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BPoster-1%5D.jpg"
+    },
+    {
+      "title": "Poster-2",
+      "filename": "Pothochola [Poster-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothochola%20%5BPoster-2%5D.jpg"
+    }
+  ],
+  "Pothchola": [
+    {
+      "title": "Artwork",
+      "filename": "Pothchola+-5BArtwork-5D.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%2B-5BArtwork-5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Pothchola [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Pothchola [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Pothchola [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "Inset-4",
+      "filename": "Pothchola [Inset-4].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BInset-4%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Pothchola [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Pothchola [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Legacy Concert Band Photo",
+      "filename": "Pothchola [Legacy Concert Band Photo].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BLegacy%20Concert%20Band%20Photo%5D.jpg"
+    },
+    {
+      "title": "Legacy Concert Poster",
+      "filename": "Pothchola [Legacy Concert Poster].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BLegacy%20Concert%20Poster%5D.jpg"
+    },
+    {
+      "title": "Poster-1",
+      "filename": "Pothchola [Poster-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothchola%20%5BPoster-1%5D.jpg"
+    },
+    {
+      "title": "Poster-2",
+      "filename": "Pothochola [Poster-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Pothchola%20%282008%29/Album%20Cover/Pothochola%20%5BPoster-2%5D.jpg"
+    }
+  ],
+  "Warfaze - Shotto": [
+    {
+      "title": "Front",
+      "filename": "Shotto [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Shotto [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Shotto [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Shotto [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "Inset-4",
+      "filename": "Shotto [Inset-4].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BInset-4%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Shotto [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Shotto [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Poster",
+      "filename": "Shotto [Poster].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BPoster%5D.jpg"
+    }
+  ],
+  "Shotto": [
+    {
+      "title": "Front",
+      "filename": "Shotto [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inset-1",
+      "filename": "Shotto [Inset-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BInset-1%5D.jpg"
+    },
+    {
+      "title": "Inset-2",
+      "filename": "Shotto [Inset-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BInset-2%5D.jpg"
+    },
+    {
+      "title": "Inset-3",
+      "filename": "Shotto [Inset-3].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BInset-3%5D.jpg"
+    },
+    {
+      "title": "Inset-4",
+      "filename": "Shotto [Inset-4].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BInset-4%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Shotto [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Shotto [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Poster",
+      "filename": "Shotto [Poster].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/Shotto%20%282012%29/Album%20Cover/Shotto%20%5BPoster%5D.jpg"
+    }
+  ],
+  "Warfaze - Hits of Metal Band Smritir Shohor": [
+    {
+      "title": "Front",
+      "filename": "Hits Of Metal Band [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inlay",
+      "filename": "Hits Of Metal Band [Inlay].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BInlay%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Hits Of Metal Band [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Hits Of Metal Band [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BBack%5D.jpg"
+    }
+  ],
+  "Hits of Metal Band Smritir Shohor": [
+    {
+      "title": "Front",
+      "filename": "Hits Of Metal Band [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Inlay",
+      "filename": "Hits Of Metal Band [Inlay].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BInlay%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Hits Of Metal Band [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Hits Of Metal Band [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BBack%5D.jpg"
+    }
+  ],
+  "Warfaze - Agontuk 2": [
+    {
+      "title": "Front-Back",
+      "filename": "Agontuk 2 [Front-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BFront-Back%5D.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "Agontuk 2 [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Booklet",
+      "filename": "Agontuk 2 [Booklet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BBooklet%5D.jpg"
+    },
+    {
+      "title": "Inlay",
+      "filename": "Agontuk 2 [Inlay].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BInlay%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Agontuk 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BCD%5D.jpg"
+    }
+  ],
+  "Warfaze - Shomorpon": [
+    {
+      "title": "Front",
+      "filename": "Shomorpon [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Shomorpon%20%282011%29/Album%20Cover/Shomorpon%20%5BFront%5D.jpg"
+    }
+  ],
   "Disciples - Harano Podochchap": [
     {
       "title": "front",
@@ -5038,50 +6519,6 @@
       "title": "Front",
       "filename": "Bonno [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Bonno%20%282008%29/Album%20Cover/Bonno%20%5BFront%5D.jpg"
-    }
-  ],
-  "Warfaze - Hits of Metal Band Smritir Shohor": [
-    {
-      "title": "Front",
-      "filename": "Hits Of Metal Band [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Inlay",
-      "filename": "Hits Of Metal Band [Inlay].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BInlay%5D.jpg"
-    },
-    {
-      "title": "CD",
-      "filename": "Hits Of Metal Band [CD].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BCD%5D.jpg"
-    },
-    {
-      "title": "Back",
-      "filename": "Hits Of Metal Band [Back].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BBack%5D.jpg"
-    }
-  ],
-  "Hits of Metal Band Smritir Shohor": [
-    {
-      "title": "Front",
-      "filename": "Hits Of Metal Band [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Inlay",
-      "filename": "Hits Of Metal Band [Inlay].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BInlay%5D.jpg"
-    },
-    {
-      "title": "CD",
-      "filename": "Hits Of Metal Band [CD].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BCD%5D.jpg"
-    },
-    {
-      "title": "Back",
-      "filename": "Hits Of Metal Band [Back].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Hits%20of%20Metal%20Band%20Smritir%20Shohor%20%281991%29/Album%20Cover/Hits%20Of%20Metal%20Band%20%5BBack%5D.jpg"
     }
   ],
   "Rockstarta - Hits of Metal Band Smritir Shohor": [
@@ -6236,33 +7673,6 @@
     }
   ],
   "dNA - Agontuk 2": [
-    {
-      "title": "Front-Back",
-      "filename": "Agontuk 2 [Front-Back].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BFront-Back%5D.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Agontuk 2 [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Booklet",
-      "filename": "Agontuk 2 [Booklet].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BBooklet%5D.jpg"
-    },
-    {
-      "title": "Inlay",
-      "filename": "Agontuk 2 [Inlay].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BInlay%5D.jpg"
-    },
-    {
-      "title": "CD",
-      "filename": "Agontuk 2 [CD].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BCD%5D.jpg"
-    }
-  ],
-  "Warfaze - Agontuk 2": [
     {
       "title": "Front-Back",
       "filename": "Agontuk 2 [Front-Back].jpg",
@@ -9386,9 +10796,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%201/Album%20Cover/Jhalmuri%2C%20Vol.%201%20%282007%29%5Bfront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri, Vol. 2 [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Jhalmuri": [
@@ -9398,9 +10858,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%201/Album%20Cover/Jhalmuri%2C%20Vol.%201%20%282007%29%5Bfront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri, Vol. 2 [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     },
     {
       "title": "Front",
@@ -9420,9 +10930,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%201/Album%20Cover/Jhalmuri%2C%20Vol.%201%20%282007%29%5Bfront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri, Vol. 2 [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Abida - Jhalmuri": [
@@ -9432,9 +10992,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%201/Album%20Cover/Jhalmuri%2C%20Vol.%201%20%282007%29%5Bfront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri, Vol. 2 [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Labik Kamal Gaurob - Jhalmuri": [
@@ -9444,9 +11054,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%201/Album%20Cover/Jhalmuri%2C%20Vol.%201%20%282007%29%5Bfront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri, Vol. 2 [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Armeen Musa & Nabila - Jhalmuri": [
@@ -9456,9 +11116,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%201/Album%20Cover/Jhalmuri%2C%20Vol.%201%20%282007%29%5Bfront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri, Vol. 2 [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Tanvir Alam Shawjeeb - Jhalmuri": [
@@ -9468,9 +11178,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%201/Album%20Cover/Jhalmuri%2C%20Vol.%201%20%282007%29%5Bfront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri, Vol. 2 [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Sahana Bajpaie - Jhalmuri": [
@@ -9480,9 +11240,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%201/Album%20Cover/Jhalmuri%2C%20Vol.%201%20%282007%29%5Bfront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri, Vol. 2 [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Bappa Mazumder - Jhalmuri": [
@@ -9492,9 +11302,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%201/Album%20Cover/Jhalmuri%2C%20Vol.%201%20%282007%29%5Bfront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri, Vol. 2 [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Shobbhota - Jhalmuri": [
@@ -9504,9 +11364,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%202/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%282007%29%20%5BFront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Shuvo - Jhalmuri": [
@@ -9516,9 +11426,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%202/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%282007%29%20%5BFront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Laura - Jhalmuri": [
@@ -9528,9 +11488,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%202/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%282007%29%20%5BFront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Rupom - Jhalmuri": [
@@ -9540,9 +11550,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%202/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%282007%29%20%5BFront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Srabonti - Jhalmuri": [
@@ -9552,9 +11612,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%202/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%282007%29%20%5BFront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Syed Wakil Ahad - Jhalmuri": [
@@ -9564,9 +11674,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%202/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%282007%29%20%5BFront%5D.jpg"
     },
     {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
+    {
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
+    },
+    {
       "title": "Front",
       "filename": "Jhalmuri [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Nancy - Jhalmuri": [
@@ -9576,21 +11736,59 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%202/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%282007%29%20%5BFront%5D.jpg"
     },
     {
-      "title": "Front",
-      "filename": "Jhalmuri [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%20%5BFront%5D.jpg"
-    }
-  ],
-  "Arnob - Jhalmuri": [
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 1 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Front%5D.jpg"
+    },
     {
-      "title": "Front",
-      "filename": "Jhalmuri, Vol. 2 (2007) [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Vol%202/Album%20Cover/Jhalmuri%2C%20Vol.%202%20%282007%29%20%5BFront%5D.jpg"
+      "title": "Inlay-Front",
+      "filename": "Jhalmuri 2 [Inlay-Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Front%5D.jpg"
     },
     {
       "title": "Front",
       "filename": "Jhalmuri [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 1 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Lyrics",
+      "filename": "Jhalmuri 2 [Lyrics].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BLyrics%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 1 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "Inlay-Back",
+      "filename": "Jhalmuri 2 [Inlay-Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BInlay-Back%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 1 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "CD",
+      "filename": "Jhalmuri 2 [CD].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BCD%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 1 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%201%20%5BBack%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Jhalmuri 2 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jhalmuri%20%282007%29/Album%20Cover/Jhalmuri%202%20%5BBack%5D.jpg"
     }
   ],
   "Arafat Kazi - Bonno": [
@@ -10340,13 +12538,6 @@
       "title": "Front",
       "filename": "Rock 707 [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20707%20%282011%29/Album%20Cover/Rock%20707%20%5BFront%5D.jpg"
-    }
-  ],
-  "Warfaze - Shomorpon": [
-    {
-      "title": "Front",
-      "filename": "Shomorpon [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Shomorpon%20%282011%29/Album%20Cover/Shomorpon%20%5BFront%5D.jpg"
     }
   ],
   "Habib Wahid - Shomorpon": [
@@ -12076,20 +14267,6 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg"
     }
   ],
-  "Deep Nevar Age": [
-    {
-      "title": "Front",
-      "filename": "Deep Nevar Age [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg"
-    }
-  ],
-  "Arnob - Deep Nevar Age": [
-    {
-      "title": "Front",
-      "filename": "Deep Nevar Age [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg"
-    }
-  ],
   "Rafa - Deep Nevar Age": [
     {
       "title": "Front",
@@ -12098,13 +14275,6 @@
     }
   ],
   "Adit - Deep Nevar Age": [
-    {
-      "title": "Front",
-      "filename": "Deep Nevar Age [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Deep%20Nevar%20Age%20%282015%29/Album%20Cover/Deep%20Nevar%20Age%20%5BFront%5D.jpg"
-    }
-  ],
-  "Ayub Bachchu - Deep Nevar Age": [
     {
       "title": "Front",
       "filename": "Deep Nevar Age [Front].jpg",
