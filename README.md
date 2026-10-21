@@ -1,10 +1,20 @@
 # 🇧🇩 BD Band Music
 
-[![Live Web Player](https://img.shields.io/badge/▶_Launch-Live_Web_Player-8b5cf6?style=for-the-badge&logo=googlechrome&logoColor=white)](https://bd-band-archive.github.io/BD-Band-Music/) [![Catalog - Lossless FLAC Tracks](https://img.shields.io/badge/Catalog-979%20FLAC%20Tracks-007ec6?style=for-the-badge&logo=flac&logoColor=white)](#) [![Git LFS - Enabled](https://img.shields.io/badge/Git%20LFS-Enabled-f05032?style=for-the-badge&logo=git-lfs&logoColor=white)](#)
+[![Live Web Player](https://img.shields.io/badge/▶_Launch-Live_Web_Player-8b5cf6?style=for-the-badge&logo=googlechrome&logoColor=white)](https://bd-band-archive.github.io/BD-Band-Music/) [![Catalog - Lossless FLAC Tracks](https://img.shields.io/badge/Catalog-956%20FLAC%20Tracks-007ec6?style=for-the-badge&logo=flac&logoColor=white)](#) [![Git LFS - Enabled](https://img.shields.io/badge/Git%20LFS-Enabled-f05032?style=for-the-badge&logo=git-lfs&logoColor=white)](#)
 
 > 🌐 **Interactive Web Player & Search Engine:**  
-> Search, browse, and stream all **979 lossless FLAC tracks** across all bands and compilations directly in your browser with instant search, playlists, and background lock-screen playback:  
+> Search, browse, and stream all **lossless FLAC tracks** across all bands and compilations directly in your browser with instant search, playlists, and background lock-screen playback:  
 > **👉 [https://bd-band-archive.github.io/BD-Band-Music/](https://bd-band-archive.github.io/BD-Band-Music/)**
+
+---
+
+# 🎸 [Aftermath](https://github.com/BD-Band-Archive/Aftermath)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Aftermath">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/assets/band_cover.jpg" alt="Aftermath Band Cover" width="750" />
+  </a>
+</p>
 
 ---
 
@@ -13,6 +23,16 @@
 <p align="center">
   <a href="https://github.com/BD-Band-Archive/Arbovirus">
     <img src="https://raw.githubusercontent.com/BD-Band-Archive/Arbovirus/master/assets/band_cover.png" alt="Arbovirus Band Cover" width="750" />
+  </a>
+</p>
+
+---
+
+# 🎸 [Arnob](https://github.com/BD-Band-Archive/Arnob)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Arnob">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/assets/band_cover.jpg" alt="Arnob Band Cover" width="750" />
   </a>
 </p>
 
@@ -38,6 +58,16 @@
 
 ---
 
+# 🎸 [Ayub Bachchu](https://github.com/BD-Band-Archive/Ayub-Bachchu)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Ayub-Bachchu">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/assets/band_cover.jpg" alt="Ayub Bachchu Band Cover" width="750" />
+  </a>
+</p>
+
+---
+
 # 🎸 [Bassbaba Sumon](https://github.com/BD-Band-Archive/Bassbaba-Sumon)
 
 <p align="center">
@@ -58,7 +88,23 @@
 
 ---
 
+# 🎸 [Cryptic Fate](https://github.com/BD-Band-Archive/Cryptic-Fate)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Cryptic-Fate">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Cryptic-Fate/master/assets/band_cover.jpg" alt="Cryptic Fate Band Cover" width="750" />
+  </a>
+</p>
+
+---
+
 # 🎸 [Disciples](https://github.com/BD-Band-Archive/Disciples)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Disciples">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Disciples/master/assets/band_cover.jpg" alt="Disciples Band Cover" width="750" />
+  </a>
+</p>
 
 ---
 
@@ -84,9 +130,31 @@
 
 # 🎸 [Jon Kabir](https://github.com/BD-Band-Archive/Jon-Kabir)
 
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Jon-Kabir">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Jon-Kabir/master/assets/band_cover.jpg" alt="Jon Kabir Band Cover" width="750" />
+  </a>
+</p>
+
+---
+
+# 🎸 [LRB](https://github.com/BD-Band-Archive/LRB)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/LRB">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/assets/band_cover.jpg" alt="LRB Band Cover" width="750" />
+  </a>
+</p>
+
 ---
 
 # 🎸 [Mila](https://github.com/BD-Band-Archive/Mila)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Mila">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/assets/band_cover.jpg" alt="Mila Band Cover" width="750" />
+  </a>
+</p>
 
 ---
 
@@ -140,14 +208,13 @@
 
 ---
 
-### 🤝 Contribution & DMCA Notice
-All songs and archival materials in this repository were collected and curated from various internet sources, physical CD rips, and public community archives for cultural preservation and historical documentation.
+# 🎸 [Warfaze](https://github.com/BD-Band-Archive/Warfaze)
 
-- **Contributions:** If you have physical CD or cassette rips in lossless FLAC format, missing booklet/inlay scans, or tracklist metadata corrections, contributions and pull requests are warmly welcome!
-- **DMCA / Copyright Notice:** If this repository contains your copyrighted or DMCA-protected files and you wish to have them removed, please contact:
-  - **Email:** [maniruzzamanmridul@gmail.com](mailto:maniruzzamanmridul@gmail.com)
-  
-  Please provide the specific track, album, or file details, and the requested material will be reviewed and removed as soon as possible.
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Warfaze">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Warfaze/master/assets/band_cover.jpg" alt="Warfaze Band Cover" width="750" />
+  </a>
+</p>
 
 ---
 
