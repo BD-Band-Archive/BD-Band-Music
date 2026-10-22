@@ -477,7 +477,8 @@ body {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   box-shadow: var(--shadow-sm);
 }
 
@@ -1566,9 +1567,9 @@ body {
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 768px) {
   :root {
-    --player-height: 74px;
+    --player-height: 106px;
     --header-height: 56px;
   }
   
@@ -1624,32 +1625,111 @@ body {
     padding-bottom: calc(var(--player-height) + 1.5rem);
   }
   
-  .th-album, .td-album {
-    display: none;
+  /* Tracks Table: Enable horizontal swipe/sliding so all song details (album, year, format, actions) are accessible */
+  .tracks-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    border-radius: var(--radius-md);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
   }
-  
-  /* Mobile Player Bar: Edge-to-edge top scrub bar, generous track info */
+
+  .tracks-table-container::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .tracks-table-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .tracks-table-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+  }
+
+  .tracks-table {
+    min-width: 680px;
+    width: 100%;
+  }
+
+  /* Explicitly unhide all columns on mobile so horizontal sliding exposes full track info */
+  .th-play, .td-play,
+  .th-title, .td-title,
+  .th-artist, .td-artist,
+  .th-album, .td-album,
+  .th-year, .td-year,
+  .th-quality, .td-quality,
+  .th-actions, .td-actions {
+    display: table-cell !important;
+  }
+
+  .th-play, .td-play {
+    width: 44px;
+    min-width: 44px;
+    text-align: center;
+  }
+
+  .th-title, .td-title {
+    min-width: 170px;
+  }
+
+  .th-artist, .td-artist {
+    min-width: 120px;
+    white-space: nowrap;
+  }
+
+  .th-album, .td-album {
+    min-width: 120px;
+    white-space: nowrap;
+  }
+
+  .th-year, .td-year {
+    width: 58px;
+    min-width: 58px;
+    text-align: center;
+  }
+
+  .th-quality, .td-quality {
+    width: 78px;
+    min-width: 78px;
+    text-align: center;
+  }
+
+  .th-actions, .td-actions {
+    width: 90px;
+    min-width: 90px;
+    text-align: right;
+  }
+
+  .row-action-btn {
+    padding: 6px;
+  }
+
+  /* Mobile Player Bar: 2-Tier Stacked Layout
+     Tier 1 (Top): Cover art thumbnail + Title + Artist/Album badge
+     Tier 2 (Downside): Full-width toolbar with Shuffle, Prev, Play/Pause, Next, Repeat, Share, Download */
   .player-bar {
-    padding: 0 0.85rem;
-    gap: 0.6rem;
+    padding: 0.45rem 0.85rem 0.45rem;
     height: var(--player-height);
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-  }
-
-  /* Full-width scrub bar at top of mobile player */
-  .player-center {
-    position: static;
-    flex: 0 0 auto;
-    max-width: none;
     gap: 0;
+    box-sizing: border-box;
+    background: rgba(13, 17, 23, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-color);
+    z-index: 70;
   }
 
+  /* Full-width scrub bar pinned to top edge of mobile player */
   .progress-bar-container {
     position: absolute;
     top: -3px;
@@ -1681,17 +1761,24 @@ body {
     opacity: 1;
   }
 
+  /* Tier 1 (Top): Now Playing Info spanning 100% width */
   .player-left {
-    flex: 1 1 auto;
-    min-width: 0;
-    max-width: calc(100% - 105px);
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    height: 42px;
+    display: flex;
+    align-items: center;
     gap: 0.65rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.15rem;
   }
 
   .now-playing-cover {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
   }
 
   .now-playing-info {
@@ -1709,33 +1796,73 @@ body {
   }
 
   .player-artist {
-    max-width: 60%;
+    max-width: 55%;
+  }
+
+  /* Tier 2 (Downside below player): Playback controls and action buttons */
+  .player-center {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 46px;
+    max-width: none;
+    position: static;
+    gap: 0;
+    min-width: 0;
   }
 
   .player-controls {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    justify-content: space-around;
+    width: 100%;
+    gap: 0.25rem;
   }
-  
-  #prevBtn, #shuffleBtn, #repeatBtn {
-    display: none;
+
+  /* Ensure shuffle, prev, play, next, repeat are all visible and comfortably sized */
+  #shuffleBtn, #prevBtn, #repeatBtn {
+    display: flex !important;
   }
 
   .play-btn {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.25);
   }
 
   .control-btn {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
   }
 
+  /* Downside right actions: Share & Download */
   .player-right {
-    display: none;
+    flex: 0 0 auto;
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.35rem;
+    height: 46px;
+    width: auto;
+    margin-left: 0.35rem;
+  }
+
+  .player-right .volume-container,
+  .player-right .eq-btn {
+    display: none !important;
+  }
+
+  .player-right #playerShareBtn,
+  .player-right #playerDownloadBtn {
+    display: flex !important;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    align-items: center;
+    justify-content: center;
   }
   
   .queue-drawer {
@@ -1780,18 +1907,18 @@ body {
   }
 
   .player-bar {
-    padding: 0 0.6rem;
-    gap: 0.4rem;
+    padding: 0.35rem 0.5rem 0.4rem;
   }
 
   .now-playing-cover {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
   }
 
   .player-left {
-    max-width: calc(100% - 95px);
+    width: 100%;
+    max-width: 100%;
     gap: 0.5rem;
   }
 
@@ -1805,6 +1932,17 @@ body {
     width: 32px;
     height: 32px;
     min-width: 32px;
+  }
+
+  .player-right #playerShareBtn,
+  .player-right #playerDownloadBtn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  .player-controls {
+    gap: 0.15rem;
   }
 }
 
@@ -3053,7 +3191,7 @@ body {
 
 @media (max-width: 640px) {
   .direct-autoplay-prompt {
-    bottom: 104px;
+    bottom: calc(var(--player-height) + 12px);
     left: 1rem;
     right: 1rem;
     transform: none;
