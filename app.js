@@ -29,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.5';
+  const APP_VERSION = '5.3.6';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -51,7 +51,6 @@
   let currentTrackRetryCount = 0;
   let trackRetryTimer = null;
   let activePlaybackPosition = 0;
-  let pendingAppReload = false;
   let isHandlingTrackEnd = false;
   let endWatchdogTimer = null;
   let hasUserInitiatedPlayback = false;
@@ -116,17 +115,6 @@
       if (!res.ok) return;
       const data = await res.json();
 
-      // Auto-reload active clients if a new app version was deployed (deferred if music is playing)
-      if (data && data.version && data.version !== APP_VERSION) {
-        if (isPlaying && !audio.paused) {
-          console.log('[Version Sync] New app version available:', data.version, '- deferring reload until song ends');
-          pendingAppReload = true;
-          return;
-        }
-        console.log('[Version Sync] New app version available:', data.version, '(current:', APP_VERSION + '). Reloading...');
-        window.location.reload(true);
-        return;
-      }
 
       let hasChanges = false;
       let lastChangedKey = null;
@@ -2242,11 +2230,6 @@
     activePlaybackPosition = 0;
     audioSpinner.style.display = 'none';
 
-    if (pendingAppReload) {
-      console.log('[Version Sync] Playback ended, applying deferred update reload.');
-      window.location.reload(true);
-      return;
-    }
 
     if (repeatMode === 'one') {
       audio.currentTime = 0;
