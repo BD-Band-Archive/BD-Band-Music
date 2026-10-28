@@ -263,7 +263,23 @@ def get_exact_album_cover(stream_url):
             if cov_dir.exists():
                 files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
                 if files:
-                    front = next((f for f in files if 'front' in f.name.lower() or 'artwork' in f.name.lower()), files[0])
+                    front = None
+                    # If in Singles folder, look for a track-specific cover first
+                    if 'singles' in cur_folder.lower():
+                        track_file = stream_url.split('/')[-1].split('?')[0]
+                        track_clean = re.sub(r'^\d+[\s\.\-_]+', '', urllib.parse.unquote(Path(track_file).stem).lower()).strip()
+                        words = [w for w in re.split(r'[\s\-_]+', track_clean) if len(w) > 3 and w not in ['aftermath', 'arnob', 'artcell', 'singles', 'flac', 'bangladesh']]
+                        for f in files:
+                            if 'front' in f.name.lower() or f.stem.lower() == 'folder':
+                                continue
+                            f_stem = f.stem.lower()
+                            if any(w in f_stem for w in words):
+                                front = f
+                                break
+
+                    if not front:
+                        front = next((f for f in files if 'front' in f.name.lower() or 'artwork' in f.name.lower()), files[0])
+
                     enc_cov = urllib.parse.quote(cov_name)
                     enc_file = urllib.parse.quote(front.name)
                     if cur_folder:
@@ -342,9 +358,13 @@ def get_all_album_covers(stream_url):
                         continue
                     try:
                         h = get_f_hash(f)
-                        if h in seen_hashes:
-                            continue
-                        seen_hashes.add(h)
+                        if 'singles' in cur_folder.lower():
+                            if f.name in seen_urls:
+                                continue
+                        else:
+                            if h in seen_hashes:
+                                continue
+                            seen_hashes.add(h)
                     except Exception:
                         pass
                     
@@ -562,6 +582,9 @@ def build_catalog():
                 
                 # Strip Bengali script subtitles (e.g. "Lokayot (লোকাযত)" -> "Lokayot", "Charpotro (ছাড়পত্র)" -> "Charpotro")
                 clean_album = re.sub(r'\s*\([\u0980-\u09FF\s\d\w\-\.,]+\)', '', clean_album).strip()
+
+                if folder_name != "Mixed Albums" and any(k in clean_album.lower() for k in ["single", "standalone", "solos", "collaboration"]):
+                    clean_album = f"{folder_name} Singles"
                 
                 current_album = clean_album
                 current_cover = ""
@@ -676,6 +699,9 @@ def build_catalog():
 
                 # Normalize album name by stripping Bengali script subtitles
                 track_album = re.sub(r'\s*\([\u0980-\u09FF\s\d\w\-\.,]+\)', '', track_album).strip()
+
+                if folder_name != "Mixed Albums" and (any(k in track_album.lower() for k in ["single", "standalone", "solos", "collaboration"]) or "/singles/" in clean_url.lower()):
+                    track_album = f"{folder_name} Singles"
 
                 # High-precision cover resolution:
                 # 1. Exact album cover deduced from streamUrl

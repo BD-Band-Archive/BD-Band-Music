@@ -13,7 +13,7 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/Jed/Album%20Cover/Jed%20%5Bfront%5D.jpg"
     }
   ],
-  "Aftermath - Singles & Standalone Releases": [
+  "Aftermath - Aftermath Singles": [
     {
       "title": "Front",
       "filename": "Aftermath - Singles [Front].jpg",
@@ -23,9 +23,14 @@
       "title": "Aftermath - Biplobir",
       "filename": "Aftermath - Biplobir.jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/Singles/Album%20Cover/Aftermath%20-%20Biplobir.jpg"
+    },
+    {
+      "title": "Aftermath - Moho",
+      "filename": "Aftermath - Moho.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/Singles/Album%20Cover/Aftermath%20-%20Moho.jpg"
     }
   ],
-  "Singles & Standalone Releases": [
+  "Aftermath Singles": [
     {
       "title": "Front",
       "filename": "Aftermath - Singles [Front].jpg",
@@ -37,44 +42,9 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/Singles/Album%20Cover/Aftermath%20-%20Biplobir.jpg"
     },
     {
-      "title": "Front",
-      "filename": "Arbovirus - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arbovirus/master/Singles/Album%20Cover/Arbovirus%20-%20Singles%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Arnob - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Singles/Album%20Cover/Arnob%20-%20Singles%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Arnob - Esho Shemolo Shundoro",
-      "filename": "Arnob - Esho Shemolo Shundoro.jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Singles/Album%20Cover/Arnob%20-%20Esho%20Shemolo%20Shundoro.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Artcell - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Artcell/master/Singles/Album%20Cover/Artcell%20-%20Singles%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Bassbaba Sumon - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Bassbaba-Sumon/master/Singles/Album%20Cover/Bassbaba%20Sumon%20-%20Singles%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Black - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Black/master/Singles/Album%20Cover/Black%20-%20Singles%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Cryptic Fate - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Cryptic-Fate/master/Singles/Album%20Cover/Cryptic%20Fate%20-%20Singles%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Front",
-      "filename": "Indalo - Singles [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Singles%20%5BFront%5D.jpg"
+      "title": "Aftermath - Moho",
+      "filename": "Aftermath - Moho.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aftermath/master/Singles/Album%20Cover/Aftermath%20-%20Moho.jpg"
     }
   ],
   "Arbovirus - 64min53sec": [
@@ -243,7 +213,14 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arbovirus/master/Otopor/Album%20Cover/Otopor%20%5BFront%5D.jpg"
     }
   ],
-  "Arbovirus - Singles & Standalone Releases": [
+  "Arbovirus - Arbovirus Singles": [
+    {
+      "title": "Front",
+      "filename": "Arbovirus - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arbovirus/master/Singles/Album%20Cover/Arbovirus%20-%20Singles%20%5BFront%5D.jpg"
+    }
+  ],
+  "Arbovirus Singles": [
     {
       "title": "Front",
       "filename": "Arbovirus - Singles [Front].jpg",
@@ -1078,7 +1055,7 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Khoob%20Doob/Album%20Cover/Khoob%20Doob%20%5BFront%5D.jpg"
     }
   ],
-  "Arnob - Singles & Standalone Releases": [
+  "Arnob - Arnob Singles": [
     {
       "title": "Front",
       "filename": "Arnob - Singles [Front].jpg",
@@ -1088,6 +1065,28 @@
       "title": "Arnob - Esho Shemolo Shundoro",
       "filename": "Arnob - Esho Shemolo Shundoro.jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Singles/Album%20Cover/Arnob%20-%20Esho%20Shemolo%20Shundoro.jpg"
+    },
+    {
+      "title": "Arnob - Tui Bolle",
+      "filename": "Arnob - Tui Bolle.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Singles/Album%20Cover/Arnob%20-%20Tui%20Bolle.jpg"
+    }
+  ],
+  "Arnob Singles": [
+    {
+      "title": "Front",
+      "filename": "Arnob - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Singles/Album%20Cover/Arnob%20-%20Singles%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Arnob - Esho Shemolo Shundoro",
+      "filename": "Arnob - Esho Shemolo Shundoro.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Singles/Album%20Cover/Arnob%20-%20Esho%20Shemolo%20Shundoro.jpg"
+    },
+    {
+      "title": "Arnob - Tui Bolle",
+      "filename": "Arnob - Tui Bolle.jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Arnob/master/Singles/Album%20Cover/Arnob%20-%20Tui%20Bolle.jpg"
     }
   ],
   "Arnob - Jhalmuri 2": [
@@ -1580,7 +1579,14 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Artcell/master/Otritio/Album%20Cover/Sticker.jpg"
     }
   ],
-  "Artcell - Singles & Standalone Releases": [
+  "Artcell - Artcell Singles": [
+    {
+      "title": "Front",
+      "filename": "Artcell - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Artcell/master/Singles/Album%20Cover/Artcell%20-%20Singles%20%5BFront%5D.jpg"
+    }
+  ],
+  "Artcell Singles": [
     {
       "title": "Front",
       "filename": "Artcell - Singles [Front].jpg",
@@ -2544,14 +2550,14 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aurthohin/master/Phoenixer%20Diary%202/Album%20Covers/Phoenixer%20Diary%202%20%5BFront%5D.jpg"
     }
   ],
-  "Aurthohin - Singles": [
+  "Aurthohin - Aurthohin Singles": [
     {
       "title": "Front",
       "filename": "Aurthohin - Singles [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Aurthohin/master/Singles/Album%20Cover/Aurthohin%20-%20Singles%20%5BFront%5D.jpg"
     }
   ],
-  "Singles": [
+  "Aurthohin Singles": [
     {
       "title": "Front",
       "filename": "Aurthohin - Singles [Front].jpg",
@@ -3201,7 +3207,14 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Bassbaba-Sumon/master/Soul%20Food%2C%20Pt.%201%20%282016%29/Album%20Cover/Soul%20Food%2C%20Pt.%201%20%5BFront%5D.jpg"
     }
   ],
-  "Bassbaba Sumon - Singles & Standalone Releases": [
+  "Bassbaba Sumon - Bassbaba Sumon Singles": [
+    {
+      "title": "Front",
+      "filename": "Bassbaba Sumon - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Bassbaba-Sumon/master/Singles/Album%20Cover/Bassbaba%20Sumon%20-%20Singles%20%5BFront%5D.jpg"
+    }
+  ],
+  "Bassbaba Sumon Singles": [
     {
       "title": "Front",
       "filename": "Bassbaba Sumon - Singles [Front].jpg",
@@ -3579,7 +3592,14 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Black/master/Unomanush/Album%20Cover/Unomanush%20-%20Artwork.jpg"
     }
   ],
-  "Black - Singles & Standalone Releases": [
+  "Black - Black Singles": [
+    {
+      "title": "Front",
+      "filename": "Black - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Black/master/Singles/Album%20Cover/Black%20-%20Singles%20%5BFront%5D.jpg"
+    }
+  ],
+  "Black Singles": [
     {
       "title": "Front",
       "filename": "Black - Singles [Front].jpg",
@@ -4519,7 +4539,14 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Cryptic-Fate/master/Noy%20Maash%20%282024%29/Album%20Cover/Noy%20Mash%20%5BFront%5D.jpg"
     }
   ],
-  "Cryptic Fate - Singles & Standalone Releases": [
+  "Cryptic Fate - Cryptic Fate Singles": [
+    {
+      "title": "Front",
+      "filename": "Cryptic Fate - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Cryptic-Fate/master/Singles/Album%20Cover/Cryptic%20Fate%20-%20Singles%20%5BFront%5D.jpg"
+    }
+  ],
+  "Cryptic Fate Singles": [
     {
       "title": "Front",
       "filename": "Cryptic Fate - Singles [Front].jpg",
@@ -5005,7 +5032,14 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Kokhon%20Kibhabe%20Ekhane%20Ke%20Jane/Album%20Cover/Kokhon%20Kibhabe%20Ekhane%20Ke%20Jane%20%5BFront%5D.jpg"
     }
   ],
-  "Indalo - Singles & Standalone Releases": [
+  "Indalo - Indalo Singles": [
+    {
+      "title": "Front",
+      "filename": "Indalo - Singles [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Singles%20%5BFront%5D.jpg"
+    }
+  ],
+  "Indalo Singles": [
     {
       "title": "Front",
       "filename": "Indalo - Singles [Front].jpg",
@@ -5396,14 +5430,14 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Stoic-Bliss/master/2000%27s%20Hits%20Re-Mastered/Album%20Cover/2000%27s%20Hits%20Re-Mastered%20%5BFront%5D.jpg"
     }
   ],
-  "Stoic Bliss - Singles & Collaborations": [
+  "Stoic Bliss - Stoic Bliss Singles": [
     {
       "title": "Front",
       "filename": "Stoic Bliss - Singles [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Stoic-Bliss/master/Singles/Album%20Cover/Stoic%20Bliss%20-%20Singles%20%5BFront%5D.jpg"
     }
   ],
-  "Singles & Collaborations": [
+  "Stoic Bliss Singles": [
     {
       "title": "Front",
       "filename": "Stoic Bliss - Singles [Front].jpg",
