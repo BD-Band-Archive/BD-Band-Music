@@ -29,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.14';
+  const APP_VERSION = '5.3.15';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -706,6 +706,17 @@
         setArtistFilter(artist);
       });
     });
+
+    // Enable smooth horizontal mouse wheel scrolling for desktop users
+    if (!artistFilterBar._hasWheelListener) {
+      artistFilterBar.addEventListener('wheel', (e) => {
+        if (e.deltaY !== 0) {
+          e.preventDefault();
+          artistFilterBar.scrollLeft += e.deltaY;
+        }
+      }, { passive: false });
+      artistFilterBar._hasWheelListener = true;
+    }
   }
 
   // --- Navigation & Browser History State ---
@@ -744,7 +755,11 @@
 
       // Update pills UI
       artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.artist === activeArtistFilter);
+        const isActive = btn.dataset.artist === activeArtistFilter;
+        btn.classList.toggle('active', isActive);
+        if (isActive && activeArtistFilter !== 'all') {
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        }
       });
 
       // Update banner UI
@@ -774,9 +789,13 @@
     activeAlbumFilter = 'all';
     isFullTracksListExpanded = (artist !== 'all');
     
-    // Update active pill UI
+    // Update active pill UI & scroll into view smoothly
     artistFilterBar.querySelectorAll('.filter-pill').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.artist === artist);
+      const isActive = btn.dataset.artist === artist;
+      btn.classList.toggle('active', isActive);
+      if (isActive) {
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+      }
     });
 
     // Update banner

@@ -296,7 +296,7 @@ body {
   align-items: center;
   padding: 0 1.5rem;
   gap: 1.25rem;
-  overflow-x: auto;
+  overflow: hidden;
   white-space: nowrap;
 }
 
@@ -306,6 +306,7 @@ body {
   padding: 0.5rem 0;
   border-right: 1px solid var(--border-color);
   padding-right: 1rem;
+  flex-shrink: 0;
 }
 
 .tab-btn {
@@ -335,18 +336,52 @@ body {
 }
 
 .artist-filter-bar {
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 0;
+  gap: 0.45rem;
+  padding: 0.45rem 0 0.55rem 0;
   overflow-x: auto;
-  scrollbar-width: none;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+
+  /* Modern standard scrollbar styling (Baseline) */
+  --scrollbar-thumb: rgba(139, 92, 246, 0.5);
+  --scrollbar-thumb-hover: var(--accent);
+  --scrollbar-track: rgba(255, 255, 255, 0.06);
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
+
+/* Custom horizontal scrollbar for WebKit browsers */
 .artist-filter-bar::-webkit-scrollbar {
-  display: none;
+  height: 6px;
+  display: block;
+}
+
+.artist-filter-bar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-full);
+  margin: 0 4px;
+}
+
+.artist-filter-bar::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: var(--radius-full);
+  transition: background 0.2s ease;
+}
+
+.artist-filter-bar::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }
 
 .filter-pill {
+  flex-shrink: 0;
+  user-select: none;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   color: var(--text-secondary);

@@ -40,10 +40,10 @@
   <meta http-equiv="Expires" content="0">
 
   <script>
-    // Ensure all visitors immediately upgrade to v5.3.14 and purge stale offline caches
+    // Ensure all visitors immediately upgrade to v5.3.15 and purge stale offline caches
     (function() {
       try {
-        var CURRENT_VER = '5.3.14';
+        var CURRENT_VER = '5.3.15';
         var lastVer = localStorage.getItem('bd_band_app_version');
         if (lastVer !== CURRENT_VER) {
           localStorage.removeItem('bd_band_plays_v1');
@@ -59,7 +59,7 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="style.css?v=5.3.14">
+  <link rel="stylesheet" href="style.css?v=5.3.15">
 </head>
 <body>
   <!-- Full-Screen Immersive Landing Page & Manifesto Overlay -->
@@ -817,6 +817,6 @@
   </div>
 
   <script src="assets/qrcode.min.js"></script>
-  <script src="app.js?v=5.3.14"></script>
+  <script src="app.js?v=5.3.15"></script>
 </body>
 </html>
