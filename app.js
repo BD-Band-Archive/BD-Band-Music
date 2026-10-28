@@ -29,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.12';
+  const APP_VERSION = '5.3.13';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -1488,10 +1488,10 @@
     'Disciples': 'assets/artists/disciples_logo.jpg',
     'Bohemian': 'assets/artists/bohemian.jpg',
     'Breach': 'assets/artists/breach.png',
-    'Durey': 'assets/artists/duray.jpg',
+    'Durey': 'assets/artists/durey.jpg',
     'Kral': 'assets/artists/kral.png',
     'Metal Maze': 'assets/artists/metal_maze.jpg',
-    'Mohakaal': 'assets/artists/mohakal.png',
+    'Mohakaal': 'assets/artists/mohakaal.png',
     'Poizon Green': 'assets/artists/poizon_green.png',
     'Reborn': 'assets/artists/reborn.jpg',
     'Stentorian': 'assets/artists/stentorian.jpg',

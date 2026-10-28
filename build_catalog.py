@@ -857,8 +857,8 @@ def build_artists_map(catalog):
         file_map[normalize_slug(stem)] = rel_path
 
     alias_map = {
-        normalize_slug('durey'): normalize_slug('duray'),
-        normalize_slug('mohakaal'): normalize_slug('mohakal'),
+        normalize_slug('duray'): normalize_slug('durey'),
+        normalize_slug('mohakal'): normalize_slug('mohakaal'),
         normalize_slug('the icons'): normalize_slug('icons'),
         normalize_slug('stentorian feat. bassbaba sumon'): normalize_slug('stentorian'),
         normalize_slug('bishop fuad'): normalize_slug('fuad'),
