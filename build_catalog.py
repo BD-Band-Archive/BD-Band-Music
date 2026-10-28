@@ -266,16 +266,42 @@ def get_exact_album_cover(stream_url):
                     front = None
                     # If in Singles folder, look for a track-specific cover first
                     if 'singles' in cur_folder.lower():
-                        track_file = stream_url.split('/')[-1].split('?')[0]
-                        track_clean = re.sub(r'^\d+[\s\.\-_]+', '', urllib.parse.unquote(Path(track_file).stem).lower()).strip()
-                        words = [w for w in re.split(r'[\s\-_]+', track_clean) if len(w) > 3 and w not in ['aftermath', 'arnob', 'artcell', 'singles', 'flac', 'bangladesh']]
-                        for f in files:
-                            if 'front' in f.name.lower() or f.stem.lower() == 'folder':
-                                continue
-                            f_stem = f.stem.lower()
-                            if any(w in f_stem for w in words):
+                        track_file = urllib.parse.unquote(stream_url.split('/')[-1].split('?')[0])
+                        track_stem = Path(track_file).stem
+                        track_stem_clean = re.sub(r'^\d+[\s\.\-_]+', '', track_stem)
+                        art_norm = (repo or '').lower().replace('-', ' ').strip()
+                        cand_files = [f for f in files if not any(x in f.name.lower() for x in ['front', 'back', 'folder', 'cd', 'booklet', 'inlay'])]
+                        
+                        # 1. Exact match with track stem or clean stem
+                        for f in cand_files:
+                            if f.stem.lower() == track_stem.lower() or f.stem.lower() == track_stem_clean.lower():
                                 front = f
                                 break
+                                
+                        # 2. Match without artist prefix/suffix
+                        if not front:
+                            for f in cand_files:
+                                c_stem_clean = re.sub(r'^\d+[\s\.\-_]+', '', f.stem)
+                                t_core = track_stem_clean.lower().replace(art_norm, '').strip(' -_')
+                                c_core = c_stem_clean.lower().replace(art_norm, '').strip(' -_')
+                                if t_core and c_core and (t_core == c_core or t_core in c_core or c_core in t_core):
+                                    front = f
+                                    break
+                                    
+                        # 3. Overlap of distinctive keywords (excluding artist names and generic terms)
+                        if not front:
+                            ignore_words = set(art_norm.split() + ['singles', 'flac', 'm4a', 'bangladesh', 'aftermath', 'arnob', 'artcell', 'aurthohin', 'arbovirus', 'bassbaba', 'sumon', 'black', 'cryptic', 'fate', 'indalo', 'stoic', 'bliss', 'apeiruss', 'revisited', 'remastered'])
+                            t_words = [w for w in re.findall(r'[a-z0-9]+', track_stem_clean.lower()) if len(w) >= 3 and w not in ignore_words]
+                            best_f = None
+                            max_overlap = 0
+                            for f in cand_files:
+                                c_words = [w for w in re.findall(r'[a-z0-9]+', f.stem.lower()) if len(w) >= 3 and w not in ignore_words]
+                                overlap = sum(1 for w in t_words if w in c_words)
+                                if overlap > max_overlap:
+                                    max_overlap = overlap
+                                    best_f = f
+                            if max_overlap > 0:
+                                front = best_f
 
                     if not front:
                         front = next((f for f in files if 'front' in f.name.lower() or 'artwork' in f.name.lower()), files[0])
