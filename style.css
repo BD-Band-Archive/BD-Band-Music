@@ -4742,10 +4742,53 @@ dialog.story-share-dialog::backdrop {
 }
 
 .immersive-year-badge {
-  font-size: 0.70rem;
-  font-weight: 600;
-  color: #64748b;
-  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  letter-spacing: 0.08em;
+  padding: 0.22rem 0.7rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  line-height: 1.2;
+}
+
+/* Immersive Title Row & 45deg Copy Link Button (15px away) */
+.immersive-title-row {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* exactly 15 pixel away from the name */
+}
+
+.immersive-title-link-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.immersive-title-link-btn svg {
+  transform: rotate(0deg); /* exactly 45 angle */
+  transition: transform 0.2s ease;
+}
+
+.immersive-title-link-btn:hover {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.14);
+  border-color: rgba(56, 189, 248, 0.45);
+  transform: scale(1.1);
+}
+
+.immersive-title-link-btn:hover svg {
+  transform: rotate(0deg) scale(1.08);
 }
 
 .immersive-song-title {
@@ -4935,6 +4978,93 @@ dialog.story-share-dialog::backdrop {
 }
 
 
+/* Sound Bar & Control Visibility Rules across Layouts */
+.immersive-volume-slider {
+  width: 85px;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  accent-color: #38bdf8;
+  transition: background 0.2s ease;
+}
+
+.immersive-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #38bdf8;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.6);
+  transition: transform 0.15s ease;
+}
+
+.immersive-volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Default: Top-Down Mode Controls */
+.immersive-title-link-btn {
+  display: none !important;
+}
+
+.immersive-side-volume-wrap {
+  display: none !important;
+}
+
+.immersive-sound-btn {
+  display: flex !important;
+}
+
+.immersive-link-btn {
+  display: flex !important;
+}
+
+.immersive-popout-volume-wrap {
+  display: none;
+  align-items: center;
+  margin-right: 0.35rem;
+  opacity: 0;
+  transform: scaleX(0.85);
+  transform-origin: right center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.immersive-popout-volume-wrap.visible {
+  display: flex !important;
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Left-Right (Side-by-Side) Mode Controls */
+.immersive-player-overlay.layout-side-by-side .immersive-title-link-btn {
+  display: flex !important;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-side-volume-wrap {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1.25rem;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-sound-btn {
+  display: none !important;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-popout-volume-wrap {
+  display: none !important;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-link-btn {
+  display: none !important;
+}
+
 /* ==========================================================================
    Side-by-Side Layout Mode (v5.3.20 Style - Activated via Slash Button)
    ========================================================================== */
@@ -5045,6 +5175,25 @@ dialog.story-share-dialog::backdrop {
 
 /* Side-by-Side Responsive Fallback on Mobile & Tablet */
 @media (max-width: 860px) {
+  /* Remove slash button on mobile type screens */
+  .immersive-slash-btn {
+    display: none !important;
+  }
+
+  /* Enforce Top-Down control visibility on mobile */
+  .immersive-title-link-btn {
+    display: none !important;
+  }
+  .immersive-side-volume-wrap {
+    display: none !important;
+  }
+  .immersive-sound-btn {
+    display: flex !important;
+  }
+  .immersive-link-btn {
+    display: flex !important;
+  }
+
   .immersive-player-overlay.layout-side-by-side .immersive-stage {
     flex-direction: column;
     align-items: center;

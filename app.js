@@ -510,6 +510,9 @@
   const immersivePlayerOverlay = document.getElementById('immersivePlayerOverlay');
   const immersiveBg = document.getElementById('immersiveBg');
   const immersiveLayoutToggleBtn = document.getElementById('immersiveLayoutToggleBtn');
+  const immersiveExpandBtn = document.getElementById('immersiveExpandBtn');
+  const immersiveExpandIcon = document.getElementById('immersiveExpandIcon');
+  const immersiveCompressIcon = document.getElementById('immersiveCompressIcon');
   const closeImmersiveBtn = document.getElementById('closeImmersiveBtn');
   const cdWaveformCanvas = document.getElementById('cdWaveformCanvas');
   const immersiveCdWrap = document.getElementById('immersiveCdWrap');
@@ -522,6 +525,18 @@
   const immersiveArtistTag = document.getElementById('immersiveArtistTag');
   const immersiveYearTag = document.getElementById('immersiveYearTag');
   const immersiveTitle = document.getElementById('immersiveTitle');
+  const immersiveTitleShareBtn = document.getElementById('immersiveTitleShareBtn');
+  const immersiveControlsShareBtn = document.getElementById('immersiveControlsShareBtn');
+  const immersivePopoutVolume = document.getElementById('immersivePopoutVolume');
+  const immersiveTopDownVolumeSlider = document.getElementById('immersiveTopDownVolumeSlider');
+  const immersiveSoundBtn = document.getElementById('immersiveSoundBtn');
+  const immersiveSoundVolHighIcon = document.getElementById('immersiveSoundVolHighIcon');
+  const immersiveSoundVolMuteIcon = document.getElementById('immersiveSoundVolMuteIcon');
+  const immersiveSideVolume = document.getElementById('immersiveSideVolume');
+  const immersiveSideVolumeBtn = document.getElementById('immersiveSideVolumeBtn');
+  const immersiveSideVolHighIcon = document.getElementById('immersiveSideVolHighIcon');
+  const immersiveSideVolMuteIcon = document.getElementById('immersiveSideVolMuteIcon');
+  const immersiveSideVolumeSlider = document.getElementById('immersiveSideVolumeSlider');
   const immersiveArtist = document.getElementById('immersiveArtist');
   const immersiveAlbum = document.getElementById('immersiveAlbum');
   const immersiveSeekSlider = document.getElementById('immersiveSeekSlider');
@@ -2654,31 +2669,63 @@
   window.addEventListener('mouseup', onSeekCommit);
   window.addEventListener('touchend', onSeekCommit);
 
-  // --- Volume Slider ---
-  volumeSlider.addEventListener('input', () => {
-    audio.volume = parseFloat(volumeSlider.value);
-    volumeSlider.style.backgroundSize = `${audio.volume * 100}% 100%`;
-    updateVolumeIcon();
-  });
+  // --- Synchronized Volume Management (Bottom Player & Fullscreen Views) ---
+  function updateAllVolumeUi() {
+    const isMuted = audio.muted || audio.volume === 0;
+    const vol = audio.volume;
 
-  volumeBtn.addEventListener('click', () => {
+    if (volumeSlider) {
+      volumeSlider.value = vol;
+      volumeSlider.style.backgroundSize = `${vol * 100}% 100%`;
+    }
+    if (volHighIcon && volMuteIcon) {
+      volHighIcon.style.display = isMuted ? 'none' : 'block';
+      volMuteIcon.style.display = isMuted ? 'block' : 'none';
+    }
+
+    if (immersiveSideVolumeSlider) {
+      immersiveSideVolumeSlider.value = vol;
+    }
+    if (immersiveSideVolHighIcon && immersiveSideVolMuteIcon) {
+      immersiveSideVolHighIcon.style.display = isMuted ? 'none' : 'block';
+      immersiveSideVolMuteIcon.style.display = isMuted ? 'block' : 'none';
+    }
+
+    if (immersiveTopDownVolumeSlider) {
+      immersiveTopDownVolumeSlider.value = vol;
+    }
+    if (immersiveSoundVolHighIcon && immersiveSoundVolMuteIcon) {
+      immersiveSoundVolHighIcon.style.display = isMuted ? 'none' : 'block';
+      immersiveSoundVolMuteIcon.style.display = isMuted ? 'block' : 'none';
+    }
+  }
+
+  function setGlobalVolume(val) {
+    val = Math.max(0, Math.min(1, val));
+    audio.muted = false;
+    audio.volume = val;
+    updateAllVolumeUi();
+  }
+
+  function toggleGlobalMute() {
     if (audio.muted || audio.volume === 0) {
       audio.muted = false;
-      audio.volume = parseFloat(volumeSlider.value) || 0.85;
+      if (audio.volume === 0) audio.volume = 0.85;
     } else {
       audio.muted = true;
     }
-    updateVolumeIcon();
+    updateAllVolumeUi();
+  }
+
+  // --- Volume Slider ---
+  volumeSlider.addEventListener('input', () => {
+    setGlobalVolume(parseFloat(volumeSlider.value));
   });
 
+  volumeBtn.addEventListener('click', toggleGlobalMute);
+
   function updateVolumeIcon() {
-    if (audio.muted || audio.volume === 0) {
-      volHighIcon.style.display = 'none';
-      volMuteIcon.style.display = 'block';
-    } else {
-      volHighIcon.style.display = 'block';
-      volMuteIcon.style.display = 'none';
-    }
+    updateAllVolumeUi();
   }
 
   // --- Controls Buttons ---
@@ -4724,7 +4771,7 @@
   // Fullscreen Immersive CD Player View Module
   // ==========================================================================
 
-  let immersiveLayoutMode = localStorage.getItem('immersive_layout_mode') || 'centered';
+  let immersiveLayoutMode = localStorage.getItem('immersive_layout_mode') || 'side-by-side';
 
   function setImmersiveLayoutMode(mode) {
     immersiveLayoutMode = mode;
@@ -4758,7 +4805,36 @@
     }
   }
 
-  function openImmersivePlayer() {
+  function updateFullscreenButtonsState(mode) {
+    if (mode === 'normal') {
+      if (playerFullscreenBtn) {
+        playerFullscreenBtn.classList.remove('active');
+        playerFullscreenBtn.title = 'Fullscreen Immersive Player (F)';
+      }
+    } else if (mode === 'windowed') {
+      if (playerFullscreenBtn) {
+        playerFullscreenBtn.classList.add('active');
+        playerFullscreenBtn.title = 'Enter Chrome Fullscreen (F)';
+      }
+      if (immersiveExpandBtn) {
+        immersiveExpandBtn.title = 'Enter Chrome Fullscreen (F)';
+      }
+      if (immersiveExpandIcon) immersiveExpandIcon.style.display = 'block';
+      if (immersiveCompressIcon) immersiveCompressIcon.style.display = 'none';
+    } else if (mode === 'browser') {
+      if (playerFullscreenBtn) {
+        playerFullscreenBtn.classList.add('active');
+        playerFullscreenBtn.title = 'Exit Fullscreen (F)';
+      }
+      if (immersiveExpandBtn) {
+        immersiveExpandBtn.title = 'Exit Chrome Fullscreen (F)';
+      }
+      if (immersiveExpandIcon) immersiveExpandIcon.style.display = 'none';
+      if (immersiveCompressIcon) immersiveCompressIcon.style.display = 'block';
+    }
+  }
+
+  function openImmersivePlayer(withNative = false) {
     if (!immersivePlayerOverlay) return;
     isImmersiveOpen = true;
     immersivePlayerOverlay.style.display = 'flex';
@@ -4774,8 +4850,7 @@
       themeToggleBtn.classList.remove('active');
     }
 
-    // Try native fullscreen if available
-    if (document.documentElement.requestFullscreen && !document.fullscreenElement) {
+    if (withNative && document.documentElement.requestFullscreen && !document.fullscreenElement) {
       document.documentElement.requestFullscreen().catch(() => {});
     }
 
@@ -4788,8 +4863,11 @@
 
     setImmersiveLayoutMode(immersiveLayoutMode);
     syncImmersiveShuffleRepeat();
+    updateAllVolumeUi();
     updatePlayPauseState();
     startCdWaveformVisualizer();
+
+    updateFullscreenButtonsState(document.fullscreenElement ? 'browser' : 'windowed');
   }
 
   function closeImmersivePlayer() {
@@ -4811,13 +4889,28 @@
       cancelAnimationFrame(cdWaveformAnimId);
       cdWaveformAnimId = null;
     }
+
+    updateFullscreenButtonsState('normal');
   }
 
   function toggleImmersivePlayer() {
-    if (isImmersiveOpen) {
-      closeImmersivePlayer();
+    if (!isImmersiveOpen) {
+      // 1st press: Open in-browser windowed fullscreen (fills browser window without Chrome OS fullscreen, Spotify style)
+      openImmersivePlayer(false);
+    } else if (!document.fullscreenElement) {
+      // 2nd press: Now take Chrome into true OS/browser fullscreen
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().then(() => {
+          updateFullscreenButtonsState('browser');
+        }).catch(() => {
+          closeImmersivePlayer();
+        });
+      } else {
+        closeImmersivePlayer();
+      }
     } else {
-      openImmersivePlayer();
+      // 3rd press: Return to normal view
+      closeImmersivePlayer();
     }
   }
 
@@ -5083,73 +5176,89 @@
       ctx.restore();
 
       // -------------------------------------------------------------
-      // 2. Harmonic Sine Wave Ribbons (Smoothly fading out towards edges, scaled to disc)
+      // 2. Harmonic Sine Wave Ribbons (Braided Unified Full Wave with Crisp Edges)
       // -------------------------------------------------------------
+      const energyPulse = (bassEnergy * 0.7 + midEnergy * 0.3);
+      const waveAmp = (18 + energyPulse * 32) * dpr * radiusScale;
+      const baseFreq = 0.0046 / dpr;
+      const waveT = nowMs * 0.0014;
+      const startX = Math.max(0, discCenterX - discRadius * 0.35);
+
       const ribbons = [
         {
-          color: 'rgba(0, 245, 255, 0.85)',
+          color: 'rgba(0, 245, 255, 0.95)',
           glow: '#00f5ff',
-          freq: 0.005 / dpr,
-          speed: 1.4,
+          speed: 0.90,
           phase: 0,
-          amp: (20 + bassEnergy * 32) * dpr * radiusScale,
-          offsetY: -10 * dpr * radiusScale
+          ampMult: 1.0,
+          harmonicMult: 2.05,
+          offsetY: -1.5 * dpr * radiusScale
         },
         {
-          color: 'rgba(247, 37, 133, 0.82)',
-          glow: '#f72585',
-          freq: 0.007 / dpr,
-          speed: -1.2,
-          phase: Math.PI * 0.45,
-          amp: (16 + midEnergy * 26) * dpr * radiusScale,
-          offsetY: 4 * dpr * radiusScale
+          color: 'rgba(255, 45, 135, 0.92)',
+          glow: '#ff2d87',
+          speed: 1.05,
+          phase: Math.PI * 0.65,
+          ampMult: 0.88,
+          harmonicMult: 2.15,
+          offsetY: 1.2 * dpr * radiusScale
         },
         {
-          color: 'rgba(114, 9, 183, 0.78)',
-          glow: '#7209b7',
-          freq: 0.0045 / dpr,
-          speed: 1.0,
-          phase: Math.PI * 0.9,
-          amp: (14 + bassEnergy * 22) * dpr * radiusScale,
-          offsetY: 16 * dpr * radiusScale
+          color: 'rgba(168, 85, 247, 0.90)',
+          glow: '#a855f7',
+          speed: 0.82,
+          phase: Math.PI * 1.25,
+          ampMult: 0.80,
+          harmonicMult: 1.95,
+          offsetY: -0.8 * dpr * radiusScale
         },
         {
-          color: 'rgba(0, 255, 170, 0.75)',
-          glow: '#00ffaa',
-          freq: 0.0085 / dpr,
-          speed: -1.6,
-          phase: Math.PI * 1.35,
-          amp: (12 + midEnergy * 20) * dpr * radiusScale,
-          offsetY: -18 * dpr * radiusScale
+          color: 'rgba(0, 255, 175, 0.88)',
+          glow: '#00ffaf',
+          speed: 1.15,
+          phase: Math.PI * 1.85,
+          ampMult: 0.84,
+          harmonicMult: 2.25,
+          offsetY: 1.5 * dpr * radiusScale
         }
       ];
 
       ribbons.forEach((rb) => {
         ctx.save();
+        ctx.globalCompositeOperation = 'screen';
         ctx.shadowColor = rb.glow;
-        ctx.shadowBlur = Math.max(6, 14 * dpr * radiusScale);
-        ctx.lineWidth = Math.max(1.2, 2.4 * dpr * radiusScale);
+        ctx.shadowBlur = Math.max(8, 16 * dpr * radiusScale);
+        ctx.lineWidth = Math.max(1.8, 3.2 * dpr * radiusScale);
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
 
-        // Ribbon gradient with edge-fade to eliminate any harsh edge clipping
-        const ribbonGrad = ctx.createLinearGradient(0, 0, w, 0);
+        // Luminous gradient with crisp, distinct emergence from the CD disc rim
+        const ribbonGrad = ctx.createLinearGradient(startX, 0, w, 0);
         ribbonGrad.addColorStop(0, 'rgba(0,0,0,0)');
-        ribbonGrad.addColorStop(0.12, rb.color);
+        ribbonGrad.addColorStop(0.06, rb.color);
         ribbonGrad.addColorStop(0.88, rb.color);
         ribbonGrad.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.strokeStyle = ribbonGrad;
 
         ctx.beginPath();
-        // Draw flowing sine wave across stage
-        for (let x = 0; x <= w; x += 3 * dpr) {
-          const sampleOffset = hasSignal ? ((cdTimeData[Math.floor((x / w) * 32)] - 128) / 128) * 14 * dpr * radiusScale : 0;
-          const sinePrimary = Math.sin(x * rb.freq + t * rb.speed + rb.phase);
-          const sineSecondary = Math.cos(x * (rb.freq * 0.45) + t * (rb.speed * 0.65));
-          const y = discCenterY + rb.offsetY + (sinePrimary * 0.72 + sineSecondary * 0.28) * rb.amp + sampleOffset;
+        const step = Math.max(1.5, 2.0 * dpr);
+        let first = true;
 
-          if (x === 0) {
+        for (let x = startX; x <= w; x += step) {
+          // Smooth sinusoidal envelope emerging naturally from the disc without sharp jump
+          const tEnv = Math.min(1.0, Math.max(0.0, (x - startX) / (discRadius * 1.2)));
+          const envelope = Math.sin(tEnv * (Math.PI / 2));
+
+          const h1 = Math.sin(x * baseFreq - waveT * rb.speed + rb.phase);
+          const h2 = Math.sin(x * baseFreq * rb.harmonicMult - waveT * rb.speed * 1.35 + rb.phase * 0.5) * 0.28;
+          const h3 = Math.cos(x * baseFreq * 0.55 - waveT * rb.speed * 0.75 + rb.phase * 1.2) * 0.22;
+
+          const waveY = (h1 + h2 + h3) * waveAmp * rb.ampMult * envelope;
+          const y = discCenterY + rb.offsetY + waveY;
+
+          if (first) {
             ctx.moveTo(x, y);
+            first = false;
           } else {
             ctx.lineTo(x, y);
           }
@@ -5169,6 +5278,90 @@
     }
     if (closeImmersiveBtn) {
       closeImmersiveBtn.addEventListener('click', closeImmersivePlayer);
+    }
+
+    // Direct Copy Link Button 15px from Song Title (Side-by-Side Mode)
+    if (immersiveTitleShareBtn) {
+      immersiveTitleShareBtn.addEventListener('click', () => {
+        if (currentTrack) {
+          copyTrackShareLink(currentTrack.id);
+        } else if (catalog && catalog.length > 0) {
+          copyTrackShareLink(catalog[0].id);
+        }
+      });
+    }
+
+    // Direct Copy Link Button on right of repeat (Top-Down Mode)
+    if (immersiveControlsShareBtn) {
+      immersiveControlsShareBtn.addEventListener('click', () => {
+        if (currentTrack) {
+          copyTrackShareLink(currentTrack.id);
+        } else if (catalog && catalog.length > 0) {
+          copyTrackShareLink(catalog[0].id);
+        }
+      });
+    }
+
+    // Side-by-Side Sound Bar Listeners
+    if (immersiveSideVolumeSlider) {
+      immersiveSideVolumeSlider.addEventListener('input', (e) => {
+        setGlobalVolume(parseFloat(e.target.value));
+      });
+    }
+    if (immersiveSideVolumeBtn) {
+      immersiveSideVolumeBtn.addEventListener('click', toggleGlobalMute);
+    }
+
+    // Top-Down Pop-out Sound Bar with 2s Auto-Hide
+    let soundBarHideTimer = null;
+
+    function showPopoutSoundBar() {
+      if (!immersivePopoutVolume) return;
+      immersivePopoutVolume.style.display = 'flex';
+      requestAnimationFrame(() => {
+        immersivePopoutVolume.classList.add('visible');
+      });
+      if (immersiveSoundBtn) immersiveSoundBtn.classList.add('active');
+    }
+
+    function hidePopoutSoundBar() {
+      if (!immersivePopoutVolume) return;
+      immersivePopoutVolume.classList.remove('visible');
+      if (immersiveSoundBtn) immersiveSoundBtn.classList.remove('active');
+      setTimeout(() => {
+        if (!immersivePopoutVolume.classList.contains('visible')) {
+          immersivePopoutVolume.style.display = 'none';
+        }
+      }, 200);
+      if (soundBarHideTimer) {
+        clearTimeout(soundBarHideTimer);
+        soundBarHideTimer = null;
+      }
+    }
+
+    function schedulePopoutSoundBarHide() {
+      if (soundBarHideTimer) clearTimeout(soundBarHideTimer);
+      soundBarHideTimer = setTimeout(() => {
+        hidePopoutSoundBar();
+      }, 2000); // exactly 2s after changing sound
+    }
+
+    if (immersiveSoundBtn) {
+      immersiveSoundBtn.addEventListener('click', () => {
+        if (immersivePopoutVolume && immersivePopoutVolume.classList.contains('visible')) {
+          hidePopoutSoundBar();
+        } else {
+          showPopoutSoundBar();
+          schedulePopoutSoundBarHide();
+        }
+      });
+    }
+
+    if (immersiveTopDownVolumeSlider) {
+      immersiveTopDownVolumeSlider.addEventListener('input', (e) => {
+        setGlobalVolume(parseFloat(e.target.value));
+        schedulePopoutSoundBarHide();
+      });
     }
 
     // Slash Button: Toggle between 5.3.20 Side-by-Side and 5.3.21 Centered
@@ -5269,10 +5462,35 @@
       });
     }
 
-    // Browser Native Fullscreen Exit Watcher
+    // Expand / Compress Button inside Fullscreen View
+    if (immersiveExpandBtn) {
+      immersiveExpandBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen().then(() => {
+              updateFullscreenButtonsState('browser');
+            }).catch(() => {});
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen().then(() => {
+              updateFullscreenButtonsState('windowed');
+            }).catch(() => {});
+          }
+        }
+      });
+    }
+
+    // Browser Native Fullscreen State Watcher
     document.addEventListener('fullscreenchange', () => {
-      if (!document.fullscreenElement && isImmersiveOpen) {
-        closeImmersivePlayer();
+      if (!document.fullscreenElement) {
+        if (isImmersiveOpen) {
+          updateFullscreenButtonsState('windowed');
+        } else {
+          updateFullscreenButtonsState('normal');
+        }
+      } else {
+        updateFullscreenButtonsState('browser');
       }
     });
   }
