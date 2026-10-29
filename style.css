@@ -4236,6 +4236,40 @@ dialog.story-share-dialog::backdrop {
   border: 1px solid rgba(56, 189, 248, 0.3);
 }
 
+/* Slash Layout Toggle Button (Upper Left) */
+.immersive-slash-btn {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #94a3b8;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.immersive-slash-btn:hover {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.16);
+  border-color: rgba(56, 189, 248, 0.45);
+  transform: scale(1.08);
+}
+
+.immersive-slash-btn.active {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.22);
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+}
+
 .immersive-header-right {
   display: flex;
   align-items: center;
@@ -4804,5 +4838,113 @@ dialog.story-share-dialog::backdrop {
   }
   .immersive-song-artist {
     font-size: 1.05rem;
+  }
+}
+
+
+/* ==========================================================================
+   Side-by-Side Layout Mode (v5.3.20 Style - Activated via Slash Button)
+   ========================================================================== */
+.immersive-player-overlay.layout-side-by-side .immersive-stage {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 7rem;
+  padding: 1rem 4rem 3rem;
+  max-width: 1440px;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-disc-stage {
+  flex: none;
+  width: 490px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+}
+
+.immersive-player-overlay.layout-side-by-side .jewel-case-box {
+  width: 335px;
+  height: 315px;
+  margin-right: 0;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-cd-wrap {
+  left: auto;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 295px;
+  height: 295px;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-meta-stage {
+  flex: 1;
+  max-width: 560px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  gap: 2.2rem;
+  padding-left: 2.5rem;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-info-group {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-tag-row {
+  justify-content: flex-start;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-song-title {
+  font-size: 2.5rem;
+  text-align: left;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-song-artist {
+  font-size: 1.35rem;
+  text-align: left;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-album-row {
+  justify-content: flex-start;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-progress-group {
+  max-width: 500px;
+}
+
+.immersive-player-overlay.layout-side-by-side .immersive-controls-row {
+  justify-content: flex-start;
+}
+
+@media (max-width: 1024px) {
+  .immersive-player-overlay.layout-side-by-side .immersive-stage {
+    gap: 4rem;
+    padding: 1rem 2rem 2.5rem;
+  }
+  .immersive-player-overlay.layout-side-by-side .immersive-disc-stage {
+    width: 420px;
+    height: 350px;
+  }
+  .immersive-player-overlay.layout-side-by-side .jewel-case-box {
+    width: 290px;
+    height: 270px;
+  }
+  .immersive-player-overlay.layout-side-by-side .immersive-cd-wrap {
+    width: 250px;
+    height: 250px;
+    right: -10px;
+  }
+  .immersive-player-overlay.layout-side-by-side .immersive-meta-stage {
+    padding-left: 1.5rem;
+  }
+  .immersive-player-overlay.layout-side-by-side .immersive-song-title {
+    font-size: 2.1rem;
   }
 }

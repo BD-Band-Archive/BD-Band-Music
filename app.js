@@ -29,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.21';
+  const APP_VERSION = '5.3.22';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -509,6 +509,7 @@
   // Fullscreen Immersive CD Player Elements
   const immersivePlayerOverlay = document.getElementById('immersivePlayerOverlay');
   const immersiveBg = document.getElementById('immersiveBg');
+  const immersiveLayoutToggleBtn = document.getElementById('immersiveLayoutToggleBtn');
   const closeImmersiveBtn = document.getElementById('closeImmersiveBtn');
   const cdWaveformCanvas = document.getElementById('cdWaveformCanvas');
   const immersiveCdWrap = document.getElementById('immersiveCdWrap');
@@ -3574,6 +3575,11 @@
     }
 
     if (e.key === '/') {
+      if (isImmersiveOpen && document.activeElement !== globalSearchInput) {
+        e.preventDefault();
+        if (immersiveLayoutToggleBtn) immersiveLayoutToggleBtn.click();
+        return;
+      }
       e.preventDefault();
       globalSearchInput.focus();
       return;
@@ -4718,6 +4724,30 @@
   // Fullscreen Immersive CD Player View Module
   // ==========================================================================
 
+  let immersiveLayoutMode = localStorage.getItem('immersive_layout_mode') || 'centered';
+
+  function setImmersiveLayoutMode(mode) {
+    immersiveLayoutMode = mode;
+    localStorage.setItem('immersive_layout_mode', mode);
+    if (!immersivePlayerOverlay) return;
+
+    if (mode === 'side-by-side') {
+      immersivePlayerOverlay.classList.add('layout-side-by-side');
+      immersivePlayerOverlay.classList.remove('layout-centered');
+      if (immersiveLayoutToggleBtn) {
+        immersiveLayoutToggleBtn.classList.add('active');
+        immersiveLayoutToggleBtn.title = 'Current: Side-by-Side (5.3.20) — Click for Centered (/)';
+      }
+    } else {
+      immersivePlayerOverlay.classList.remove('layout-side-by-side');
+      immersivePlayerOverlay.classList.add('layout-centered');
+      if (immersiveLayoutToggleBtn) {
+        immersiveLayoutToggleBtn.classList.remove('active');
+        immersiveLayoutToggleBtn.title = 'Current: Centered (5.3.21) — Click for Side-by-Side (/)';
+      }
+    }
+  }
+
   function syncImmersiveShuffleRepeat() {
     if (immersiveShuffleBtn) {
       immersiveShuffleBtn.classList.toggle('active', isShuffle);
@@ -4756,6 +4786,7 @@
       updateImmersiveTrack(catalog[0]);
     }
 
+    setImmersiveLayoutMode(immersiveLayoutMode);
     syncImmersiveShuffleRepeat();
     updatePlayPauseState();
     startCdWaveformVisualizer();
@@ -5135,6 +5166,15 @@
     }
     if (closeImmersiveBtn) {
       closeImmersiveBtn.addEventListener('click', closeImmersivePlayer);
+    }
+
+    // Slash Button: Toggle between 5.3.20 Side-by-Side and 5.3.21 Centered
+    if (immersiveLayoutToggleBtn) {
+      immersiveLayoutToggleBtn.addEventListener('click', () => {
+        const nextMode = (immersiveLayoutMode === 'side-by-side') ? 'centered' : 'side-by-side';
+        setImmersiveLayoutMode(nextMode);
+        showToast(nextMode === 'side-by-side' ? 'Layout: Side-by-Side (5.3.20)' : 'Layout: Centered (5.3.21)');
+      });
     }
 
 

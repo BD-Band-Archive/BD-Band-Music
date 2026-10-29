@@ -40,10 +40,10 @@
   <meta http-equiv="Expires" content="0">
 
   <script>
-    // Ensure all visitors immediately upgrade to v5.3.21 and purge stale offline caches
+    // Ensure all visitors immediately upgrade to v5.3.22 and purge stale offline caches
     (function() {
       try {
-        var CURRENT_VER = '5.3.21';
+        var CURRENT_VER = '5.3.22';
         var lastVer = localStorage.getItem('bd_band_app_version');
         if (lastVer !== CURRENT_VER) {
           localStorage.removeItem('bd_band_plays_v1');
@@ -59,7 +59,7 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="style.css?v=5.3.21">
+  <link rel="stylesheet" href="style.css?v=5.3.22">
 </head>
 <body>
   <!-- Full-Screen Immersive Landing Page & Manifesto Overlay -->
@@ -837,6 +837,10 @@
             <span class="immersive-brand-title">BD Band Music</span>
           </div>
           <span class="immersive-badge" id="immersiveQualityBadge">Lossless FLAC</span>
+          <!-- Slash Layout Toggle Button (Toggles 5.3.20 Side-by-Side vs 5.3.21 Centered) -->
+          <button id="immersiveLayoutToggleBtn" class="icon-btn immersive-icon-btn immersive-slash-btn" title="Toggle Layout: Side-by-Side (5.3.20) / Centered (/)" aria-label="Toggle Fullscreen Layout">
+            <span class="slash-icon">/</span>
+          </button>
         </div>
         
         <div class="immersive-header-right">
@@ -943,6 +947,6 @@
   </div>
 
   <script src="assets/qrcode.min.js"></script>
-  <script src="app.js?v=5.3.21"></script>
+  <script src="app.js?v=5.3.22"></script>
 </body>
 </html>
