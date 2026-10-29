@@ -4980,32 +4980,74 @@ dialog.story-share-dialog::backdrop {
 
 /* Sound Bar & Control Visibility Rules across Layouts */
 .immersive-volume-slider {
-  width: 85px;
+  width: 88px;
   height: 4px;
   -webkit-appearance: none;
   appearance: none;
-  background: rgba(255, 255, 255, 0.22);
-  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.25);
+  background-image: linear-gradient(#38bdf8, #38bdf8);
+  background-size: 85% 100%;
+  background-repeat: no-repeat;
+  border-radius: 9999px;
   outline: none;
   cursor: pointer;
-  accent-color: #38bdf8;
-  transition: background 0.2s ease;
+  transition: height 0.15s ease, background 0.2s ease;
+  flex-shrink: 0;
 }
 
+.immersive-volume-slider:hover {
+  height: 6px;
+}
+
+/* Draggable thumb / scrolling head with crisp white glow */
 .immersive-volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: #38bdf8;
+  background: #ffffff;
   cursor: pointer;
-  box-shadow: 0 0 6px rgba(56, 189, 248, 0.6);
-  transition: transform 0.15s ease;
+  opacity: 1 !important;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6), 0 0 8px rgba(56, 189, 248, 0.9);
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
-.immersive-volume-slider::-webkit-slider-thumb:hover {
+.immersive-volume-slider:hover::-webkit-slider-thumb {
   transform: scale(1.2);
+  background: #38bdf8;
+  border-color: #ffffff;
+}
+
+.immersive-volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  opacity: 1 !important;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6), 0 0 8px rgba(56, 189, 248, 0.9);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.immersive-volume-slider:hover::-moz-range-thumb {
+  transform: scale(1.2);
+  background: #38bdf8;
+  border-color: #ffffff;
+}
+
+.immersive-volume-slider::-moz-range-track {
+  background-color: rgba(255, 255, 255, 0.25);
+  height: 4px;
+  border-radius: 9999px;
+}
+
+.immersive-volume-slider::-moz-range-progress {
+  background-color: #38bdf8;
+  height: 4px;
+  border-radius: 9999px;
 }
 
 /* Default: Top-Down Mode Controls */
@@ -5017,6 +5059,13 @@ dialog.story-share-dialog::backdrop {
   display: none !important;
 }
 
+.immersive-sound-btn-anchor {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
 .immersive-sound-btn {
   display: flex !important;
 }
@@ -5025,20 +5074,33 @@ dialog.story-share-dialog::backdrop {
   display: flex !important;
 }
 
+/* Sound bar pops out horizontally to the left of the stationary sound button */
 .immersive-popout-volume-wrap {
+  position: absolute;
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%) scaleX(0.8);
+  transform-origin: right center;
   display: none;
   align-items: center;
-  margin-right: 0.35rem;
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
   opacity: 0;
-  transform: scaleX(0.85);
-  transform-origin: right center;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 30;
 }
 
 .immersive-popout-volume-wrap.visible {
   display: flex !important;
   opacity: 1;
-  transform: scaleX(1);
+  pointer-events: auto;
+  transform: translateY(-50%) scaleX(1);
 }
 
 /* Left-Right (Side-by-Side) Mode Controls */
@@ -5050,9 +5112,14 @@ dialog.story-share-dialog::backdrop {
   display: flex !important;
   align-items: center;
   gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 4px 10px 4px 4px;
   margin-left: 1.25rem;
 }
 
+.immersive-player-overlay.layout-side-by-side .immersive-sound-btn-anchor,
 .immersive-player-overlay.layout-side-by-side .immersive-sound-btn {
   display: none !important;
 }
@@ -5187,6 +5254,7 @@ dialog.story-share-dialog::backdrop {
   .immersive-side-volume-wrap {
     display: none !important;
   }
+  .immersive-sound-btn-anchor,
   .immersive-sound-btn {
     display: flex !important;
   }

@@ -29,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.27';
+  const APP_VERSION = '5.3.28';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -2672,7 +2672,7 @@
   // --- Synchronized Volume Management (Bottom Player & Fullscreen Views) ---
   function updateAllVolumeUi() {
     const isMuted = audio.muted || audio.volume === 0;
-    const vol = audio.volume;
+    const vol = isMuted ? 0 : audio.volume;
 
     if (volumeSlider) {
       volumeSlider.value = vol;
@@ -2685,6 +2685,7 @@
 
     if (immersiveSideVolumeSlider) {
       immersiveSideVolumeSlider.value = vol;
+      immersiveSideVolumeSlider.style.backgroundSize = `${vol * 100}% 100%`;
     }
     if (immersiveSideVolHighIcon && immersiveSideVolMuteIcon) {
       immersiveSideVolHighIcon.style.display = isMuted ? 'none' : 'block';
@@ -2693,6 +2694,7 @@
 
     if (immersiveTopDownVolumeSlider) {
       immersiveTopDownVolumeSlider.value = vol;
+      immersiveTopDownVolumeSlider.style.backgroundSize = `${vol * 100}% 100%`;
     }
     if (immersiveSoundVolHighIcon && immersiveSoundVolMuteIcon) {
       immersiveSoundVolHighIcon.style.display = isMuted ? 'none' : 'block';
@@ -3647,16 +3649,10 @@
       audio.currentTime = Math.max(audio.currentTime - 5, 0);
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      audio.volume = Math.min(audio.volume + 0.05, 1);
-      volumeSlider.value = audio.volume;
-      volumeSlider.style.backgroundSize = `${audio.volume * 100}% 100%`;
-      updateVolumeIcon();
+      setGlobalVolume(Math.min(audio.volume + 0.05, 1));
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      audio.volume = Math.max(audio.volume - 0.05, 0);
-      volumeSlider.value = audio.volume;
-      volumeSlider.style.backgroundSize = `${audio.volume * 100}% 100%`;
-      updateVolumeIcon();
+      setGlobalVolume(Math.max(audio.volume - 0.05, 0));
     } else if (e.key === 'm' || e.key === 'M') {
       volumeBtn.click();
     } else if (e.key === 'n' || e.key === 'N') {
@@ -4873,6 +4869,16 @@
   function closeImmersivePlayer() {
     if (!immersivePlayerOverlay) return;
     isImmersiveOpen = false;
+
+    if (immersivePopoutVolume) {
+      immersivePopoutVolume.classList.remove('visible');
+      immersivePopoutVolume.style.display = 'none';
+      immersivePopoutVolume.style.transform = '';
+    }
+    if (immersiveSoundBtn) {
+      immersiveSoundBtn.classList.remove('active');
+    }
+
     immersivePlayerOverlay.classList.remove('active');
     setTimeout(() => {
       if (!isImmersiveOpen) {
@@ -5176,89 +5182,73 @@
       ctx.restore();
 
       // -------------------------------------------------------------
-      // 2. Harmonic Sine Wave Ribbons (Braided Unified Full Wave with Crisp Edges)
+      // 2. Harmonic Sine Wave Ribbons (Smoothly fading out towards edges, scaled to disc)
       // -------------------------------------------------------------
-      const energyPulse = (bassEnergy * 0.7 + midEnergy * 0.3);
-      const waveAmp = (18 + energyPulse * 32) * dpr * radiusScale;
-      const baseFreq = 0.0046 / dpr;
-      const waveT = nowMs * 0.0014;
-      const startX = Math.max(0, discCenterX - discRadius * 0.35);
-
       const ribbons = [
         {
-          color: 'rgba(0, 245, 255, 0.95)',
+          color: 'rgba(0, 245, 255, 0.85)',
           glow: '#00f5ff',
-          speed: 0.90,
+          freq: 0.005 / dpr,
+          speed: 1.4,
           phase: 0,
-          ampMult: 1.0,
-          harmonicMult: 2.05,
-          offsetY: -1.5 * dpr * radiusScale
+          amp: (20 + bassEnergy * 32) * dpr * radiusScale,
+          offsetY: -10 * dpr * radiusScale
         },
         {
-          color: 'rgba(255, 45, 135, 0.92)',
-          glow: '#ff2d87',
-          speed: 1.05,
-          phase: Math.PI * 0.65,
-          ampMult: 0.88,
-          harmonicMult: 2.15,
-          offsetY: 1.2 * dpr * radiusScale
+          color: 'rgba(247, 37, 133, 0.82)',
+          glow: '#f72585',
+          freq: 0.007 / dpr,
+          speed: -1.2,
+          phase: Math.PI * 0.45,
+          amp: (16 + midEnergy * 26) * dpr * radiusScale,
+          offsetY: 4 * dpr * radiusScale
         },
         {
-          color: 'rgba(168, 85, 247, 0.90)',
-          glow: '#a855f7',
-          speed: 0.82,
-          phase: Math.PI * 1.25,
-          ampMult: 0.80,
-          harmonicMult: 1.95,
-          offsetY: -0.8 * dpr * radiusScale
+          color: 'rgba(114, 9, 183, 0.78)',
+          glow: '#7209b7',
+          freq: 0.0045 / dpr,
+          speed: 1.0,
+          phase: Math.PI * 0.9,
+          amp: (14 + bassEnergy * 22) * dpr * radiusScale,
+          offsetY: 16 * dpr * radiusScale
         },
         {
-          color: 'rgba(0, 255, 175, 0.88)',
-          glow: '#00ffaf',
-          speed: 1.15,
-          phase: Math.PI * 1.85,
-          ampMult: 0.84,
-          harmonicMult: 2.25,
-          offsetY: 1.5 * dpr * radiusScale
+          color: 'rgba(0, 255, 170, 0.75)',
+          glow: '#00ffaa',
+          freq: 0.0085 / dpr,
+          speed: -1.6,
+          phase: Math.PI * 1.35,
+          amp: (12 + midEnergy * 20) * dpr * radiusScale,
+          offsetY: -18 * dpr * radiusScale
         }
       ];
 
       ribbons.forEach((rb) => {
         ctx.save();
-        ctx.globalCompositeOperation = 'screen';
         ctx.shadowColor = rb.glow;
-        ctx.shadowBlur = Math.max(8, 16 * dpr * radiusScale);
-        ctx.lineWidth = Math.max(1.8, 3.2 * dpr * radiusScale);
+        ctx.shadowBlur = Math.max(6, 14 * dpr * radiusScale);
+        ctx.lineWidth = Math.max(1.2, 2.4 * dpr * radiusScale);
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
 
-        // Luminous gradient with crisp, distinct emergence from the CD disc rim
-        const ribbonGrad = ctx.createLinearGradient(startX, 0, w, 0);
+        // Ribbon gradient with edge-fade to eliminate any harsh edge clipping
+        const ribbonGrad = ctx.createLinearGradient(0, 0, w, 0);
         ribbonGrad.addColorStop(0, 'rgba(0,0,0,0)');
-        ribbonGrad.addColorStop(0.06, rb.color);
+        ribbonGrad.addColorStop(0.12, rb.color);
         ribbonGrad.addColorStop(0.88, rb.color);
         ribbonGrad.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.strokeStyle = ribbonGrad;
 
         ctx.beginPath();
-        const step = Math.max(1.5, 2.0 * dpr);
-        let first = true;
+        // Draw flowing sine wave across stage
+        for (let x = 0; x <= w; x += 3 * dpr) {
+          const sampleOffset = hasSignal ? ((cdTimeData[Math.floor((x / w) * 32)] - 128) / 128) * 14 * dpr * radiusScale : 0;
+          const sinePrimary = Math.sin(x * rb.freq + t * rb.speed + rb.phase);
+          const sineSecondary = Math.cos(x * (rb.freq * 0.45) + t * (rb.speed * 0.65));
+          const y = discCenterY + rb.offsetY + (sinePrimary * 0.72 + sineSecondary * 0.28) * rb.amp + sampleOffset;
 
-        for (let x = startX; x <= w; x += step) {
-          // Smooth sinusoidal envelope emerging naturally from the disc without sharp jump
-          const tEnv = Math.min(1.0, Math.max(0.0, (x - startX) / (discRadius * 1.2)));
-          const envelope = Math.sin(tEnv * (Math.PI / 2));
-
-          const h1 = Math.sin(x * baseFreq - waveT * rb.speed + rb.phase);
-          const h2 = Math.sin(x * baseFreq * rb.harmonicMult - waveT * rb.speed * 1.35 + rb.phase * 0.5) * 0.28;
-          const h3 = Math.cos(x * baseFreq * 0.55 - waveT * rb.speed * 0.75 + rb.phase * 1.2) * 0.22;
-
-          const waveY = (h1 + h2 + h3) * waveAmp * rb.ampMult * envelope;
-          const y = discCenterY + rb.offsetY + waveY;
-
-          if (first) {
+          if (x === 0) {
             ctx.moveTo(x, y);
-            first = false;
           } else {
             ctx.lineTo(x, y);
           }
@@ -5319,6 +5309,14 @@
       if (!immersivePopoutVolume) return;
       immersivePopoutVolume.style.display = 'flex';
       requestAnimationFrame(() => {
+        // Prevent clipping off-screen on narrow mobile screens
+        const rect = immersivePopoutVolume.getBoundingClientRect();
+        if (rect.left < 10) {
+          const shift = 10 - rect.left;
+          immersivePopoutVolume.style.transform = `translateY(-50%) translateX(${shift}px) scaleX(1)`;
+        } else {
+          immersivePopoutVolume.style.transform = 'translateY(-50%) scaleX(1)';
+        }
         immersivePopoutVolume.classList.add('visible');
       });
       if (immersiveSoundBtn) immersiveSoundBtn.classList.add('active');
@@ -5331,6 +5329,7 @@
       setTimeout(() => {
         if (!immersivePopoutVolume.classList.contains('visible')) {
           immersivePopoutVolume.style.display = 'none';
+          immersivePopoutVolume.style.transform = '';
         }
       }, 200);
       if (soundBarHideTimer) {
@@ -5360,6 +5359,12 @@
     if (immersiveTopDownVolumeSlider) {
       immersiveTopDownVolumeSlider.addEventListener('input', (e) => {
         setGlobalVolume(parseFloat(e.target.value));
+        schedulePopoutSoundBarHide();
+      });
+      immersiveTopDownVolumeSlider.addEventListener('pointerdown', () => {
+        if (soundBarHideTimer) clearTimeout(soundBarHideTimer);
+      });
+      immersiveTopDownVolumeSlider.addEventListener('pointerup', () => {
         schedulePopoutSoundBarHide();
       });
     }
