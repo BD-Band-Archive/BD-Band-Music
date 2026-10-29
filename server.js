@@ -123,7 +123,7 @@ const server = http.createServer(async (req, res) => {
         status: 'ok',
         database: 'connected',
         provider: 'Neon Postgres',
-        version: '5.3.15',
+        version: '5.3.16',
         branch: process.env.NEON_BRANCH || 'production',
         dbTime: dbCheck[0].db_time
       });
@@ -149,7 +149,7 @@ const server = http.createServer(async (req, res) => {
       }
       return sendJson(res, 200, {
         success: true,
-        version: '5.3.15',
+        version: '5.3.16',
         trending: allRows.slice(0, 15),
         plays: playsMap,
         total_played_tracks: allRows.length
