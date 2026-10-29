@@ -4942,18 +4942,31 @@ dialog.story-share-dialog::backdrop {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 4.5rem;
-  padding: 1rem 3rem 2.5rem;
-  max-width: 1350px;
+  gap: clamp(4.5rem, 6.5vw, 7.5rem);
+  padding: 1rem clamp(2rem, 4vw, 4rem) 2.5rem;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-disc-stage {
   flex: none;
+  width: calc(var(--immersive-jewel-w) + (var(--immersive-cd-size) / 2));
+  height: var(--immersive-jewel-h);
+  min-height: var(--immersive-jewel-h);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   margin: 0;
+  box-sizing: border-box;
 }
 
 .immersive-player-overlay.layout-side-by-side .jewel-case-box {
+  width: var(--immersive-jewel-w);
+  height: var(--immersive-jewel-h);
   margin: 0;
+  flex-shrink: 0;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-cd-wrap {
@@ -4961,24 +4974,29 @@ dialog.story-share-dialog::backdrop {
   right: auto;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: var(--immersive-cd-size);
+  height: var(--immersive-cd-size);
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-meta-stage {
   flex: 1;
-  max-width: 520px;
+  max-width: 560px;
+  min-width: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   text-align: left;
-  gap: 1.8rem;
-  padding-left: 1.5rem;
+  gap: clamp(1.4rem, 2.2vh, 2.2rem);
+  padding-left: clamp(2rem, 3.5vw, 3.5rem);
+  box-sizing: border-box;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-info-group {
   align-items: flex-start;
   text-align: left;
+  width: 100%;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-tag-row {
@@ -4986,13 +5004,18 @@ dialog.story-share-dialog::backdrop {
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-song-title {
-  font-size: 2.2rem;
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
   text-align: left;
+  line-height: 1.15;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-song-artist {
-  font-size: 1.3rem;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
   text-align: left;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-album-row {
@@ -5000,11 +5023,24 @@ dialog.story-share-dialog::backdrop {
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-progress-group {
-  max-width: 480px;
+  width: 100%;
+  max-width: 500px;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-controls-row {
   justify-content: flex-start;
+}
+
+/* Fluid intermediate desktop & tablet scaling (861px - 1200px) */
+@media (max-width: 1200px) and (min-width: 861px) {
+  .immersive-player-overlay.layout-side-by-side .immersive-stage {
+    gap: clamp(2.5rem, 4vw, 4.5rem);
+    padding: 1rem 2rem 2rem;
+  }
+  .immersive-player-overlay.layout-side-by-side .immersive-meta-stage {
+    padding-left: clamp(1.2rem, 2vw, 2rem);
+    max-width: 480px;
+  }
 }
 
 /* Side-by-Side Responsive Fallback on Mobile & Tablet */
@@ -5015,6 +5051,7 @@ dialog.story-share-dialog::backdrop {
     justify-content: space-between;
     gap: 0.75rem;
     padding: 0.25rem 1rem 1.25rem;
+    max-width: 100%;
   }
   .immersive-player-overlay.layout-side-by-side .immersive-disc-stage {
     margin: 0 auto;
