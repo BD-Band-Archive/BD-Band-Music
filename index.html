@@ -40,10 +40,10 @@
   <meta http-equiv="Expires" content="0">
 
   <script>
-    // Ensure all visitors immediately upgrade to v5.3.19 and purge stale offline caches
+    // Ensure all visitors immediately upgrade to v5.3.20 and purge stale offline caches
     (function() {
       try {
-        var CURRENT_VER = '5.3.19';
+        var CURRENT_VER = '5.3.20';
         var lastVer = localStorage.getItem('bd_band_app_version');
         if (lastVer !== CURRENT_VER) {
           localStorage.removeItem('bd_band_plays_v1');
@@ -59,7 +59,7 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="style.css?v=5.3.19">
+  <link rel="stylesheet" href="style.css?v=5.3.20">
 </head>
 <body>
   <!-- Full-Screen Immersive Landing Page & Manifesto Overlay -->
@@ -840,11 +840,6 @@
         </div>
         
         <div class="immersive-header-right">
-          <!-- Visualizer Toggle Button (Toggle spectrum from topbar) -->
-          <button id="immersiveVisToggleBtn" class="icon-btn immersive-icon-btn" title="Toggle Spectrum Visualizer (V)" aria-label="Toggle Spectrum Visualizer">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5v14M7 8v8M22 10v4M2 10v4"/></svg>
-          </button>
-          
           <!-- Close / Exit Fullscreen Button -->
           <button id="closeImmersiveBtn" class="icon-btn immersive-icon-btn close-btn" title="Exit Fullscreen (Esc / F)" aria-label="Exit Fullscreen">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -948,6 +943,6 @@
   </div>
 
   <script src="assets/qrcode.min.js"></script>
-  <script src="app.js?v=5.3.19"></script>
+  <script src="app.js?v=5.3.20"></script>
 </body>
 </html>

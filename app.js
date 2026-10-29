@@ -29,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.19';
+  const APP_VERSION = '5.3.20';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -509,7 +509,6 @@
   // Fullscreen Immersive CD Player Elements
   const immersivePlayerOverlay = document.getElementById('immersivePlayerOverlay');
   const immersiveBg = document.getElementById('immersiveBg');
-  const immersiveVisToggleBtn = document.getElementById('immersiveVisToggleBtn');
   const closeImmersiveBtn = document.getElementById('closeImmersiveBtn');
   const cdWaveformCanvas = document.getElementById('cdWaveformCanvas');
   const immersiveCdWrap = document.getElementById('immersiveCdWrap');
@@ -3569,14 +3568,6 @@
       }
     }
 
-    if (e.key === 'v' || e.key === 'V') {
-      if (isImmersiveOpen && document.activeElement !== globalSearchInput) {
-        e.preventDefault();
-        immersiveVisToggleBtn.click();
-        return;
-      }
-    }
-
     // If typing in search box, ignore playback shortcuts
     if (document.activeElement === globalSearchInput) {
       return;
@@ -4746,15 +4737,11 @@
     });
     document.body.classList.add('fullscreen-active');
 
-    // Prompt off bottom audio spectrum in fullscreen by default (can be toggled back on from topbar)
+    // Deactivate bottom audio spectrum in fullscreen view
     if (visualizerEnabled) {
       visualizerEnabled = false;
       visualizerCanvas.classList.remove('active');
       themeToggleBtn.classList.remove('active');
-      if (immersiveVisToggleBtn) immersiveVisToggleBtn.classList.remove('active');
-      showToast('Audio Spectrum: OFF in Fullscreen (Toggle with topbar button or V)');
-    } else {
-      if (immersiveVisToggleBtn) immersiveVisToggleBtn.classList.remove('active');
     }
 
     // Try native fullscreen if available
@@ -5150,26 +5137,7 @@
       closeImmersiveBtn.addEventListener('click', closeImmersivePlayer);
     }
 
-    // Topbar Spectrum Toggle in Fullscreen View
-    if (immersiveVisToggleBtn) {
-      immersiveVisToggleBtn.addEventListener('click', () => {
-        visualizerEnabled = !visualizerEnabled;
-        visualizerCanvas.classList.toggle('active', visualizerEnabled);
-        themeToggleBtn.classList.toggle('active', visualizerEnabled);
-        immersiveVisToggleBtn.classList.toggle('active', visualizerEnabled);
 
-        if (visualizerEnabled) {
-          initAudioVisualizer();
-          if (audioCtx && audioCtx.state === 'suspended') {
-            audioCtx.resume().catch(() => {});
-          }
-          visualizerCanvas.width = window.innerWidth;
-          visualizerCanvas.height = 90;
-          startVisualizerLoop();
-        }
-        showToast(visualizerEnabled ? 'Audio Spectrum: ON' : 'Audio Spectrum: OFF');
-      });
-    }
 
     // Artist Redirection Listeners in Fullscreen View
     if (immersiveArtistTag) {
