@@ -1,6 +1,6 @@
 {
   "name": "bd-band-music",
-  "version": "5.3.28",
+  "version": "5.3.29",
   "description": "Lossless Bangladeshi Band Music Streaming Archive with Neon Postgres Global Trending",
   "main": "server.js",
   "scripts": {

@@ -29,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.28';
+  const APP_VERSION = '5.3.29';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -4837,6 +4837,7 @@
     requestAnimationFrame(() => {
       immersivePlayerOverlay.classList.add('active');
     });
+    document.documentElement.classList.add('fullscreen-active');
     document.body.classList.add('fullscreen-active');
 
     // Deactivate bottom audio spectrum in fullscreen view
@@ -4885,6 +4886,7 @@
         immersivePlayerOverlay.style.display = 'none';
       }
     }, 350);
+    document.documentElement.classList.remove('fullscreen-active');
     document.body.classList.remove('fullscreen-active');
 
     if (document.fullscreenElement && document.exitFullscreen) {
@@ -5269,6 +5271,22 @@
     if (closeImmersiveBtn) {
       closeImmersiveBtn.addEventListener('click', closeImmersivePlayer);
     }
+
+    // Lock scrolling on wheel & touch while in fullscreen (windowed or native)
+    immersivePlayerOverlay.addEventListener('wheel', (e) => {
+      if (isImmersiveOpen) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    immersivePlayerOverlay.addEventListener('touchmove', (e) => {
+      if (isImmersiveOpen) {
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.closest('input[type="range"]'))) {
+          return;
+        }
+        e.preventDefault();
+      }
+    }, { passive: false });
 
     // Direct Copy Link Button 15px from Song Title (Side-by-Side Mode)
     if (immersiveTitleShareBtn) {

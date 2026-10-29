@@ -4234,24 +4234,56 @@ dialog.story-share-dialog::backdrop {
   transform: scale(1.08);
 }
 
-/* Fullscreen Overlay Container - Guaranteed no overflow trap */
+/* Lock scrollbar and disable all scrolling when fullscreen (windowed or native) is active */
+html.fullscreen-active,
+body.fullscreen-active {
+  overflow: hidden !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  touch-action: none !important;
+  overscroll-behavior: none !important;
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE / Edge */
+}
+
+html.fullscreen-active::-webkit-scrollbar,
+body.fullscreen-active::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Fullscreen Overlay Container - Fixed viewport, locked scrollbar, no scrolling like native OS fullscreen */
 .immersive-player-overlay {
   position: fixed;
   inset: 0;
   width: 100vw;
+  height: 100vh;
   height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
   z-index: 999999;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden !important; /* Lock scrollbar: absolutely no scrolling */
+  overscroll-behavior: none !important;
+  touch-action: none;
   background-color: #07090e;
   color: #f8fafc;
   font-family: inherit;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s ease;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.immersive-player-overlay::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .immersive-player-overlay.active {
