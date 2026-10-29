@@ -29,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.24';
+  const APP_VERSION = '5.3.25';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -5044,10 +5044,13 @@
         discRadius = (discRect.width / 2) * dpr;
       }
 
+      // Proportional scale factor relative to standard desktop disc size (140px radius)
+      const radiusScale = Math.min(1.2, Math.max(0.45, discRadius / (140 * dpr)));
+
       // -------------------------------------------------------------
       // 1. Radial Spectrum Rays (radiating outward along exposed disc edge)
       // -------------------------------------------------------------
-      const numRays = 38;
+      const numRays = Math.round(36 * Math.max(0.7, radiusScale));
       const startAngle = -Math.PI * 0.48; // facing rightward arc
       const endAngle = Math.PI * 0.48;
       const angleStep = (endAngle - startAngle) / (numRays - 1);
@@ -5057,7 +5060,7 @@
         const angle = startAngle + i * angleStep;
         const freqIdx = Math.floor((i / numRays) * (hasSignal ? 28 : 16));
         const sampleVal = hasSignal ? (cdFreqData[freqIdx] / 255) : (Math.sin(t * 2.8 + i * 0.3) * 0.35 + 0.4);
-        const rayLen = (14 + sampleVal * 68 * (0.45 + bassEnergy * 0.8)) * dpr;
+        const rayLen = (10 + sampleVal * 54 * (0.45 + bassEnergy * 0.8)) * dpr * radiusScale;
 
         const x1 = discCenterX + Math.cos(angle) * (discRadius - 4 * dpr);
         const y1 = discCenterY + Math.sin(angle) * (discRadius - 4 * dpr);
@@ -5070,7 +5073,7 @@
         rayGrad.addColorStop(1, 'rgba(236, 72, 153, 0.9)');
 
         ctx.strokeStyle = rayGrad;
-        ctx.lineWidth = Math.max(1.8, 3.4 * dpr);
+        ctx.lineWidth = Math.max(1.2, 3.0 * dpr * radiusScale);
         ctx.lineCap = 'round';
         ctx.beginPath();
         ctx.moveTo(x1, y1);
@@ -5080,7 +5083,7 @@
       ctx.restore();
 
       // -------------------------------------------------------------
-      // 2. Harmonic Sine Wave Ribbons (Smoothly fading out towards edges, no cut-off)
+      // 2. Harmonic Sine Wave Ribbons (Smoothly fading out towards edges, scaled to disc)
       // -------------------------------------------------------------
       const ribbons = [
         {
@@ -5089,8 +5092,8 @@
           freq: 0.005 / dpr,
           speed: 1.4,
           phase: 0,
-          amp: (26 + bassEnergy * 42) * dpr,
-          offsetY: -14 * dpr
+          amp: (20 + bassEnergy * 32) * dpr * radiusScale,
+          offsetY: -10 * dpr * radiusScale
         },
         {
           color: 'rgba(247, 37, 133, 0.82)',
@@ -5098,8 +5101,8 @@
           freq: 0.007 / dpr,
           speed: -1.2,
           phase: Math.PI * 0.45,
-          amp: (22 + midEnergy * 34) * dpr,
-          offsetY: 6 * dpr
+          amp: (16 + midEnergy * 26) * dpr * radiusScale,
+          offsetY: 4 * dpr * radiusScale
         },
         {
           color: 'rgba(114, 9, 183, 0.78)',
@@ -5107,8 +5110,8 @@
           freq: 0.0045 / dpr,
           speed: 1.0,
           phase: Math.PI * 0.9,
-          amp: (20 + bassEnergy * 28) * dpr,
-          offsetY: 22 * dpr
+          amp: (14 + bassEnergy * 22) * dpr * radiusScale,
+          offsetY: 16 * dpr * radiusScale
         },
         {
           color: 'rgba(0, 255, 170, 0.75)',
@@ -5116,16 +5119,16 @@
           freq: 0.0085 / dpr,
           speed: -1.6,
           phase: Math.PI * 1.35,
-          amp: (16 + midEnergy * 26) * dpr,
-          offsetY: -26 * dpr
+          amp: (12 + midEnergy * 20) * dpr * radiusScale,
+          offsetY: -18 * dpr * radiusScale
         }
       ];
 
       ribbons.forEach((rb) => {
         ctx.save();
         ctx.shadowColor = rb.glow;
-        ctx.shadowBlur = 16 * dpr;
-        ctx.lineWidth = 2.6 * dpr;
+        ctx.shadowBlur = Math.max(6, 14 * dpr * radiusScale);
+        ctx.lineWidth = Math.max(1.2, 2.4 * dpr * radiusScale);
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
 
@@ -5140,7 +5143,7 @@
         ctx.beginPath();
         // Draw flowing sine wave across stage
         for (let x = 0; x <= w; x += 3 * dpr) {
-          const sampleOffset = hasSignal ? ((cdTimeData[Math.floor((x / w) * 32)] - 128) / 128) * 18 * dpr : 0;
+          const sampleOffset = hasSignal ? ((cdTimeData[Math.floor((x / w) * 32)] - 128) / 128) * 14 * dpr * radiusScale : 0;
           const sinePrimary = Math.sin(x * rb.freq + t * rb.speed + rb.phase);
           const sineSecondary = Math.cos(x * (rb.freq * 0.45) + t * (rb.speed * 0.65));
           const y = discCenterY + rb.offsetY + (sinePrimary * 0.72 + sineSecondary * 0.28) * rb.amp + sampleOffset;

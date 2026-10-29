@@ -33,7 +33,7 @@ export default {
           status: 'ok',
           provider: 'Neon Postgres',
           runtime: 'Cloudflare Worker',
-          version: '5.3.24',
+          version: '5.3.25',
           dbTime: check[0].db_time
         });
       } catch (err) {
@@ -55,7 +55,7 @@ export default {
         }
         return jsonResponse({
           success: true,
-          version: '5.3.24',
+          version: '5.3.25',
           trending: allRows.slice(0, 15),
           plays: playsMap,
           total_played_tracks: allRows.length

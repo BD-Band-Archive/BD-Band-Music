@@ -4133,8 +4133,95 @@ dialog.story-share-dialog::backdrop {
 
 
 /* ==========================================================================
-   Fullscreen Immersive CD Player Styles
+   Fullscreen Immersive CD Player Styles (Responsive Multi-Device Scaling)
    ========================================================================== */
+
+:root {
+  --immersive-jewel-w: 320px;
+  --immersive-jewel-h: 300px;
+  --immersive-cd-size: 280px;
+  --immersive-spine-w: 22px;
+  --immersive-title-size: 1.85rem;
+  --immersive-artist-size: 1.15rem;
+  --immersive-meta-gap: 0.8rem;
+  --immersive-play-btn-size: 60px;
+  --immersive-ctrl-btn-size: 42px;
+}
+
+/* Tablet & Moderate Screens */
+@media (max-width: 900px) {
+  :root {
+    --immersive-jewel-w: 255px;
+    --immersive-jewel-h: 240px;
+    --immersive-cd-size: 225px;
+    --immersive-spine-w: 18px;
+    --immersive-title-size: 1.55rem;
+    --immersive-artist-size: 1.05rem;
+    --immersive-meta-gap: 0.65rem;
+    --immersive-play-btn-size: 54px;
+    --immersive-ctrl-btn-size: 38px;
+  }
+}
+
+/* Standard Mobile Screens (<= 600px) */
+@media (max-width: 600px) {
+  :root {
+    --immersive-jewel-w: 190px;
+    --immersive-jewel-h: 178px;
+    --immersive-cd-size: 168px;
+    --immersive-spine-w: 15px;
+    --immersive-title-size: 1.25rem;
+    --immersive-artist-size: 0.95rem;
+    --immersive-meta-gap: 0.5rem;
+    --immersive-play-btn-size: 48px;
+    --immersive-ctrl-btn-size: 34px;
+  }
+}
+
+/* Small Mobile Screens (iPhone SE, Galaxy Fold, <= 380px) */
+@media (max-width: 380px) {
+  :root {
+    --immersive-jewel-w: 155px;
+    --immersive-jewel-h: 145px;
+    --immersive-cd-size: 136px;
+    --immersive-spine-w: 13px;
+    --immersive-title-size: 1.1rem;
+    --immersive-artist-size: 0.85rem;
+    --immersive-meta-gap: 0.35rem;
+    --immersive-play-btn-size: 44px;
+    --immersive-ctrl-btn-size: 30px;
+  }
+}
+
+/* Short Screens (Landscape mobile, compact laptops <= 680px height) */
+@media (max-height: 680px) {
+  :root {
+    --immersive-jewel-w: 165px;
+    --immersive-jewel-h: 154px;
+    --immersive-cd-size: 145px;
+    --immersive-spine-w: 14px;
+    --immersive-title-size: 1.15rem;
+    --immersive-artist-size: 0.85rem;
+    --immersive-meta-gap: 0.35rem;
+    --immersive-play-btn-size: 46px;
+    --immersive-ctrl-btn-size: 32px;
+  }
+}
+
+/* Very Short Screens (<= 520px height) */
+@media (max-height: 520px) {
+  :root {
+    --immersive-jewel-w: 130px;
+    --immersive-jewel-h: 120px;
+    --immersive-cd-size: 114px;
+    --immersive-spine-w: 11px;
+    --immersive-title-size: 1.0rem;
+    --immersive-artist-size: 0.78rem;
+    --immersive-meta-gap: 0.25rem;
+    --immersive-play-btn-size: 40px;
+    --immersive-ctrl-btn-size: 28px;
+  }
+}
 
 /* Player Bar Fullscreen Button */
 .fullscreen-btn {
@@ -4147,7 +4234,7 @@ dialog.story-share-dialog::backdrop {
   transform: scale(1.08);
 }
 
-/* Fullscreen Overlay Container */
+/* Fullscreen Overlay Container - Guaranteed no overflow trap */
 .immersive-player-overlay {
   position: fixed;
   inset: 0;
@@ -4156,7 +4243,9 @@ dialog.story-share-dialog::backdrop {
   z-index: 999999;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   background-color: #07090e;
   color: #f8fafc;
   font-family: inherit;
@@ -4198,24 +4287,38 @@ dialog.story-share-dialog::backdrop {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.1rem 2.5rem 0.5rem;
+  padding: 0.75rem 1.75rem 0.25rem;
   flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .immersive-header {
+    padding: 0.5rem 1rem 0.2rem;
+  }
 }
 
 .immersive-header-left {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .immersive-brand {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.0rem;
   letter-spacing: 0.04em;
   color: #f1f5f9;
+}
+
+@media (max-width: 480px) {
+  .immersive-brand-title {
+    display: none;
+  }
 }
 
 .immersive-brand-icon {
@@ -4225,11 +4328,11 @@ dialog.story-share-dialog::backdrop {
 }
 
 .immersive-badge {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 0.2rem 0.65rem;
+  letter-spacing: 0.08em;
+  padding: 0.18rem 0.55rem;
   border-radius: 9999px;
   background: rgba(56, 189, 248, 0.12);
   color: #38bdf8;
@@ -4239,12 +4342,12 @@ dialog.story-share-dialog::backdrop {
 /* Slash Layout Toggle Button (Upper Left) */
 .immersive-slash-btn {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   line-height: 1;
   color: #94a3b8;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4267,13 +4370,13 @@ dialog.story-share-dialog::backdrop {
   color: #38bdf8;
   background: rgba(56, 189, 248, 0.22);
   border-color: rgba(56, 189, 248, 0.5);
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
 }
 
 .immersive-header-right {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .immersive-icon-btn {
@@ -4281,8 +4384,8 @@ dialog.story-share-dialog::backdrop {
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #cbd5e1;
   border-radius: 50%;
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4312,12 +4415,12 @@ dialog.story-share-dialog::backdrop {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 2rem 2.25rem;
+  padding: 0.25rem 1rem 1.25rem;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Full Stage Waveform & Sine Wave Canvas */
@@ -4330,24 +4433,27 @@ dialog.story-share-dialog::backdrop {
   z-index: 1;
 }
 
-/* Disc & Jewel Case Stage (Center of Screen) - Total width = Box (320px) + Half CD (140px) = 460px */
+/* Disc & Jewel Case Stage - Exact width = Jewel Case + Half CD */
 .immersive-disc-stage {
   position: relative;
   flex: 1;
-  width: 460px;
-  min-height: 350px;
+  width: calc(var(--immersive-jewel-w) + (var(--immersive-cd-size) / 2));
+  height: var(--immersive-jewel-h);
+  min-height: var(--immersive-jewel-h);
+  max-height: 420px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin: 0 auto;
   z-index: 2;
+  box-sizing: border-box;
 }
 
 /* Physical CD Box (Jewel Case) */
 .jewel-case-box {
   position: relative;
-  width: 320px;
-  height: 300px;
+  width: var(--immersive-jewel-w);
+  height: var(--immersive-jewel-h);
   border-radius: 6px;
   background: #111317;
   display: flex;
@@ -4355,9 +4461,10 @@ dialog.story-share-dialog::backdrop {
   z-index: 3;
   cursor: pointer;
   margin: 0;
+  flex-shrink: 0;
   box-shadow: 
-    0 25px 60px -10px rgba(0, 0, 0, 0.85),
-    0 10px 20px -5px rgba(0, 0, 0, 0.6),
+    0 20px 50px -10px rgba(0, 0, 0, 0.85),
+    0 8px 16px -5px rgba(0, 0, 0, 0.6),
     inset 0 0 0 1px rgba(255, 255, 255, 0.16);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -4365,14 +4472,14 @@ dialog.story-share-dialog::backdrop {
 .jewel-case-box:hover {
   transform: translateY(-2px);
   box-shadow: 
-    0 30px 70px -10px rgba(0, 0, 0, 0.9),
-    0 12px 25px -5px rgba(0, 0, 0, 0.7),
+    0 25px 60px -10px rgba(0, 0, 0, 0.9),
+    0 10px 20px -5px rgba(0, 0, 0, 0.7),
     inset 0 0 0 1px rgba(255, 255, 255, 0.22);
 }
 
 /* Left Black Ribbed Strip (Spine) */
 .jewel-case-spine {
-  width: 22px;
+  width: var(--immersive-spine-w);
   height: 100%;
   background: #090a0d;
   flex-shrink: 0;
@@ -4422,10 +4529,10 @@ dialog.story-share-dialog::backdrop {
   align-items: center;
   justify-content: center;
   background: linear-gradient(145deg, #1e293b, #0f172a);
-  padding: 1.5rem;
+  padding: 1rem;
   box-sizing: border-box;
   text-align: center;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .placeholder-icon {
@@ -4434,7 +4541,7 @@ dialog.story-share-dialog::backdrop {
 }
 
 .placeholder-album-title {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #f1f5f9;
   line-height: 1.35;
@@ -4466,17 +4573,18 @@ dialog.story-share-dialog::backdrop {
     );
 }
 
-/* Rotating CD Disc (CD center is directly on the line of the box cover edge) */
+/* Rotating CD Disc (CD center is mathematically locked on the box cover edge) */
 .immersive-cd-wrap {
   position: absolute;
-  left: 320px;
+  left: var(--immersive-jewel-w);
   right: auto;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 280px;
-  height: 280px;
+  width: var(--immersive-cd-size);
+  height: var(--immersive-cd-size);
   z-index: 2;
   filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.75));
+  flex-shrink: 0;
 }
 
 .immersive-cd-disc {
@@ -4490,7 +4598,7 @@ dialog.story-share-dialog::backdrop {
   box-shadow: 
     0 0 0 1px rgba(255, 255, 255, 0.18),
     inset 0 0 25px rgba(0, 0, 0, 0.35);
-  /* Slower Clockwise rotation (~7.5s) */
+  /* Clockwise rotation (~7.5s) */
   animation: cdSpinClockwise 7.5s linear infinite;
 }
 
@@ -4513,17 +4621,17 @@ dialog.story-share-dialog::backdrop {
     radial-gradient(
       circle at center,
       transparent 0,
-      transparent 22px,
-      #1e2025 22px,
-      #1e2025 24px,
-      #0e0f12 24px,
-      #16171b 45px,
-      #0c0d0f 47px,
-      #1c1d22 75px,
-      #101114 77px,
-      #202228 108px,
-      #0c0d10 111px,
-      #17191e 135px
+      transparent 18px,
+      #1e2025 18px,
+      #1e2025 20px,
+      #0e0f12 20px,
+      #16171b 38px,
+      #0c0d0f 40px,
+      #1c1d22 62px,
+      #101114 64px,
+      #202228 90px,
+      #0c0d10 93px,
+      #17191e 120px
     ),
     conic-gradient(
       from 0deg,
@@ -4536,18 +4644,18 @@ dialog.story-share-dialog::backdrop {
     );
 }
 
-/* CD Center Spindle Hole & Rings */
+/* CD Center Spindle Hole & Rings - Scaled proportionally */
 .cd-center-hole {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 58px;
-  height: 58px;
+  width: calc(var(--immersive-cd-size) * 0.20);
+  height: calc(var(--immersive-cd-size) * 0.20);
   border-radius: 50%;
   background: #07090e;
   border: 2px solid rgba(255, 255, 255, 0.28);
-  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.95);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4556,8 +4664,8 @@ dialog.story-share-dialog::backdrop {
 }
 
 .cd-center-ring {
-  width: 90px;
-  height: 90px;
+  width: calc(var(--immersive-cd-size) * 0.32);
+  height: calc(var(--immersive-cd-size) * 0.32);
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.03);
@@ -4568,26 +4676,27 @@ dialog.story-share-dialog::backdrop {
   pointer-events: none;
 }
 
-/* Immersive Metadata Stage (Bottom Middle, Compact, Current Sized) */
+/* Immersive Metadata Stage (Bottom Middle) */
 .immersive-meta-stage {
   flex-shrink: 0;
   width: 100%;
-  max-width: 520px;
+  max-width: 480px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0.85rem;
-  padding: 0.5rem 1rem 0;
+  gap: var(--immersive-meta-gap);
+  padding: 0.25rem 0.5rem 0;
   z-index: 3;
+  box-sizing: border-box;
 }
 
 .immersive-info-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.25rem;
   width: 100%;
 }
 
@@ -4595,16 +4704,16 @@ dialog.story-share-dialog::backdrop {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  margin-bottom: 0.2rem;
+  gap: 0.5rem;
+  margin-bottom: 0.1rem;
 }
 
 .immersive-artist-badge {
-  font-size: 0.72rem;
+  font-size: 0.70rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 0.22rem 0.7rem;
+  padding: 0.18rem 0.6rem;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.08);
   color: #94a3b8;
@@ -4633,14 +4742,14 @@ dialog.story-share-dialog::backdrop {
 }
 
 .immersive-year-badge {
-  font-size: 0.72rem;
+  font-size: 0.70rem;
   font-weight: 600;
   color: #64748b;
   letter-spacing: 0.06em;
 }
 
 .immersive-song-title {
-  font-size: 1.9rem;
+  font-size: var(--immersive-title-size);
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -4652,7 +4761,7 @@ dialog.story-share-dialog::backdrop {
 }
 
 .immersive-song-artist {
-  font-size: 1.2rem;
+  font-size: var(--immersive-artist-size);
   font-weight: 600;
   color: #38bdf8;
   margin: 0;
@@ -4665,7 +4774,7 @@ dialog.story-share-dialog::backdrop {
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
 }
 
 .album-label {
@@ -4683,9 +4792,9 @@ dialog.story-share-dialog::backdrop {
 .immersive-progress-group {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.35rem;
   width: 100%;
-  max-width: 480px;
+  max-width: 440px;
 }
 
 .immersive-timeline-wrap {
@@ -4745,7 +4854,7 @@ dialog.story-share-dialog::backdrop {
 .immersive-time-row {
   display: flex;
   justify-content: space-between;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: #94a3b8;
   font-variant-numeric: tabular-nums;
@@ -4757,8 +4866,14 @@ dialog.story-share-dialog::backdrop {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.6rem;
-  margin-top: 0.2rem;
+  gap: 1.4rem;
+  margin-top: 0.1rem;
+}
+
+@media (max-width: 600px) {
+  .immersive-controls-row {
+    gap: 1rem;
+  }
 }
 
 .immersive-ctrl-btn {
@@ -4769,7 +4884,7 @@ dialog.story-share-dialog::backdrop {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.45rem;
+  padding: 0.35rem;
   border-radius: 50%;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -4787,16 +4902,16 @@ dialog.story-share-dialog::backdrop {
 
 .immersive-ctrl-btn .repeat-one {
   position: absolute;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 800;
-  top: 4px;
-  right: 4px;
+  top: 2px;
+  right: 2px;
   color: #38bdf8;
 }
 
 .immersive-play-btn {
-  width: 60px;
-  height: 60px;
+  width: var(--immersive-play-btn-size);
+  height: var(--immersive-play-btn-size);
   border-radius: 50%;
   background: linear-gradient(135deg, #38bdf8, #2563eb);
   border: none;
@@ -4805,42 +4920,18 @@ dialog.story-share-dialog::backdrop {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
 }
 
 .immersive-play-btn:hover {
   transform: scale(1.08);
-  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.6);
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.6);
 }
 
 .immersive-play-btn:active {
   transform: scale(0.96);
-}
-
-/* Responsive Adaptations for Immersive Overlay */
-@media (max-width: 600px) {
-  .immersive-disc-stage {
-    width: 315px;
-    min-height: 250px;
-  }
-  .jewel-case-box {
-    width: 220px;
-    height: 205px;
-    margin: 0;
-  }
-  .immersive-cd-wrap {
-    width: 190px;
-    height: 190px;
-    left: 220px;
-    transform: translate(-50%, -50%);
-  }
-  .immersive-song-title {
-    font-size: 1.55rem;
-  }
-  .immersive-song-artist {
-    font-size: 1.05rem;
-  }
 }
 
 
@@ -4851,47 +4942,38 @@ dialog.story-share-dialog::backdrop {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 5.5rem;
-  padding: 1rem 3.5rem 3rem;
-  max-width: 1440px;
+  gap: 4.5rem;
+  padding: 1rem 3rem 2.5rem;
+  max-width: 1350px;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-disc-stage {
   flex: none;
-  width: 460px;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
   margin: 0;
 }
 
 .immersive-player-overlay.layout-side-by-side .jewel-case-box {
-  width: 320px;
-  height: 300px;
   margin: 0;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-cd-wrap {
-  left: 320px;
+  left: var(--immersive-jewel-w);
   right: auto;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 280px;
-  height: 280px;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-meta-stage {
   flex: 1;
-  max-width: 560px;
+  max-width: 520px;
   margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   text-align: left;
-  gap: 2.2rem;
-  padding-left: 2.5rem;
+  gap: 1.8rem;
+  padding-left: 1.5rem;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-info-group {
@@ -4904,12 +4986,12 @@ dialog.story-share-dialog::backdrop {
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-song-title {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   text-align: left;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-song-artist {
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   text-align: left;
 }
 
@@ -4918,37 +5000,51 @@ dialog.story-share-dialog::backdrop {
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-progress-group {
-  max-width: 500px;
+  max-width: 480px;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-controls-row {
   justify-content: flex-start;
 }
 
-@media (max-width: 1024px) {
+/* Side-by-Side Responsive Fallback on Mobile & Tablet */
+@media (max-width: 860px) {
   .immersive-player-overlay.layout-side-by-side .immersive-stage {
-    gap: 4rem;
-    padding: 1rem 2rem 2.5rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.25rem 1rem 1.25rem;
   }
   .immersive-player-overlay.layout-side-by-side .immersive-disc-stage {
-    width: 400px;
-    height: 350px;
-  }
-  .immersive-player-overlay.layout-side-by-side .jewel-case-box {
-    width: 280px;
-    height: 260px;
-    margin: 0;
-  }
-  .immersive-player-overlay.layout-side-by-side .immersive-cd-wrap {
-    width: 240px;
-    height: 240px;
-    left: 280px;
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
   }
   .immersive-player-overlay.layout-side-by-side .immersive-meta-stage {
-    padding-left: 1.5rem;
+    align-items: center;
+    text-align: center;
+    padding-left: 0;
+    max-width: 440px;
+    gap: var(--immersive-meta-gap);
+  }
+  .immersive-player-overlay.layout-side-by-side .immersive-info-group {
+    align-items: center;
+    text-align: center;
+  }
+  .immersive-player-overlay.layout-side-by-side .immersive-tag-row {
+    justify-content: center;
   }
   .immersive-player-overlay.layout-side-by-side .immersive-song-title {
-    font-size: 2.1rem;
+    font-size: var(--immersive-title-size);
+    text-align: center;
+  }
+  .immersive-player-overlay.layout-side-by-side .immersive-song-artist {
+    font-size: var(--immersive-artist-size);
+    text-align: center;
+  }
+  .immersive-player-overlay.layout-side-by-side .immersive-album-row {
+    justify-content: center;
+  }
+  .immersive-player-overlay.layout-side-by-side .immersive-controls-row {
+    justify-content: center;
   }
 }
