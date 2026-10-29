@@ -40,10 +40,10 @@
   <meta http-equiv="Expires" content="0">
 
   <script>
-    // Ensure all visitors immediately upgrade to v5.3.18 and purge stale offline caches
+    // Ensure all visitors immediately upgrade to v5.3.19 and purge stale offline caches
     (function() {
       try {
-        var CURRENT_VER = '5.3.18';
+        var CURRENT_VER = '5.3.19';
         var lastVer = localStorage.getItem('bd_band_app_version');
         if (lastVer !== CURRENT_VER) {
           localStorage.removeItem('bd_band_plays_v1');
@@ -59,7 +59,7 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="style.css?v=5.3.18">
+  <link rel="stylesheet" href="style.css?v=5.3.19">
 </head>
 <body>
   <!-- Full-Screen Immersive Landing Page & Manifesto Overlay -->
@@ -857,12 +857,12 @@
 
       <!-- Main Stage -->
       <main class="immersive-stage">
-        <!-- Left: CD Box + Rotating CD Disc + Waveform Canvas -->
-        <div class="immersive-disc-stage">
-          <!-- Real-Time Waveform & Sine Wave Canvas -->
-          <canvas id="cdWaveformCanvas" class="cd-waveform-canvas"></canvas>
+        <!-- Real-Time Waveform & Sine Wave Canvas (Full stage backdrop) -->
+        <canvas id="cdWaveformCanvas" class="cd-waveform-canvas"></canvas>
 
-          <!-- Rotating CD Disc (anticlockwise rotation) -->
+        <!-- Left: CD Box + Rotating CD Disc -->
+        <div class="immersive-disc-stage">
+          <!-- Rotating CD Disc (clockwise rotation) -->
           <div class="immersive-cd-wrap" id="immersiveCdWrap">
             <div class="immersive-cd-disc" id="immersiveCdDisc">
               <div class="cd-center-hole">
@@ -898,7 +898,7 @@
         <div class="immersive-meta-stage">
           <div class="immersive-info-group">
             <div class="immersive-tag-row">
-              <span class="immersive-artist-badge" id="immersiveArtistTag">Artist</span>
+              <span class="immersive-artist-badge immersive-link-item immersive-artist-link" id="immersiveArtistTag" title="View artist discography">Artist</span>
               <span class="immersive-year-badge" id="immersiveYearTag">Year</span>
             </div>
             <h1 class="immersive-song-title" id="immersiveTitle">Song Title</h1>
@@ -948,6 +948,6 @@
   </div>
 
   <script src="assets/qrcode.min.js"></script>
-  <script src="app.js?v=5.3.18"></script>
+  <script src="app.js?v=5.3.19"></script>
 </body>
 </html>

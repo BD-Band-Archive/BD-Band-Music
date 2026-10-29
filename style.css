@@ -4275,7 +4275,7 @@ dialog.story-share-dialog::backdrop {
   border-color: rgba(239, 68, 68, 0.4);
 }
 
-/* Immersive Stage (Layout) */
+/* Immersive Stage (Layout) - Generous spacing & full backdrop canvas */
 .immersive-stage {
   position: relative;
   z-index: 5;
@@ -4283,47 +4283,47 @@ dialog.story-share-dialog::backdrop {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5rem;
-  padding: 1rem 3.5rem 3rem;
-  max-width: 1320px;
+  gap: 7.5rem;
+  padding: 1rem 4rem 3rem;
+  max-width: 1440px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Disc & Jewel Case Stage (Left) */
+/* Full Stage Waveform & Sine Wave Canvas (No hard clipping boundaries) */
+.cd-waveform-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Disc & Jewel Case Stage (Left) - Scaled with breathing room */
 .immersive-disc-stage {
   position: relative;
-  width: 440px;
-  height: 380px;
+  width: 490px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;
-}
-
-/* Waveform & Sine Wave Canvas */
-.cd-waveform-canvas {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
-  pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Physical CD Box (Jewel Case) */
 .jewel-case-box {
   position: relative;
-  width: 320px;
-  height: 300px;
+  width: 335px;
+  height: 315px;
   border-radius: 6px;
   background: #111317;
   display: flex;
   overflow: hidden;
   z-index: 3;
+  cursor: pointer;
   box-shadow: 
     0 25px 60px -10px rgba(0, 0, 0, 0.85),
     0 10px 20px -5px rgba(0, 0, 0, 0.6),
@@ -4341,7 +4341,7 @@ dialog.story-share-dialog::backdrop {
 
 /* Left Black Ribbed Strip (Spine) */
 .jewel-case-spine {
-  width: 22px;
+  width: 24px;
   height: 100%;
   background: #090a0d;
   flex-shrink: 0;
@@ -4435,14 +4435,14 @@ dialog.story-share-dialog::backdrop {
     );
 }
 
-/* Rotating CD Disc (protruding from the right of the jewel case) */
+/* Rotating CD Disc (protruding comfortably to the right) */
 .immersive-cd-wrap {
   position: absolute;
-  right: -25px;
+  right: -5px;
   top: 50%;
   transform: translateY(-50%);
-  width: 280px;
-  height: 280px;
+  width: 295px;
+  height: 295px;
   z-index: 2;
   filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.75));
 }
@@ -4458,20 +4458,20 @@ dialog.story-share-dialog::backdrop {
   box-shadow: 
     0 0 0 1px rgba(255, 255, 255, 0.18),
     inset 0 0 25px rgba(0, 0, 0, 0.35);
-  /* Anticlockwise rotation at realistic CD player speed (~3.6s) */
-  animation: cdSpinAntiClockwise 3.6s linear infinite;
+  /* Slower Clockwise rotation (~7.5s) */
+  animation: cdSpinClockwise 7.5s linear infinite;
 }
 
 .immersive-cd-disc.paused {
   animation-play-state: paused;
 }
 
-@keyframes cdSpinAntiClockwise {
+@keyframes cdSpinClockwise {
   from {
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(-360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -4536,14 +4536,16 @@ dialog.story-share-dialog::backdrop {
   pointer-events: none;
 }
 
-/* Immersive Metadata Stage (Right) */
+/* Immersive Metadata Stage (Right) - Padded away from left edge */
 .immersive-meta-stage {
   flex: 1;
-  max-width: 580px;
+  max-width: 560px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  gap: 2.2rem;
+  padding-left: 2.5rem;
+  z-index: 3;
 }
 
 .immersive-info-group {
@@ -4569,6 +4571,27 @@ dialog.story-share-dialog::backdrop {
   background: rgba(255, 255, 255, 0.08);
   color: #94a3b8;
   border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.2s ease;
+}
+
+/* Clickable Links in Immersive Fullscreen View */
+.immersive-link-item {
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
+}
+
+.immersive-link-item:hover {
+  color: #38bdf8 !important;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.immersive-artist-badge.immersive-link-item:hover {
+  background: rgba(56, 189, 248, 0.22);
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #38bdf8 !important;
+  transform: translateY(-1px);
+  text-decoration: none;
 }
 
 .immersive-year-badge {
@@ -4755,30 +4778,29 @@ dialog.story-share-dialog::backdrop {
 /* ==========================================================================
    Responsive Adaptations for Immersive Overlay
    ========================================================================== */
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .immersive-stage {
-    gap: 3rem;
+    gap: 4rem;
     padding: 1rem 2rem 2.5rem;
   }
   .immersive-disc-stage {
-    width: 380px;
-    height: 320px;
+    width: 420px;
+    height: 350px;
   }
   .jewel-case-box {
-    width: 270px;
-    height: 250px;
+    width: 290px;
+    height: 270px;
   }
   .immersive-cd-wrap {
-    width: 230px;
-    height: 230px;
-    right: -20px;
+    width: 250px;
+    height: 250px;
+    right: -10px;
   }
-  .cd-waveform-canvas {
-    width: 480px;
-    height: 480px;
+  .immersive-meta-stage {
+    padding-left: 1.5rem;
   }
   .immersive-song-title {
-    font-size: 2rem;
+    font-size: 2.1rem;
   }
 }
 
@@ -4810,15 +4832,12 @@ dialog.story-share-dialog::backdrop {
     height: 195px;
     right: -15px;
   }
-  .cd-waveform-canvas {
-    width: 400px;
-    height: 400px;
-  }
   .immersive-meta-stage {
     width: 100%;
     max-width: 420px;
     align-items: center;
     gap: 1.5rem;
+    padding-left: 0;
   }
   .immersive-tag-row {
     justify-content: center;
