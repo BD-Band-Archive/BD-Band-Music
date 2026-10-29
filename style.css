@@ -4330,31 +4330,31 @@ dialog.story-share-dialog::backdrop {
   z-index: 1;
 }
 
-/* Disc & Jewel Case Stage (Center of Screen) */
+/* Disc & Jewel Case Stage (Center of Screen) - Total width = Box (320px) + Half CD (140px) = 460px */
 .immersive-disc-stage {
   position: relative;
   flex: 1;
-  width: 640px;
+  width: 460px;
   min-height: 350px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 0 auto;
   z-index: 2;
 }
 
-/* Physical CD Box (Jewel Case) - Centered layout with disc */
+/* Physical CD Box (Jewel Case) */
 .jewel-case-box {
   position: relative;
-  width: 310px;
-  height: 290px;
+  width: 320px;
+  height: 300px;
   border-radius: 6px;
   background: #111317;
   display: flex;
   overflow: hidden;
   z-index: 3;
   cursor: pointer;
-  margin-right: 170px; /* Perfectly balances the generous 170px CD disc protrusion */
+  margin: 0;
   box-shadow: 
     0 25px 60px -10px rgba(0, 0, 0, 0.85),
     0 10px 20px -5px rgba(0, 0, 0, 0.6),
@@ -4466,14 +4466,15 @@ dialog.story-share-dialog::backdrop {
     );
 }
 
-/* Rotating CD Disc (protruding significantly to the right to showcase artwork) */
+/* Rotating CD Disc (CD center is directly on the line of the box cover edge) */
 .immersive-cd-wrap {
   position: absolute;
-  left: calc(50% + 105px);
+  left: 320px;
+  right: auto;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 270px;
-  height: 270px;
+  width: 280px;
+  height: 280px;
   z-index: 2;
   filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.75));
 }
@@ -4820,18 +4821,19 @@ dialog.story-share-dialog::backdrop {
 /* Responsive Adaptations for Immersive Overlay */
 @media (max-width: 600px) {
   .immersive-disc-stage {
-    width: 360px;
-    min-height: 260px;
+    width: 315px;
+    min-height: 250px;
   }
   .jewel-case-box {
-    width: 215px;
-    height: 200px;
-    margin-right: 110px;
+    width: 220px;
+    height: 205px;
+    margin: 0;
   }
   .immersive-cd-wrap {
-    width: 185px;
-    height: 185px;
-    left: calc(50% + 70px);
+    width: 190px;
+    height: 190px;
+    left: 220px;
+    transform: translate(-50%, -50%);
   }
   .immersive-song-title {
     font-size: 1.55rem;
@@ -4856,7 +4858,7 @@ dialog.story-share-dialog::backdrop {
 
 .immersive-player-overlay.layout-side-by-side .immersive-disc-stage {
   flex: none;
-  width: 550px;
+  width: 460px;
   height: 400px;
   display: flex;
   align-items: center;
@@ -4867,14 +4869,14 @@ dialog.story-share-dialog::backdrop {
 .immersive-player-overlay.layout-side-by-side .jewel-case-box {
   width: 320px;
   height: 300px;
-  margin-right: 0;
+  margin: 0;
 }
 
 .immersive-player-overlay.layout-side-by-side .immersive-cd-wrap {
-  left: 240px;
+  left: 320px;
   right: auto;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
   width: 280px;
   height: 280px;
 }
@@ -4929,17 +4931,19 @@ dialog.story-share-dialog::backdrop {
     padding: 1rem 2rem 2.5rem;
   }
   .immersive-player-overlay.layout-side-by-side .immersive-disc-stage {
-    width: 420px;
+    width: 400px;
     height: 350px;
   }
   .immersive-player-overlay.layout-side-by-side .jewel-case-box {
-    width: 290px;
-    height: 270px;
+    width: 280px;
+    height: 260px;
+    margin: 0;
   }
   .immersive-player-overlay.layout-side-by-side .immersive-cd-wrap {
-    width: 250px;
-    height: 250px;
-    right: -10px;
+    width: 240px;
+    height: 240px;
+    left: 280px;
+    transform: translate(-50%, -50%);
   }
   .immersive-player-overlay.layout-side-by-side .immersive-meta-stage {
     padding-left: 1.5rem;
