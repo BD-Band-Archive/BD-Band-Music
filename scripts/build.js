@@ -36,34 +36,35 @@ async function runBuild() {
   const catalogData = JSON.parse(fs.readFileSync(catalogPath, 'utf-8'));
   console.log(`[✓] catalog.json validated: ${catalogData.length} audio tracks indexed.`);
 
-  // 2. Verify Neon Database Configuration
+  // 2. Verify Neon Database Configuration (Optional for static frontend build)
   const dbUrl = process.env.DATABASE_URL;
-  if (!dbUrl) {
-    throw new Error('DATABASE_URL is missing from environment or .env.local');
-  }
-  const maskedHost = dbUrl.split('@')[1] ? dbUrl.split('@')[1].split('/')[0] : 'hidden';
-  console.log(`[✓] Neon database configuration detected: ${maskedHost}`);
-  console.log(`[✓] Active Neon branch: ${process.env.NEON_BRANCH || 'production'}`);
+  if (dbUrl) {
+    const maskedHost = dbUrl.split('@')[1] ? dbUrl.split('@')[1].split('/')[0] : 'hidden';
+    console.log(`[✓] Neon database configuration detected: ${maskedHost}`);
+    console.log(`[✓] Active Neon branch: ${process.env.NEON_BRANCH || 'production'}`);
 
-  // 3. Connect to Neon and ensure schema
-  console.log('[*] Testing connection to Neon Postgres & ensuring schema...');
-  try {
-    const sql = neon(dbUrl);
+    // 3. Connect to Neon and ensure schema
+    console.log('[*] Testing connection to Neon Postgres & ensuring schema...');
+    try {
+      const sql = neon(dbUrl);
 
-  await sql`
-    CREATE TABLE IF NOT EXISTS plays (
-      track_key VARCHAR(255) PRIMARY KEY,
-      count INTEGER NOT NULL DEFAULT 1,
-      last_played_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-    );
-  `;
-  console.log('[✓] Table "plays" confirmed in Neon Postgres.');
+      await sql`
+        CREATE TABLE IF NOT EXISTS plays (
+          track_key VARCHAR(255) PRIMARY KEY,
+          count INTEGER NOT NULL DEFAULT 1,
+          last_played_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+        );
+      `;
+      console.log('[✓] Table "plays" confirmed in Neon Postgres.');
 
-  // Verify read query
-  const countRes = await sql`SELECT COUNT(*)::int AS total_tracks FROM plays;`;
-    console.log(`[✓] Total uniquely tracked songs in Neon: ${countRes[0].total_tracks}`);
-  } catch (err) {
-    console.warn(`[!] Neon local verification notice: ${err.message}`);
+      // Verify read query
+      const countRes = await sql`SELECT COUNT(*)::int AS total_tracks FROM plays;`;
+      console.log(`[✓] Total uniquely tracked songs in Neon: ${countRes[0].total_tracks}`);
+    } catch (err) {
+      console.warn(`[!] Neon verification notice: ${err.message}`);
+    }
+  } else {
+    console.log('[✓] DATABASE_URL not provided in environment — skipping Neon schema check (static frontend deployment).');
   }
 
   // 4. Validate core application files exist
