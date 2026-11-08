@@ -1,10 +1,12 @@
 # 🇧🇩 BD Band Music
 
-[![Live Web Player](https://img.shields.io/badge/▶_Launch-Live_Web_Player-8b5cf6?style=for-the-badge&logo=googlechrome&logoColor=white)](https://bd-band-archive.github.io/BD-Band-Music/) [![Catalog - Lossless FLAC Tracks](https://img.shields.io/badge/Catalog-1214%20FLAC%20Tracks-007ec6?style=for-the-badge&logo=flac&logoColor=white)](#) [![Git LFS - Enabled](https://img.shields.io/badge/Git%20LFS-Enabled-f05032?style=for-the-badge&logo=git-lfs&logoColor=white)](#)
+[![Live Web Player](https://img.shields.io/badge/▶_Launch-Live_Web_Player-8b5cf6?style=for-the-badge&logo=googlechrome&logoColor=white)](https://bd-band-music.pages.dev/) [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare_Pages-Live-f38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://bd-band-music.pages.dev/) [![Netlify Mirror](https://img.shields.io/badge/Netlify-Live-00ad9f?style=for-the-badge&logo=netlify&logoColor=white)](https://bd-band-music.netlify.app/) [![Git LFS - Enabled](https://img.shields.io/badge/Git%20LFS-Enabled-f05032?style=for-the-badge&logo=git-lfs&logoColor=white)](#)
 
 > 🌐 **Interactive Web Player & Search Engine:**  
 > Search, browse, and stream all **lossless FLAC tracks** across all bands and compilations directly in your browser with instant search, playlists, and background lock-screen playback:  
-> **👉 [https://bd-band-archive.github.io/BD-Band-Music/](https://bd-band-archive.github.io/BD-Band-Music/)**
+> **👉 Cloudflare Pages: [https://bd-band-music.pages.dev/](https://bd-band-music.pages.dev/)**  
+> **👉 Netlify Mirror: [https://bd-band-music.netlify.app/](https://bd-band-music.netlify.app/)**  
+> **👉 GitHub Pages: [https://bd-band-archive.github.io/BD-Band-Music/](https://bd-band-archive.github.io/BD-Band-Music/)**
 
 ---
 
@@ -98,11 +100,31 @@
 
 ---
 
+# 🎸 [Dads In The Park](https://github.com/BD-Band-Archive/Dads-In-The-Park)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Dads-In-The-Park">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Dads-In-The-Park/master/assets/band_cover.jpg" alt="Dads In The Park Band Cover" width="750" />
+  </a>
+</p>
+
+---
+
 # 🎸 [Disciples](https://github.com/BD-Band-Archive/Disciples)
 
 <p align="center">
   <a href="https://github.com/BD-Band-Archive/Disciples">
     <img src="https://raw.githubusercontent.com/BD-Band-Archive/Disciples/master/assets/band_cover.jpg" alt="Disciples Band Cover" width="750" />
+  </a>
+</p>
+
+---
+
+# 🎸 [Firoze Jong](https://github.com/BD-Band-Archive/Firoze-Jong)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Firoze-Jong">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Firoze-Jong/master/assets/band_cover.jpg" alt="Firoze Jong Band Cover" width="750" />
   </a>
 </p>
 
@@ -133,6 +155,16 @@
 <p align="center">
   <a href="https://github.com/BD-Band-Archive/Jon-Kabir">
     <img src="https://raw.githubusercontent.com/BD-Band-Archive/Jon-Kabir/master/assets/band_cover.jpg" alt="Jon Kabir Band Cover" width="750" />
+  </a>
+</p>
+
+---
+
+# 🎸 [Karnival](https://github.com/BD-Band-Archive/Karnival)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Karnival">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Karnival/master/assets/band_cover.jpg" alt="Karnival Band Cover" width="750" />
   </a>
 </p>
 
@@ -173,6 +205,16 @@
 <p align="center">
   <a href="https://github.com/BD-Band-Archive/Mixed-Albums">
     <img src="https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/assets/band_cover.png" alt="Mixed Albums Band Cover" width="750" />
+  </a>
+</p>
+
+---
+
+# 🎸 [Monosoroni](https://github.com/BD-Band-Archive/Monosoroni)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Monosoroni">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Monosoroni/master/assets/band_cover.jpg" alt="Monosoroni Band Cover" width="750" />
   </a>
 </p>
 
