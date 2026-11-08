@@ -3856,43 +3856,6 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%202%20%282004%29/Album%20Cover/Agontuk%202%20%5BCD%5D.jpg"
     }
   ],
-  "Black - Din Bodol": [
-    {
-      "title": "Front",
-      "filename": "Din Bodol [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Din%20Bodol%20%282004%29/Album%20Cover/Din%20Bodol%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Inset-1",
-      "filename": "Din Bodol [Inset-1].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Din%20Bodol%20%282004%29/Album%20Cover/Din%20Bodol%20%5BInset-1%5D.jpg"
-    },
-    {
-      "title": "Inset-2",
-      "filename": "Din Bodol [Inset-2].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Din%20Bodol%20%282004%29/Album%20Cover/Din%20Bodol%20%5BInset-2%5D.jpg"
-    },
-    {
-      "title": "Inset-3",
-      "filename": "Din Bodol [Inset-3].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Din%20Bodol%20%282004%29/Album%20Cover/Din%20Bodol%20%5BInset-3%5D.jpg"
-    },
-    {
-      "title": "Inset-4",
-      "filename": "Din Bodol [Inset-4].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Din%20Bodol%20%282004%29/Album%20Cover/Din%20Bodol%20%5BInset-4%5D.jpg"
-    },
-    {
-      "title": "Inset-5",
-      "filename": "Din Bodol [Inset-5].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Din%20Bodol%20%282004%29/Album%20Cover/Din%20Bodol%20%5BInset-5%5D.jpg"
-    },
-    {
-      "title": "Back",
-      "filename": "Din Bodol [Back].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Din%20Bodol%20%282004%29/Album%20Cover/Din%20Bodol%20%5BBack%5D.jpg"
-    }
-  ],
   "Black - Lokayot": [
     {
       "title": "Front",
@@ -3952,33 +3915,6 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Shopnochura%20%282004%29/Album%20Cover/Shopnochura%20%5BCD%5D.jpg"
     }
   ],
-  "Black - Agontuk 3": [
-    {
-      "title": "Front",
-      "filename": "Agontuk 3 [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BFront%5D.jpg"
-    },
-    {
-      "title": "Booklet-1",
-      "filename": "Agontuk 3 [Booklet-1].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BBooklet-1%5D.jpg"
-    },
-    {
-      "title": "Booklet-2",
-      "filename": "Agontuk 3 [Booklet-2].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BBooklet-2%5D.jpg"
-    },
-    {
-      "title": "Inlay",
-      "filename": "Agontuk 3 [Inlay].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BInlay%5D.jpg"
-    },
-    {
-      "title": "Back",
-      "filename": "Agontuk 3 [Back].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BBack%5D.jpg"
-    }
-  ],
   "Black - Shopnochura 2": [
     {
       "title": "Front",
@@ -4021,6 +3957,33 @@
       "title": "Back",
       "filename": "Shopnochura 2 [Back].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Shopnochura%202%20%282005%29/Album%20Cover/Shopnochura%202%20%5BBack%5D.jpg"
+    }
+  ],
+  "Black - Agontuk 3": [
+    {
+      "title": "Front",
+      "filename": "Agontuk 3 [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "Booklet-1",
+      "filename": "Agontuk 3 [Booklet-1].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BBooklet-1%5D.jpg"
+    },
+    {
+      "title": "Booklet-2",
+      "filename": "Agontuk 3 [Booklet-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BBooklet-2%5D.jpg"
+    },
+    {
+      "title": "Inlay",
+      "filename": "Agontuk 3 [Inlay].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BInlay%5D.jpg"
+    },
+    {
+      "title": "Back",
+      "filename": "Agontuk 3 [Back].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Agontuk%203%20%282005%29/Album%20Cover/Agontuk%203%20%5BBack%5D.jpg"
     }
   ],
   "Black - Live Now": [
@@ -4633,6 +4596,16 @@
       "title": "Artwork",
       "filename": "Artwork.jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Cryptic-Fate/master/The%20Platform%20Live%20%282022%29/Album%20Cover/Artwork.jpg"
+    },
+    {
+      "title": "Front",
+      "filename": "The Platform Live [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Dads-In-The-Park/master/The%20Platform%20Live%20%282022%29/Album%20Cover/The%20Platform%20Live%20%5BFront%5D.jpg"
+    },
+    {
+      "title": "The Platform Live(Season 1, Vol. 1) (2022)",
+      "filename": "The Platform Live(Season 1, Vol. 1) (2022).jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Karnival/master/The%20Platform%20Live%28Season%201%2C%20Vol.%201%29%20%282022%29/Album%20Cover/The%20Platform%20Live%28Season%201%2C%20Vol.%201%29%20%282022%29.jpg"
     }
   ],
   "Cryptic Fate - Noy Maash": [
@@ -5179,16 +5152,6 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Chhobi.jpg"
     },
     {
-      "title": "Indalo - Ekanto Golaap",
-      "filename": "Indalo - Ekanto Golaap.jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Ekanto%20Golaap.jpg"
-    },
-    {
-      "title": "Indalo - Ghuri",
-      "filename": "Indalo - Ghuri.jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Ghuri.jpg"
-    },
-    {
       "title": "Indalo - Hobeki",
       "filename": "Indalo - Hobeki.jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Hobeki.jpg"
@@ -5214,16 +5177,6 @@
       "title": "Indalo - Chhobi",
       "filename": "Indalo - Chhobi.jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Chhobi.jpg"
-    },
-    {
-      "title": "Indalo - Ekanto Golaap",
-      "filename": "Indalo - Ekanto Golaap.jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Ekanto%20Golaap.jpg"
-    },
-    {
-      "title": "Indalo - Ghuri",
-      "filename": "Indalo - Ghuri.jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Indalo/master/Singles/Album%20Cover/Indalo%20-%20Ghuri.jpg"
     },
     {
       "title": "Indalo - Hobeki",
@@ -6625,6 +6578,27 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Shomorpon%20%282011%29/Album%20Cover/Shomorpon%20%5BFront%5D.jpg"
     }
   ],
+  "Dads In The Park - The Platform Live": [
+    {
+      "title": "Front",
+      "filename": "The Platform Live [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Dads-In-The-Park/master/The%20Platform%20Live%20%282022%29/Album%20Cover/The%20Platform%20Live%20%5BFront%5D.jpg"
+    }
+  ],
+  "Dads In The Park - 88 New Paul Town": [
+    {
+      "title": "Front",
+      "filename": "88 New Paul Town [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Dads-In-The-Park/master/88%20New%20Paul%20Town%20%282026%29/Album%20Cover/88%20New%20Paul%20Town%20%5BFront%5D.jpg"
+    }
+  ],
+  "88 New Paul Town": [
+    {
+      "title": "Front",
+      "filename": "88 New Paul Town [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Dads-In-The-Park/master/88%20New%20Paul%20Town%20%282026%29/Album%20Cover/88%20New%20Paul%20Town%20%5BFront%5D.jpg"
+    }
+  ],
   "Disciples - Harano Podochchap": [
     {
       "title": "front",
@@ -6670,6 +6644,76 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Jewel%20With%20The%20Stars%20%282006%29/Album%20Cover/Jewel%20with%20the%20stars%20%5BFront%5D.jpg"
     }
   ],
+  "Karnival - Indraloy": [
+    {
+      "title": "front",
+      "filename": "Indraloy[front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Karnival/master/Indraloy%20%282009%29/Album%20Cover/Indraloy%5Bfront%5D.jpg"
+    }
+  ],
+  "Indraloy": [
+    {
+      "title": "front",
+      "filename": "Indraloy[front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Karnival/master/Indraloy%20%282009%29/Album%20Cover/Indraloy%5Bfront%5D.jpg"
+    }
+  ],
+  "Karnival - Mohomukti": [
+    {
+      "title": "front",
+      "filename": "Mohomukti [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Karnival/master/Mohomukti%20%282020%29/Album%20Cover/Mohomukti%20%5Bfront%5D.jpg"
+    }
+  ],
+  "Mohomukti": [
+    {
+      "title": "front",
+      "filename": "Mohomukti [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Karnival/master/Mohomukti%20%282020%29/Album%20Cover/Mohomukti%20%5Bfront%5D.jpg"
+    }
+  ],
+  "Karnival - Attotshorgo": [
+    {
+      "title": "front",
+      "filename": "Attotshorgo [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Karnival/master/Attotshorgo%20%282021%29/Album%20Cover/Attotshorgo%20%5Bfront%5D.jpg"
+    }
+  ],
+  "Attotshorgo": [
+    {
+      "title": "front",
+      "filename": "Attotshorgo [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Karnival/master/Attotshorgo%20%282021%29/Album%20Cover/Attotshorgo%20%5Bfront%5D.jpg"
+    }
+  ],
+  "Karnival - The Platform Live": [
+    {
+      "title": "The Platform Live(Season 1, Vol. 1) (2022)",
+      "filename": "The Platform Live(Season 1, Vol. 1) (2022).jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Karnival/master/The%20Platform%20Live%28Season%201%2C%20Vol.%201%29%20%282022%29/Album%20Cover/The%20Platform%20Live%28Season%201%2C%20Vol.%201%29%20%282022%29.jpg"
+    }
+  ],
+  "Karnival - Rock 707": [
+    {
+      "title": "Front",
+      "filename": "Rock 707 [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20707%20%282011%29/Album%20Cover/Rock%20707%20%5BFront%5D.jpg"
+    }
+  ],
+  "Rock 707": [
+    {
+      "title": "Front",
+      "filename": "Rock 707 [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20707%20%282011%29/Album%20Cover/Rock%20707%20%5BFront%5D.jpg"
+    }
+  ],
+  "Karnival - Rock 909": [
+    {
+      "title": "Front",
+      "filename": "Rock 909 [Front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20909%20%282015%29/Album%20Cover/Rock%20909%20%5BFront%5D.jpg"
+    }
+  ],
   "Mila - Fele Asha": [
     {
       "title": "Front",
@@ -6682,6 +6726,64 @@
       "title": "Front",
       "filename": "Fele Asha [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Fele%20Asha%20%282006%29/Album%20Cover/Fele%20Asha%20%5BFront%5D.jpg"
+    }
+  ],
+  "Mila - Chapter 2": [
+    {
+      "title": "front-2",
+      "filename": "Chapter 2[front-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Chapter%202%20%282007%29/Album%20Cover/Chapter%202%5Bfront-2%5D.jpg"
+    },
+    {
+      "title": "front",
+      "filename": "Chapter 2[front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Chapter%202%20%282007%29/Album%20Cover/Chapter%202%5Bfront%5D.jpg"
+    },
+    {
+      "title": "cd",
+      "filename": "Chapter 2[cd].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Chapter%202%20%282007%29/Album%20Cover/Chapter%202%5Bcd%5D.jpg"
+    }
+  ],
+  "Chapter 2": [
+    {
+      "title": "front-2",
+      "filename": "Chapter 2[front-2].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Chapter%202%20%282007%29/Album%20Cover/Chapter%202%5Bfront-2%5D.jpg"
+    },
+    {
+      "title": "front",
+      "filename": "Chapter 2[front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Chapter%202%20%282007%29/Album%20Cover/Chapter%202%5Bfront%5D.jpg"
+    },
+    {
+      "title": "cd",
+      "filename": "Chapter 2[cd].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Chapter%202%20%282007%29/Album%20Cover/Chapter%202%5Bcd%5D.jpg"
+    }
+  ],
+  "Mila - Re-defined": [
+    {
+      "title": "front",
+      "filename": "Mila Re-defined [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Re-defined%20%282009%29/Album%20Cover/Mila%20Re-defined%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "cd",
+      "filename": "Mila Re-defined [cd].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Re-defined%20%282009%29/Album%20Cover/Mila%20Re-defined%20%5Bcd%5D.jpg"
+    }
+  ],
+  "Re-defined": [
+    {
+      "title": "front",
+      "filename": "Mila Re-defined [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Re-defined%20%282009%29/Album%20Cover/Mila%20Re-defined%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "cd",
+      "filename": "Mila Re-defined [cd].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Re-defined%20%282009%29/Album%20Cover/Mila%20Re-defined%20%5Bcd%5D.jpg"
     }
   ],
   "Mila - Uncensored": [
@@ -6698,11 +6800,39 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Uncensored%20%282016%29/Album%20Cover/Uncensored%20%5BFront%5D.jpg"
     }
   ],
+  "Mila - Re-Defined": [
+    {
+      "title": "front",
+      "filename": "Re-Defined - 2023[front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Re-Defined%20%282023%20Remaster%29/Album%20Cover/Re-Defined%20-%202023%5Bfront%5D.jpg"
+    }
+  ],
+  "Re-Defined": [
+    {
+      "title": "front",
+      "filename": "Re-Defined - 2023[front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mila/master/Re-Defined%20%282023%20Remaster%29/Album%20Cover/Re-Defined%20-%202023%5Bfront%5D.jpg"
+    }
+  ],
   "Mila - Bonno": [
     {
       "title": "Front",
       "filename": "Bonno [Front].jpg",
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Bonno%20%282008%29/Album%20Cover/Bonno%20%5BFront%5D.jpg"
+    }
+  ],
+  "Monosoroni - Monosoroni": [
+    {
+      "title": "front",
+      "filename": "Monosoroni[front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Monosoroni/master/Monosoroni%20%282013%29/Album%20Cover/Monosoroni%5Bfront%5D.jpg"
+    }
+  ],
+  "Monosoroni": [
+    {
+      "title": "front",
+      "filename": "Monosoroni[front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Monosoroni/master/Monosoroni%20%282013%29/Album%20Cover/Monosoroni%5Bfront%5D.jpg"
     }
   ],
   "Rockstarta - Hits of Metal Band Smritir Shohor": [
@@ -9562,6 +9692,198 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Shopnochura%202%20%282005%29/Album%20Cover/Shopnochura%202%20%5BBack%5D.jpg"
     }
   ],
+  "Adhar - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Tepantor - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Dwfs - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Tomosh - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Kalponik - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Aloukik - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "3rd World - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "D/Zeal - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Prachir - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Orbz - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Forbidden Truth - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Darkends - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Genesplit - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "Drek - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
+  "D.O.T - Prarthona": [
+    {
+      "title": "front",
+      "filename": "Prarthona [front].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Bfront%5D.jpg"
+    },
+    {
+      "title": "inlet",
+      "filename": "Prarthona [inlet].jpg",
+      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Prarthona%20%282006%29/Album%20Cover/Prarthona%20%5Binlet%5D.jpg"
+    }
+  ],
   "Jewel - Jewel With The Stars": [
     {
       "title": "Front",
@@ -12122,13 +12444,6 @@
       "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20707%20%282011%29/Album%20Cover/Rock%20707%20%5BFront%5D.jpg"
     }
   ],
-  "Rock 707": [
-    {
-      "title": "Front",
-      "filename": "Rock 707 [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20707%20%282011%29/Album%20Cover/Rock%20707%20%5BFront%5D.jpg"
-    }
-  ],
   "Powersurge - Rock 707": [
     {
       "title": "Front",
@@ -12200,13 +12515,6 @@
     }
   ],
   "Cadaver - Rock 707": [
-    {
-      "title": "Front",
-      "filename": "Rock 707 [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20707%20%282011%29/Album%20Cover/Rock%20707%20%5BFront%5D.jpg"
-    }
-  ],
-  "Karnival - Rock 707": [
     {
       "title": "Front",
       "filename": "Rock 707 [Front].jpg",
@@ -13829,13 +14137,6 @@
     }
   ],
   "Crozz - Rock 909": [
-    {
-      "title": "Front",
-      "filename": "Rock 909 [Front].jpg",
-      "url": "https://raw.githubusercontent.com/BD-Band-Archive/Mixed-Albums/master/Rock%20909%20%282015%29/Album%20Cover/Rock%20909%20%5BFront%5D.jpg"
-    }
-  ],
-  "Karnival - Rock 909": [
     {
       "title": "Front",
       "filename": "Rock 909 [Front].jpg",
