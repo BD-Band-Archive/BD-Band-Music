@@ -36,15 +36,14 @@ FOLDER_MAP = {
     'BD-Band-Music': 'BD Band Music',
     'Stoic-Bliss': 'Stoic Bliss',
     'The-Watson-Brothers': 'The Watson Brothers',
-    'Bassbaba-Sumon': 'Bassbaba Sumon',
-    'Ayub-Bachchu': 'Ayub Bachchu'
+    'Bassbaba-Sumon': 'Bassbaba Sumon'
 }
 
 def discover_repos():
     r"""Dynamically discovers all music and band repositories in D:\Music."""
     priority_bands = [
-        "Aftermath", "Arbovirus", "Arnob", "Artcell", "Aurthohin", "Ayub Bachchu", "Bassbaba Sumon", "Black",
-        "Cryptic Fate", "Icons", "Indalo", "LRB", "Minerva", "Stoic Bliss", "The Watson Brothers", "Vibe", "Warfaze"
+        "Aftermath", "Arbovirus", "Arnob", "Artcell", "Aurthohin", "Bassbaba Sumon", "Black",
+        "Cryptic Fate", "Icons", "Indalo", "Minerva", "Stoic Bliss", "The Watson Brothers", "Vibe", "Warfaze"
     ]
     repos = []
     
@@ -117,11 +116,6 @@ CANONICAL_ARTIST_MAP = {
     "aftermath": "Aftermath",
     "arnob": "Arnob",
     "arnob & friends": "Arnob",
-    "ayub bachchu": "Ayub Bachchu",
-    "ayub bacchu": "Ayub Bachchu",
-    "ab": "Ayub Bachchu",
-    "lrb": "LRB",
-    "love runs blind": "LRB",
     "warfaze": "Warfaze",
     "wazfaze": "Warfaze",
     "sahana": "Sahana Bajpaie",

@@ -29,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.36';
+  const APP_VERSION = '5.3.39';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -1537,8 +1537,6 @@
   const ARTIST_OFFICIAL_IMAGES = {
     'Aftermath': 'assets/artists/aftermath.jpg',
     'Arnob': 'assets/artists/arnob.jpg',
-    'Ayub Bachchu': 'assets/artists/ayub_bachchu.jpg',
-    'LRB': 'assets/artists/lrb.jpg',
     'Artcell': 'assets/artists/artcell_logo.png',
     'Black': 'assets/artists/black.jpg',
     'Aurthohin': 'assets/artists/aurthohin.png',
