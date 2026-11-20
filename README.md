@@ -94,7 +94,7 @@
 
 <p align="center">
   <a href="https://github.com/BD-Band-Archive/Dads-In-The-Park">
-    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Dads-In-The-Park/master/assets/band_cover.jpg" alt="Dads In The Park Band Cover" width="750" />
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/BD-Band-Music/master/assets/covers/Dads%20In%20The%20Park/assets/band_cover.jpg" alt="Dads In The Park Band Cover" width="750" />
   </a>
 </p>
 
@@ -114,7 +114,7 @@
 
 <p align="center">
   <a href="https://github.com/BD-Band-Archive/Firoze-Jong">
-    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Firoze-Jong/master/assets/band_cover.jpg" alt="Firoze Jong Band Cover" width="750" />
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/BD-Band-Music/master/assets/covers/Firoze%20Jong/assets/band_cover.jpg" alt="Firoze Jong Band Cover" width="750" />
   </a>
 </p>
 
@@ -154,7 +154,7 @@
 
 <p align="center">
   <a href="https://github.com/BD-Band-Archive/Karnival">
-    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Karnival/master/assets/band_cover.jpg" alt="Karnival Band Cover" width="750" />
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/BD-Band-Music/master/assets/covers/Karnival/assets/band_cover.jpg" alt="Karnival Band Cover" width="750" />
   </a>
 </p>
 
@@ -194,7 +194,7 @@
 
 <p align="center">
   <a href="https://github.com/BD-Band-Archive/Monosoroni">
-    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Monosoroni/master/assets/band_cover.jpg" alt="Monosoroni Band Cover" width="750" />
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/BD-Band-Music/master/assets/covers/Monosoroni/assets/band_cover.jpg" alt="Monosoroni Band Cover" width="750" />
   </a>
 </p>
 

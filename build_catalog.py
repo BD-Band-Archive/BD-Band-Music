@@ -226,6 +226,37 @@ def get_local_repo_dir(repo):
         return MUSIC_DIR / rep_space
     return MUSIC_DIR / repo
 
+NON_EXISTENT_REPOS = {
+    'karnival': 'Karnival',
+    'firoze-jong': 'Firoze Jong',
+    'firoze jong': 'Firoze Jong',
+    'dads-in-the-park': 'Dads In The Park',
+    'dads in the park': 'Dads In The Park',
+    'monosoroni': 'Monosoroni'
+}
+
+def make_cover_url(repo, cur_folder, cov_name, fname):
+    enc_cov = urllib.parse.quote(cov_name)
+    enc_file = urllib.parse.quote(fname)
+    if cur_folder:
+        enc_alb = "/".join(urllib.parse.quote(seg) for seg in cur_folder.split("/"))
+        subpath = f"{enc_alb}/{enc_cov}/{enc_file}"
+    else:
+        subpath = f"{enc_cov}/{enc_file}"
+        
+    norm_repo = (repo or '').lower().replace('-', ' ').strip()
+    if (repo or '').lower() in NON_EXISTENT_REPOS or norm_repo in NON_EXISTENT_REPOS:
+        local_name = NON_EXISTENT_REPOS.get((repo or '').lower()) or NON_EXISTENT_REPOS.get(norm_repo)
+        return f"https://raw.githubusercontent.com/BD-Band-Archive/BD-Band-Music/master/assets/covers/{urllib.parse.quote(local_name)}/{subpath}"
+    return f"https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{subpath}"
+
+def is_primary_front(f):
+    n = f.stem.lower()
+    if 'front' not in n and 'artwork' not in n:
+        return False
+    exclude = ['front-2', 'front-3', 'front2', 'front3', 'front-back', 'front_back', 'front+inlay', 'inset-front', 'inlay-front', 'front-re-release']
+    return not any(x in n for x in exclude)
+
 def get_exact_album_cover(stream_url):
     """Directly inspect filesystem for the album's cover based on the stream URL."""
     m = re.match(r'https://media\.githubusercontent\.com/media/BD-Band-Archive/([^/]+)/master/(.+)/[^/]+$', stream_url)
@@ -252,7 +283,7 @@ def get_exact_album_cover(stream_url):
     for cur_folder, target_dir in target_dirs:
         if not target_dir or not target_dir.exists():
             continue
-        for cov_name in ['Album Cover', 'Album Covers']:
+        for cov_name in ['Album Cover', 'Album Covers', 'Song cover photos']:
             cov_dir = target_dir / cov_name
             if cov_dir.exists():
                 files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
@@ -298,15 +329,11 @@ def get_exact_album_cover(stream_url):
                                 front = best_f
 
                     if not front:
+                        front = next((f for f in files if is_primary_front(f)), None)
+                    if not front:
                         front = next((f for f in files if 'front' in f.name.lower() or 'artwork' in f.name.lower()), files[0])
 
-                    enc_cov = urllib.parse.quote(cov_name)
-                    enc_file = urllib.parse.quote(front.name)
-                    if cur_folder:
-                        enc_alb = "/".join(urllib.parse.quote(seg) for seg in cur_folder.split("/"))
-                        return f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
-                    else:
-                        return f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_cov}/{enc_file}'
+                    return make_cover_url(repo, cur_folder, cov_name, front.name)
                 
     return ''
 
@@ -345,14 +372,16 @@ def get_all_album_covers(stream_url):
     for cur_folder, target_dir in target_dirs:
         if not target_dir or not target_dir.exists():
             continue
-        for cov_name in ['Album Cover', 'Album Covers']:
+        for cov_name in ['Album Cover', 'Album Covers', 'Song cover photos']:
             cov_dir = target_dir / cov_name
             if cov_dir.exists():
                 files = [f for f in cov_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp']]
                 def natural_sort_key(f):
                     n = f.name.lower()
-                    cat = 8
-                    if 'front' in n:
+                    cat = 9
+                    if is_primary_front(f):
+                        cat = 0
+                    elif 'front' in n:
                         cat = 1
                     elif 'artwork' in n:
                         cat = 2
@@ -388,13 +417,7 @@ def get_all_album_covers(stream_url):
                     except Exception:
                         pass
                     
-                    enc_cov = urllib.parse.quote(cov_name)
-                    enc_file = urllib.parse.quote(f.name)
-                    if cur_folder:
-                        enc_alb = "/".join(urllib.parse.quote(seg) for seg in cur_folder.split("/"))
-                        raw_url = f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_alb}/{enc_cov}/{enc_file}'
-                    else:
-                        raw_url = f'https://raw.githubusercontent.com/BD-Band-Archive/{repo}/master/{enc_cov}/{enc_file}'
+                    raw_url = make_cover_url(repo, cur_folder, cov_name, f.name)
 
                     if raw_url in seen_urls:
                         continue
@@ -543,6 +566,13 @@ def build_catalog():
     repos = discover_repos()
     print(f"[*] Discovered {len(repos)} repositories to process.")
     
+    ia_urls_file = OUTPUT_DIR / "assets" / "ia_stream_urls.json"
+    ia_stream_urls = {}
+    if ia_urls_file.exists():
+        with open(ia_urls_file, "r", encoding="utf-8") as f:
+            ia_stream_urls = json.load(f)
+        print(f"[*] Loaded {len(ia_stream_urls)} Internet Archive streaming targets.")
+    
     for folder_name, repo_name in repos:
         readme_path = MUSIC_DIR / folder_name / "README.md"
         repo_dir = MUSIC_DIR / folder_name
@@ -638,7 +668,13 @@ def build_catalog():
             if m_img:
                 img_src = m_img.group(1).strip()
                 if "img.shields.io" not in img_src and "band_cover" not in img_src and "assets/band_cover" not in img_src:
-                    if not img_src.startswith("http"):
+                    norm_repo = repo_name.lower().replace('-', ' ').strip()
+                    if repo_name.lower() in NON_EXISTENT_REPOS or norm_repo in NON_EXISTENT_REPOS:
+                        local_name = NON_EXISTENT_REPOS.get(repo_name.lower()) or NON_EXISTENT_REPOS.get(norm_repo)
+                        unquoted = urllib.parse.unquote(img_src.replace("\\", "/"))
+                        encoded_path = "/".join(urllib.parse.quote(seg) for seg in unquoted.split("/"))
+                        img_src = f"https://raw.githubusercontent.com/BD-Band-Archive/BD-Band-Music/master/assets/covers/{urllib.parse.quote(local_name)}/{encoded_path}"
+                    elif not img_src.startswith("http"):
                         unquoted = urllib.parse.unquote(img_src.replace("\\", "/"))
                         encoded_path = "/".join(urllib.parse.quote(seg) for seg in unquoted.split("/"))
                         img_src = f"https://raw.githubusercontent.com/BD-Band-Archive/{repo_name}/master/{encoded_path}"
@@ -749,6 +785,18 @@ def build_catalog():
                 
                 track_id = f"track-{len(catalog)+1}"
                 
+                # Resolve streaming and download URLs (prefer Internet Archive direct stream)
+                track_filename = urllib.parse.unquote(clean_url.split('/')[-1])
+                ia_url = ia_stream_urls.get(track_filename)
+                if not ia_url:
+                    for k, v in ia_stream_urls.items():
+                        if k in clean_url or Path(k).name.lower() == Path(track_filename).name.lower():
+                            ia_url = v
+                            break
+                            
+                effective_stream = ia_url if ia_url else clean_url
+                effective_download = ia_url if ia_url else f"{clean_url}?download=true"
+                
                 catalog.append({
                     "id": track_id,
                     "title": track_title,
@@ -758,8 +806,8 @@ def build_catalog():
                     "album": track_album,
                     "year": track_year,
                     "trackNo": album_track_counter,
-                    "streamUrl": clean_url,
-                    "downloadUrl": f"{clean_url}?download=true",
+                    "streamUrl": effective_stream,
+                    "downloadUrl": effective_download,
                     "coverUrl": track_cover,
                     "repo": repo_name,
                     "isLossyTranscode": lossy_note
