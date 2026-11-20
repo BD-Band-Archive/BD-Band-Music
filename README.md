@@ -60,6 +60,16 @@
 
 ---
 
+# 🎸 [Ayub Bachchu](https://github.com/BD-Band-Archive/Ayub-Bachchu)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/Ayub-Bachchu">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/Ayub-Bachchu/master/assets/band_cover.jpg" alt="Ayub Bachchu Band Cover" width="750" />
+  </a>
+</p>
+
+---
+
 # 🎸 [Bassbaba Sumon](https://github.com/BD-Band-Archive/Bassbaba-Sumon)
 
 <p align="center">
@@ -155,6 +165,16 @@
 <p align="center">
   <a href="https://github.com/BD-Band-Archive/Karnival">
     <img src="https://raw.githubusercontent.com/BD-Band-Archive/BD-Band-Music/master/assets/covers/Karnival/assets/band_cover.jpg" alt="Karnival Band Cover" width="750" />
+  </a>
+</p>
+
+---
+
+# 🎸 [LRB](https://github.com/BD-Band-Archive/LRB)
+
+<p align="center">
+  <a href="https://github.com/BD-Band-Archive/LRB">
+    <img src="https://raw.githubusercontent.com/BD-Band-Archive/LRB/master/assets/band_cover.jpg" alt="LRB Band Cover" width="750" />
   </a>
 </p>
 
