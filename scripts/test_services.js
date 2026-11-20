@@ -64,10 +64,10 @@ async function runTests() {
   // Test atomic play recording across multiple artists & albums
   console.log('[*] Testing atomic increments across multiple artists & albums in Neon...');
   const testTracks = [
-    'artcell::oniket prantor',
-    'artcell::dukkho bilash',
-    'black::amar prithibi',
-    'aurthohin::chaite paro'
+    'artcell::oniket prantor::oniket prantor',
+    'artcell::oniket prantor::dukkho bilash',
+    'black::amar prithibi::amar prithibi',
+    'aurthohin::trimatrik::chaite paro'
   ];
 
   for (const t of testTracks) {
@@ -119,7 +119,7 @@ async function runTests() {
       path: '/api/play',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
-    }, { track_key: 'artcell::oniket prantor' });
+    }, { track_key: 'artcell::oniket prantor::oniket prantor' });
 
     if (playRecord.statusCode !== 200 || !playRecord.json?.success) {
       throw new Error(`POST /api/play failed: ${playRecord.body}`);
@@ -177,9 +177,19 @@ async function runTests() {
     const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf-8'));
     const playsMap = trendingResp.json.plays;
 
+    function cleanTrackString(s) {
+      if (!s || typeof s !== 'string') return '';
+      return s.replace(/\s*\([\u0980-\u09FF\s\.,\-]+\)/g, '').trim().toLowerCase();
+    }
+
     function getTrackKey(track) {
-      const cleanTitle = (track.title || '').replace(/\s*\([\u0980-\u09FF\s\d\w\-\.,]+\)/g, '').trim().toLowerCase();
+      if (!track) return '';
       const cleanArtist = (track.artist || '').trim().toLowerCase();
+      const cleanAlbum = cleanTrackString(track.album);
+      const cleanTitle = cleanTrackString(track.title);
+      if (cleanAlbum) {
+        return `${cleanArtist}::${cleanAlbum}::${cleanTitle}`;
+      }
       return `${cleanArtist}::${cleanTitle}`;
     }
 
@@ -224,6 +234,7 @@ async function runTests() {
   console.log('\n====================================================');
   console.log('  ALL END-TO-END SERVICE TESTS PASSED SUCCESSFULLY!  ');
   console.log('====================================================\n');
+  process.exit(0);
 }
 
 runTests().catch(err => {

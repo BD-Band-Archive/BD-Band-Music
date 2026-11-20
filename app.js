@@ -29,7 +29,7 @@
   let currentLightboxIndex = 0;
 
   // Version identifier for cache busting and auto-update sync
-  const APP_VERSION = '5.3.39';
+  const APP_VERSION = '5.3.40';
 
   // Neon Postgres Global Trending & Real-Time Sync (Strictly Database Checking)
   let defaultApiBase = 'https://bd-band-music-api.bd-band-music.workers.dev';
@@ -93,11 +93,21 @@
     { artist: 'Artcell', title: 'Dhushor Shomoy' }
   ];
 
+  function cleanTrackString(s) {
+    if (!s || typeof s !== 'string') return '';
+    // Strip Bengali parentheticals: e.g. " (শুকনো পাতা)", while preserving English qualifiers like "(Remix)", "(Acoustic)", etc.
+    return s.replace(/\s*\([\u0980-\u09FF\s\.,\-]+\)/g, '').trim().toLowerCase();
+  }
+
   function getTrackKey(track) {
     if (!track) return '';
     if (typeof track === 'string') return track;
-    const cleanTitle = (track.title || '').replace(/\s*\([\u0980-\u09FF\s\d\w\-\.,]+\)/g, '').trim().toLowerCase();
     const cleanArtist = (track.artist || '').trim().toLowerCase();
+    const cleanAlbum = cleanTrackString(track.album);
+    const cleanTitle = cleanTrackString(track.title);
+    if (cleanAlbum) {
+      return `${cleanArtist}::${cleanAlbum}::${cleanTitle}`;
+    }
     return `${cleanArtist}::${cleanTitle}`;
   }
 
